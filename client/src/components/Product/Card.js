@@ -18,7 +18,7 @@ function writeRatingStars(rating) {
 
 const ProductCard = ({ name, price, image, rating }) => {
   return (
-    <Card style={{ width: "15rem" }}>
+    <Card style={{ width: "100%" }}>
       {console.log("nombre", name)}
       <Card.Img variant="top" src={image} />
       <Card.Body>
