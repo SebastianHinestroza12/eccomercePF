@@ -1,4 +1,4 @@
-import Card from "../components/Product/Card";
+import Cards from "../components/Cards/cards";
 import "./store.css";
 /**
  * BOOTSTRAP IMPORTS
@@ -70,10 +70,7 @@ const Store = () => {
             </div>
           </Col>
           <Col>
-            <Card
-              name={recetasJsonLocal[0].nombre}
-              price={recetasJsonLocal[0].precio}
-            />
+            <Cards/>
           </Col>
         </Row>
       </Container>
