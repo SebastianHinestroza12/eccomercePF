@@ -11,12 +11,12 @@ const ProductCard = ({ name, price, image }) => {
       <Card.Body>
         <Card.Text>CATEGORIA</Card.Text>
         <hr></hr>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title>{nombre}</Card.Title>
         <div className={"buttons_shop"}>
           <Unicons.UilShoppingCartAlt />
           <Unicons.UilHeart />
         </div>
-        <div>${price}</div>
+        <div>${precio}</div>
       </Card.Body>
     </Card>
   );
