@@ -39,6 +39,8 @@
 
 html {
   font-size: 14px;
+}
+html * {
   font-family: "Poppins", sans-serif;
 }
 /* PALETA DE COLORES */
