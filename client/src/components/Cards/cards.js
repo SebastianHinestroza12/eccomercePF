@@ -9,11 +9,13 @@ const Cards = () => {
     return (
         <div className="container">
             <div className="row">
-                    {json.map(({ nombre, precio, id }) => (
+                    {json.map(({ nombre, precio, id, imagen, calificación, }) => (
                         <div className="col-md-3 tamanio" key={id}>
                             <ProductCard 
                                 nombre = {nombre}
                                 precio = {precio}
+                                imagen = {imagen}
+                                calificación = {calificación}
                             />
                         </div>
                     ))}
