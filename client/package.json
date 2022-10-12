@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@iconscout/react-unicons": "^1.1.6",
+    "bootstrap": "^5.2.2",
+    "react-bootstrap": "^2.5.0",
+    "nodemon": "^2.0.20",
     "@testing-library/jest-dom": "^5.11.10",
+    "axios": "^1.1.2",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.1",
     "react": "^17.0.2",
