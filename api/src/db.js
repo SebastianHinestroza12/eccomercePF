@@ -2,10 +2,7 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-
-const {
-  DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/eccomerce`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -33,11 +30,19 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { NameModelo } = sequelize.models;
+const { Admin, Product, Client, Order, Comment } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
+Admin.belongsToMany(Product, {through: 'admin-product'});
+Product.belongsToMany(Admin, {through: 'admin-product'});
+
+Admin.belongsToMany(Client, {through: 'admin-client'});
+Client.belongsToMany(Admin, {through: 'admin-client'});
+
+Client.hasMany(Order);
+Order.belongsTo(Client);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
