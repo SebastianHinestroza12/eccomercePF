@@ -1,3 +1,11 @@
+.card {
+  border: none;
+}
+
+.card:hover {
+  cursor: pointer;
+  border: 1px solid silver;
+}
 .buttons_shop {
   visibility: hidden;
   opacity: 0;
@@ -22,9 +30,6 @@
   transition-delay: 0s;
 }
 
-.card:hover {
-  cursor: pointer;
-}
 .buttons_shop svg {
   padding: 6px;
   box-sizing: content-box;
