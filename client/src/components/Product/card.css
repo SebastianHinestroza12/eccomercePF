@@ -1,0 +1,38 @@
+.buttons_shop {
+  visibility: hidden;
+  opacity: 0;
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+  transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+  bottom: 33%;
+  height: auto;
+  right: 0px;
+  height: auto;
+  position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem 0;
+}
+.card:hover .buttons_shop {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+.buttons_shop svg {
+  padding: 6px;
+  box-sizing: content-box;
+}
+
+.buttons_shop svg:hover {
+  background: var(--third-color);
+  border-radius: 40px;
+  box-sizing: content-box;
+  color: white;
+}
