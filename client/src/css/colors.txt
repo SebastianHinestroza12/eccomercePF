@@ -1,0 +1,6 @@
+.color1 {color: #3e090e;}   Bordo
+.color2 {color: #7e0917;}   Rojo oscuro
+.color3 {color: #2075d8;}   Celeste Oscuro
+.color4 {color: #bed6ed;}   Celeste pastel claro
+.color5 {color: #f8efed;}   Arena
+.color6 {color: #2b2b2b;}   Gris oscuro

@@ -1,12 +1,14 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import Store from "./Pages/Store";
+import Landing from "./components/Landing";
+import { Route } from "react-router-dom"; 
 
 function App() {
   return (
-    <>
-      <Store />
-    </>
+    <div>
+      <Route exact path={"/"}>
+        <Landing />
+      </Route>
+    </div>
+    
   );
 }
 
