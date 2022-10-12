@@ -73,6 +73,7 @@ const Store = () => {
             <Card
               name={recetasJsonLocal[0].nombre}
               price={recetasJsonLocal[0].precio}
+              image={recetasJsonLocal[0].imagen}
             />
           </Col>
         </Row>
