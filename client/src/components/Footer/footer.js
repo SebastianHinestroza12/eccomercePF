@@ -1,5 +1,6 @@
 import React from 'react'
-import logo from './logoqatar.jpg'
+import logo1 from './logoqatartransp.png'
+// import logo from './logoqatar.jpg'
 
 function footer() {
     return (
@@ -7,16 +8,16 @@ function footer() {
             <div class='row p-5 pb-2 bg-dark text-white'>
                 <div class='col-xs-12 col-md-6 col-lg-3 h-30 w-30'>
                     {/* <p class='fs-40'>Qatar Shop</p> */}
-                    <img class='img-fluid br-10' alt='logoqatar' src={logo} />
+                    <img class='img-fluid br-10' alt='logoqatar' src={logo1} />
                     
                 </div>
                 <div class='col-xs-12 col-md-6 col-lg-3'>
                     <p class='h5 mb-3'>Links</p>
                     <div class='mb-1'>
-                    <a class='text-secondary text-decoration-none ' href='#'>Terms and Condition</a>
+                    <a class='text-secondary text-decoration-none ' href='/terminos'>Terms and Condition</a>
                     </div>
                     <div class='mb-1'>
-                    <a class='text-secondary text-decoration-none ' href='#'>Privacy Policy</a>
+                    <a class='text-secondary text-decoration-none ' href='/privacy'>Privacy Policy</a>
                     </div>
                 </div>
                 <div class='col-xs-12 col-md-6 col-lg-3'>
@@ -52,10 +53,10 @@ function footer() {
                 <div class='col-xs-12 col-md-6 col-lg-3'>
                     <p class='h5 mb-3'>Contacto</p>
                     <div class='mb-1'>
-                    <a class='text-secondary text-decoration-none ' href='#'>WhatsApp</a>
+                    <a class='text-secondary text-decoration-none ' href='/wpp'>WhatsApp</a>
                     </div>
                     <div class='mb-1'>
-                    <a class='text-secondary text-decoration-none ' href='#'>Instagram</a>
+                    <a class='text-secondary text-decoration-none ' href='/ins'>Instagram</a>
                     </div>
                 </div>
                 <div class='col-xs-12 pt-4'>
