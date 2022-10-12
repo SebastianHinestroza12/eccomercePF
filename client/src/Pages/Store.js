@@ -1,4 +1,4 @@
-import Card from "../components/Product/Card";
+import Cards from "../components/Cards/cards";
 import "./store.css";
 /**
  * BOOTSTRAP IMPORTS
@@ -20,12 +20,7 @@ const Store = () => {
             <Sidebar />
           </Col>
           <Col>
-            <Card
-              name={recetasJsonLocal[0].nombre}
-              price={recetasJsonLocal[0].precio}
-              image={recetasJsonLocal[0].imagen}
-              rating={recetasJsonLocal[0].calificación}
-            />
+            <Cards />
           </Col>
         </Row>
       </Container>
