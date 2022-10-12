@@ -37,13 +37,16 @@
   }
 }
 
-body {
+html {
+  font-size: 14px;
+}
+html * {
   font-family: "Poppins", sans-serif;
 }
-
 /* PALETA DE COLORES */
 :root {
   --primary-color: #3e090e;
   --second-color: #7e0917;
   --third-color: #2075d8;
+  --grey100: #f5f5f5;
 }
