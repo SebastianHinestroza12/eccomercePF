@@ -13,7 +13,7 @@ function footer() {
                 <div class='col-xs-12 col-md-6 col-lg-3'>
                     <p class='h5 mb-3'>Links</p>
                     <div class='mb-1'>
-                    <a class='text-secondary text-decoration-none ' href='#'>Terms and Conditions</a>
+                    <a class='text-secondary text-decoration-none ' href='#'>Terms and Condition</a>
                     </div>
                     <div class='mb-1'>
                     <a class='text-secondary text-decoration-none ' href='#'>Privacy Policy</a>
