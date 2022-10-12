@@ -3,14 +3,11 @@ import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
 
-const ProductCard = ({ nombre, precio }) => {
+const ProductCard = ({ name, price, image }) => {
   return (
     <Card style={{ width: "15rem" }}>
-      {console.log("nombre", nombre)}
-      <Card.Img
-        variant="top"
-        src="https://demo2.drfuri.com/martfury12/wp-content/uploads/sites/53/2017/09/1a-300x300.jpg"
-      />
+      {console.log("nombre", name)}
+      <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Text>CATEGORIA</Card.Text>
         <hr></hr>
