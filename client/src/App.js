@@ -15,10 +15,6 @@ function App() {
       <Route path={"/"}>
         <Store />
       </Route>
-
-      <Route path={"/detail"}>
-        <ProductDetail />
-      </Route>
       <Route>
         <Footer />
       </Route>
