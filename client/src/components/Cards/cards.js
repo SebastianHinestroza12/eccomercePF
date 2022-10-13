@@ -30,7 +30,6 @@ const Cards = () => {
   };
   return (
     <div className="container">
-    <Filters setMinPageNumber={setMinPageNumber} setMaxPageNumber={setMaxPageNumber} setActualPage={setActualPage} setOrder={setOrder} />
       <div className="row">
         {actualproducts.map((products) => (
           <div className="col-md-3 tamanio">
