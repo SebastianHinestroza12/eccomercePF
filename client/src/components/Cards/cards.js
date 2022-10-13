@@ -32,10 +32,10 @@ const Cards = () => {
         {actualproducts.map((products) => (
           <div className="col-md-3 tamanio">
             <ProductCard
-              name={products.nombre}
-              price={products.precio}
-              image={products.imagen}
-              rating={products.calificación}
+              name={products.name}
+              price={products.price}
+              image={products.image}
+              rating={products.rating}
             />
           </div>
         ))}
