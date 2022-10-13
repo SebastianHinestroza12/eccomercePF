@@ -2,7 +2,7 @@ import React from 'react'
 import logo1 from './logoqatartransp.png'
 // import logo from './logoqatar.jpg'
 
-function footer() {
+function Footer() {
     return (
         <div class='container-fluid' >
             <div class='row p-5 pb-2 bg-dark text-white'>
@@ -69,4 +69,4 @@ function footer() {
     )
 }
 
-export default footer
+export default Footer
