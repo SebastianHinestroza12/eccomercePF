@@ -1,5 +1,10 @@
 .navv{
     background-color: var(--primary-color);
+   
+} 
+
+.img-logo{
+    max-height: 70px;
 }
 
 
