@@ -1,11 +1,27 @@
 import { Dropdown } from "react-bootstrap";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import React, { useEffect } from "react";
 
-const topStoreFilters = () => {
+import DropdownButton from "react-bootstrap/DropdownButton";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../../redux/action";
+
+const TopStoreFilters = () => {
+  const dispatch = useDispatch();
+  //estado global de todas las recetas
+  const allProducts = useSelector((state) => state.products);
+
+  useEffect(() => {
+    new Promise((resolve) => {
+      resolve(dispatch(getAllProducts()));
+    });
+
+    //cargo todos los cards de recetas
+  }, [dispatch]);
+
   return (
     <section className="filters_container mb-3 top_filters">
       <div>
-        <strong>xx</strong> Productos encontrados
+        <strong>{allProducts.length}</strong> Productos encontrados
       </div>
       <div className="justify-content-end">
         <DropdownButton id="dropdown-basic-button" title="Ordenar por">
@@ -18,4 +34,4 @@ const topStoreFilters = () => {
     </section>
   );
 };
-export default topStoreFilters;
+export default TopStoreFilters;
