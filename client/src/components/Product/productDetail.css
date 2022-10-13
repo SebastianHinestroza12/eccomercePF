@@ -25,3 +25,11 @@
   display: flex;
   flex-wrap: wrap;
 }
+.product-detail .rating {
+  color: var(--third-color);
+  font-size: 1.5rem;
+}
+.product-detail p.detail-text {
+  line-height: 2rem;
+  margin: 2rem 0;
+}

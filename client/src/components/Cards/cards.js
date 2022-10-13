@@ -3,7 +3,6 @@ import ProductCard from "../Product/Card";
 import "./cards.css";
 import { useState } from "react";
 import Pages from "../Pagination/pagination";
-import Filters from "../Filters/Filters";
 const json = require("../../utils/productos.json");
 
 const Cards = () => {

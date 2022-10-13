@@ -9,3 +9,13 @@ export const getAllProducts = () => {
       });
   };
 };
+
+export const getProductDetail = (productId) => {
+  return function (dispatch) {
+    return axios(`/product/${productId}`)
+      .then((response) => response.data)
+      .then((productDetail) => {
+        dispatch({ type: "GET_PRODUCT_DETAIL", payload: productDetail });
+      });
+  };
+};
