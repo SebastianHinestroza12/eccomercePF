@@ -1,0 +1,15 @@
+.navv{
+    background-color: var(--primary-color);
+}
+
+/* .navLinks{
+    color:white
+} */
+
+
+
+
+.iyr{
+    display: flex;
+    margin-left: 90px;  
+}
