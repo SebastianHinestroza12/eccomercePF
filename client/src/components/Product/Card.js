@@ -1,4 +1,6 @@
 import Card from "react-bootstrap/Card";
+import { useHistory } from "react-router-dom";
+
 import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
@@ -15,8 +17,13 @@ function writeRatingStars(rating) {
 }
 
 const ProductCard = ({ name, price, image, rating }) => {
+  const history = useHistory();
+  const goToDetail = (name) => {
+    history.push(`/detail/${name}`);
+  };
+
   return (
-    <Card style={{ width: "100%" }}>
+    <Card style={{ width: "100%" }} onClick={() => goToDetail(name)}>
       {console.log(name, price, image, rating)}
       <Card.Img variant="top" src={image} />
       <Card.Body>
