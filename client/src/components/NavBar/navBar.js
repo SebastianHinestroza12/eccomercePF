@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo1 from '../Footer/logoqatartransp.png'
-import carrito from './carrito.png'
+import carrito from './carrito1.png'
 import './navBar.css'
 import Footer from '../Footer/footer'
 
