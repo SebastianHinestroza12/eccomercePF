@@ -1,4 +1,6 @@
 import Card from "react-bootstrap/Card";
+import { useHistory } from "react-router-dom";
+
 import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
@@ -14,10 +16,14 @@ function writeRatingStars(rating) {
   return ratingStars.join("");
 }
 
-const ProductCard = ({ name, price, image, rating }) => {
+const ProductCard = ({ name, price, image, rating, id }) => {
+  const history = useHistory();
+  const goToDetail = (id) => {
+    history.push(`/detail/${id}`);
+  };
+
   return (
-    <Card style={{ width: "100%" }}>
-      {console.log(name, price, image, rating)}
+    <Card style={{ width: "100%" }} onClick={() => goToDetail(id)}>
       <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Text>CATEGORIA</Card.Text>

@@ -1,0 +1,35 @@
+.qty {
+  border-width: 0;
+  width: 60px;
+  padding: 10px 0;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  -webkit-appearance: textfield;
+  text-align: center;
+  font-weight: 600;
+  color: #000;
+  display: inline-block;
+  background-color: transparent;
+}
+.qty-box {
+  border: 1px solid var(--grey500);
+  padding: 0 20px;
+  transition: 0.5s;
+  width: fit-content;
+  position: relative;
+}
+.cartButtons {
+  cursor: pointer;
+}
+.buttonsAddToCart {
+  display: flex;
+  flex-wrap: wrap;
+}
+.product-detail .rating {
+  color: var(--third-color);
+  font-size: 1.5rem;
+}
+.product-detail p.detail-text {
+  line-height: 2rem;
+  margin: 2rem 0;
+}
