@@ -36,6 +36,7 @@ function NavScrollExample() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
+            
             <div class='divNav' >
               <Nav.Link href="/home" className='navLinks'>Inicio</Nav.Link>
               <Nav.Link href="/productos" className='navLinks'>Productos</Nav.Link>

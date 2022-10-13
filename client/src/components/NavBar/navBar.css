@@ -10,13 +10,15 @@
 }
 
 .but:hover{
+    
     background-color: var(--grey500);
     border-color: var(--primary-color)
 }
 .divNav{
+
     display: flex;
     margin-left: 90px;
-    
+
 }
 
 .navLinks{
