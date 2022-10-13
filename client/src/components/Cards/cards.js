@@ -3,10 +3,12 @@ import ProductCard from "../Product/Card";
 import "./cards.css";
 import { useState } from "react";
 import Pages from "../Pagination/pagination";
+import Filters from "../Filters/Filters";
 const json = require("../../utils/productos.json");
 
 const Cards = () => {
   const appTopRef = useRef();
+  const [order, setOrder] = useState("");
   const [actualPage, setActualPage] = useState(1); //arrancamos desde la page 1
   const [productsPerPage, setproductsPerPage] = useState(12); //cuantos products por page
   const indexOfLastproduct = actualPage * productsPerPage;
@@ -28,6 +30,7 @@ const Cards = () => {
   };
   return (
     <div className="container">
+    <Filters setMinPageNumber={setMinPageNumber} setMaxPageNumber={setMaxPageNumber} setActualPage={setActualPage} setOrder={setOrder} />
       <div className="row">
         {actualproducts.map((products) => (
           <div className="col-md-3 tamanio">
@@ -36,6 +39,7 @@ const Cards = () => {
               price={products.price}
               image={products.image}
               rating={products.rating}
+              id={products.id}
             />
           </div>
         ))}
