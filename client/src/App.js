@@ -4,6 +4,7 @@ import Store from "./Pages/Store";
 import { Route } from "react-router-dom";
 import NavScrollExample from "./components/NavBar/navBar";
 import Footer from "./components/Footer/footer";
+import ProductDetail from "./components/Product/ProductDetail";
 
 function App() {
   return (
