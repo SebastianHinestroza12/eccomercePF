@@ -1,0 +1,32 @@
+.navv{
+    background-color: var(--primary-color);
+}
+
+
+.but{
+    background-color: var(--grey100);
+    border-color: var(--primary-color);
+    color:var(--primary-color)
+}
+
+.but:hover{
+    background-color: var(--grey500);
+    border-color: var(--primary-color)
+}
+.divNav{
+    display: flex;
+    margin-left: 90px;
+}
+
+.navLinks{
+    font-size: 1.5em;
+}
+.linkcs{
+    font-size: 1.5em;
+}
+
+.iyr{
+    display: flex;
+    margin-left: 90px;  
+
+}
