@@ -6,6 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo1 from '../Footer/logoqatartransp.png'
 import carrito from './carrito1.png'
+import * as Unicons from '@iconscout/react-unicons'
 import './navBar.css'
 
 
@@ -13,7 +14,7 @@ function NavScrollExample() {
   return (
     <Navbar className='navv' variant='dark' expand="lg" >
       <Container fluid>
-        <Navbar.Brand href="/home"><a><img src={logo1} class='img-fluid' className='img-logo'  /> </a></Navbar.Brand>
+        <Navbar.Brand href="/home"><a><img src={logo1} alt='QATAR SHOP' class='img-fluid' className='img-logo'  /> </a></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
 
@@ -38,7 +39,7 @@ function NavScrollExample() {
           >
             
             <div class='divNav' >
-              <Nav.Link href="/home" className='navLinks'>Inicio</Nav.Link>
+              <Nav.Link href="/" className='navLinks'>Inicio</Nav.Link>
               <Nav.Link href="/productos" className='navLinks'>Productos</Nav.Link>
 
               <NavDropdown title="Link"  id="navbarScrollingDropdown" className='linkcs'>
@@ -52,8 +53,8 @@ function NavScrollExample() {
                 </NavDropdown.Item>
               </NavDropdown>
             </div>
-            <Nav.Link href="#" class='w-20' >
-              <a><img class='img-fluid ml-5' height='32px' width='32px' src={carrito} /> </a>
+            <Nav.Link href="/carrito" class='w-20' >
+              <a><Unicons.UilShoppingCartAlt /> </a>
             </Nav.Link>
             <div className='iyr'>
             <Nav.Link href="/productos" className='navLinks'>Ingresar</Nav.Link>
