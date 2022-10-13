@@ -4,6 +4,7 @@ import Landing from "./components/Landing/Landing";
 import Store from "./Pages/Store";
 import { Route } from "react-router-dom";
 import Carousel from "./components/Carousel/Carousel";
+import ProductDetail from "./components/Product/ProductDetail";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
       </Route>
       <Route path={"/carousel"}>
         <Carousel />
+      </Route>
+      <Route path={"/detail"}>
+        <ProductDetail />
       </Route>
     </>
   );
