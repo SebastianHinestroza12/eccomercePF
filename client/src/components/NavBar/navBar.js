@@ -28,7 +28,7 @@ function NavScrollExample() {
 
 
             />
-            <Button variant="outline-success">Buscar</Button>
+            <Button variant="outline-success" className='but'>Buscar</Button>
           </Form>
 
           <Nav
@@ -36,7 +36,8 @@ function NavScrollExample() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <div class='mx-5 d-flex' >
+            
+            <div class='divNav' >
               <Nav.Link href="/home" className='navLinks'>Inicio</Nav.Link>
               <Nav.Link href="/productos" className='navLinks'>Productos</Nav.Link>
 
@@ -47,7 +48,7 @@ function NavScrollExample() {
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action5">
-                  Something else here
+                  Something else 
                 </NavDropdown.Item>
               </NavDropdown>
             </div>
