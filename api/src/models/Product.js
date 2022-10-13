@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       detail: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(1000),
         allowNull: false,
       },
       size: {
@@ -33,16 +33,18 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
-      score: {
+      stars: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: 0,
       },
+      visible: {
+        type: DataTypes.BOOLEAN
+      }
     },
     {
       timestamps: false,
-      createdAt: false,
-      updatedAt: false,
     }
   );
 };
+
