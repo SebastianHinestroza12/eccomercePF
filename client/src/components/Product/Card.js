@@ -3,14 +3,22 @@ import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
 
-const ProductCard = ({ name, price }) => {
+function writeRatingStars(rating) {
+  let ratingStars = [];
+  for (let i = 1; i <= rating; i++) {
+    ratingStars.push("★");
+  }
+  for (let i = 1; i <= 5 - rating; i++) {
+    ratingStars.push("☆");
+  }
+  return ratingStars.join("");
+}
+
+const ProductCard = ({ name, price, image, rating }) => {
   return (
-    <Card style={{ width: "15rem" }}>
-      {console.log("nombre", name)}
-      <Card.Img
-        variant="top"
-        src="https://demo2.drfuri.com/martfury12/wp-content/uploads/sites/53/2017/09/1a-300x300.jpg"
-      />
+    <Card style={{ width: "100%" }}>
+      {console.log(name, price, image, rating)}
+      <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Text>CATEGORIA</Card.Text>
         <hr></hr>
@@ -19,6 +27,8 @@ const ProductCard = ({ name, price }) => {
           <Unicons.UilShoppingCartAlt />
           <Unicons.UilHeart />
         </div>
+        <div className="rating">{writeRatingStars(rating)}</div>
+
         <div>${price}</div>
       </Card.Body>
     </Card>

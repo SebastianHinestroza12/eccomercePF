@@ -1,10 +1,16 @@
 button.list-group-item-action:hover {
   color: var(--third-color);
 }
-.sidebar .filters_container {
-  background: #f5f5f5;
+.filters_container {
+  background: var(--grey100);
   padding: 2rem;
 }
 .sidebar .filters_container .list-group-item {
   background: none;
+}
+.top_filters {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
 }
