@@ -12,6 +12,9 @@ const Cards = () => {
   const allProducts = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
+  /**
+   * PAGINADO
+   */
   const appTopRef = useRef();
   const [order, setOrder] = useState("");
   const [actualPage, setActualPage] = useState(1); //arrancamos desde la page 1
@@ -36,6 +39,9 @@ const Cards = () => {
       setMaxPageNumber(maxPageNumber - 4);
     }
   };
+  /**
+   * FIN PAGINADO
+   */
 
   useEffect(() => {
     new Promise((resolve) => {
@@ -52,7 +58,7 @@ const Cards = () => {
   ) : (
     <div>
       <div className="row">
-        {allProducts.map((products) => (
+        {actualproducts.map((products) => (
           <div className="col-md-3 tamanio" key={products.id}>
             <ProductCard
               name={products.name}
