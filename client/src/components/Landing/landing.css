@@ -1,0 +1,46 @@
+.divTop{
+    background-color: #292828;
+    padding: 25px;
+}
+.cajaDivs{
+    display: flex;
+    height: 64vh;
+}
+.div1{
+    background-color: #f8efed;
+    width: 40%;
+    
+}
+.div2{
+    background-color: #2075d8;
+    width: 60%;
+}
+.boton{
+    background-color: #292828;
+    border: none;
+    border-radius: 5px;
+    font-size: x-large;
+    color: #f8efed;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 15px;
+    padding: 10px;
+    width: 130px;
+}
+.boton:hover{
+    background-color: #474545;
+}
+.texto1{
+    font-family: 'Stick No Bills', sans-serif;
+    text-align: right;
+    font-size: 55px;
+    color: white;
+    margin-top: 40px;
+    margin-right: 55px;
+}
+.texto2{
+    font-family: 'Stick No Bills', sans-serif;
+    text-align: right;
+    font-size: 40px;
+    color: white;
+    margin-right: 55px;
+}
