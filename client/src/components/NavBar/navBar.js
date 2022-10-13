@@ -39,7 +39,7 @@ function NavScrollExample() {
           >
             
             <div class='divNav' >
-              <Nav.Link href="/home" className='navLinks'>Inicio</Nav.Link>
+              <Nav.Link href="/" className='navLinks'>Inicio</Nav.Link>
               <Nav.Link href="/productos" className='navLinks'>Productos</Nav.Link>
 
               <NavDropdown title="Link"  id="navbarScrollingDropdown" className='linkcs'>
