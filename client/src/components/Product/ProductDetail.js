@@ -1,11 +1,28 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import * as Unicons from "@iconscout/react-unicons";
-
+import { useDispatch, useSelector } from "react-redux";
 import "./productDetail.css";
+import { getProductDetail } from "../../redux/action";
+import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
+  const { productId } = useParams();
+
+  //loader hasta que se carga el detalle del producto
+  const [loading, setLoading] = useState([true]);
+
+  const dispatch = useDispatch();
+  const recipeDetail = useSelector((state) => state.productDetail);
+
+  useEffect(() => {
+    new Promise((resolve) => {
+      resolve(dispatch(getProductDetail(productId)));
+    }).then((res) => {
+      setLoading(false);
+    });
+  }, [dispatch]);
+
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
   const [quantity, setQuantity] = useState(0);
 
@@ -19,27 +36,34 @@ const ProductDetail = () => {
     }
   }
 
+  function writeRatingStars(rating) {
+    let ratingStars = [];
+    for (let i = 1; i <= rating; i++) {
+      ratingStars.push("★");
+    }
+    for (let i = 1; i <= 5 - rating; i++) {
+      ratingStars.push("☆");
+    }
+    return ratingStars.join("");
+  }
+
   return (
-    <Container>
+    <Container className="product-detail">
+      {console.log("productId", recipeDetail.detail)}
       <Row>
         <Col md={5} className="sidebar">
-          <img
-            src="https://demo2.drfuri.com/martfury12/wp-content/uploads/sites/53/2017/09/1a.jpg"
-            alt="product-name"
-          />
+          <img src={recipeDetail.image} alt="product-name" />
         </Col>
         <Col md={7}>
           <section id="detail">
-            <h3>Herschel Leather Duffle Bag In Brown Color</h3>
-            ★★★★
+            <h3>{recipeDetail.name}</h3>
+            <div className="rating">
+              {console.log("recipeDetail.rating", recipeDetail.rating)}
+              {writeRatingStars(recipeDetail.stars)}
+            </div>
             <hr></hr>
-            <h4>$125.30</h4>
-            <p>
-              Unrestrained and portable active stereo speaker Free from the
-              confines of wires and chords 20 hours of portable capabilities
-              Double-ended Coil Cord with 3.5mm Stereo Plugs Included 3/4″ Dome
-              Tweeters: 2X and 4″ Woofer: 1X
-            </p>
+            <h4>$ {recipeDetail.price}</h4>
+            <p className="detail-text">{recipeDetail.detail}</p>
           </section>
           <section className="buttonsAddToCart">
             <div>

@@ -24,7 +24,6 @@ const ProductCard = ({ name, price, image, rating, id }) => {
 
   return (
     <Card style={{ width: "100%" }} onClick={() => goToDetail(id)}>
-      {console.log(name, price, image, rating)}
       <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Text>CATEGORIA</Card.Text>
