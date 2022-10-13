@@ -15,6 +15,9 @@ function App() {
       <Route exact path={"/"}>
         <Store />
       </Route>
+      <Route exact path={"/detail"}>
+        <ProductDetail />
+      </Route>
       <Route>
         <Footer />
       </Route>
