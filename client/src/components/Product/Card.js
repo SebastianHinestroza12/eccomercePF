@@ -16,14 +16,14 @@ function writeRatingStars(rating) {
   return ratingStars.join("");
 }
 
-const ProductCard = ({ name, price, image, rating }) => {
+const ProductCard = ({ name, price, image, rating, id }) => {
   const history = useHistory();
-  const goToDetail = (name) => {
-    history.push(`/detail/${name}`);
+  const goToDetail = (id) => {
+    history.push(`/detail/${id}`);
   };
 
   return (
-    <Card style={{ width: "100%" }} onClick={() => goToDetail(name)}>
+    <Card style={{ width: "100%" }} onClick={() => goToDetail(id)}>
       {console.log(name, price, image, rating)}
       <Card.Img variant="top" src={image} />
       <Card.Body>
