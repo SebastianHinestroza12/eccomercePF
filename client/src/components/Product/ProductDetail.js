@@ -47,7 +47,13 @@ const ProductDetail = () => {
     return ratingStars.join("");
   }
 
-  return (
+  return loading ? (
+    <img
+      src={`https://recipes-client-production.up.railway.app/uploads/loading1.gif`}
+      className="loading"
+      alt="logo"
+    />
+  ) : (
     <Container className="product-detail">
       {console.log("productId", recipeDetail.detail)}
       <Row>
