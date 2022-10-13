@@ -56,3 +56,8 @@ img {
 .container {
   padding: 5rem 0;
 }
+.loading {
+  width: 10%;
+  margin: auto;
+  display: block;
+}
