@@ -7,13 +7,13 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import logo1 from '../Footer/logoqatartransp.png'
 import carrito from './carrito1.png'
 import './navBar.css'
-import Footer from '../Footer/footer'
+
 
 function NavScrollExample() {
   return (
     <Navbar className='navv' variant='dark' expand="lg" >
       <Container fluid>
-        <Navbar.Brand href="/home"><a><img src={logo1} class='img-fluid' height='120px' width='120px' /> </a></Navbar.Brand>
+        <Navbar.Brand href="/home"><a><img src={logo1} class='img-fluid' className='img-logo'  /> </a></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
 
