@@ -7,11 +7,14 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Sidebar from "../components/Product/Sidebar";
+import TopStoreFilters from "../components/Filter/TopStoreFilters";
+import Carousel from "../components/Carousel/Carousel";
 const recetasJsonLocal = require("../utils/productos");
 
 const Store = () => {
   return (
     <>
+      <Carousel />
       {console.log("recetasJsonLocal", recetasJsonLocal[0].id)}
       <Container>
         Tienda
@@ -20,6 +23,7 @@ const Store = () => {
             <Sidebar />
           </Col>
           <Col>
+            <TopStoreFilters />
             <Cards />
           </Col>
         </Row>
