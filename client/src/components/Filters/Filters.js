@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { filterByPrice } from "../../redux/action.js"
+import { filterByPrice, filterByRating } from "../../redux/action.js"
 import { Dropdown } from "react-bootstrap";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +17,12 @@ const Filters = ({ setMinPageNumber, setMaxPageNumber, setActualPage, setOrder})
             setMinPageNumber(0)
             setMaxPageNumber(5)  
             setOrder(`sort by ${e.target.value}`);    
+        } else if (e.target.value === 'MayorRating' || e.target.value === 'MenorRating') {
+            dispatch(filterByRating(e.target.value));
+            setActualPage(1);
+            setMinPageNumber(0)
+            setMaxPageNumber(5)  
+            setOrder(`sort by ${e.target.value}`);   
         }
     }
 
@@ -24,7 +30,6 @@ const Filters = ({ setMinPageNumber, setMaxPageNumber, setActualPage, setOrder})
         new Promise((resolve) => {
           resolve(dispatch(getAllProducts()));
         });
-    
         //cargo todos los cards de recetas
       }, [dispatch]);
 
@@ -38,6 +43,8 @@ const Filters = ({ setMinPageNumber, setMaxPageNumber, setActualPage, setOrder})
                     <option value="DEFAULT" disabled>Ordenar por</option>
                     <option value="MayorPrecio">Mayor precio</option>
                     <option value="MenorPrecio">Menor precio</option>
+                    <option value="MayorRating">Mayor Rating</option>
+                    <option value="MenorRating">Menor Rating</option>
                 </select>
             </div>
         </section>

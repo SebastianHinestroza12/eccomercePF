@@ -27,3 +27,10 @@ export function filterByPrice (payload) {
   }
 }
 
+export function filterByRating (payload) {
+  return {
+    type: 'ORDER_BY_RATING',
+    payload
+  }
+}
+
