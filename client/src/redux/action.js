@@ -58,3 +58,10 @@ export function filterByName(payload) {
     payload,
   };
 }
+
+//CREACION DE PRODUCTO
+export const createProduct = (props) => {
+  return function () {
+    return axios.post(`/postProduct`, props).then((response) => response);
+  };
+};
