@@ -53,6 +53,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "SEARCH_PRODUCTS":
+      console.log("estado actual products", state.products);
       return {
         ...state,
         products: payload,

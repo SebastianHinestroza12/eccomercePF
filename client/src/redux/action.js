@@ -40,6 +40,10 @@ export const SearchByName = (name) => {
       .then((r) => r.data)
       .then((productFound) => {
         dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
+      })
+      .catch((error) => {
+        console.log("AXIOS error", typeof error.response.data);
+        return error.response.data;
       });
   };
 };
