@@ -21,7 +21,7 @@ const ProductDetail = () => {
     }).then((res) => {
       setLoading(false);
     });
-  }, [dispatch]);
+  }, [dispatch, productId]);
 
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
   const [quantity, setQuantity] = useState(0);
@@ -47,64 +47,64 @@ const ProductDetail = () => {
     return ratingStars.join("");
   }
 
-  return loading ? (
-    <img src="/images/loader-blue.gif" className="loading" alt="loader" />
-  ) : (
+  return (
     <Container className="product-detail">
-      {console.log("productId", productDetail.detail)}
-      <Row>
-        <Col md={5} className="sidebar">
-          <img src={productDetail.image} alt="product-name" />
-        </Col>
-        <Col md={7}>
-          <section id="detail">
-            <h3>{productDetail.name}</h3>
-            <div className="rating">
-              {console.log("productDetail.rating", productDetail.rating)}
-              {writeRatingStars(productDetail.stars)}
-            </div>
-            <hr></hr>
-            <h4>$ {productDetail.price}</h4>
-            <p className="detail-text">{productDetail.detail}</p>
-          </section>
-          <section className="buttonsAddToCart">
-            <div>
-              Cantidad
-              <div className="qty-box">
-                <span
-                  className="cartButtons decrease"
-                  onClick={() => addQuantityToCart("minus")}
-                >
-                  <Unicons.UilMinus />
-                </span>
-                <input
-                  type="number"
-                  id="quantity_6347dd6ab108a"
-                  className="input-text qty text"
-                  step="1"
-                  min="1"
-                  max=""
-                  name="quantity"
-                  value={quantity}
-                  title="Qty"
-                  size="4"
-                  placeholder=""
-                  inputMode="numeric"
-                  readOnly={true}
-                />
-                <span
-                  className="cartButtons increase"
-                  onClick={() => addQuantityToCart("plus")}
-                >
-                  <Unicons.UilPlus />
-                </span>
+      {loading ? (
+        <img src="/images/loader-blue.gif" className="loading" alt="loader" />
+      ) : (
+        <Row>
+          <Col md={5} className="sidebar">
+            <img src={productDetail.image} alt="product-name" />
+          </Col>
+          <Col md={7}>
+            <section id="detail">
+              <h3>{productDetail.name}</h3>
+              <div className="rating">
+                {writeRatingStars(productDetail.stars)}
               </div>
-            </div>
+              <hr></hr>
+              <h4>$ {productDetail.price}</h4>
+              <p className="detail-text">{productDetail.detail}</p>
+            </section>
+            <section className="buttonsAddToCart">
+              <div>
+                Cantidad
+                <div className="qty-box">
+                  <span
+                    className="cartButtons decrease"
+                    onClick={() => addQuantityToCart("minus")}
+                  >
+                    <Unicons.UilMinus />
+                  </span>
+                  <input
+                    type="number"
+                    id="quantity_6347dd6ab108a"
+                    className="input-text qty text"
+                    step="1"
+                    min="1"
+                    max=""
+                    name="quantity"
+                    value={quantity}
+                    title="Qty"
+                    size="4"
+                    placeholder=""
+                    inputMode="numeric"
+                    readOnly={true}
+                  />
+                  <span
+                    className="cartButtons increase"
+                    onClick={() => addQuantityToCart("plus")}
+                  >
+                    <Unicons.UilPlus />
+                  </span>
+                </div>
+              </div>
 
-            <Button className="buy">COMPRAR</Button>
-          </section>
-        </Col>
-      </Row>
+              <Button className="buy">COMPRAR</Button>
+            </section>
+          </Col>
+        </Row>
+      )}
     </Container>
   );
 };

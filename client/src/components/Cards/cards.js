@@ -42,12 +42,18 @@ const Cards = ({ loading, setLoading }) => {
    */
 
   useEffect(() => {
-    new Promise((resolve) => {
+    new Promise((resolve, reject) => {
       resolve(dispatch(getAllProducts()));
-    }).then(() => {
-      setLoading(false);
-    });
-  }, []);
+    })
+      .then((res) => {
+        console.log("res", res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        return error.response.data.error;
+      });
+  }, [dispatch]);
 
   return loading ? (
     <>
@@ -62,17 +68,25 @@ const Cards = ({ loading, setLoading }) => {
         setOrder={setOrder}
       />
       <div className="row">
-        {actualproducts.map((products) => (
-          <div className="col-md-3 tamanio" key={products.id}>
-            <ProductCard
-              name={products.name}
-              price={products.price}
-              image={products.image}
-              stars={products.stars}
-              id={products.id}
-            />
-          </div>
-        ))}
+        {console.log("actualproducts", actualproducts)}
+        {Array.isArray(actualproducts) ? (
+          actualproducts.map((products) => (
+            <div className="col-md-3 tamanio" key={products.id}>
+              <ProductCard
+                name={products.name}
+                price={products.price}
+                image={products.image}
+                stars={products.stars}
+                id={products.id}
+              />
+            </div>
+          ))
+        ) : (
+          <>
+            {console.log("actualproducts 2", actualproducts)}
+            <p className="errors">{actualproducts}</p>
+          </>
+        )}
       </div>
       <Pages
         actualPage={actualPage}
