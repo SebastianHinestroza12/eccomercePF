@@ -24,11 +24,9 @@ router.get('/', async (req, res) => {
       if (filterName.length > 0) return res.status(200).json(filterName);
       else return res.status(404).json(`No tenemos este producto disponible`);
     }
-
     products.forEach(el => {
       Product.findOrCreate({
         where: {
-          id: el.id,
           name: el.name,
           price: el.price,
           detail: el.detail,

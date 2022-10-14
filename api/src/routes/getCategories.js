@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Categories } = require("../db.js");
+const { Category } = require("../db.js");
 const jsonCats = require("../JSON/jsonCategories");
 
 const categories = () => {
@@ -12,14 +12,14 @@ router.get("/", async (req, res) => {
 
   try {
     cats.forEach((i) => {
-      Categories.findOrCreate({
+        Category.findOrCreate({
         where: {
           name: i.name,
         },
       });
     });
 
-    const resp = await Categories.findAll();
+    const resp = await Category.findAll();
     return res.json(resp);
   
   } catch (err) {

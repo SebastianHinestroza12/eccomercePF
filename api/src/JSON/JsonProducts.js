@@ -10,6 +10,7 @@ const jsonProducts = [
     "stock": 20,
     "stars": 5,
     "visible": true,
+    "category": "Jersey"
   },
   {
     "id": "x002",

@@ -5,7 +5,8 @@ module.exports = (sequelize) => {
     "product",
     {
       id: {
-        type: DataTypes.STRING,
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
       name: {
@@ -35,10 +36,10 @@ module.exports = (sequelize) => {
       stars: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0,
       },
       visible: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
       }
     },
     {
