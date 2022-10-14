@@ -101,7 +101,7 @@ const ProductDetail = () => {
               </div>
             </div>
 
-            <Button>COMPRAR</Button>
+            <Button className="buy">COMPRAR</Button>
           </section>
         </Col>
       </Row>
