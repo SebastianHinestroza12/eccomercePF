@@ -15,6 +15,24 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productDetail: payload,
       };
+      case 'ORDER_BY_PRICE':
+        const filterByPrice =
+          payload === "MayorPrecio"
+            ? state.products.sort((a, b) => {
+                if (parseInt(a.price) > parseInt(b.price)) return -1;
+                if (parseInt(a.price) < parseInt(b.price)) return 1;
+                return 0
+              })
+            : state.products.sort((a, b) => {
+                if (parseInt(a.price) < parseInt(b.price)) return -1;
+                if (parseInt(a.price) > parseInt(b.price)) return 1;
+                return 0
+              });
+        return {
+          ...state,
+          products: filterByPrice,
+        };
+
     default:
       return state;
   }
