@@ -34,3 +34,16 @@ export function filterByRating (payload) {
   }
 }
 
+export function searchProducts(search) {
+  return async function (dispatch) {
+
+      axios.get('/product?name=' + search)
+      .then(function (response) {
+          return dispatch({
+              type: 'SEARCH_PRODUCTS',
+              payload: response.data
+          });
+      }).catch(err => console.error(err))
+
+  }
+}
