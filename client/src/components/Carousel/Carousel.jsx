@@ -4,6 +4,7 @@ import image2 from '../Carousel/lago.jpg'
 import image3 from '../Carousel/montaña.jpg'
 import image4 from '../Carousel/imagen4.jpg'
 import image6 from '../Carousel/imagen6.jpg'
+import image7 from '../Carousel/imagen7.jpg'
 
 function Carousel() {
   return (
@@ -18,10 +19,10 @@ function Carousel() {
       <img src={image4} class="d-block w-100" alt="..." />
     </div>
     <div class="carousel-item">
-      <img src={image6} class="d-block w-100" alt="..." />
+      <img src={image7} class="d-block w-100" alt="..." />
     </div>
     <div class="carousel-item">
-      <img src={image3} class="d-block w-100" alt="..." />
+      <img src={image6} class="d-block w-100" alt="..." />
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
