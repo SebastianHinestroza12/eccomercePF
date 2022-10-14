@@ -1,7 +1,4 @@
 import React from 'react'
-import image1 from '../Carousel/laguna.jpg'
-import image2 from '../Carousel/lago.jpg'
-import image3 from '../Carousel/montaña.jpg'
 import image4 from '../Carousel/imagen4.jpg'
 import image6 from '../Carousel/imagen6.jpg'
 import image7 from '../Carousel/imagen7.jpg'
