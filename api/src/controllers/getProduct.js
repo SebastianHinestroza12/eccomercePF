@@ -1,6 +1,6 @@
 const jsonProducts = require('../JSON/JsonProducts');
 const router = require("express").Router();
-const { Product } = require('../db')
+const { Product, Category } = require('../db')
 
 // Se Mapea La Informacion Del Json
 
@@ -39,7 +39,8 @@ router.get('/', async (req, res) => {
       })
     })
 
-    const consult = await Product.findAll();
+    const consult = await Product.findAll(  {include: Category}  );
+    
     return res.status(200).json(consult);
   } catch (error) {
     console.log(error);
