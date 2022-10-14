@@ -10,6 +10,7 @@ const jsonProducts = [
     "stock": 20,
     "stars": 5,
     "visible": true,
+    "category": "Jersey"
   },
   {
     "id": "x002",
@@ -3191,7 +3192,7 @@ const jsonProducts = [
     "visible": true,
   },
   {
-    "id": "x292",
+    "id": "x291",
     "name": "JERSEY LOCAL SELECCIÓN TUNEZ 22",
     "price": 1799,
     "detail": "JERSEY LOCAL",

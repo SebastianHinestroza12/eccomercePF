@@ -36,10 +36,10 @@ module.exports = (sequelize) => {
       stars: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: 0,
       },
       visible: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
       }
     },
     {

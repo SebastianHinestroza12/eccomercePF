@@ -1,12 +1,12 @@
 const jsonCategories = [
   {
-    "nameCat": "Jersey"
+    "name": "Jersey"
   },
   {
-    "nameCat": "Balón"
+    "name": "Balón"
   },
   {
-    "nameCat": "Botínclear"
+    "name": "Botínclear"
   },
 ];
 

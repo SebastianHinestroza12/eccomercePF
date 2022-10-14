@@ -1,16 +1,30 @@
-const router = require('express').Router();
-const jsonProducts = require('../JSON/JsonProducts');
-//const { Category } = require('../../db.js');
+const router = require("express").Router();
+const { Category } = require("../db.js");
+const jsonCats = require("../JSON/jsonCategories");
 
-const product = () => {
-    const data = jsonProducts.map(data => data);
-    return data;
-  };
+const categories = () => {
+  const data = jsonCats.map((i) => i);
+  return data;
+};
 
 router.get("/", async (req, res) => {
-  const products = product();
+  const cats = categories();
 
-  res.json(products);
+  try {
+    cats.forEach((i) => {
+        Category.findOrCreate({
+        where: {
+          name: i.name,
+        },
+      });
+    });
+
+    const resp = await Category.findAll();
+    return res.json(resp);
+  
+  } catch (err) {
+    console.log("Error en getCats.." + err.message);
+  }
 });
 
 module.exports = router;
