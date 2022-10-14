@@ -52,6 +52,13 @@ const rootReducer = (state = initialState, action) => {
           products: filterByRating,
         };
 
+        case SEARCH_PRODUCTS:
+            
+          return {
+              ...state,
+              products: action.payload
+          }
+
     default:
       return state;
   }
