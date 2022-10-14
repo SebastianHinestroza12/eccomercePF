@@ -13,7 +13,7 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState([true]);
 
   const dispatch = useDispatch();
-  const recipeDetail = useSelector((state) => state.productDetail);
+  const productDetail = useSelector((state) => state.productDetail);
 
   useEffect(() => {
     new Promise((resolve) => {
@@ -48,28 +48,24 @@ const ProductDetail = () => {
   }
 
   return loading ? (
-    <img
-      src={`https://recipes-client-production.up.railway.app/uploads/loading1.gif`}
-      className="loading"
-      alt="logo"
-    />
+    <img src="/images/loader-blue.gif" className="loading" alt="loader" />
   ) : (
     <Container className="product-detail">
-      {console.log("productId", recipeDetail.detail)}
+      {console.log("productId", productDetail.detail)}
       <Row>
         <Col md={5} className="sidebar">
-          <img src={recipeDetail.image} alt="product-name" />
+          <img src={productDetail.image} alt="product-name" />
         </Col>
         <Col md={7}>
           <section id="detail">
-            <h3>{recipeDetail.name}</h3>
+            <h3>{productDetail.name}</h3>
             <div className="rating">
-              {console.log("recipeDetail.rating", recipeDetail.rating)}
-              {writeRatingStars(recipeDetail.stars)}
+              {console.log("productDetail.rating", productDetail.rating)}
+              {writeRatingStars(productDetail.stars)}
             </div>
             <hr></hr>
-            <h4>$ {recipeDetail.price}</h4>
-            <p className="detail-text">{recipeDetail.detail}</p>
+            <h4>$ {productDetail.price}</h4>
+            <p className="detail-text">{productDetail.detail}</p>
           </section>
           <section className="buttonsAddToCart">
             <div>

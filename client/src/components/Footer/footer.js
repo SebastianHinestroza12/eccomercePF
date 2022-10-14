@@ -1,5 +1,5 @@
 import React from 'react'
-import logo1 from './logoqatartransp.png'
+import logo from './logoFooter.png'
 // import logo from './logoqatar.jpg'
 
 function Footer() {
@@ -8,7 +8,7 @@ function Footer() {
             <div class='row p-5 pb-2 bg-dark text-white'>
                 <div class='col-xs-12 col-md-6 col-lg-3'>
                     {/* <p class='fs-40'>Qatar Shop</p> */}
-                    <img class='w-50 h-50' alt='logoqatar' src={logo1} />
+                    <img class='w-50 h-50' alt='logoqatar' src={logo} />
                     
                 </div>
                 <div class='col-xs-12 col-md-6 col-lg-3'>
