@@ -4,8 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo1 from '../Footer/logoqatartransp.png'
-import carrito from './carrito1.png'
+import logo from './logoNavbar.png'
 import * as Unicons from '@iconscout/react-unicons'
 import './navBar.css'
 
@@ -14,7 +13,7 @@ function NavScrollExample() {
   return (
     <Navbar className='navv' variant='dark' expand="lg" >
       <Container fluid>
-        <Navbar.Brand href="/home"><a><img src={logo1} alt='QATAR SHOP' class='img-fluid' className='img-logo'  /> </a></Navbar.Brand>
+        <Navbar.Brand href="/home"><a><img src={logo} alt='QATAR SHOP' class='img-fluid' className='img-logo'  /> </a></Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
 
@@ -52,11 +51,11 @@ function NavScrollExample() {
                   Something else 
                 </NavDropdown.Item>
               </NavDropdown>
-            </div>
+           
             <Nav.Link href="/carrito" class='w-20' >
               <a><Unicons.UilShoppingCartAlt /> </a>
             </Nav.Link>
-            <div className='iyr'>
+             
             <Nav.Link href="/productos" className='navLinks'>Ingresar</Nav.Link>
             <Nav.Link href="/productos" className='navLinks'>Registrarse</Nav.Link>
             </div>
