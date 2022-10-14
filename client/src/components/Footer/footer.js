@@ -1,5 +1,5 @@
 import React from 'react'
-import logo1 from './logoqatartransp.png'
+import logo1 from './logoFooter.png'
 // import logo from './logoqatar.jpg'
 
 function Footer() {
