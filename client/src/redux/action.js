@@ -20,30 +20,34 @@ export const getProductDetail = (productId) => {
   };
 };
 
-export function filterByPrice (payload) {
+export function filterByPrice(payload) {
   return {
-      type: 'ORDER_BY_PRICE',
-      payload
-  }
+    type: "ORDER_BY_PRICE",
+    payload,
+  };
 }
 
-export function filterByRating (payload) {
+export function filterByRating(payload) {
   return {
-    type: 'ORDER_BY_RATING',
+    type: "ORDER_BY_RATING",
+    payload,
+  };
+}
+
+export const SearchByName = (name) => {
+  return function (dispatch) {
+    return axios(`/product?name=${name}`)
+      .then((r) => r.data)
+      .then((productFound) => {
+        dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
+      });
+  };
+};
+
+
+export function filterByName (payload) {
+  return {
+    type: 'ORDER_BY_NAME',
     payload
-  }
-}
-
-export function searchProducts(search) {
-  return async function (dispatch) {
-
-      axios.get('/product?name=' + search)
-      .then(function (response) {
-          return dispatch({
-              type: 'SEARCH_PRODUCTS',
-              payload: response.data
-          });
-      }).catch(err => console.error(err))
-
   }
 }

@@ -16,48 +16,65 @@ const rootReducer = (state = initialState, action) => {
         productDetail: payload,
       };
 
-      case 'ORDER_BY_PRICE':
-        const filterByPrice =
-          payload === "MayorPrecio"
-            ? state.products.sort((a, b) => {
-                if (parseInt(a.price) > parseInt(b.price)) return -1;
-                if (parseInt(a.price) < parseInt(b.price)) return 1;
-                return 0
-              })
-            : state.products.sort((a, b) => {
-                if (parseInt(a.price) < parseInt(b.price)) return -1;
-                if (parseInt(a.price) > parseInt(b.price)) return 1;
-                return 0
-              });
-        return {
-          ...state,
-          products: filterByPrice,
-        };
+    case "ORDER_BY_PRICE":
+      const filterByPrice =
+        payload === "MayorPrecio"
+          ? state.products.sort((a, b) => {
+              if (parseInt(a.price) > parseInt(b.price)) return -1;
+              if (parseInt(a.price) < parseInt(b.price)) return 1;
+              return 0;
+            })
+          : state.products.sort((a, b) => {
+              if (parseInt(a.price) < parseInt(b.price)) return -1;
+              if (parseInt(a.price) > parseInt(b.price)) return 1;
+              return 0;
+            });
+      return {
+        ...state,
+        products: filterByPrice,
+      };
 
-      case 'ORDER_BY_RATING':
-        const filterByRating = 
-          payload === "MayorRating"
+    case "ORDER_BY_RATING":
+      const filterByRating =
+        payload === "MayorRating"
           ? state.products.sort((a, b) => {
               if (parseInt(a.stars) > parseInt(b.stars)) return -1;
               if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-              return 0
+              return 0;
             })
           : state.products.sort((a, b) => {
               if (parseInt(a.stars) < parseInt(b.stars)) return -1;
               if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-              return 0
+              return 0;
             });
-        return {
-          ...state,
-          products: filterByRating,
-        };
-
-        case SEARCH_PRODUCTS:
-            
+      return {
+        ...state,
+        products: filterByRating,
+      };
+        
+      case 'ORDER_BY_NAME':
+        const orderedByName =
+          action.payload === "Name (A-Z)"
+          ? state.products.sort((a, b) => {
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
+            return 0;
+          })
+          : state.products.sort((a, b) => {
+            if (a.name > b.name) return -1;
+            if (a.name < b.name) return 1;
+            return 0;
+          });
           return {
-              ...state,
-              products: action.payload
-          }
+            ...state,
+            products: orderedByName,
+          };
+
+    case "SEARCH_PRODUCTS":
+      return {
+        ...state,
+        products: payload,
+      };
 
     default:
       return state;

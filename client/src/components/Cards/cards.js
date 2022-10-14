@@ -1,15 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import ProductCard from "../Product/Card";
 import "./cards.css";
-import { useState } from "react";
 import Pages from "../Pagination/pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/action";
 import Filters from "../Filters/Filters";
 
-const Cards = () => {
-  const [loading, setLoading] = useState([true]);
-
+const Cards = ({ loading, setLoading }) => {
   const allProducts = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
@@ -58,7 +55,12 @@ const Cards = () => {
     </>
   ) : (
     <div>
-      <Filters setMinPageNumber={setMinPageNumber} setMaxPageNumber={setMaxPageNumber} setActualPage={setActualPage} setOrder={setOrder} />
+      <Filters
+        setMinPageNumber={setMinPageNumber}
+        setMaxPageNumber={setMaxPageNumber}
+        setActualPage={setActualPage}
+        setOrder={setOrder}
+      />
       <div className="row">
         {actualproducts.map((products) => (
           <div className="col-md-3 tamanio" key={products.id}>
@@ -66,7 +68,7 @@ const Cards = () => {
               name={products.name}
               price={products.price}
               image={products.image}
-              rating={products.rating}
+              stars={products.stars}
               id={products.id}
             />
           </div>
