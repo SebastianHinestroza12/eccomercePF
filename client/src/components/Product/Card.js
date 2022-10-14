@@ -6,7 +6,6 @@ import "./card.css";
 import * as Unicons from "@iconscout/react-unicons";
 
 function writeRatingStars(stars) {
-  console.log("rating", stars);
   let ratingStars = [];
   for (let i = 1; i <= stars; i++) {
     ratingStars.push("★");

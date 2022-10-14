@@ -1,15 +1,12 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import ProductCard from "../Product/Card";
 import "./cards.css";
-import { useState } from "react";
 import Pages from "../Pagination/pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/action";
 import Filters from "../Filters/Filters";
 
-const Cards = () => {
-  const [loading, setLoading] = useState([true]);
-
+const Cards = ({ loading, setLoading }) => {
   const allProducts = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
