@@ -2,10 +2,14 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "comment",
+    "size",
     {
-      description: {
+      name: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      stock: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },

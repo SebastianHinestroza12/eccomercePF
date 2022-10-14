@@ -1,6 +1,6 @@
 const jsonProducts = require('../JSON/JsonProducts');
 const router = require("express").Router();
-const { Product } = require('../db')
+const { Product, Category } = require('../db')
 const { Op } = require("sequelize");
 
 /* Una ruta que devuelve una lista de productos, o todos los productos que en su nombre contienen la
@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
       })
     })
 
-    const consult = await Product.findAll();
+    const consult = await Product.findAll( {include: Category} );
     // console.log(consult.length);
     return res.status(200).json(consult);
   } catch (error) {
