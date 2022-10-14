@@ -5,18 +5,19 @@ import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
 
-function writeRatingStars(rating) {
+function writeRatingStars(stars) {
+  console.log("rating", stars);
   let ratingStars = [];
-  for (let i = 1; i <= rating; i++) {
+  for (let i = 1; i <= stars; i++) {
     ratingStars.push("★");
   }
-  for (let i = 1; i <= 5 - rating; i++) {
+  for (let i = 1; i <= 5 - stars; i++) {
     ratingStars.push("☆");
   }
   return ratingStars.join("");
 }
 
-const ProductCard = ({ name, price, image, rating, id }) => {
+const ProductCard = ({ name, price, image, stars, id }) => {
   const history = useHistory();
   const goToDetail = (id) => {
     history.push(`/detail/${id}`);
@@ -24,7 +25,10 @@ const ProductCard = ({ name, price, image, rating, id }) => {
 
   return (
     <Card style={{ width: "100%" }} onClick={() => goToDetail(id)}>
-      <Card.Img variant="top" src={image} />
+      <div>
+        <img variant="top" src={image} alt={name} />
+      </div>
+
       <Card.Body>
         <Card.Text>CATEGORIA</Card.Text>
         <hr></hr>
@@ -33,7 +37,7 @@ const ProductCard = ({ name, price, image, rating, id }) => {
           <Unicons.UilShoppingCartAlt />
           <Unicons.UilHeart />
         </div>
-        <div className="rating">{writeRatingStars(rating)}</div>
+        <div className="rating">{writeRatingStars(stars)}</div>
 
         <div>${price}</div>
       </Card.Body>

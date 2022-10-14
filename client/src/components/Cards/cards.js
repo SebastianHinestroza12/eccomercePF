@@ -58,7 +58,12 @@ const Cards = () => {
     </>
   ) : (
     <div>
-      <Filters setMinPageNumber={setMinPageNumber} setMaxPageNumber={setMaxPageNumber} setActualPage={setActualPage} setOrder={setOrder} />
+      <Filters
+        setMinPageNumber={setMinPageNumber}
+        setMaxPageNumber={setMaxPageNumber}
+        setActualPage={setActualPage}
+        setOrder={setOrder}
+      />
       <div className="row">
         {actualproducts.map((products) => (
           <div className="col-md-3 tamanio" key={products.id}>
@@ -66,7 +71,7 @@ const Cards = () => {
               name={products.name}
               price={products.price}
               image={products.image}
-              rating={products.rating}
+              stars={products.stars}
               id={products.id}
             />
           </div>
