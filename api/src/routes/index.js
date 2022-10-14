@@ -5,6 +5,9 @@ const getProduct = require('../controllers/getProduct');
 const putProduct = require('../controllers/putProduct');
 const productId = require('../controllers/productId');
 const getFilterPrice = require('../controllers/getFilterPrice');
+const getFilterType = require('../controllers/getFilterType');
+const getFilterSize = require('../controllers/getFilterSize');
+const getFilterEquipement = require('../controllers/getFilterEquipment');
 
 const postProduct = require('./postProduct');
 const postAdmin = require('./postAdmin');
@@ -15,6 +18,9 @@ router.use('/product', getProduct);
 router.use('/product', putProduct);
 router.use('/product', productId);
 router.use('/filterPrice', getFilterPrice);
+router.use('/filterType', getFilterType);
+router.use('/filterSize', getFilterSize);
+router.use('/filterEquipement', getFilterEquipement);
 
 
 router.use('/postProduct', postProduct);

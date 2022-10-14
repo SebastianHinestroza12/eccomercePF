@@ -47,3 +47,11 @@ export const SearchByName = (name) => {
       });
   };
 };
+
+
+export function filterByName (payload) {
+  return {
+    type: 'ORDER_BY_NAME',
+    payload
+  }
+}

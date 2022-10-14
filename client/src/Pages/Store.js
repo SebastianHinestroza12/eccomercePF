@@ -25,7 +25,6 @@ const Store = () => {
             <Sidebar />
           </Col>
           <Col>
-            <TopStoreFilters />
             <Cards loading={loading} setLoading={setLoading} />
           </Col>
         </Row>

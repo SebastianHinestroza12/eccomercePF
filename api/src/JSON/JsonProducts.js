@@ -959,7 +959,7 @@ const jsonProducts = [
   },
   {
     "id": "x088",
-    "name": "JERSEY VISITANTE SELECCIÓN 22",
+    "name": "JERSEY VISITANTE SELECCIÓN GHANA 22",
     "price": 1799,
     "detail": "JERSEY VISITANTE",
     "size": "XL",
