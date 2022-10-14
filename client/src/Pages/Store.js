@@ -15,9 +15,7 @@ const Store = () => {
   return (
     <>
       <Carousel />
-      {console.log("recetasJsonLocal", recetasJsonLocal[0].id)}
       <Container>
-        Tienda
         <Row>
           <Col md={3} className="sidebar">
             <Sidebar />

@@ -1,17 +1,30 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import ProductCard from "../Product/Card";
 import "./cards.css";
 import { useState } from "react";
 import Pages from "../Pagination/pagination";
-const json = require("../../utils/productos.json");
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProducts } from "../../redux/action";
 
 const Cards = () => {
+  const [loading, setLoading] = useState([true]);
+
+  const allProducts = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  /**
+   * PAGINADO
+   */
   const appTopRef = useRef();
+  const [order, setOrder] = useState("");
   const [actualPage, setActualPage] = useState(1); //arrancamos desde la page 1
   const [productsPerPage, setproductsPerPage] = useState(12); //cuantos products por page
   const indexOfLastproduct = actualPage * productsPerPage;
   const indexOfFirstproduct = indexOfLastproduct - productsPerPage;
-  const actualproducts = json.slice(indexOfFirstproduct, indexOfLastproduct); //recortamos el arreglo con todos los products
+  const actualproducts = allProducts.slice(
+    indexOfFirstproduct,
+    indexOfLastproduct
+  ); //recortamos el arreglo con todos los products
   const [minPageNumber, setMinPageNumber] = useState(0);
   const [maxPageNumber, setMaxPageNumber] = useState(5);
 
@@ -26,16 +39,33 @@ const Cards = () => {
       setMaxPageNumber(maxPageNumber - 4);
     }
   };
-  return (
-    <div className="container">
+  /**
+   * FIN PAGINADO
+   */
+
+  useEffect(() => {
+    new Promise((resolve) => {
+      resolve(dispatch(getAllProducts()));
+    }).then(() => {
+      setLoading(false);
+    });
+  }, []);
+
+  return loading ? (
+    <>
+      <img src="/images/loader-blue.gif" className="loading" alt="loader" />
+    </>
+  ) : (
+    <div>
       <div className="row">
         {actualproducts.map((products) => (
-          <div className="col-md-3 tamanio">
+          <div className="col-md-3 tamanio" key={products.id}>
             <ProductCard
               name={products.name}
               price={products.price}
               image={products.image}
               rating={products.rating}
+              id={products.id}
             />
           </div>
         ))}
@@ -45,7 +75,7 @@ const Cards = () => {
         minPageNumber={minPageNumber}
         maxPageNumber={maxPageNumber}
         productsPerPage={productsPerPage}
-        products={Array.isArray(json) ? json.length : 1}
+        products={Array.isArray(allProducts) ? allProducts.length : 1}
         pages={pages}
       />
     </div>

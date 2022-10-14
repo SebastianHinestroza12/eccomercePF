@@ -12,8 +12,11 @@ function App() {
       <Route>
         <NavScrollExample />
       </Route>
-      <Route path={"/"}>
+      <Route exact path={"/"}>
         <Store />
+      </Route>
+      <Route path={"/detail/:productId"}>
+        <ProductDetail />
       </Route>
       <Route>
         <Footer />
