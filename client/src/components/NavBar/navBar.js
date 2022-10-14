@@ -51,11 +51,11 @@ function NavScrollExample() {
                   Something else 
                 </NavDropdown.Item>
               </NavDropdown>
-            </div>
+           
             <Nav.Link href="/carrito" class='w-20' >
               <a><Unicons.UilShoppingCartAlt /> </a>
             </Nav.Link>
-            <div className='iyr'>
+             
             <Nav.Link href="/productos" className='navLinks'>Ingresar</Nav.Link>
             <Nav.Link href="/productos" className='navLinks'>Registrarse</Nav.Link>
             </div>
