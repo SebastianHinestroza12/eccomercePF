@@ -42,13 +42,18 @@ const Cards = ({ loading, setLoading }) => {
    */
 
   useEffect(() => {
-    console.log("update");
-    new Promise((resolve) => {
+    new Promise((resolve, reject) => {
       resolve(dispatch(getAllProducts()));
-    }).then(() => {
-      setLoading(false);
-    });
-  }, []);
+    })
+      .then((res) => {
+        console.log("res", res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("error", error);
+        return error.response.data.error;
+      });
+  }, [dispatch]);
 
   return loading ? (
     <>
@@ -63,6 +68,7 @@ const Cards = ({ loading, setLoading }) => {
         setOrder={setOrder}
       />
       <div className="row">
+        {console.log("actualproducts", actualproducts)}
         {Array.isArray(actualproducts) ? (
           actualproducts.map((products) => (
             <div className="col-md-3 tamanio" key={products.id}>

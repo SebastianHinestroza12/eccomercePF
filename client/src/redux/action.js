@@ -6,6 +6,10 @@ export const getAllProducts = () => {
       .then((response) => response.data)
       .then((products) => {
         dispatch({ type: "GET_ALL_PRODUCTS", payload: products });
+      })
+      .catch((error) => {
+        console.log("AXIOS error get all", error.response.data);
+        return error.response.data.error;
       });
   };
 };
@@ -42,16 +46,15 @@ export const SearchByName = (name) => {
         dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
       })
       .catch((error) => {
-        console.log("AXIOS error", typeof error.response.data);
-        return error.response.data;
+        console.log("AXIOS error", typeof error.response.data.error);
+        return error.response.data.error;
       });
   };
 };
 
-
-export function filterByName (payload) {
+export function filterByName(payload) {
   return {
-    type: 'ORDER_BY_NAME',
-    payload
-  }
+    type: "ORDER_BY_NAME",
+    payload,
+  };
 }

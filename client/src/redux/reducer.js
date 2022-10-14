@@ -51,27 +51,26 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: filterByRating,
       };
-        
-      case 'ORDER_BY_NAME':
-        const orderedByName =
-          action.payload === "Name (A-Z)"
+
+    case "ORDER_BY_NAME":
+      const orderedByName =
+        action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-            if (a.name > b.name) return 1;
-            if (a.name < b.name) return -1;
-            return 0;
-          })
+              if (a.name > b.name) return 1;
+              if (a.name < b.name) return -1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (a.name > b.name) return -1;
-            if (a.name < b.name) return 1;
-            return 0;
-          });
-          return {
-            ...state,
-            products: orderedByName,
-          };
+              if (a.name > b.name) return -1;
+              if (a.name < b.name) return 1;
+              return 0;
+            });
+      return {
+        ...state,
+        products: orderedByName,
+      };
 
     case "SEARCH_PRODUCTS":
-      console.log("estado actual products", state.products);
       return {
         ...state,
         products: payload,

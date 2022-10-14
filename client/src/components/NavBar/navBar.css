@@ -89,4 +89,8 @@ ESTILOS PARA MOBILE
   .navbar-collapse {
     margin: 1rem 0;
   }
+  .navbar .divNav {
+    margin-left: 0;
+    gap: 0;
+  }
 }

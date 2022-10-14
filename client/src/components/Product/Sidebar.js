@@ -49,16 +49,18 @@ const Sidebar = () => {
         <h5>TALLA</h5>
 
         <Form>
-          {getSizeProducts(getProducts).map((product) => (
-            // console.log(product)
-            <div key={`default-${product.size}`} className="mb-2">
-              <Form.Check
-                product="checkbox"
-                id={`default-${product.size}`}
-                label={`${product.size}`}
-              />
-            </div>
-          ))}
+          {getSizeProducts(getProducts)
+            ? getSizeProducts(getProducts).map((product) => (
+                // console.log(product)
+                <div key={`default-${product.size}`} className="mb-2">
+                  <Form.Check
+                    product="checkbox"
+                    id={`default-${product.size}`}
+                    label={`${product.size}`}
+                  />
+                </div>
+              ))
+            : "empty"}
         </Form>
       </div>
 
@@ -66,20 +68,12 @@ const Sidebar = () => {
         <h5>TIPO</h5>
 
         <Form>
-          {["checkbox"].map(
-            (
-              type //console.log("type", type)
-            ) => (
-              <div key={`rating-${type}`} className="mb-3">
-                <Form.Check type={type} id={`rating-${type}`} label="Local" />
-                <Form.Check
-                  type={type}
-                  id={`rating-${type}`}
-                  label="Visitante"
-                />
-              </div>
-            )
-          )}
+          {["checkbox"].map((type) => (
+            <div key={`rating-${type}`} className="mb-3">
+              <Form.Check type={type} id={`rating-${type}`} label="Local" />
+              <Form.Check type={type} id={`rating-${type}`} label="Visitante" />
+            </div>
+          ))}
         </Form>
       </div>
     </>

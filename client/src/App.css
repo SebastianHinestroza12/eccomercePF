@@ -63,3 +63,9 @@ img {
   margin: auto;
   display: block;
 }
+footer .container {
+  margin: auto;
+}
+footer img {
+  width: 70%;
+}

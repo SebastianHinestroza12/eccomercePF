@@ -39,3 +39,8 @@
 .product-detail button.buy {
   padding: 0 3rem;
 }
+
+label.form-check-label,
+.form-check-input[type="checkbox"] {
+  cursor: pointer;
+}
