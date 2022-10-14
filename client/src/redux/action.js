@@ -19,3 +19,18 @@ export const getProductDetail = (productId) => {
       });
   };
 };
+
+export function filterByPrice (payload) {
+  return {
+      type: 'ORDER_BY_PRICE',
+      payload
+  }
+}
+
+export function filterByRating (payload) {
+  return {
+    type: 'ORDER_BY_RATING',
+    payload
+  }
+}
+

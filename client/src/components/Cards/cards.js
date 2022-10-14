@@ -5,6 +5,7 @@ import { useState } from "react";
 import Pages from "../Pagination/pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/action";
+import Filters from "../Filters/Filters";
 
 const Cards = () => {
   const [loading, setLoading] = useState([true]);
@@ -57,6 +58,7 @@ const Cards = () => {
     </>
   ) : (
     <div>
+      <Filters setMinPageNumber={setMinPageNumber} setMaxPageNumber={setMaxPageNumber} setActualPage={setActualPage} setOrder={setOrder} />
       <div className="row">
         {actualproducts.map((products) => (
           <div className="col-md-3 tamanio" key={products.id}>
