@@ -7,7 +7,6 @@ function NewProduct() {
     register,
     formState: { errors },
     handleSubmit,
-    watch,
   } = useForm({
     defaultValues: {
       name: "Balon Adidas",
