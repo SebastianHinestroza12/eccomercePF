@@ -1,6 +1,7 @@
 const initialState = {
   products: [],
   productDetail: [],
+  newProducts: []
 };
 const rootReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -9,6 +10,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         products: payload,
+      };
+    case "LOAD_PRODUCTS":
+      return {
+        ...state,
+        newProducts: payload,
       };
     case "GET_PRODUCT_DETAIL":
       return {
