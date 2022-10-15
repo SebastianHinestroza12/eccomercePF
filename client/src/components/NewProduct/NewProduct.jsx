@@ -14,14 +14,7 @@ function NewProduct() {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      name: "Balon Adidas",
-      category: "Balones",
-      price: 100,
-      stock: 4,
       image: "https://picsum.photos/200/200",
-      stars: 5,
-      detail: "Probando form",
-      size: "L"
     },
   });
 
