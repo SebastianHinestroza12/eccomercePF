@@ -1,8 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import '../NewProduct/newProduct.css'
+import { useDispatch } from "react-redux";
+import { envioForm } from "../../redux/action";
 
 function NewProduct() {
+
+  const dispatch = useDispatch()
+
   const {
     register,
     formState: { errors },
@@ -13,12 +18,17 @@ function NewProduct() {
       category: "Balones",
       price: 100,
       stock: 4,
-      image: "https://dwefffewfweqf.com",
+      image: "https://picsum.photos/200/200",
+      stars: 5,
+      detail: "Probando form",
+      size: "L"
     },
   });
 
   const onSubmit = (data) => {
     console.log(data);
+    alert('Se enviaron los datos correctamente')
+    dispatch(envioForm(data))
   };
 
   const selectValidator = (value) => {
@@ -165,12 +175,12 @@ function NewProduct() {
             })}
           >
             <option selected>---</option>
-            <option value="xs">XS</option>
-            <option value="s">S</option>
-            <option value="m">M</option>
-            <option value="l">L</option>
-            <option value="xl">XL</option>
-            <option value="xxl">XXL</option>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
           </select>
           {errors.size && <p>Debes seleccionar una opción</p>}
         </div>

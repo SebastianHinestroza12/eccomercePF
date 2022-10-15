@@ -60,8 +60,12 @@ export function filterByName(payload) {
 }
 
 //CREACION DE PRODUCTO
-export const createProduct = (props) => {
-  return function () {
-    return axios.post(`/postProduct`, props).then((response) => response);
+export const envioForm = (data) => {
+  return async (dispatch) => {
+    await axios.post(`/postProduct`, data);
+    dispatch({
+      type: "LOAD_PRODUCTS",
+      payload: data,
+    })
   };
 };
