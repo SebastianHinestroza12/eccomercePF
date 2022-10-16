@@ -58,13 +58,13 @@ function NewProduct() {
             })}
           />
           {errors.name?.type === "required" && (
-            <p>El campo Nombre es requerido</p>
+            <p className="textoError">El campo Nombre es requerido</p>
           )}
           {errors.name?.type === "maxLength" && (
-            <p>Máximo de carácteres permitidos</p>
+            <p className="textoError">Máximo de carácteres permitidos</p>
           )}
           {errors.name?.type === "pattern" && (
-            <p>No se permiten números o símbolos</p>
+            <p className="textoError">No se permiten números o símbolos</p>
           )}
         </div>
         <div class="col-md-3">
@@ -81,10 +81,10 @@ function NewProduct() {
             })}
           />
           {errors.category?.type === "required" && (
-            <p>El campo Categoría es requerido</p>
+            <p className="textoError">El campo Categoría es requerido</p>
           )}
           {errors.category?.type === "pattern" && (
-            <p>No se permiten números o símbolos</p>
+            <p className="textoError">No se permiten números o símbolos</p>
           )}
         </div>
         <div class="col-md-3">
@@ -101,9 +101,9 @@ function NewProduct() {
             })}
           />
           {errors.price?.type === "required" && (
-            <p>El campo Precio es requerido</p>
+            <p className="textoError">El campo Precio es requerido</p>
           )}
-          {errors.price?.type === "pattern" && <p>Sólo números permitidos</p>}
+          {errors.price?.type === "pattern" && <p className="textoError">Sólo números permitidos</p>}
         </div>
         <div class="col-md-3">
           <label htmlFor="stock" class="form-label">
@@ -119,9 +119,9 @@ function NewProduct() {
             })}
           />
           {errors.stock?.type === "required" && (
-            <p>El campo Stock es requerido</p>
+            <p className="textoError">El campo Stock es requerido</p>
           )}
-          {errors.stock?.type === "pattern" && <p>Sólo números permitidos</p>}
+          {errors.stock?.type === "pattern" && <p className="textoError">Sólo números permitidos</p>}
         </div>
         <div class="col-md-3">
           <label htmlFor="image" class="form-label">
@@ -136,7 +136,7 @@ function NewProduct() {
             })}
           />
           {errors.image ?.type === "required" && (
-            <p>El campo Imagen es requerido</p>
+            <p className="textoError">El campo Imagen es requerido</p>
           )}
         </div>
         <div class="col-md-3">
@@ -159,7 +159,7 @@ function NewProduct() {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          {errors.stars && <p>Debes seleccionar una opción</p>}
+          {errors.stars && <p className="textoError">Debes seleccionar una opción</p>}
         </div>
         <div class="col-md-3">
           <label htmlFor="size" class="form-label">
@@ -182,7 +182,7 @@ function NewProduct() {
             <option value="XL">XL</option>
             <option value="XXL">XXL</option>
           </select>
-          {errors.size && <p>Debes seleccionar una opción</p>}
+          {errors.size && <p className="textoError">Debes seleccionar una opción</p>}
         </div>
         <div class="col-md-6">
           <div class="form-floating">
@@ -196,7 +196,7 @@ function NewProduct() {
             ></textarea>
             <label for="floatingTextarea">Detalles</label>
             {errors.detail?.type === "required" && (
-              <p>El campo Detalles es requerido</p>
+              <p className="textoError">El campo Detalles es requerido</p>
             )}
           </div>
         </div>
