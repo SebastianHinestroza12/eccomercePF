@@ -25,7 +25,7 @@ function NavScrollExample() {
               <Nav.Link href="/" className="navLinks">
                 Inicio
               </Nav.Link>
-              <Nav.Link href="/productos" className="navLinks">
+              <Nav.Link href="/store" className="navLinks">
                 Productos
               </Nav.Link>
 
