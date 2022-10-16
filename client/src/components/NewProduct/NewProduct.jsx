@@ -58,7 +58,7 @@ function NewProduct() {
             })}
           />
           {errors.name?.type === "required" && (
-            <p>El campo nombre es requerido</p>
+            <p>El campo Nombre es requerido</p>
           )}
           {errors.name?.type === "maxLength" && (
             <p>Máximo de carácteres permitidos</p>
@@ -81,7 +81,7 @@ function NewProduct() {
             })}
           />
           {errors.category?.type === "required" && (
-            <p>El campo nombre es requerido</p>
+            <p>El campo Categoría es requerido</p>
           )}
           {errors.category?.type === "pattern" && (
             <p>No se permiten números o símbolos</p>
@@ -101,7 +101,7 @@ function NewProduct() {
             })}
           />
           {errors.price?.type === "required" && (
-            <p>El campo nombre es requerido</p>
+            <p>El campo Precio es requerido</p>
           )}
           {errors.price?.type === "pattern" && <p>Sólo números permitidos</p>}
         </div>
@@ -119,7 +119,7 @@ function NewProduct() {
             })}
           />
           {errors.stock?.type === "required" && (
-            <p>El campo nombre es requerido</p>
+            <p>El campo Stock es requerido</p>
           )}
           {errors.stock?.type === "pattern" && <p>Sólo números permitidos</p>}
         </div>
@@ -136,7 +136,7 @@ function NewProduct() {
             })}
           />
           {errors.image ?.type === "required" && (
-            <p>El campo nombre es requerido</p>
+            <p>El campo Imagen es requerido</p>
           )}
         </div>
         <div class="col-md-3">
@@ -196,7 +196,7 @@ function NewProduct() {
             ></textarea>
             <label for="floatingTextarea">Detalles</label>
             {errors.detail?.type === "required" && (
-              <p>El campo detalles es requerido</p>
+              <p>El campo Detalles es requerido</p>
             )}
           </div>
         </div>
