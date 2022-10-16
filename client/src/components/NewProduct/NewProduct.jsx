@@ -1,15 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import '../NewProduct/newProduct.css'
+import "../NewProduct/newProduct.css";
 import { useDispatch } from "react-redux";
 import { envioForm } from "../../redux/action";
 
 function NewProduct() {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const {
     register,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -20,8 +20,9 @@ function NewProduct() {
 
   const onSubmit = (data) => {
     console.log(data);
-    alert('Se enviaron los datos correctamente')
-    dispatch(envioForm(data))
+    alert("Se enviaron los datos correctamente");
+    dispatch(envioForm(data));
+    reset()
   };
 
   const selectValidator = (value) => {
@@ -99,6 +100,9 @@ function NewProduct() {
               pattern: /^-?\d*(\.\d+)?$/,
             })}
           />
+          {errors.price?.type === "required" && (
+            <p>El campo nombre es requerido</p>
+          )}
           {errors.price?.type === "pattern" && <p>Sólo números permitidos</p>}
         </div>
         <div class="col-md-3">
@@ -114,6 +118,9 @@ function NewProduct() {
               pattern: /^-?\d*(\.\d+)?$/,
             })}
           />
+          {errors.stock?.type === "required" && (
+            <p>El campo nombre es requerido</p>
+          )}
           {errors.stock?.type === "pattern" && <p>Sólo números permitidos</p>}
         </div>
         <div class="col-md-3">
@@ -128,8 +135,8 @@ function NewProduct() {
               required: true,
             })}
           />
-          {errors.image?.type === "pattern" && (
-            <p>El formato debe ser tipo EMAIL</p>
+          {errors.image ?.type === "required" && (
+            <p>El campo nombre es requerido</p>
           )}
         </div>
         <div class="col-md-3">
@@ -184,13 +191,13 @@ function NewProduct() {
               placeholder="Leave a comment here"
               id="floatingTextarea"
               {...register("detail", {
-                required: true
+                required: true,
               })}
             ></textarea>
             <label for="floatingTextarea">Detalles</label>
             {errors.detail?.type === "required" && (
-            <p>El campo detalles es requerido</p>
-          )}
+              <p>El campo detalles es requerido</p>
+            )}
           </div>
         </div>
         <div class="col-12 mt-5">
