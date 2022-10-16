@@ -4,17 +4,10 @@
 	 --font-sans: "Rubik", sans-serif;
 	 --font-serif: "Cardo", serif;
 }
- * {
-	 box-sizing: border-box;
-}
- html, body {
-	 height: 100%;
-}
- body {
-	 display: grid;
+
+
+.page-content {
 	 place-items: center;
-}
- .page-content {
 	 display: grid;
 	 grid-gap: 2rem;
 	 padding: 1rem;
