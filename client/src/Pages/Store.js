@@ -18,7 +18,6 @@ const Store = () => {
 
   return (
     <>
-      <Carousel />
       <Container>
         <Row>
           <Col md={3} className="sidebar">

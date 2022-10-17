@@ -45,14 +45,15 @@ const Cards = ({ loading, setLoading }) => {
     new Promise((resolve, reject) => {
       resolve(dispatch(getAllProducts()));
     })
-      .then((res) => {
-        console.log("res", res);
+      .then(() => {
         setLoading(false);
       })
       .catch((error) => {
         console.log("error", error);
         return error.response.data.error;
       });
+
+    return () => {};
   }, [dispatch]);
 
   return loading ? (
@@ -68,7 +69,6 @@ const Cards = ({ loading, setLoading }) => {
         setOrder={setOrder}
       />
       <div className="row">
-        {console.log("actualproducts", actualproducts)}
         {Array.isArray(actualproducts) ? (
           actualproducts.map((products) => (
             <div className="col-md-3 tamanio" key={products.id}>
@@ -83,7 +83,6 @@ const Cards = ({ loading, setLoading }) => {
           ))
         ) : (
           <>
-            {console.log("actualproducts 2", actualproducts)}
             <p className="errors">{actualproducts}</p>
           </>
         )}
