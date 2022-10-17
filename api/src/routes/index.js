@@ -10,6 +10,8 @@ const getFilterSize = require('../controllers/getFilterSize');
 const getFilterEquipement = require('../controllers/getFilterEquipment');
 
 const postProduct = require('./postProduct');
+const postCategory = require('./postCategory');
+
 const postAdmin = require('./postAdmin');
 
 const getCategories = require('./getCategories');
@@ -24,6 +26,8 @@ router.use('/filterEquipement', getFilterEquipement);
 
 
 router.use('/postProduct', postProduct);
+router.use('/postCategory', postCategory);
+
 router.use('/getCategories', getCategories);
 
 //

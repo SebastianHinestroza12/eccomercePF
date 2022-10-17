@@ -12,6 +12,10 @@ router.post("/", async (req, res) => {
         name: name, price: price, detail: detail, size: size, image: image, stock: stock, stars: stars
     });
 
+    Category.findOrCreate({ 
+        where: { name: category }, 
+    });
+
     const matchingCategorys = await Category.findAll({
         where: {
             name: {
