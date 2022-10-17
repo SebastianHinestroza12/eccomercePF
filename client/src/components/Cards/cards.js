@@ -5,6 +5,7 @@ import Pages from "../Pagination/pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/action";
 import Filters from "../Filters/Filters";
+import Sidebar from "../Product/Sidebar";
 
 const Cards = ({ loading, setLoading }) => {
   const allProducts = useSelector((state) => state.products);
@@ -46,11 +47,11 @@ const Cards = ({ loading, setLoading }) => {
       resolve(dispatch(getAllProducts()));
     })
       .then((res) => {
-        console.log("res", res);
+       
         setLoading(false);
       })
       .catch((error) => {
-        console.log("error", error);
+  
         return error.response.data.error;
       });
   }, [dispatch]);
@@ -61,6 +62,14 @@ const Cards = ({ loading, setLoading }) => {
     </>
   ) : (
     <div>
+      <div className="home-sidebar">
+        <Sidebar
+          setMinPageNumber={setMinPageNumber}
+          setMaxPageNumber={setMaxPageNumber}
+          setActualPage={setActualPage}
+          setOrder={setOrder}
+        />
+      </div>
       <Filters
         setMinPageNumber={setMinPageNumber}
         setMaxPageNumber={setMaxPageNumber}
@@ -68,10 +77,10 @@ const Cards = ({ loading, setLoading }) => {
         setOrder={setOrder}
       />
       <div className="row">
-        {console.log("actualproducts", actualproducts)}
+       
         {Array.isArray(actualproducts) ? (
           actualproducts.map((products) => (
-            <div className="col-md-3 tamanio" key={products.id}>
+            <div className="col-md-3" key={products.id}>
               <ProductCard
                 name={products.name}
                 price={products.price}
@@ -83,7 +92,7 @@ const Cards = ({ loading, setLoading }) => {
           ))
         ) : (
           <>
-            {console.log("actualproducts 2", actualproducts)}
+         
             <p className="errors">{actualproducts}</p>
           </>
         )}

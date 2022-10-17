@@ -4,6 +4,7 @@ button.list-group-item-action:hover {
 .filters_container {
   background: var(--grey100);
   padding: 2rem;
+  margin-right: 1rem;
 }
 .sidebar .filters_container .list-group-item {
   background: none;

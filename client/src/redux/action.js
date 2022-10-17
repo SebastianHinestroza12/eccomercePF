@@ -69,3 +69,10 @@ export const envioForm = (data) => {
     })
   };
 };
+
+export const filterBySize = (payload) => {
+  return {
+    type: 'FILTER_BY_SIZE',
+    payload
+  }
+}
