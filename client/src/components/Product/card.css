@@ -6,6 +6,10 @@
 .card-title.h5 {
   font-size: 1rem;
 }
+.card div:first-child {
+  overflow: hidden;
+  height: 187px;
+}
 
 .card:hover {
   cursor: pointer;

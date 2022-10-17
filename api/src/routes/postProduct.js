@@ -1,13 +1,26 @@
 const router = require("express").Router();
-const { Product } = require ("../db.js");
+const { Product, Category } = require ("../db.js");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+
 
 router.post("/", async (req, res) => {
   try{
-    let { name, price, detail, size, image, stock, score } = req.body;
+    let { name, price, detail, size, image, stock, stars, category } = req.body;
 
-    await Product.create({
-        name: name, price: price, detail: detail, size: size, image: image, stock: stock, score: score
+    let newProduct = await Product.create({
+        name: name, price: price, detail: detail, size: size, image: image, stock: stock, stars: stars
     });
+
+    const matchingCategorys = await Category.findAll({
+        where: {
+            name: {
+                [Op.eq]: category,
+            },
+        },
+    });
+    
+    await newProduct.setCategories(matchingCategorys);
 
     res.send("Producto creado correctamente");
     

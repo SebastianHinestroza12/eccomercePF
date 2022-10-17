@@ -1,30 +1,39 @@
-const jsonProducts = require('../JSON/JsonProducts');
+const jsonProducts = require("../JSON/JsonProducts");
 const router = require("express").Router();
-const { Product } = require('../db')
-
-// Se Mapea La Informacion Del Json
-
-const product = () => {
-  const data = jsonProducts.map(data => data);
-  return data;
-};
+const { Product, Category } = require("../db");
+const { Op } = require("sequelize");
 
 /* Una ruta que devuelve una lista de productos, o todos los productos que en su nombre contienen la
 entrada ingresada por el cliente, ademas guarda los productos en la tabla Product. */
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   const { name } = req.query;
-  const products = product();
 
   try {
     if (name) {
-
-      const filterName = products.filter(el => el.name.toLowerCase().trim().includes(name.toLowerCase().trim()));
+      const filterName = await Product.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `%${name}%`,
+          },
+        },
+      });
 
       if (filterName.length > 0) return res.status(200).json(filterName);
-      else return res.status(404).json(`No tenemos este producto disponible`);
+      else
+        return res.status(404).json({
+          error: "no tenemos este producto disponible",
+          message:
+            "verifique si tiene la base de datos llena, haga la peticion a la ruta get  /product",
+        });
     }
-    products.forEach(el => {
+
+    const product = {};
+    const productSet = jsonProducts.filter((e) => {
+      return product[e.name] ? false : (product[e.name] = true);
+    });
+
+    productSet.forEach((el) => {
       Product.findOrCreate({
         where: {
           name: el.name,
@@ -34,17 +43,17 @@ router.get('/', async (req, res) => {
           image: el.image,
           stock: el.stock,
           stars: el.stars,
-          visible: el.visible
-        }
-      })
-    })
+          visible: el.visible,
+        },
+      });
+    });
 
-    const consult = await Product.findAll();
+    const consult = await Product.findAll({ include: Category });
+    // console.log(consult.length);
     return res.status(200).json(consult);
   } catch (error) {
     console.log(error);
   }
-})
-
+});
 
 module.exports = router;

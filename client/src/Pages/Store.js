@@ -1,4 +1,6 @@
 import Cards from "../components/Cards/cards";
+import React, { useState } from "react";
+
 import "./store.css";
 /**
  * BOOTSTRAP IMPORTS
@@ -9,9 +11,11 @@ import Col from "react-bootstrap/Col";
 import Sidebar from "../components/Product/Sidebar";
 import TopStoreFilters from "../components/Filter/TopStoreFilters";
 import Carousel from "../components/Carousel/Carousel";
-const recetasJsonLocal = require("../utils/productos");
 
 const Store = () => {
+  //estado para la carga
+  const [loading, setLoading] = useState([true]);
+
   return (
     <>
       <Carousel />
@@ -21,8 +25,7 @@ const Store = () => {
             <Sidebar />
           </Col>
           <Col>
-            <TopStoreFilters />
-            <Cards />
+            <Cards loading={loading} setLoading={setLoading} />
           </Col>
         </Row>
       </Container>

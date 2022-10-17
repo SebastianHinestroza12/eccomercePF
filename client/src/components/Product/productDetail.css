@@ -11,12 +11,14 @@
   display: inline-block;
   background-color: transparent;
 }
-.qty-box {
-  border: 1px solid var(--grey500);
+.product-detail .qty-box {
+  border: 1px solid var(--grey200);
   padding: 0 20px;
   transition: 0.5s;
+  width: -moz-fit-content;
   width: fit-content;
   position: relative;
+  border-radius: 6px;
 }
 .cartButtons {
   cursor: pointer;
@@ -24,6 +26,7 @@
 .buttonsAddToCart {
   display: flex;
   flex-wrap: wrap;
+  gap: 3rem;
 }
 .product-detail .rating {
   color: var(--third-color);
@@ -32,4 +35,12 @@
 .product-detail p.detail-text {
   line-height: 2rem;
   margin: 2rem 0;
+}
+.product-detail button.buy {
+  padding: 0 3rem;
+}
+
+label.form-check-label,
+.form-check-input[type="checkbox"] {
+  cursor: pointer;
 }
