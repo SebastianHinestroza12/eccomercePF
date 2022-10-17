@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       size: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.JSONB),
         allowNull: false,
       },
       image: {

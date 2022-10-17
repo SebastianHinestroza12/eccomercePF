@@ -52,7 +52,7 @@ router.get("/", async (req, res) => {
     // console.log(consult.length);
     return res.status(200).json(consult);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 });
 
