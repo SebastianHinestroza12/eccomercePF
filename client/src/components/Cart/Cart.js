@@ -25,7 +25,7 @@ const Cart = () => {
   );
 
   let subtotal = 0
-  if (productsInTheCart.length > 1) {
+  if (productsInTheCart) {
     for (let i=0; i<productsInTheCart.length; i++){
       subtotal += productsInTheCart[i].price * productsInTheCart[i].quantity
     }
