@@ -1,3 +1,14 @@
 .home-sidebar {
-    float: left;
+  float: left;
+}
+.sidebar .filters_container button {
+  border: none;
+  text-align: left;
+  background: none;
+  padding: 1rem;
+  list-style: square;
+}
+.sidebar .filters_container button:hover,
+label.form-check-label:hover {
+  color: var(--third-color);
 }

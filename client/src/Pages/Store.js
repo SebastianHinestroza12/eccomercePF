@@ -17,11 +17,7 @@ const Store = () => {
     <>
       <Container>
         <Row>
-          <Col md={-1} className="sidebar">
-          </Col>
-          <Col>
-            <Cards loading={loading} setLoading={setLoading} />
-          </Col>
+          <Cards loading={loading} setLoading={setLoading} />
         </Row>
       </Container>
     </>

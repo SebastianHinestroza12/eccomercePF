@@ -48,6 +48,7 @@ img.cart-image {
 .dropdown-menu.show {
   display: block;
   width: 460px;
+  padding: 2rem 1rem 1rem;
 }
 .dropdown-menu.show::after {
   top: var(--bs-popover-border-width);
