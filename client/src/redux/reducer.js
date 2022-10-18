@@ -29,15 +29,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByPrice =
         payload === "MayorPrecio"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.price) > parseInt(b.price)) return -1;
-              if (parseInt(a.price) < parseInt(b.price)) return 1;
-              return 0;
-            })
+            if (parseInt(a.price) > parseInt(b.price)) return -1;
+            if (parseInt(a.price) < parseInt(b.price)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.price) < parseInt(b.price)) return -1;
-              if (parseInt(a.price) > parseInt(b.price)) return 1;
-              return 0;
-            });
+            if (parseInt(a.price) < parseInt(b.price)) return -1;
+            if (parseInt(a.price) > parseInt(b.price)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByPrice,
@@ -47,15 +47,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByRating =
         payload === "MayorRating"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.stars) > parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-              return 0;
-            })
+            if (parseInt(a.stars) > parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) < parseInt(b.stars)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.stars) < parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-              return 0;
-            });
+            if (parseInt(a.stars) < parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) > parseInt(b.stars)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByRating,
@@ -65,15 +65,15 @@ const rootReducer = (state = initialState, action) => {
       const orderedByName =
         action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-              if (a.name > b.name) return 1;
-              if (a.name < b.name) return -1;
-              return 0;
-            })
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (a.name > b.name) return -1;
-              if (a.name < b.name) return 1;
-              return 0;
-            });
+            if (a.name > b.name) return -1;
+            if (a.name < b.name) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: orderedByName,
@@ -81,13 +81,13 @@ const rootReducer = (state = initialState, action) => {
 
     case "FILTER_BY_SIZE":
       const allProducts = state.products;
-      const filterBySize = 
+      const filterBySize =
         allProducts.filter((p) => p.size.includes(action.payload));
       return {
         ...state,
         products: filterBySize,
       }
-      
+
     case "FILTER_BY_TYPE":
       const allProducts2 = state.products;
       const filterByType =
@@ -137,6 +137,17 @@ const rootReducer = (state = initialState, action) => {
           quantityProductsAdded: state.quantityProductsAdded + quantity,
         };
       }
+
+    case 'DELETE_PRODUCT_FROM_CART':
+      let quantity_ = state.cartProducts[action.payload].quantity
+      return {
+        ...state,
+        quantityProductsAdded: state.quantityProductsAdded - quantity_,
+        cartProducts: state.cartProducts.filter(item => {
+          return item.id != state.cartProducts[action.payload].id
+        })
+      }
+
     case "INCREASE_QUANTITY":
       console.log("payload", payload);
       console.log("STATE", state.cartProducts[payload]);
@@ -146,19 +157,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-    /*
+
     case "DECREASE_QUANTITY":
-      let quantity = state.Carts[action.payload].quantity;
+      let quantity1 = state.cartProducts[action.payload].quantity;
       console.log("quantity", action.payload);
-      if (quantity > 1) {
-        state.numberCart--;
-        state.Carts[action.payload].quantity--;
+      if (quantity1 > 1) {
+        state.quantityProductsAdded--;
+        state.cartProducts[payload].quantity--;
       }
 
       return {
         ...state,
       };
-      */
     default:
       return state;
   }

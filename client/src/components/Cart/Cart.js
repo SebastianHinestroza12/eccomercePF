@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import { useEffect, useState } from "react";
 import "./cart.css";
+import { deleteProductFromCart } from "../../redux/action";
 
 const Cart = () => {
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
@@ -67,6 +68,7 @@ const Cart = () => {
               <tbody>
                 {productsInTheCart.map((element, index) => (
                   <tr key={index} id={index}>
+                     <td><button className="badge badge-danger" onClick={()=>deleteProductFromCart(index)}>X</button></td>
                     <td>
                       <img src={element.image} className="cart-image-detail" />
                     </td>
