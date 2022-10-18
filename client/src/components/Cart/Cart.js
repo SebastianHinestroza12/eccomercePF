@@ -18,8 +18,34 @@ const Cart = () => {
   function TotalPrice(price, quantity) {
     return Number(price * quantity).toLocaleString("en-US");
   }
+  
   const productsInTheCart = useSelector((state) => state.cartProducts);
+  const addedToCart = useSelector(
+    (state) => state.quantityProductsAdded
+  );
 
+  let subtotal = 0
+  if (productsInTheCart.length > 1) {
+    for (let i=0; i<productsInTheCart.length; i++){
+      subtotal += productsInTheCart[i].price * productsInTheCart[i].quantity
+    }
+  }
+
+  let impuestos = 0
+  if (productsInTheCart) {
+    impuestos = Math.floor(subtotal * 0.2)
+  }
+  
+  let totalPrice = 0
+  if (subtotal > 0) {
+    totalPrice = subtotal + impuestos
+  }
+  
+  /*
+
+  productsInTheCart.forEach(funciton(item)){
+    subtotal+=productsInTheCart[item].quantity * productsInTheCart[item].price;
+  */
   useEffect(() => {}, []);
 
   return (
@@ -50,7 +76,7 @@ const Cart = () => {
                       <ItemCount
                         productDetail={element}
                         quantity={element.quantity}
-                        setQuantity={setQuantity}
+                        addedToCart={addedToCart}
                         carrito="true"
                         index={index}
                       />
@@ -82,11 +108,15 @@ const Cart = () => {
               <div className="totals">
                 <div className="item-totals">
                   Subtotal
-                  <span>$</span>
+                  <span>$ {subtotal}</span>
                 </div>
                 <div className="item-totals">
                   Impuestos
-                  <span>$</span>
+                  <span>$ {impuestos}</span>
+                </div>
+                <div className="item-totals">
+                  Total
+                  <span>$ {totalPrice}</span>
                 </div>
               </div>
             </section>
