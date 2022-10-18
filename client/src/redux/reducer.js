@@ -79,6 +79,15 @@ const rootReducer = (state = initialState, action) => {
         products: orderedByName,
       };
 
+    case "FILTER_BY_SIZE":
+      const allProducts = state.products;
+      const filterBySize = 
+        allProducts.filter((p) => p.size.includes(action.payload));
+      return {
+        ...state,
+        products: filterBySize,
+      } 
+
     case "SEARCH_PRODUCTS":
       return {
         ...state,
