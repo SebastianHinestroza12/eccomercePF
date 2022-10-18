@@ -98,3 +98,17 @@ export const filterBySize = (payload) => {
     payload
   }
 }
+
+export const filterByType = (payload) => {
+  return {
+    type: 'FILTER_BY_TYPE',
+    payload
+  }
+}
+
+export const filterByCategory = (payload) => {
+  return {
+    type: 'FILTER_BY_CATEGORY',
+    payload
+  }
+}
