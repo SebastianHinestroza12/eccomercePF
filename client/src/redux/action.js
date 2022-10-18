@@ -48,6 +48,8 @@ export const SearchByName = (name) => {
       .catch((error) => {
         console.log("AXIOS error", typeof error.response.data.error);
         return error.response.data.error;
+        // console.log(error)
+        // dispatch({ type: "SEARCH_PRODUCTS", payload:[] })
       });
   };
 };
