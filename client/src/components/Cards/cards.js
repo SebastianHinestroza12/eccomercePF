@@ -47,13 +47,15 @@ const Cards = ({ loading, setLoading }) => {
       resolve(dispatch(getAllProducts()));
     })
       .then((res) => {
-       
+      .then(() => {
         setLoading(false);
       })
       .catch((error) => {
   
         return error.response.data.error;
       });
+
+    return () => {};
   }, [dispatch]);
 
   return loading ? (
@@ -77,7 +79,6 @@ const Cards = ({ loading, setLoading }) => {
         setOrder={setOrder}
       />
       <div className="row">
-       
         {Array.isArray(actualproducts) ? (
           actualproducts.map((products) => (
             <div className="col-md-3" key={products.id}>
@@ -92,7 +93,6 @@ const Cards = ({ loading, setLoading }) => {
           ))
         ) : (
           <>
-         
             <p className="errors">{actualproducts}</p>
           </>
         )}

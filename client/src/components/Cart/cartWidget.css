@@ -1,0 +1,30 @@
+img.cart-image {
+  width: 20%;
+}
+.listItem {
+  display: flex;
+  font-size: 1rem;
+  align-items: center;
+}
+.listItem .title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.detailsCart {
+  display: flex;
+  flex-direction: column;
+}
+#popover-positioned-bottom {
+  max-width: 400px;
+}
+.buttons-cart-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+}
+.buttons-cart-group .buttons-cart {
+  width: 50%;
+  font-weight: 300;
+  font-size: 1rem;
+  padding: 10px 0;
+}

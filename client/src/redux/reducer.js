@@ -2,10 +2,12 @@ const initialState = {
   products: [],
   productDetail: [],
   newProducts: [],
-  filters: []
+  cartProducts: [],
+  quantityProductsAdded: 0,
+
 };
 const rootReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+  const { type, payload, quantity } = action;
   switch (type) {
     case "GET_ALL_PRODUCTS":
       return {
@@ -90,6 +92,14 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         products: payload,
+      };
+
+    case "ADD_PRODUCTS_TO_CART":
+      console.log("quantityProductsAdded", state.quantityProductsAdded);
+      return {
+        ...state,
+        cartProducts: [...state.cartProducts, payload],
+        quantityProductsAdded: state.quantityProductsAdded + quantity,
       };
 
     default:
