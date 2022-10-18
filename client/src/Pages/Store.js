@@ -5,9 +5,7 @@ import "./store.css";
 /**
  * BOOTSTRAP IMPORTS
  */
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Container, Row } from "react-bootstrap";
 
 const Store = () => {
   //estado para la carga
