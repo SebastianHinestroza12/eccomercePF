@@ -1,0 +1,26 @@
+.totals-cart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.table > tbody tr {
+  vertical-align: middle;
+}
+.totals {
+  border: 1px solid var(--grey200);
+  background-color: var(--grey100);
+  padding: 2rem;
+
+  width: 400px;
+}
+.totals .item-totals {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0px;
+}
+h2.cart-title,
+.cart-empty {
+  text-align: center;
+  margin-bottom: 3rem;
+}
