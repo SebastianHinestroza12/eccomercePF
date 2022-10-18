@@ -9,11 +9,9 @@ const CartWidget = () => {
     (state) => state.quantityProductsAdded
   );
   const productsInTheCart = useSelector((state) => state.cartProducts);
-  const { name, price, quantity, image } = productsInTheCart;
 
   return (
     <>
-      {productsInTheCart.map((product) => console.log("entro aqui", product))}
       <OverlayTrigger
         trigger={["click"]}
         key={"bottom"}
@@ -23,7 +21,7 @@ const CartWidget = () => {
             <Popover.Body>
               {productsInTheCart.length ? (
                 productsInTheCart.map((product) => (
-                  <div className="listItem">
+                  <div className="listItem" key={product.id}>
                     <img src={product.image} className="cart-image" />
                     <div className="detailsCart">
                       <span className="title">{product.name}</span>
@@ -38,10 +36,16 @@ const CartWidget = () => {
               )}
               {productsInTheCart.length ? (
                 <div className="buttons-cart-group">
-                  <Link to="/cart" className="buy btn btn-primary buttons-cart">
+                  <Link
+                    to="/carrito"
+                    className="buy btn btn-primary buttons-cart"
+                  >
                     FINALIZAR COMPRA
                   </Link>
-                  <Link to="/cart" className="buy btn btn-primary buttons-cart">
+                  <Link
+                    to="/carrito"
+                    className="buy btn btn-primary buttons-cart"
+                  >
                     IR AL CARRITO
                   </Link>
                 </div>

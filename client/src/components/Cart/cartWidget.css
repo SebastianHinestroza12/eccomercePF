@@ -13,6 +13,7 @@ img.cart-image {
 .detailsCart {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 }
 #popover-positioned-bottom {
   max-width: 400px;
@@ -27,4 +28,20 @@ img.cart-image {
   font-weight: 300;
   font-size: 1rem;
   padding: 10px 0;
+}
+.fade.toast.show {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+.toast-header {
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+.toast-body {
+  padding: 1rem;
+  background-color: white;
+}
+.cart-image-detail {
+  width: 60px;
 }

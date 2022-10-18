@@ -85,7 +85,8 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "ADD_PRODUCTS_TO_CART":
-      console.log("quantityProductsAdded", state.quantityProductsAdded);
+      console.log("payload", payload.id);
+      //if(state.cartProducts.find(element=>element===payload))
       return {
         ...state,
         cartProducts: [...state.cartProducts, payload],
