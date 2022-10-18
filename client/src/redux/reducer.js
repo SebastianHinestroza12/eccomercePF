@@ -5,8 +5,9 @@ const initialState = {
   cartProducts: [],
   quantityProductsAdded: 0,
 };
+
 const rootReducer = (state = initialState, action) => {
-  const { type, payload, quantity } = action;
+  const { type, payload, quantity, actionButton } = action;
   switch (type) {
     case "GET_ALL_PRODUCTS":
       return {
@@ -94,13 +95,52 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "ADD_PRODUCTS_TO_CART":
-      console.log("quantityProductsAdded", state.quantityProductsAdded);
+      console.log("cartProducts", state.cartProducts);
+      let productAlreadyInTheCart = state.cartProducts.find(
+        (element) => element.id === payload.id
+      );
+      if (productAlreadyInTheCart) {
+        return state.cartProducts.map((item, index) => {
+          if (index.id !== payload.id) {
+            // This isn't the item we care about - keep it as-is
+            return item;
+          }
+          // Otherwise, this is the one we want - return an updated value
+          return {
+            ...item,
+            ...action.item,
+          };
+        });
+      } else {
+        console.log("state", state.cartProducts);
+        return {
+          ...state,
+          cartProducts: [...state.cartProducts, payload],
+          quantityProductsAdded: state.quantityProductsAdded + quantity,
+        };
+      }
+    case "INCREASE_QUANTITY":
+      console.log("payload", payload);
+      console.log("STATE", state.cartProducts[payload]);
+      state.quantityProductsAdded++;
+      state.cartProducts[payload].quantity++;
+
       return {
         ...state,
-        cartProducts: [...state.cartProducts, payload],
-        quantityProductsAdded: state.quantityProductsAdded + quantity,
       };
+    /*
+    case "DECREASE_QUANTITY":
+      let quantity = state.Carts[action.payload].quantity;
+      console.log("quantity", action.payload);
+      if (quantity > 1) {
+        state.numberCart--;
+        state.Carts[action.payload].quantity--;
+      }
 
+      return {
+        ...state,
+      };
+      */
     default:
       return state;
   }
