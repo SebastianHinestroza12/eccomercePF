@@ -68,6 +68,21 @@ export const envioForm = (data) => {
     dispatch({
       type: "LOAD_PRODUCTS",
       payload: data,
-    })
+    });
   };
 };
+
+export function addProductToCart(payload, quantity) {
+  return {
+    type: "ADD_PRODUCTS_TO_CART",
+    payload: { ...payload, quantity },
+    quantity,
+  };
+}
+
+export const filterBySize = (payload) => {
+  return {
+    type: 'FILTER_BY_SIZE',
+    payload
+  }
+}

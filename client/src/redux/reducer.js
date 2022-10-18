@@ -1,10 +1,12 @@
 const initialState = {
   products: [],
   productDetail: [],
-  newProducts: []
+  newProducts: [],
+  cartProducts: [],
+  quantityProductsAdded: 0,
 };
 const rootReducer = (state = initialState, action) => {
-  const { type, payload } = action;
+  const { type, payload, quantity } = action;
   switch (type) {
     case "GET_ALL_PRODUCTS":
       return {
@@ -76,10 +78,27 @@ const rootReducer = (state = initialState, action) => {
         products: orderedByName,
       };
 
+    case "FILTER_BY_SIZE":
+      const allProducts = state.products;
+      const filterBySize = 
+        allProducts.filter((p) => p.size.includes(action.payload));
+      return {
+        ...state,
+        products: filterBySize,
+      } 
+
     case "SEARCH_PRODUCTS":
       return {
         ...state,
         products: payload,
+      };
+
+    case "ADD_PRODUCTS_TO_CART":
+      console.log("quantityProductsAdded", state.quantityProductsAdded);
+      return {
+        ...state,
+        cartProducts: [...state.cartProducts, payload],
+        quantityProductsAdded: state.quantityProductsAdded + quantity,
       };
 
     default:
