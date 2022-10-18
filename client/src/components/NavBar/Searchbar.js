@@ -1,21 +1,32 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { InputGroup, Form, Button } from "react-bootstrap";
 import { SearchByName } from "../../redux/action";
 
 const Searchbar = ({ setLoading }) => {
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.products)
 
   //estado local para coger el nombre que se quiere buscar
   const [name, setName] = useState("");
-  const [errors, seterrors] = useState({ name: "vacio" });
+  const [errors, seterrors] = useState({ name: "" });
 
   //se dispara cuando se presiona el btn de busqueda
 
   const handleSubmit = (e) => {
+    let filterSearch = products.filter((p) => p.name.includes(name.toUpperCase()))
+
+
     e.preventDefault();
-    dispatch(SearchByName(name));
+    if (!name.length) {
+      seterrors({ name: 'Colocar un producto !!' })
+    }
+    dispatch(SearchByName(name))
+
+    if (filterSearch.length === 0) {
+      seterrors({ name: 'El producto no existe' })
+    }
   };
 
   //control del input de busqueda
@@ -42,7 +53,7 @@ const Searchbar = ({ setLoading }) => {
       errors.name = "Enter minimum 2 characters";
     }
     if (value.name.length === 0) {
-      errors.name = "vacio";
+      errors.name = "";
     }
     return errors;
   }
@@ -64,6 +75,11 @@ const Searchbar = ({ setLoading }) => {
       >
         BUSCAR
       </Button>
+      {errors.name && (
+        <div className="alert alert-danger" role="alert">
+          <p>{errors.name}</p>
+        </div>
+      )}
     </InputGroup>
   );
 };
