@@ -4,7 +4,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN ESTADOS UNIDOS 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
           {"size" : "S", "stock":20},
           {"size" : "M", "stock":20},
           {"size" : "L", "stock":20},
@@ -20,7 +20,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN IRAN 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -36,7 +36,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN URUGUAY 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -52,7 +52,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN URUGUAY 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -68,7 +68,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN ECUADOR 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -84,7 +84,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN IRAN 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -100,7 +100,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN SENEGAL 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -116,7 +116,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN GALES 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -132,7 +132,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN DINAMARCA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -148,7 +148,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN COSTA RICA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -164,7 +164,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN ESTADOS UNIDOS 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -180,7 +180,7 @@ const jsonProducts = [
       "name": "JERSEY UNIFORME DE VISITANTE ALEMANIA 22",
       "price": 1499,
       "detail": "Inspirado en los colores de la bandera del país, este jersey visitante adidas para jóvenes distorsiona la D de Deutschland para reflejar el dinamismo del equipo actual. Enfocado en mantener los hinchas orgullosos y cómodos, este jersey incluye details tejidos del equipo y tecnología de absorción AEROREADY.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -196,7 +196,7 @@ const jsonProducts = [
       "name": "JERSEY TERCERO SELECCIÓN MEXICO 22",
       "price": 1799,
       "detail": "JERSEY TERCERO",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -212,7 +212,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN POLONIA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -228,7 +228,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN MARRUECOS 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -244,7 +244,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN ARABIA SAUDITA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -260,7 +260,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN BRASIL 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -276,7 +276,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN TUNEZ 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -292,7 +292,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN GHANA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -308,7 +308,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN SUIZA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -324,7 +324,7 @@ const jsonProducts = [
       "name": "SHORTS LOCAL SELECCIÓN NACIONAL DE MÉXICO",
       "price": 1099,
       "detail": "La tecnología AEROREADY ayuda a mantener tu cuerpo seco sin importar si estás preparándote para jugar o descansando en un día cálido. El escudo tejido en la pierna simboliza un nuevo comienzo.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -340,7 +340,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN BRASIL 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -356,7 +356,7 @@ const jsonProducts = [
       "name": "JERSEY DE LOCAL ARGENTINA 22",
       "price": 1799,
       "detail": "100% Argentina. A lo largo de la historia del fútbol, estas tres rayas azules han representado un juego de pies hipnotizante y un compromiso incomparable. Para el nuevo jersey de local de la Selección, adidas regresó a ese look ganador. Diseñado para hinchas, ofrece comodidad en todo momento gracias a su tejido suave con tecnología de absorción AEROREADY. Los details en la parte interior trasera del cuello están inspirados en la bandera nacional que los jugadores representan con tanto orgullo.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -372,7 +372,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN FRANCIA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -388,7 +388,7 @@ const jsonProducts = [
       "name": "CALZADO DE FÚTBOL X SPEEDPORTAL MESSI.4 PASTO SINTÉTICO",
       "price": 1599,
       "detail": "Este calzado de fútbol fue creado para realizar movimientos rápidos y cambios de velocidad en superficies de césped artificial. Suave y resistente, su exterior textil revestido te ayuda a mantener el balón bajo tu control. Los estampados llamativos destacan el amor que Lionel Messi tiene con el balón. Hecho a base de materiales reciclados, el exterior incorpora al menos un 50 % de contenido reciclado. Este producto representa solo una de nuestras soluciones para acabar con los residuos plásticos.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "3", "stock":20},
         {"size" : "4", "stock":20},
         {"size" : "5", "stock":20},
@@ -408,7 +408,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN SERBIA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -424,7 +424,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN CANADA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -440,7 +440,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN ARABIA SAUDITA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -456,7 +456,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN SERBIA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -472,7 +472,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN NACIONAL DE MÉXICO",
       "price": 1499,
       "detail": "100% Mexicano. Inspirado en civilizaciones antiguas, este jersey de visitante de México reune el espíritu de lucha necesario para dominar el mundo del fútbol. En medio de ese llamativo diseño, un detail al exterior del cuello muestra el cuerpo de serpiente de Quetzalcoatl, símbolo de las capacidades físicas de la humanidad. Los paneles de malla y el tejido absorbente de la tecnología AEROREADY se encargan de mantenerte cómodo y fresco en todo momento.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -488,7 +488,7 @@ const jsonProducts = [
       "name": "CONJUNTO LOCAL SELECCIÓN NACIONAL DE MÉXICO",
       "price": 1399,
       "detail": "El tejido suave con tecnología de absorción AEROREADY se encarga de brindar comodidad mientras viven sus sueños futboleros.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -504,7 +504,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN MARRUECOS 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -520,7 +520,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN COREA DEL SUR 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -536,7 +536,7 @@ const jsonProducts = [
       "name": "MINIBALÓN AL RIHLA",
       "price": 349,
       "detail": "Al Rihla significa El Viaje, el balón es solo el comienzo. El resto de tu historia futbolística aún no está escrito. Inspirado en el diseño del balón oficial para partidos de la Copa Mundial de la FIFA™, este minibalón adidas Al Rihla te permite llevar tus habilidades futbolísticas a donde vayas. Su tamaño compacto y su interior de espuma lo hacen perfecto para los espacios reducidos y nunca tendrás que preocuparte por inflarlo.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "1", "stock":20},
         {"size" : "3", "stock":20},
         {"size" : "4", "stock":20},
@@ -552,7 +552,7 @@ const jsonProducts = [
       "name": "SHORTS UNIFORME LOCAL ARGENTINA 22",
       "price": 1099,
       "detail": "Parte de su uniforme local atemporal. Luciendo los clásicos colores blanco y negro, estos shorts de fútbol adidas de la Selección Argentina siguen el ejemplo del jersey al que acompañan. Creados para mantener cómodo al seguidor, están hechos de tejido suave y cuentan con tecnología de absorción AEROREADY. EL logo de la selección bordado le pone el toque final al diseño.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -568,7 +568,7 @@ const jsonProducts = [
       "name": "BALÓN AL RIHLA PRO",
       "price": 4099,
       "detail": "Al Rihla significa El Viaje, el balón es solo el comienzo. El resto de tu historia futbolística aún no está escrito. El balón oficial de la Copa Mundial de la FIFA Qatar 2022™, este balón adidas Al Rihla Pro sin costuras lleva la precisión a nuevas alturas. La forma de la estructura Speedshell inspirada en el dhow se combina con textura y grabado de diamante para mejorar el efecto de giro y la precisión. Los estampados vibrantes brillan bajo un acabado perlado.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "1", "stock":20},
         {"size" : "3", "stock":20},
         {"size" : "4", "stock":20},
@@ -584,7 +584,7 @@ const jsonProducts = [
       "name": "BALÓN DE ENTRENAMIENTO AL RIHLA",
       "price": 749,
       "detail": "Al Rihla significa El Viaje, el balón es solo el comienzo. El resto de tu historia futbolística aún no está escrito. Inspirado en el look del balón oficial para partidos de la Copa Mundial de la FIFA™, este balón de entrenamiento Al Rihla de adidas es ideal para sesiones intensas. Su estructura cosida a máquina y la cámara de butilo garantizan resistencia y longevidad. La superficie texturizada le da el acabado perfecto.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "1", "stock":20},
         {"size" : "3", "stock":20},
         {"size" : "4", "stock":20},
@@ -600,7 +600,7 @@ const jsonProducts = [
       "name": "JERSEY UNIFORME DE VISITANTE ESPAÑA 22",
       "price": 1499,
       "detail": "Listo para conquistar el mundo. El estampado ondulado de este jersey adidas para jóvenes se inspira en el logo de estilo art déco que recibió a los mejores futbolistas en España en 1982. En el centro del pecho se destacan las versiones tejidas del logo de las 3 Franjas y el escudo actualizado de la Selección de España. Creado para envolver los hinchas en comodidad, este jersey incorpora tecnología de absorción AEROREADY y paneles en la malla.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -616,7 +616,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN QATAR 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -632,7 +632,7 @@ const jsonProducts = [
       "name": "BALÓN DE ENTRENAMIENTO HOLOGRAMA AL RIHLA",
       "price": 849,
       "detail": "Al Rihla significa El Viaje, el balón es solo el comienzo. El resto de tu historia futbolística aún no está escrito. Inspirado en el look del balón oficial para partidos de la Copa Mundial de la FIFA™, este balón de entrenamiento Al Rihla de adidas es ideal para sesiones intensas. Su estructura cosida a máquina y la cámara de butilo garantizan resistencia y longevidad. La capa con holograma metalizado llama la atención en todo momento y lugar.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "1", "stock":20},
         {"size" : "3", "stock":20},
         {"size" : "4", "stock":20},
@@ -648,7 +648,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN CROACIA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -664,7 +664,7 @@ const jsonProducts = [
       "name": "BALÓN UNIFORIA FINALE LEAGUE",
       "price": 569,
       "detail": "Este producto está agotado. Suscríbete a nuestra newsletter y entérate antes que nadie de los próximos lanzamientos.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "1", "stock":20},
         {"size" : "3", "stock":20},
         {"size" : "4", "stock":20},
@@ -680,7 +680,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN CROACIA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -696,7 +696,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN PORTUGAL 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -712,7 +712,7 @@ const jsonProducts = [
       "name": "JERSEY UNIFORME DE LOCAL BÉLGICA 22",
       "price": 1799,
       "detail": "Ilumina el evento de fútbol más importante. Con llamas rojas y amarillas envolviendo sus mangas negras, este jersey de local de Bélgica se inspira en el apodo de los Diablos Rojos. Su tejido con tecnología de absorción AEROREADY y los paneles de malla mantienen a los hinchas secos en los momentos más intensos en la cancha. El logo de las 3 Franjas de adidas en el pecho le confiere un look fresco y se combina con una versión tejida del escudo de Bélgica.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -728,7 +728,7 @@ const jsonProducts = [
       "name": "CALZADO DE FÚTBOL X SPEEDPORTAL.3 TERRENO FIRME",
       "price": 1999,
       "detail": "Desata tu velocidad multidimensional con adidas X Speedportal. Los tacos de antepié adicionales en la suela ligera de este calzado de fútbol adidas te permiten reaccionar con rapidez en el terreno firme. El exterior textil revestido suave incluye un cuello de sujeción de tejido plano y un refuerzo de talón externo en TPU para mantenerte firme en cada movimiento.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "3", "stock":20},
         {"size" : "4", "stock":20},
         {"size" : "5", "stock":20},
@@ -748,7 +748,7 @@ const jsonProducts = [
       "name": "JERSEY TERCERO SELECCIÓN CANADA 22",
       "price": 1799,
       "detail": "JERSEY TERCERO",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -764,7 +764,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN SENEGAL 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -780,7 +780,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN AUSTRALIA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -796,7 +796,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN ECUADOR 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -812,7 +812,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN POLONIA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -828,7 +828,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE ARGENTINA 22",
       "price": 1799,
       "detail": "Este jersey adidas visitante de Argentina impulsa el orgullo nacional y la búsqueda de un mundo más justo. Presenta un color morado que representa la igualdad de género y un potente estampado inspirado en el Sol de Mayo presente en su bandera nacional. Creado para aportar comodidad a los seguidores, su tejido transpirable AEROREADY mantiene la piel fresca y seca. El escudo cosido en el pecho remata este look deportivo.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -844,7 +844,7 @@ const jsonProducts = [
       "name": "SHORTS UNIFORME DE LOCAL JAPÓN 22",
       "price": 1099,
       "detail": "Parte de un llamativo uniforme de local de Japón dominado por cuervos de origami. Estos shorts de fútbol adidas te envuelven con comodidad gracias a su tejido suave con tecnología de absorción AEROREADY. Lucen el escudo de la selección tejido para demostrar la fuerza de tu amor.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -860,7 +860,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN DINAMARCA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -876,7 +876,7 @@ const jsonProducts = [
       "name": "JERSEY UNIFORME DE VISITANTE BÉLGICA 22",
       "price": 1799,
       "detail": "Prepárate para destacar en el mayor escenario del fútbol internacional. El nuevo jersey de visitante adidas para los Diablos Rojos de Bélgica está inspirado en los fuegos artificiales de Tomorrowland. Una verdadera declaración de amor, como también se refleja en la parte exterior trasera del cuello con la inscripción LOVE y el logo de Tomorrowland. Diseñado para hinchas de fútbol y festivales de todos los rincones del mundo, este jersey incorpora tecnología de absorción AEROREADY.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -892,7 +892,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN GHANA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -908,7 +908,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN CAMERUN 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -924,7 +924,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN PORTUGAL 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -940,7 +940,7 @@ const jsonProducts = [
       "name": "SHORTS UNIFORME DE LOCAL ESPAÑA 22",
       "price": 1099,
       "detail": "Clásicos en todos los sentidos, estos shorts de fútbol adidas hacen parte del uniforme de local de España. Lucen los icónicos colores del país, el logo de las 3 Franjas y el escudo actualizado en la pierna. La tecnología AEROREADY mantiene tu cuerpo seco en la cancha y en los momentos de descanso en la tribuna.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -956,7 +956,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN PAISES BAJOS 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -972,7 +972,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN INGLATERRA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -988,7 +988,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN AUSTRALIA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1004,7 +1004,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN PAISES BAJOS 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1020,7 +1020,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN TUNEZ 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1036,7 +1036,7 @@ const jsonProducts = [
       "name": "CALZADO DE FÚTBOL PREDATOR EDGE.1 PASTO SINTÉTICO",
       "price": 4599,
       "detail": "Da un giro a lo ordinario para encontrar tus límites. Introduce una nueva faceta de tu juego con este calzado de fútbol de pasto sintético adidas Predator. Sobre una mediasuela Bounce flexible, su exterior Zone Skin incluye secciones acanaladas discretas, cada una de las cuales se destaca en un tipo diferente de contacto con el balón. El cuello flexible de adidas PRIMEKNIT sujeta el pie mientras tú dominas la cancha.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "3", "stock":20},
         {"size" : "4", "stock":20},
         {"size" : "5", "stock":20},
@@ -1056,7 +1056,7 @@ const jsonProducts = [
       "name": "JERSEY UNIFORME DE LOCAL ESPAÑA 22",
       "price": 1499,
       "detail": "Un país unido. Inspirado en el distintivo ADN futbolístico de España, este jersey de local atemporal para jóvenes está dominado por los famosos colores rojos del equipo. En el pecho, versiones tejidas del escudo actualizado de la Selección de España y las 3 Franjas de adidas irradian orgullo. Incorpora tecnología de absorción AEROREADY que se encarga del sudor bajo la superficie para mantener a los hinchas cómodos mientras siguen la acción en la cancha.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1072,7 +1072,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN SUIZA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1088,7 +1088,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN QATAR 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1104,7 +1104,7 @@ const jsonProducts = [
       "name": "JERSEY ICON ALEMANIA",
       "price": 1699,
       "detail": "Luciendo los colores de la bandera nacional, los estampados adidas Equipment se destacan en los costados de este jersey de fútbol de Alemania. Parte de una colección que reinterpreta algo del estilo de los 90, está confeccionado en un ajuste holgado para brindar comodidad en todo momento. Luciendo esas envidiadas estrellas, el escudo del equipo ubicado en el centro le da un toque retro.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1120,7 +1120,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN CANADA 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1136,7 +1136,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN CAMERUN 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1152,7 +1152,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN COSTA RICA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1168,7 +1168,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN GALES 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1184,7 +1184,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN JAPÓN 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1200,7 +1200,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN FRANCIA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1216,7 +1216,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN COREA DEL SUR 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1232,7 +1232,7 @@ const jsonProducts = [
       "name": "JERSEY VISITANTE SELECCIÓN INGLATERRA 22",
       "price": 1799,
       "detail": "JERSEY VISITANTE",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1248,7 +1248,7 @@ const jsonProducts = [
       "name": "JERSEY LOCAL SELECCIÓN JAPÓN 22",
       "price": 1799,
       "detail": "JERSEY LOCAL",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},
@@ -1264,7 +1264,7 @@ const jsonProducts = [
       "name": "SHORTS UNIFORME DE LOCAL ALEMANIA 22",
       "price": 1099,
       "detail": "Parte del uniforme de local de la Selección de Alemania, inspirado en el ADN. Hechos con tejido suave con tecnología de absorción AEROREADY, estos shorts de fútbol adidas te mantienen cómodo sin importar si estás corriendo por la cancha o siguiendo a tus héroes. El escudo del equipo tejido tiene la última palabra y las cuatro estrellas que tanto han costado conseguir.",
-      "size-stock": [
+      "size_stock": [
         {"size" : "S", "stock":20},
         {"size" : "M", "stock":20},
         {"size" : "L", "stock":20},

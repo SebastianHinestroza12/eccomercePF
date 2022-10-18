@@ -39,17 +39,18 @@ router.get("/", async (req, res) => {
           name: el.name,
           price: el.price,
           detail: el.detail,
-          size: el.size,
+          size_stock: el.size_stock,
           image: el.image,
-          stock: el.stock,
           stars: el.stars,
           visible: el.visible,
+          category: el.category,
         },
-      });
+      })
     });
 
     const consult = await Product.findAll({ include: Category });
-    // console.log(consult.length);
+
+
     return res.status(200).json(consult);
   } catch (error) {
     console.log(error.message);

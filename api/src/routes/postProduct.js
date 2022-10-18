@@ -6,10 +6,10 @@ const Op = Sequelize.Op;
 
 router.post("/", async (req, res) => {
   try{
-    let { name, price, detail, size, image, stock, stars, category } = req.body;
+    let { name, price, detail, size_stock, image, stock, stars, category } = req.body;
 
     let newProduct = await Product.create({
-        name: name, price: price, detail: detail, size: size, image: image, stock: stock, stars: stars
+        name: name, price: price, detail: detail, size_stock: size_stock, image: image, stock: stock, stars: stars, category: category
     });
 
     Category.findOrCreate({ 

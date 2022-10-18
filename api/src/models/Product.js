@@ -21,9 +21,9 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(1000),
         allowNull: false,
       },
-      size: {
+      size_stock: {
         type: DataTypes.ARRAY(DataTypes.JSONB),
-        allowNull: false,
+        allowNull: true,
       },
       image: {
         type: DataTypes.STRING,
@@ -31,16 +31,20 @@ module.exports = (sequelize) => {
       },
       stock: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       stars: {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
+      category: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       visible: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-      }
+      },
     },
     {
       timestamps: false,
