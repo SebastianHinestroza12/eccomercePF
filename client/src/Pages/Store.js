@@ -8,9 +8,6 @@ import "./store.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Sidebar from "../components/Product/Sidebar";
-import TopStoreFilters from "../components/Filter/TopStoreFilters";
-import Carousel from "../components/Carousel/Carousel";
 
 const Store = () => {
   //estado para la carga
@@ -20,8 +17,7 @@ const Store = () => {
     <>
       <Container>
         <Row>
-          <Col md={3} className="sidebar">
-            <Sidebar />
+          <Col md={-1} className="sidebar">
           </Col>
           <Col>
             <Cards loading={loading} setLoading={setLoading} />

@@ -14,7 +14,7 @@ const Home = () => {
                         <h2 class="title">Camisetas</h2>
                         <p class="copy">Todas las camisetas de las mejores selecciones del mundo</p>
                         <Nav.Link href="/store" className="navLinks">
-                            <button class="btn">Ir a tienda</button>
+                            <button class="home-btn">Ir a tienda</button>
                         </Nav.Link>
                     </div>
                 </div>
@@ -23,7 +23,7 @@ const Home = () => {
                       <h2 class="title">Pantalones</h2>
                       <p class="copy">Todos los pantalones de las mejores selecciones del mundo</p>
                       <Nav.Link href="/store" className="navLinks">
-                        <button class="btn">Ir a tienda</button>
+                        <button class="home-btn">Ir a tienda</button>
                       </Nav.Link>
                     </div>
                 </div>
@@ -32,7 +32,7 @@ const Home = () => {
                     <h2 class="title">Botines</h2>
                     <p class="copy">Botines de los mejores jugadores del mundo</p>
                     <Nav.Link href="/store" className="navLinks">
-                        <button class="btn">Ir a tienda</button>
+                        <button class="home-btn">Ir a tienda</button>
                     </Nav.Link>
                   </div>
                 </div>
@@ -41,7 +41,7 @@ const Home = () => {
                     <h2 class="title">Balones</h2>
                     <p class="copy">Balones oficiales del mundial, incluido el balon de entrenamiento!</p>
                     <Nav.Link href="/store" className="navLinks">
-                        <button class="btn">Ir a tienda</button>
+                        <button class="home-btn">Ir a tienda</button>
                     </Nav.Link>
                   </div>
                 </div>

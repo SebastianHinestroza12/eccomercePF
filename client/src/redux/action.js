@@ -77,3 +77,10 @@ export function addProductToCart(payload, quantity) {
     quantity,
   };
 }
+
+export const filterBySize = (payload) => {
+  return {
+    type: 'FILTER_BY_SIZE',
+    payload
+  }
+}
