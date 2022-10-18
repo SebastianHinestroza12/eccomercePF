@@ -5,6 +5,7 @@ import { addProductToCart } from "../../redux/action";
 
 import "./addToCart.css";
 import ItemCount from "../Cart/ItemCount";
+import { Link } from "react-router-dom";
 
 const AddToCart = () => {
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
@@ -36,7 +37,14 @@ const AddToCart = () => {
           <strong className="me-auto">Producto añadido al carrito</strong>
           <small>Ahora</small>
         </Toast.Header>
-        <Toast.Body>{productDetail.name}</Toast.Body>
+        <Toast.Body>
+          <>
+            {productDetail.name}&nbsp;
+            <Link to={"/carrito"}>
+              <span>Ver carrito</span>
+            </Link>
+          </>
+        </Toast.Body>
       </Toast>
 
       <div>

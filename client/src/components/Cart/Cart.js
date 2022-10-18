@@ -4,19 +4,28 @@ import * as Unicons from "@iconscout/react-unicons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import "./cart.css";
 
 const Cart = () => {
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
-  const [quantity, setQuantity] = useState();
 
-  let subtotal = 0;
+  let TotalCart = 0;
+
+  const [quantity, setQuantity] = useState();
+  const [total, setTotal] = useState();
+
+  function TotalPrice(price, quantity) {
+    return Number(price * quantity).toLocaleString("en-US");
+  }
   const productsInTheCart = useSelector((state) => state.cartProducts);
+
+  useEffect(() => {}, []);
 
   return (
     <>
       <Container>
-        <h2>Mi carrito</h2>
+        <h2 className="cart-title">Mi carrito</h2>
         <section>
           {productsInTheCart.length ? (
             <Table responsive>
@@ -30,28 +39,37 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody>
-                {productsInTheCart.map((element) => (
-                  <tr key={element.id} id={element.id}>
+                {productsInTheCart.map((element, index) => (
+                  <tr key={index} id={index}>
                     <td>
                       <img src={element.image} className="cart-image-detail" />
                     </td>
                     <td>{element.name}</td>
-                    <td>$ {element.price}</td>
+                    <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
                       <ItemCount
                         productDetail={element}
-                        quantity={1}
+                        quantity={element.quantity}
                         setQuantity={setQuantity}
                         carrito="true"
+                        index={index}
                       />
                     </td>
-                    <td>$ {element.quantity * element.price}</td>
+                    <td>$ {TotalPrice(element.price, element.quantity)} </td>
                   </tr>
                 ))}
               </tbody>
             </Table>
           ) : (
-            <div>No hay productos en el carrito</div>
+            <div className="cart-empty">
+              No hay productos en el carrito
+              <div>
+                <Link to="/store" className="buy btn btn-primary buttons-cart">
+                  <Unicons.UilArrowLeft />
+                  VOLVER A LA TIENDA
+                </Link>
+              </div>
+            </div>
           )}
           {productsInTheCart.length ? (
             <section className="totals-cart">
@@ -61,16 +79,14 @@ const Cart = () => {
                   SEGUIR COMPRANDO
                 </Link>
               </div>
-              <div>
-                <div>
-                  Subtotal{" "}
-                  <span>
-                    $
-                    {productsInTheCart.map(
-                      (element) =>
-                        (subtotal = subtotal + parseInt(element.price))
-                    )}
-                  </span>
+              <div className="totals">
+                <div className="item-totals">
+                  Subtotal
+                  <span>$</span>
+                </div>
+                <div className="item-totals">
+                  Impuestos
+                  <span>$</span>
                 </div>
               </div>
             </section>

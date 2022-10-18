@@ -1,6 +1,16 @@
 import * as Unicons from "@iconscout/react-unicons";
+import { useDispatch } from "react-redux";
+import { addProductToCart, IncreaseQuantity } from "../../redux/action";
 
-const ItemCount = ({ productDetail, quantity, setQuantity, carrito }) => {
+const ItemCount = ({
+  productDetail,
+  quantity,
+  setQuantity,
+  carrito,
+  index,
+}) => {
+  const dispatch = useDispatch();
+
   function addQuantityToCart(actionButton) {
     if (!carrito) {
       if (actionButton === "minus") {
@@ -10,7 +20,10 @@ const ItemCount = ({ productDetail, quantity, setQuantity, carrito }) => {
       }
     } else {
       console.log("entro al carrito", productDetail);
-      //dispatch(addProductToCart(productDetail, quantity));
+      if (actionButton === "minus") {
+      } else {
+        dispatch(IncreaseQuantity(index));
+      }
     }
   }
 

@@ -70,10 +70,24 @@ export const envioForm = (data) => {
   };
 };
 
-export function addProductToCart(payload, quantity) {
+export function addProductToCart(payload, quantity, actionButton) {
   return {
     type: "ADD_PRODUCTS_TO_CART",
     payload: { ...payload, quantity },
     quantity,
+    actionButton,
+  };
+}
+
+export function IncreaseQuantity(payload) {
+  return {
+    type: "INCREASE_QUANTITY",
+    payload,
+  };
+}
+export function DecreaseQuantity(payload) {
+  return {
+    type: "DECREASE_QUANTITY",
+    payload,
   };
 }
