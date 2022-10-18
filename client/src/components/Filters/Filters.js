@@ -45,6 +45,14 @@ const Filters = ({ setMinPageNumber, setMaxPageNumber, setActualPage, setOrder})
     const handleRefresh = (e) => {
         dispatch(getAllProducts())
         setFilterState([])
+        uncheckAll()
+    }
+
+    // Esto deschequea los checkbox de los filtros cuando hacemos el refresh  
+    function uncheckAll() {
+        document.querySelectorAll('#formElement input[type=checkbox]').forEach(function(checkElement) {
+            checkElement.checked = false;
+        })
     }
       
     return (
@@ -70,7 +78,7 @@ const Filters = ({ setMinPageNumber, setMaxPageNumber, setActualPage, setOrder})
                         </li>
                     ))}
                 </ul>
-                <button className="refresh-btn" onClick={handleRefresh} > Refresh </button>
+                <button className="refresh-btn" onClick={handleRefresh} id="desmarcar"> Refresh </button>
         </section>
         )
 }
