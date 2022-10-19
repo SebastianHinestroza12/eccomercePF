@@ -8,6 +8,8 @@ import ProductDetail from "./components/Product/ProductDetail";
 import NewProduct from "./components/NewProduct/NewProduct";
 import Home from "./components/Home/home";
 import Login from "./components/Login/Login";
+import User from "./components/Login/User";
+import Shopping from "./components/Login/Shopping";
 
 function App() {
   return (
@@ -27,13 +29,16 @@ function App() {
       <Route path={"/new"}>
         <NewProduct />
       </Route>
-      <Route path={"/log"}>
-        <Login />
+      <Route path={"/user"}>
+        <User />
+      </Route>
+      <Route path={"/shopping"}>
+        <Shopping />
       </Route>
       <Route>
         <Footer />
       </Route>
-    </>
+    </> 
   );
 }
 
