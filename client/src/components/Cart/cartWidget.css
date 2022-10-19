@@ -1,3 +1,12 @@
+button#dropdown-cart:hover {
+  background: white;
+  color: var(--primary-color);
+}
+button#dropdown-cart {
+  background: var(--primary-color);
+  border: none;
+  padding: 8px;
+}
 img.cart-image {
   width: 20%;
 }
@@ -13,6 +22,7 @@ img.cart-image {
 .detailsCart {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 }
 #popover-positioned-bottom {
   max-width: 400px;
@@ -27,4 +37,34 @@ img.cart-image {
   font-weight: 300;
   font-size: 1rem;
   padding: 10px 0;
+  margin: 1rem 0;
+}
+.fade.toast.show {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+.toast-header {
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+.toast-body {
+  padding: 1rem;
+  background-color: white;
+}
+.cart-image-detail {
+  width: 60px;
+}
+.dropdown-menu.show {
+  display: block;
+  width: 460px;
+  padding: 2rem 1rem 1rem;
+}
+.dropdown-menu.show::after {
+  top: var(--bs-popover-border-width);
+  border-bottom-color: var(--bs-popover-bg);
+}
+.dropdown-menu.show::before {
+  border-width: 0px calc(var(--bs-popover-arrow-width) * 0.5)
+    var(--bs-popover-arrow-height);
 }

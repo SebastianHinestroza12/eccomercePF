@@ -22,7 +22,7 @@ function NewProduct() {
     console.log(data);
     alert("Se enviaron los datos correctamente");
     dispatch(envioForm(data));
-    reset()
+    reset();
   };
 
   const selectValidator = (value) => {
@@ -103,7 +103,9 @@ function NewProduct() {
           {errors.price?.type === "required" && (
             <p className="textoError">El campo Precio es requerido</p>
           )}
-          {errors.price?.type === "pattern" && <p className="textoError">Sólo números permitidos</p>}
+          {errors.price?.type === "pattern" && (
+            <p className="textoError">Sólo números permitidos</p>
+          )}
         </div>
         <div class="col-md-3">
           <label htmlFor="stock" class="form-label">
@@ -121,7 +123,9 @@ function NewProduct() {
           {errors.stock?.type === "required" && (
             <p className="textoError">El campo Stock es requerido</p>
           )}
-          {errors.stock?.type === "pattern" && <p className="textoError">Sólo números permitidos</p>}
+          {errors.stock?.type === "pattern" && (
+            <p className="textoError">Sólo números permitidos</p>
+          )}
         </div>
         <div class="col-md-3">
           <label htmlFor="image" class="form-label">
@@ -135,7 +139,7 @@ function NewProduct() {
               required: true,
             })}
           />
-          {errors.image ?.type === "required" && (
+          {errors.image?.type === "required" && (
             <p className="textoError">El campo Imagen es requerido</p>
           )}
         </div>
@@ -159,7 +163,9 @@ function NewProduct() {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          {errors.stars && <p className="textoError">Debes seleccionar una opción</p>}
+          {errors.stars && (
+            <p className="textoError">Debes seleccionar una opción</p>
+          )}
         </div>
         <div class="col-md-3">
           <label htmlFor="size" class="form-label">
@@ -182,7 +188,9 @@ function NewProduct() {
             <option value="XL">XL</option>
             <option value="XXL">XXL</option>
           </select>
-          {errors.size && <p className="textoError">Debes seleccionar una opción</p>}
+          {errors.size && (
+            <p className="textoError">Debes seleccionar una opción</p>
+          )}
         </div>
         <div class="col-md-6">
           <div class="form-floating">

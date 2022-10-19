@@ -1,0 +1,41 @@
+.totals-cart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.table > tbody tr {
+  vertical-align: middle;
+}
+.totals {
+  border: 1px solid var(--grey200);
+  background-color: var(--grey100);
+  padding: 2rem;
+
+  width: 400px;
+}
+.totals .item-totals {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0px;
+}
+h2.cart-title,
+.cart-empty {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.btn.checkout {
+  width: 100%;
+  margin-top: 1rem;
+}
+.remove-item {
+  cursor: pointer;
+  padding: 10px;
+  width: fit-content;
+  border-radius: 7px;
+}
+.remove-item:hover {
+  background: var(--third-color);
+  color: white;
+}

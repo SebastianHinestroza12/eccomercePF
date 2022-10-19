@@ -48,6 +48,8 @@ export const SearchByName = (name) => {
       .catch((error) => {
         console.log("AXIOS error", typeof error.response.data.error);
         return error.response.data.error;
+        // console.log(error)
+        // dispatch({ type: "SEARCH_PRODUCTS", payload:[] })
       });
   };
 };
@@ -70,10 +72,52 @@ export const envioForm = (data) => {
   };
 };
 
-export function addProductToCart(payload, quantity) {
+export function addProductToCart(payload, quantity, actionButton) {
   return {
     type: "ADD_PRODUCTS_TO_CART",
     payload: { ...payload, quantity },
     quantity,
+    actionButton,
   };
 }
+
+export function IncreaseQuantity(payload) {
+  return {
+    type: "INCREASE_QUANTITY",
+    payload,
+  };
+}
+export function DecreaseQuantity(payload) {
+  return {
+    type: "DECREASE_QUANTITY",
+    payload,
+  };
+}
+
+export function RemoveItemFromCart(payload) {
+  return {
+    type: "REMOVE_ITEM_FROM_CART",
+    payload,
+  };
+}
+
+export const filterBySize = (payload) => {
+  return {
+    type: "FILTER_BY_SIZE",
+    payload,
+  };
+};
+
+export const filterByType = (payload) => {
+  return {
+    type: "FILTER_BY_TYPE",
+    payload,
+  };
+};
+
+export const filterByCategory = (payload) => {
+  return {
+    type: "FILTER_BY_CATEGORY",
+    payload,
+  };
+};
