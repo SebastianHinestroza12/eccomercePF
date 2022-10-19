@@ -18,8 +18,19 @@ const AddToCart = () => {
   const productsInTheCart = useSelector((state) => state.cartProducts);
 
   function addToCartButton() {
-    setShow(true);
-    dispatch(addProductToCart(productDetail, quantity));
+    if (!productsInTheCart.length){
+      setShow(true);
+      dispatch(addProductToCart(productDetail, quantity));
+    } else {
+      for (let i=0; i<productsInTheCart.length; i++){
+        if(productsInTheCart[i].name === productDetail.name){
+          alert('No se puede agregar el mismo producto')
+        } else {
+          setShow(true);
+          dispatch(addProductToCart(productDetail, quantity));
+        }
+      } 
+    }
   }
 
   return (

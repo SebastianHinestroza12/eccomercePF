@@ -139,17 +139,26 @@ const rootReducer = (state = initialState, action) => {
         (element) => element.id === payload.id
       );
       if (productAlreadyInTheCart) {
+        /* Aca falta agregar que si el producto.id es el mismo que esta en
+        el carrito, agregar solo la cantidad de ese producto.id al carrito
+        -----------------------------------------------
         return state.cartProducts.map((item, index) => {
           if (index.id !== payload.id) {
-            // This isn't the item we care about - keep it as-is
-            return item;
+            return {
+              ...state,
+              quantityProductsAdded: state.quantityProductsAdded + quantity,
+            };
           }
-          // Otherwise, this is the one we want - return an updated value
           return {
-            ...item,
-            ...action.item,
+            ...state,
+            quantityProductsAdded: state.quantityProductsAdded + quantity,
           };
         });
+        */
+        return {
+          ...state,
+          quantityProductsAdded: state.quantityProductsAdded + quantity,
+        };
       } else {
         console.log("state", state.cartProducts);
         return {

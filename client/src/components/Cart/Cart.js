@@ -1,6 +1,5 @@
 import { Container, Table } from "react-bootstrap";
 import * as Unicons from "@iconscout/react-unicons";
-
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
@@ -21,7 +20,7 @@ const Cart = () => {
   
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const addedToCart = useSelector(
-    (state) => state.quantityProductsAdded
+    (state) => state.quantityProductsAdded + quantity
   );
 
   let subtotal = 0
@@ -41,11 +40,6 @@ const Cart = () => {
     totalPrice = subtotal + impuestos
   }
   
-  /*
-
-  productsInTheCart.forEach(funciton(item)){
-    subtotal+=productsInTheCart[item].quantity * productsInTheCart[item].price;
-  */
   useEffect(() => {}, []);
 
   return (
