@@ -69,3 +69,6 @@ footer .container {
 footer img {
   width: 70%;
 }
+.btn {
+  padding: 15px 2rem;
+}

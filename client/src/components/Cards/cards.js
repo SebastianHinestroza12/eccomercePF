@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/action";
 import Filters from "../Filters/Filters";
 import Sidebar from "../Product/Sidebar";
+import { Col } from "react-bootstrap";
 
 const Cards = ({ loading, setLoading }) => {
   const allProducts = useSelector((state) => state.products);
@@ -62,49 +63,51 @@ const Cards = ({ loading, setLoading }) => {
       <img src="/images/loader-blue.gif" className="loading" alt="loader" />
     </>
   ) : (
-    <div>
-      <div className="home-sidebar">
+    <>
+      <Col md={3} className="sidebar">
         <Sidebar
           setMinPageNumber={setMinPageNumber}
           setMaxPageNumber={setMaxPageNumber}
           setActualPage={setActualPage}
           setOrder={setOrder}
         />
-      </div>
-      <Filters
-        setMinPageNumber={setMinPageNumber}
-        setMaxPageNumber={setMaxPageNumber}
-        setActualPage={setActualPage}
-        setOrder={setOrder}
-      />
-      <div className="row">
-        {Array.isArray(actualproducts) ? (
-          actualproducts.map((products) => (
-            <div className="col-md-3" key={products.id}>
-              <ProductCard
-                name={products.name}
-                price={products.price}
-                image={products.image}
-                stars={products.stars}
-                id={products.id}
-              />
-            </div>
-          ))
-        ) : (
-          <>
-            <p className="errors">{actualproducts}</p>
-          </>
-        )}
-      </div>
-      <Pages
-        actualPage={actualPage}
-        minPageNumber={minPageNumber}
-        maxPageNumber={maxPageNumber}
-        productsPerPage={productsPerPage}
-        products={Array.isArray(allProducts) ? allProducts.length : 1}
-        pages={pages}
-      />
-    </div>
+      </Col>
+      <Col md={9}>
+        <Filters
+          setMinPageNumber={setMinPageNumber}
+          setMaxPageNumber={setMaxPageNumber}
+          setActualPage={setActualPage}
+          setOrder={setOrder}
+        />
+        <div className="row">
+          {Array.isArray(actualproducts) ? (
+            actualproducts.map((products) => (
+              <div className="col-md-3" key={products.id}>
+                <ProductCard
+                  name={products.name}
+                  price={products.price}
+                  image={products.image}
+                  stars={products.stars}
+                  id={products.id}
+                />
+              </div>
+            ))
+          ) : (
+            <>
+              <p className="errors">{actualproducts}</p>
+            </>
+          )}
+        </div>
+        <Pages
+          actualPage={actualPage}
+          minPageNumber={minPageNumber}
+          maxPageNumber={maxPageNumber}
+          productsPerPage={productsPerPage}
+          products={Array.isArray(allProducts) ? allProducts.length : 1}
+          pages={pages}
+        />
+      </Col>
+    </>
   );
 };
 

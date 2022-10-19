@@ -1,3 +1,12 @@
+button#dropdown-cart:hover {
+  background: white;
+  color: var(--primary-color);
+}
+button#dropdown-cart {
+  background: var(--primary-color);
+  border: none;
+  padding: 8px;
+}
 img.cart-image {
   width: 20%;
 }
@@ -28,6 +37,7 @@ img.cart-image {
   font-weight: 300;
   font-size: 1rem;
   padding: 10px 0;
+  margin: 1rem 0;
 }
 .fade.toast.show {
   position: fixed;
@@ -48,6 +58,7 @@ img.cart-image {
 .dropdown-menu.show {
   display: block;
   width: 460px;
+  padding: 2rem 1rem 1rem;
 }
 .dropdown-menu.show::after {
   top: var(--bs-popover-border-width);
