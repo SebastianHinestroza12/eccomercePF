@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  const { type, payload, quantity, actionButton } = action;
+  const { type, payload, quantity } = action;
   switch (type) {
     case "GET_ALL_PRODUCTS":
       return {
@@ -90,11 +90,14 @@ const rootReducer = (state = initialState, action) => {
         };
       }
       let productsFiltered = [];
-      const filterBySize = () => {
+      const filters = () => {
         for (let element of allProducts) {
           let i = 0;
           while (i < payload.length) {
-            if (element.size === payload[i])
+            if (
+              element.size === payload[i] ||
+              element.name.includes(payload[i])
+            )
               productsFiltered = [...productsFiltered, element];
             i++;
           }
@@ -104,7 +107,7 @@ const rootReducer = (state = initialState, action) => {
       };
       return {
         ...state,
-        products: filterBySize(),
+        products: filters(),
       };
 
     case "FILTER_BY_TYPE":
@@ -118,7 +121,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "FILTER_BY_CATEGORY":
-      const allProducts3 = state.products;
+      const allProducts3 = state.allProducts;
       const filterByCategory = allProducts3.filter((p) =>
         p.name.includes(action.payload)
       );
@@ -180,6 +183,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
       */
+    case "REMOVE_ITEM_FROM_CART":
+      console.log("state.cartProducts", state.cartProducts);
+      let productUpdated = state.cartProducts.filter(
+        (product) => product.id !== payload
+      );
+      return {
+        ...state,
+        cartProducts: productUpdated,
+      };
+
     default:
       return state;
   }
