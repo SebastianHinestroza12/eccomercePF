@@ -60,6 +60,7 @@ const Cards = ({ loading, setLoading }) => {
 
   return loading ? (
     <>
+      {console.log("allProducts", allProducts)}
       <img src="/images/loader-blue.gif" className="loading" alt="loader" />
     </>
   ) : (
