@@ -59,7 +59,7 @@
 .navbar .carrito {
   color: white;
   width: max-content;
-  border-radius: 500px;
+  border-radius: 7px;
   background: none;
 }
 .navbar a.carrito:hover,
