@@ -37,10 +37,6 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: true,
       },
-      category: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       visible: {
         type: DataTypes.BOOLEAN,
         allowNull: true,

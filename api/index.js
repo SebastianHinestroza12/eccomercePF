@@ -30,8 +30,9 @@ conn.sync({ force: true }).then(() => {
 .then(() => {
 
   Category.create({ name: 'Jersey' })
-  Category.create({ name: 'Balón' })
-  Category.create({ name: 'Botínclear' })
+  Category.create({ name: 'Balon' })
+  Category.create({ name: 'Calzado' })
+  Category.create({ name: 'Short' })
 
   console.log("Categorias creadas");
 })

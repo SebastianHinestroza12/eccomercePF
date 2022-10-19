@@ -8,6 +8,9 @@ const jsonCategories = [
   {
     "name": "Calzado"
   },
+  {
+    "name": "Short"
+  },
 ];
 
 module.exports= jsonCategories;
