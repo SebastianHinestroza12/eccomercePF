@@ -183,6 +183,16 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
       */
+    case "REMOVE_ITEM_FROM_CART":
+      console.log("state.cartProducts", state.cartProducts);
+      let productUpdated = state.cartProducts.filter(
+        (product) => product.id !== payload
+      );
+      return {
+        ...state,
+        cartProducts: productUpdated,
+      };
+
     default:
       return state;
   }
