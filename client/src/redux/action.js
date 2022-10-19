@@ -89,6 +89,7 @@ export function deleteProductFromCart(payload){
 }
 
 
+
 export function IncreaseQuantity(payload) {
   return {
     type: "INCREASE_QUANTITY",

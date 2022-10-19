@@ -75,6 +75,7 @@ const Cart = () => {
                     <td>{element.name}</td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
+                      
                       <ItemCount
                         productDetail={element}
                         quantity={element.quantity}

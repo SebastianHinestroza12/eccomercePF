@@ -15,6 +15,7 @@ const CartWidget = () => {
     (state) => state.quantityProductsAdded
   );
   const productsInTheCart = useSelector((state) => state.cartProducts);
+  
 
   return (
     <>

@@ -148,6 +148,7 @@ const rootReducer = (state = initialState, action) => {
           return item.id != state.cartProducts[action.payload].id
         })
       }
+      
 
     case "INCREASE_QUANTITY":
       console.log("payload", payload);
