@@ -81,6 +81,15 @@ export function addProductToCart(payload, quantity, actionButton) {
   };
 }
 
+export function deleteProductFromCart(payload){
+  return{
+    type: 'DELETE_PRODUCT_FROM_CART',
+    payload,
+  }
+}
+
+
+
 export function IncreaseQuantity(payload) {
   return {
     type: "INCREASE_QUANTITY",
