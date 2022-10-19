@@ -1,20 +1,20 @@
 import * as Unicons from "@iconscout/react-unicons";
 import { useSelector } from "react-redux";
-import {
-  OverlayTrigger,
-  Popover,
-  Button,
-  Dropdown,
-  DropdownButton,
-} from "react-bootstrap";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 import "./cartWidget.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 
 const CartWidget = () => {
+  let history = useHistory();
+
   const quantityAddedToCart = useSelector(
     (state) => state.quantityProductsAdded
   );
   const productsInTheCart = useSelector((state) => state.cartProducts);
+
+  function goToProduct(id) {
+    history.push(`/detail/${id}`);
+  }
 
   return (
     <>
@@ -29,7 +29,11 @@ const CartWidget = () => {
       >
         {productsInTheCart.length ? (
           productsInTheCart.map((product) => (
-            <Dropdown.Item className="listItem" key={product.id}>
+            <Dropdown.Item
+              className="listItem"
+              key={product.id}
+              onClick={() => goToProduct(product.id)}
+            >
               <img src={product.image} className="cart-image" />
               <div className="detailsCart">
                 <span className="title">{product.name}</span>
