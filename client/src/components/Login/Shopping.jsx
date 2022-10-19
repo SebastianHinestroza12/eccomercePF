@@ -32,7 +32,7 @@ function Shopping() {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere accusantium, vitae dolorem tempora iste inventore ipsa deleniti iusto, quo modi expedita ea doloribus. Quos, praesentium! Praesentium, totam error. Autem, ipsa!
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere accusantium, vitae dolorem 
               </p>
-              <a href="#" class="btn btn-primary">
+              <a href="#" class="btn btn-danger">
                 Volver a comprar
               </a>
             </div>
