@@ -62,7 +62,8 @@ const Cart = () => {
               </thead>
               <tbody>
                 {productsInTheCart.map((element, index) => (
-                  <tr key={index} id={index}>
+                  <tr key={index} id={index} >
+                    
                     <td>
                       <img
                         src={element.image}
@@ -73,6 +74,7 @@ const Cart = () => {
                     <td>{element.name}</td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
+                      
                       <ItemCount
                         productDetail={element}
                         quantity={element.quantity}

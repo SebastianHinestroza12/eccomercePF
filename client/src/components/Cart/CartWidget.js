@@ -11,6 +11,7 @@ const CartWidget = () => {
     (state) => state.quantityProductsAdded
   );
   const productsInTheCart = useSelector((state) => state.cartProducts);
+  
 
   function goToProduct(id) {
     history.push(`/detail/${id}`);
