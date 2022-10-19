@@ -14,6 +14,7 @@ const ProductDetail = () => {
 
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
+
   useEffect(() => {
     new Promise((resolve) => {
       resolve(dispatch(getProductDetail(productId)));

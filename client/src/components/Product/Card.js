@@ -22,6 +22,11 @@ const ProductCard = ({ name, price, image, stars, id }) => {
     history.push(`/detail/${id}`);
   };
 
+  function addToCart(e) {
+    e.stopPropagation();
+    history.push(`/`);
+  }
+
   return (
     <Card style={{ width: "100%" }} onClick={() => goToDetail(id)}>
       <div>
@@ -33,7 +38,7 @@ const ProductCard = ({ name, price, image, stars, id }) => {
         <hr></hr>
         <Card.Title>{name}</Card.Title>
         <div className={"buttons_shop"}>
-          <Unicons.UilShoppingCartAlt />
+          <Unicons.UilShoppingCartAlt onClick={(e) => addToCart(e)} />
           <Unicons.UilHeart />
         </div>
         <div className="rating">{writeRatingStars(stars)}</div>
