@@ -15,24 +15,12 @@ const AddToCart = () => {
 
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
-  const productsInTheCart = useSelector((state) => state.cartProducts);
 
   function addToCartButton() {
-    if (!productsInTheCart.length){
-      setShow(true);
-      dispatch(addProductToCart(productDetail, quantity));
-    } else {
-      for (let i=0; i<productsInTheCart.length; i++){
-        if(productsInTheCart[i].name === productDetail.name){
-          alert('No se puede agregar el mismo producto')
-        } else {
-          setShow(true);
-          dispatch(addProductToCart(productDetail, quantity));
-        }
-      } 
-    }
+    setShow(true);
+    dispatch(addProductToCart(productDetail, quantity));
   }
-
+  
   return (
     <>
       <Toast

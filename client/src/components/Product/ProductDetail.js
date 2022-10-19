@@ -21,6 +21,9 @@ const ProductDetail = () => {
     }).then((res) => {
       setLoading(false);
     });
+
+    window.localStorage.setItem("name", "Lissette");
+    console.log("montaje");
   }, [dispatch, productId]);
 
   function writeRatingStars(rating) {
