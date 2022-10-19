@@ -4,46 +4,45 @@ module.exports = (sequelize) => {
   sequelize.define(
     "client",
     {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV1,
-        primaryKey: true,
-      },
       name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       country: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       state: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       city: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       postal_code: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       dni: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       phone: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {

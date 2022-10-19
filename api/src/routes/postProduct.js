@@ -6,14 +6,14 @@ const Op = Sequelize.Op;
 
 router.post("/", async (req, res) => {
   try{
-    let { name, price, detail, size_stock, image, stock, stars, category } = req.body;
+    let { name, price, detail, size_stock, image, stars, category, visible } = req.body;
 
     let newProduct = await Product.create({
-        name: name, price: price, detail: detail, size_stock: size_stock, image: image, stock: stock, stars: stars
+        name: name, price: price, detail: detail, size_stock: size_stock, image: image, stock: stock, stars: stars, visible: visible
     });
 
     Category.findOrCreate({ 
-        where: { name: category }, 
+        where: { name: category }
     });
 
     const matchingCategorys = await Category.findAll({

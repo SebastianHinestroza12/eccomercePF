@@ -11,8 +11,10 @@ const getFilterEquipement = require('../controllers/getFilterEquipment');
 
 const postProduct = require('./postProduct');
 const postCategory = require('./postCategory');
+const postOrder = require('./postOrder');
 
 const postAdmin = require('./postAdmin');
+const postClient = require('./postClient');
 
 const getCategories = require('./getCategories');
 
@@ -24,13 +26,12 @@ router.use('/filterType', getFilterType);
 router.use('/filterSize', getFilterSize);
 router.use('/filterEquipement', getFilterEquipement);
 
-
 router.use('/postProduct', postProduct);
 router.use('/postCategory', postCategory);
-
 router.use('/getCategories', getCategories);
 
-//
 router.use('/postAdmin', postAdmin);
+router.use('/postClient', postClient);
+router.use('/postOrder', postOrder);
 
 module.exports = router;
