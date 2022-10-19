@@ -30,7 +30,8 @@ function NavScrollExample() {
                 Productos
               </Link>
               <CartWidget />
-              <Link to={`/`} className="navLinks nav-link w-20">
+              <Link to={`/`} className="navLinks nav-link w-20 loginButton">
+                <Unicons.UilUser />
                 <Login />
               </Link>
 
@@ -39,11 +40,13 @@ function NavScrollExample() {
                 id="navbarScrollingDropdown"
                 className="linkcs"
               >
-                <Link to={'/user'}>
-                <NavDropdown.Item href="#action3">Mi perfil</NavDropdown.Item>
+                <Link to={"/user"}>
+                  <NavDropdown.Item href="#action3">Mi perfil</NavDropdown.Item>
                 </Link>
                 <Link to="/shopping">
-                <NavDropdown.Item href="#action4">Mis compras</NavDropdown.Item>
+                  <NavDropdown.Item href="#action4">
+                    Mis compras
+                  </NavDropdown.Item>
                 </Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action5">
