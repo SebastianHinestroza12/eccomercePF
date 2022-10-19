@@ -1,12 +1,11 @@
 import { Container, Table } from "react-bootstrap";
-import * as Unicons from "@iconscout/react-unicons";
-
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { RemoveItemFromCart } from "../../redux/action";
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
-import { useEffect } from "react";
+import * as Unicons from "@iconscout/react-unicons";
 import "./cart.css";
-import { RemoveItemFromCart } from "../../redux/action";
 
 const Cart = () => {
   const dispatch = useDispatch();
