@@ -90,9 +90,6 @@ const rootReducer = (state = initialState, action) => {
         };
       }
       let productsFiltered = [];
-
-      console.log("payload", payload);
-
       const filterBySize = () => {
         for (let element of allProducts) {
           let i = 0;
