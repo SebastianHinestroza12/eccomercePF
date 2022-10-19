@@ -20,7 +20,7 @@ const AddToCart = () => {
     setShow(true);
     dispatch(addProductToCart(productDetail, quantity));
   }
-
+  
   return (
     <>
       <Toast
