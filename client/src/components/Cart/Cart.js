@@ -1,51 +1,45 @@
 import { Container, Table } from "react-bootstrap";
-import * as Unicons from "@iconscout/react-unicons";
-
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { RemoveItemFromCart } from "../../redux/action";
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
-import { useEffect, useState } from "react";
+import * as Unicons from "@iconscout/react-unicons";
 import "./cart.css";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
-
-  let TotalCart = 0;
-
-  const [quantity, setQuantity] = useState();
-  const [total, setTotal] = useState();
 
   function TotalPrice(price, quantity) {
     return Number(price * quantity).toLocaleString("en-US");
   }
-  
-  const productsInTheCart = useSelector((state) => state.cartProducts);
-  const addedToCart = useSelector(
-    (state) => state.quantityProductsAdded
-  );
 
-  let subtotal = 0
+  const productsInTheCart = useSelector((state) => state.cartProducts);
+  const addedToCart = useSelector((state) => state.quantityProductsAdded);
+
+  let subtotal = 0;
   if (productsInTheCart) {
-    for (let i=0; i<productsInTheCart.length; i++){
-      subtotal += productsInTheCart[i].price * productsInTheCart[i].quantity
+    for (let i = 0; i < productsInTheCart.length; i++) {
+      subtotal += productsInTheCart[i].price * productsInTheCart[i].quantity;
     }
   }
 
-  let impuestos = 0
+  let impuestos = 0;
   if (productsInTheCart) {
-    impuestos = Math.floor(subtotal * 0.2)
+    impuestos = Math.floor(subtotal * 0.2);
   }
-  
-  let totalPrice = 0
-  if (subtotal > 0) {
-    totalPrice = subtotal + impuestos
-  }
-  
-  /*
 
-  productsInTheCart.forEach(funciton(item)){
-    subtotal+=productsInTheCart[item].quantity * productsInTheCart[item].price;
-  */
+  let totalPrice = 0;
+  if (subtotal > 0) {
+    totalPrice = subtotal + impuestos;
+  }
+
+  function removeItemFromCart(index) {
+    console.log("remove");
+    dispatch(RemoveItemFromCart(index));
+  }
+
   useEffect(() => {}, []);
 
   return (
@@ -62,17 +56,24 @@ const Cart = () => {
                   <th>Precio</th>
                   <th>Cantidad</th>
                   <th>Total</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {productsInTheCart.map((element, index) => (
-                  <tr key={index} id={index}>
+                  <tr key={index} id={index} >
+                    
                     <td>
-                      <img src={element.image} className="cart-image-detail" />
+                      <img
+                        src={element.image}
+                        className="cart-image-detail"
+                        alt={element.name}
+                      />
                     </td>
                     <td>{element.name}</td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
+                      
                       <ItemCount
                         productDetail={element}
                         quantity={element.quantity}
@@ -82,13 +83,21 @@ const Cart = () => {
                       />
                     </td>
                     <td>$ {TotalPrice(element.price, element.quantity)} </td>
+                    <td>
+                      <div
+                        onClick={() => removeItemFromCart(element.id)}
+                        className="remove-item"
+                      >
+                        <Unicons.UilTrash />
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </Table>
           ) : (
             <div className="cart-empty">
-              No hay productos en el carrito
+              <p>No hay productos en el carrito</p>
               <div>
                 <Link to="/store" className="buy btn btn-primary buttons-cart">
                   <Unicons.UilArrowLeft />
@@ -105,19 +114,29 @@ const Cart = () => {
                   SEGUIR COMPRANDO
                 </Link>
               </div>
-              <div className="totals">
-                <div className="item-totals">
-                  Subtotal
-                  <span>$ {subtotal}</span>
+              <div>
+                <div className="totals">
+                  <div className="item-totals">
+                    Subtotal
+                    <span>$ {subtotal.toLocaleString("en-US")}</span>
+                  </div>
+                  <div className="item-totals">
+                    Impuestos
+                    <span>$ {impuestos.toLocaleString("en-US")}</span>
+                  </div>
+                  <hr></hr>
+                  <div className="item-totals">
+                    Total
+                    <span>$ {totalPrice.toLocaleString("en-US")}</span>
+                  </div>
                 </div>
-                <div className="item-totals">
-                  Impuestos
-                  <span>$ {impuestos}</span>
-                </div>
-                <div className="item-totals">
-                  Total
-                  <span>$ {totalPrice}</span>
-                </div>
+                <Link
+                  to="/store"
+                  className="checkout buy btn btn-primary buttons-cart"
+                >
+                  <Unicons.UilCreditCard />
+                  &nbsp;FINALIZAR COMPRA
+                </Link>
               </div>
             </section>
           ) : (

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import "./navBar.css";
 import Searchbar from "./Searchbar";
 import CartWidget from "../Cart/CartWidget";
+import Login from "../Login/Login";
 
 function NavScrollExample() {
   return (
@@ -29,8 +30,8 @@ function NavScrollExample() {
                 Productos
               </Link>
               <CartWidget />
-              <Link to={`/`} className="navLinks nav-link carrito w-20">
-                <Unicons.UilUser />
+              <Link to={`/`} className="navLinks nav-link w-20">
+                <Login />
               </Link>
 
               <NavDropdown
@@ -38,8 +39,12 @@ function NavScrollExample() {
                 id="navbarScrollingDropdown"
                 className="linkcs"
               >
+                <Link to={'/user'}>
                 <NavDropdown.Item href="#action3">Mi perfil</NavDropdown.Item>
+                </Link>
+                <Link to="/shopping">
                 <NavDropdown.Item href="#action4">Mis compras</NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action5">
                   Something else

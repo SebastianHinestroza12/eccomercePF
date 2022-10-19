@@ -15,13 +15,12 @@ const AddToCart = () => {
 
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
-  const productsInTheCart = useSelector((state) => state.cartProducts);
 
   function addToCartButton() {
     setShow(true);
     dispatch(addProductToCart(productDetail, quantity));
   }
-
+  
   return (
     <>
       <Toast
