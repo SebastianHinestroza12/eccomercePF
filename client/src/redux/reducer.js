@@ -136,56 +136,28 @@ const rootReducer = (state = initialState, action) => {
         products: payload,
       };
 
-    case "ADD_PRODUCTS_TO_CART":
-      console.log("cartProducts", state.cartProducts);
-      let productAlreadyInTheCart = state.cartProducts.find(
-        (element) => element.id === payload.id
-      );
-      if (productAlreadyInTheCart) {
-        /* Aca falta agregar que si el producto.id es el mismo que esta en
-        el carrito, agregar solo la cantidad de ese producto.id al carrito
-        -----------------------------------------------
-        return state.cartProducts.map((item, index) => {
-          if (index.id !== payload.id) {
-            return {
-              ...state,
-              quantityProductsAdded: state.quantityProductsAdded + quantity,
-            };
-          }
+      case "ADD_PRODUCTS_TO_CART":
+        let productAlreadyInTheCart = state.cartProducts.findIndex(
+          (element) => element.id === payload.id
+        );
+  
+        if (productAlreadyInTheCart >= 0) {
+          console.log("productAlreadyInTheCart", productAlreadyInTheCart);
+          state.quantityProductsAdded += quantity;
+          state.cartProducts[productAlreadyInTheCart].quantity += quantity;
           return {
             ...state,
+          };
+        } else {
+          return {
+            ...state,
+            cartProducts: [...state.cartProducts, payload],
             quantityProductsAdded: state.quantityProductsAdded + quantity,
           };
-        });
-        */
-        return {
-          ...state,
-          quantityProductsAdded: state.quantityProductsAdded + quantity,
-        };
-      } else {
-        console.log("state", state.cartProducts);
-        return {
-          ...state,
-          cartProducts: [...state.cartProducts, payload],
-          quantityProductsAdded: state.quantityProductsAdded + quantity,
-        };
-      }
-
-    case 'DELETE_PRODUCT_FROM_CART':
-      console.log('ACAAA', state.cartProducts[payload])
-      let quantity_ = state.cartProducts[action.payload].quantity
-      return {
-        ...state,
-        quantityProductsAdded: state.quantityProductsAdded - quantity_,
-        cartProducts: state.cartProducts.filter(item => {
-          return item.id != state.cartProducts[action.payload].id
-        })
-      }
+        }
       
 
     case "INCREASE_QUANTITY":
-      console.log("payload", payload);
-      console.log("STATE", state.cartProducts[payload]);
       state.quantityProductsAdded++;
       state.cartProducts[payload].quantity++;
 
