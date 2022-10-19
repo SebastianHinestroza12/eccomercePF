@@ -63,7 +63,7 @@ const Cart = () => {
               <tbody>
                 {productsInTheCart.map((element, index) => (
                   <tr key={index} id={index} >
-                    <td><button className="badge badge-danger" onClick={() => deleteProductFromCart(index)}>X</button></td>
+                    
                     <td>
                       <img
                         src={element.image}

@@ -195,7 +195,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-      */
+      
     case "REMOVE_ITEM_FROM_CART":
       console.log("state.cartProducts", state.cartProducts);
       let productUpdated = state.cartProducts.filter(
