@@ -1,4 +1,5 @@
 const initialState = {
+  allProducts: [],
   products: [],
   productDetail: [],
   newProducts: [],
@@ -7,12 +8,13 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  const { type, payload, quantity, actionButton } = action;
+  const { type, payload, quantity } = action;
   switch (type) {
     case "GET_ALL_PRODUCTS":
       return {
         ...state,
         products: payload,
+        allProducts: payload,
       };
     case "LOAD_PRODUCTS":
       return {
@@ -80,31 +82,53 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "FILTER_BY_SIZE":
-      const allProducts = state.products;
-      const filterBySize =
-        allProducts.filter((p) => p.size.includes(action.payload));
+      const allProducts = state.allProducts;
+      if (payload.length === 0) {
+        return {
+          ...state,
+          products: allProducts,
+        };
+      }
+      let productsFiltered = [];
+      const filters = () => {
+        for (let element of allProducts) {
+          let i = 0;
+          while (i < payload.length) {
+            if (
+              element.size === payload[i] ||
+              element.name.includes(payload[i])
+            )
+              productsFiltered = [...productsFiltered, element];
+            i++;
+          }
+        }
+
+        return productsFiltered;
+      };
       return {
         ...state,
-        products: filterBySize,
-      }
+        products: filters(),
+      };
 
     case "FILTER_BY_TYPE":
       const allProducts2 = state.products;
-      const filterByType =
-        allProducts2.filter((p) => p.name.includes(action.payload));
+      const filterByType = allProducts2.filter((p) =>
+        p.name.includes(action.payload)
+      );
       return {
         ...state,
         products: filterByType,
       };
 
     case "FILTER_BY_CATEGORY":
-      const allProducts3 = state.products;
-      const filterByCategory =
-        allProducts3.filter((p) => p.name.includes(action.payload));
+      const allProducts3 = state.allProducts;
+      const filterByCategory = allProducts3.filter((p) =>
+        p.name.includes(action.payload)
+      );
       return {
         ...state,
-        products: filterByCategory
-      }
+        products: filterByCategory,
+      };
 
     case "SEARCH_PRODUCTS":
       return {
@@ -171,6 +195,17 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+      */
+    case "REMOVE_ITEM_FROM_CART":
+      console.log("state.cartProducts", state.cartProducts);
+      let productUpdated = state.cartProducts.filter(
+        (product) => product.id !== payload
+      );
+      return {
+        ...state,
+        cartProducts: productUpdated,
+      };
+
     default:
       return state;
   }

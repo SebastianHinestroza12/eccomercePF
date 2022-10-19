@@ -1,6 +1,6 @@
 import * as Unicons from "@iconscout/react-unicons";
 import { useDispatch } from "react-redux";
-import { addProductToCart, IncreaseQuantity, DecreaseQuantity } from "../../redux/action";
+import { IncreaseQuantity, DecreaseQuantity } from "../../redux/action";
 
 const ItemCount = ({
   productDetail,
@@ -10,7 +10,7 @@ const ItemCount = ({
   index,
 }) => {
   const dispatch = useDispatch(); 
-  
+
 
 
   function addQuantityToCart(actionButton) {

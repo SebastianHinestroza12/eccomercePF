@@ -103,23 +103,30 @@ export function DecreaseQuantity(payload) {
   };
 }
 
+export function RemoveItemFromCart(payload) {
+  return {
+    type: "REMOVE_ITEM_FROM_CART",
+    payload,
+  };
+}
+
 export const filterBySize = (payload) => {
   return {
-    type: 'FILTER_BY_SIZE',
-    payload
-  }
-}
+    type: "FILTER_BY_SIZE",
+    payload,
+  };
+};
 
 export const filterByType = (payload) => {
   return {
-    type: 'FILTER_BY_TYPE',
-    payload
-  }
-}
+    type: "FILTER_BY_TYPE",
+    payload,
+  };
+};
 
 export const filterByCategory = (payload) => {
   return {
-    type: 'FILTER_BY_CATEGORY',
-    payload
-  }
-}
+    type: "FILTER_BY_CATEGORY",
+    payload,
+  };
+};
