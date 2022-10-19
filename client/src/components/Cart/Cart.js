@@ -4,18 +4,13 @@ import * as Unicons from "@iconscout/react-unicons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./cart.css";
 import { RemoveItemFromCart } from "../../redux/action";
 
 const Cart = () => {
   const dispatch = useDispatch();
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
-
-  let TotalCart = 0;
-
-  const [quantity, setQuantity] = useState();
-  const [total, setTotal] = useState();
 
   function TotalPrice(price, quantity) {
     return Number(price * quantity).toLocaleString("en-US");
@@ -69,7 +64,11 @@ const Cart = () => {
                 {productsInTheCart.map((element, index) => (
                   <tr key={index} id={index}>
                     <td>
-                      <img src={element.image} className="cart-image-detail" />
+                      <img
+                        src={element.image}
+                        className="cart-image-detail"
+                        alt={element.name}
+                      />
                     </td>
                     <td>{element.name}</td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>

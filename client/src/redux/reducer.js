@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  const { type, payload, quantity, actionButton } = action;
+  const { type, payload, quantity } = action;
   switch (type) {
     case "GET_ALL_PRODUCTS":
       return {

@@ -2,7 +2,7 @@ import * as Unicons from "@iconscout/react-unicons";
 import { useSelector } from "react-redux";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import "./cartWidget.css";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const CartWidget = () => {
   let history = useHistory();
@@ -34,7 +34,11 @@ const CartWidget = () => {
               key={product.id}
               onClick={() => goToProduct(product.id)}
             >
-              <img src={product.image} className="cart-image" />
+              <img
+                src={product.image}
+                className="cart-image"
+                alt={product.name}
+              />
               <div className="detailsCart">
                 <span className="title">{product.name}</span>
                 <span>

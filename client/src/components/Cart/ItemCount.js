@@ -1,6 +1,6 @@
 import * as Unicons from "@iconscout/react-unicons";
 import { useDispatch } from "react-redux";
-import { addProductToCart, IncreaseQuantity } from "../../redux/action";
+import { IncreaseQuantity } from "../../redux/action";
 
 const ItemCount = ({
   productDetail,
