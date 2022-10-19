@@ -9,7 +9,8 @@ const ItemCount = ({
   carrito,
   index,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
+  
 
   function addQuantityToCart(actionButton) {
     if (!carrito) {

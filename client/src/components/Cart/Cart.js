@@ -19,7 +19,7 @@ const Cart = () => {
   function TotalPrice(price, quantity) {
     return Number(price * quantity).toLocaleString("en-US");
   }
-  
+
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const addedToCart = useSelector(
     (state) => state.quantityProductsAdded
@@ -27,7 +27,7 @@ const Cart = () => {
 
   let subtotal = 0
   if (productsInTheCart) {
-    for (let i=0; i<productsInTheCart.length; i++){
+    for (let i = 0; i < productsInTheCart.length; i++) {
       subtotal += productsInTheCart[i].price * productsInTheCart[i].quantity
     }
   }
@@ -36,18 +36,18 @@ const Cart = () => {
   if (productsInTheCart) {
     impuestos = Math.floor(subtotal * 0.2)
   }
-  
+
   let totalPrice = 0
   if (subtotal > 0) {
     totalPrice = subtotal + impuestos
   }
-  
+
   /*
 
   productsInTheCart.forEach(funciton(item)){
     subtotal+=productsInTheCart[item].quantity * productsInTheCart[item].price;
   */
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   return (
     <>
@@ -67,8 +67,8 @@ const Cart = () => {
               </thead>
               <tbody>
                 {productsInTheCart.map((element, index) => (
-                  <tr key={index} id={index}>
-                     <td><button className="badge badge-danger" onClick={()=>deleteProductFromCart(index)}>X</button></td>
+                  <tr key={index} id={index} >
+                    <td><button className="badge badge-danger" onClick={() => deleteProductFromCart(index)}>X</button></td>
                     <td>
                       <img src={element.image} className="cart-image-detail" />
                     </td>

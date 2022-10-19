@@ -139,6 +139,7 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case 'DELETE_PRODUCT_FROM_CART':
+      console.log('ACAAA', state.cartProducts[payload])
       let quantity_ = state.cartProducts[action.payload].quantity
       return {
         ...state,
