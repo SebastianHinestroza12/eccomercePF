@@ -30,25 +30,25 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Admin, Product, Client, Order, Comment, Category, Size } = sequelize.models;
+const { Admin, Product, User, Order, Comment, Category, Size } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Admin.belongsToMany(Product, {through: 'admin-product'});
-Product.belongsToMany(Admin, {through: 'admin-product'});
+Admin.belongsToMany(Product, { through: 'admin-product' });
+Product.belongsToMany(Admin, { through: 'admin-product' });
 
-Admin.belongsToMany(Client, {through: 'admin-client'});
-Client.belongsToMany(Admin, {through: 'admin-client'});
+Admin.belongsToMany(User, { through: 'admin-client' });
+User.belongsToMany(Admin, { through: 'admin-client' });
 
-Client.hasMany(Order);
-Order.belongsTo(Client);
+User.hasMany(Order);
+Order.belongsTo(User);
 
-Product.belongsToMany(Category,{through: 'product-category'});
-Category.belongsToMany(Product,{through: 'product-category'});
+Product.belongsToMany(Category, { through: 'product-category' });
+Category.belongsToMany(Product, { through: 'product-category' });
 
-Product.belongsToMany(Size,{through: 'product-size'});
-Size.belongsToMany(Product,{through: 'product-size'});
+Product.belongsToMany(Size, { through: 'product-size' });
+Size.belongsToMany(Product, { through: 'product-size' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

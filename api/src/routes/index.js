@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 
-// const authLogin = require('../controllers/User/authLogin');
-// const authRegister = require('../controllers/User/authRegister');
-// const forgotPassword = require('../controllers/User/forgotPassword');
+const getLogin = require('../controllers/User/getLogin');
+const postRegister = require('../controllers/User/postRegister');
+const modifyUser = require('../controllers/User/modifyUser');
 
 const getProduct = require('../controllers/getProduct');
 const putProduct = require('../controllers/putProduct');
@@ -33,8 +33,8 @@ router.use('/postAdmin', postAdmin);
 
 // login , register Y recuperePaaswword users
 
-// router.use('/user/login', authLogin);
-// router.use('/user/register', authRegister);
-// router.use('/user/forgotPassword', forgotPassword);
+router.use('/user/login', getLogin);
+router.use('/user/register', postRegister);
+router.use('/user/modify', modifyUser);
 
 module.exports = router;
