@@ -7,7 +7,6 @@ import Footer from "./components/Footer/footer";
 import ProductDetail from "./components/Product/ProductDetail";
 import NewProduct from "./components/NewProduct/NewProduct";
 import Home from "./components/Home/home";
-import Login from "./components/Login/Login";
 import User from "./components/Login/User";
 import Shopping from "./components/Login/Shopping";
 
