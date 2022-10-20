@@ -11,6 +11,7 @@ import User from "./components/Login/User/User";
 import Shopping from "./components/Login/User/Shopping";
 import Cart from "./components/Cart/Cart";
 import { Fragment } from "react";
+import LogAdmin from "./components/Login/Admin/LogAdmin";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
         <ProductDetail />
       </Route>
       <Route path={"/new"}>
-        <NewProduct />
+        <LogAdmin />
       </Route>
       <Route path={"/user"}>
         <User />
