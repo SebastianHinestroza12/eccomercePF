@@ -10,6 +10,9 @@ const CartWidget = () => {
   const quantityAddedToCart = useSelector(
     (state) => state.quantityProductsAdded
   );
+
+  //En quantityAddedToCart, llegan TODOS los productos que agrego,
+  //mientras que en productsInTheCart solo llega la cantidad de producto 1vez que se agregan.
   const productsInTheCart = useSelector((state) => state.cartProducts);
 
   function goToProduct(id) {

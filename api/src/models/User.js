@@ -2,48 +2,44 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "client",
+    "user",
     {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      surnames: {
+        type: DataTypes.STRING,
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      password: {
+      picture: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       address: {
         type: DataTypes.STRING,
-        allowNull: true,
+      },
+      dni: {
+        type: DataTypes.BIGINT,
       },
       country: {
         type: DataTypes.STRING,
-        allowNull: true,
-      },
-      state: {
-        type: DataTypes.STRING,
-        allowNull: true,
       },
       city: {
         type: DataTypes.STRING,
-        allowNull: true,
       },
       postal_code: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      dni: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
       },
       phone: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
+        type: DataTypes.BIGINT,
       },
+      email_verified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+      }
     },
     {
       timestamps: false,

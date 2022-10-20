@@ -1,4 +1,5 @@
 import Card from "react-bootstrap/Card";
+<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -6,6 +7,16 @@ import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
 import { addProductToCart } from "../../redux/action";
+=======
+import { useHistory, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addProductToCart } from "../../redux/action";
+import "./card.css";
+//UNIcons library
+import * as Unicons from "@iconscout/react-unicons";
+import { Toast } from "react-bootstrap";
+import { useState } from "react";
+>>>>>>> 4b48e43391d15d1bef774305912d57bdbfd43629
 
 function writeRatingStars(stars) {
   let ratingStars = [];
@@ -25,31 +36,63 @@ const ProductCard = (props) => {
     history.push(`/detail/${id}`);
   };
 
+<<<<<<< HEAD
+=======
+  //toast
+  const [show, setShow] = useState(false);
+
+>>>>>>> 4b48e43391d15d1bef774305912d57bdbfd43629
   const dispatch = useDispatch();
   function addToCart(e) {
+    setShow(true);
     e.stopPropagation();
     dispatch(addProductToCart(props, 1));
   }
 
   return (
-    <Card style={{ width: "100%" }} onClick={() => goToDetail(id)}>
-      <div>
-        <img variant="top" src={image} alt={name} />
-      </div>
+    <>
+      <Toast
+        onClose={() => setShow(false)}
+        show={show}
+        delay={5000}
+        autohide
+        //containerPosition={"absolute"}
+        // position={"top-end"}
+      >
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+          <strong className="me-auto">Producto añadido al carrito</strong>
+          <small>Ahora</small>
+        </Toast.Header>
+        <Toast.Body>
+          <>
+            {name}&nbsp;
+            <Link to={"/carrito"}>
+              <span>Ver carrito</span>
+            </Link>
+          </>
+        </Toast.Body>
+      </Toast>
 
-      <Card.Body>
-        <Card.Text>CATEGORIA</Card.Text>
-        <hr></hr>
-        <Card.Title>{name}</Card.Title>
-        <div className={"buttons_shop"}>
-          <Unicons.UilShoppingCartAlt onClick={(e) => addToCart(e)} />
-          <Unicons.UilHeart />
+      <Card style={{ width: "100%" }} onClick={() => goToDetail(id)}>
+        <div>
+          <img variant="top" src={image} alt={name} />
         </div>
-        <div className="rating">{writeRatingStars(stars)}</div>
 
-        <div>${price}</div>
-      </Card.Body>
-    </Card>
+        <Card.Body>
+          <Card.Text>CATEGORIA</Card.Text>
+          <hr></hr>
+          <Card.Title>{name}</Card.Title>
+          <div className={"buttons_shop"}>
+            <Unicons.UilShoppingCartAlt onClick={(e) => addToCart(e)} />
+            <Unicons.UilHeart />
+          </div>
+          <div className="rating">{writeRatingStars(stars)}</div>
+
+          <div>${price}</div>
+        </Card.Body>
+      </Card>
+    </>
   );
 };
 
