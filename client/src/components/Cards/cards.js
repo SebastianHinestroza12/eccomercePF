@@ -81,7 +81,7 @@ const Cards = ({ loading, setLoading }) => {
           setOrder={setOrder}
         />
         <div className="row">
-          {Array.isArray(actualproducts) ? (
+          {Array.isArray(allProducts) ? (
             actualproducts.map((products) => (
               <div className="col-md-3" key={products.id}>
                 <ProductCard
@@ -95,7 +95,7 @@ const Cards = ({ loading, setLoading }) => {
             ))
           ) : (
             <>
-              <p className="errors">{actualproducts}</p>
+              <p className="errors">{allProducts}</p>
             </>
           )}
         </div>
