@@ -33,7 +33,25 @@
   color: white;
   font-size: 1.1rem;
   font-weight: 300;
+  display: flex;
 }
+a.navLinks.loginButton {
+  border-radius: 4px;
+}
+
+a.navLinks.loginButton button {
+  background: none;
+  color: white;
+  border: none;
+}
+a.navLinks.loginButton:hover {
+  background: white;
+  color: var(--primary-color);
+}
+a.navLinks.loginButton:hover button {
+  color: var(--primary-color);
+}
+
 .navbar a:hover {
   border-bottom: 1px solid white;
   color: white;

@@ -81,7 +81,7 @@ const rootReducer = (state = initialState, action) => {
         products: orderedByName,
       };
 
-    case "FILTER_BY_SIZE":
+    case "ALL_FILTERS":
       const allProducts = state.allProducts;
       if (payload.length === 0) {
         return {
@@ -89,7 +89,7 @@ const rootReducer = (state = initialState, action) => {
           products: allProducts,
         };
       }
-      let productsFiltered = [];
+      const productsFiltered = new Set();
       const filters = () => {
         for (let element of allProducts) {
           let i = 0;
@@ -98,16 +98,18 @@ const rootReducer = (state = initialState, action) => {
               element.size === payload[i] ||
               element.name.includes(payload[i])
             )
-              productsFiltered = [...productsFiltered, element];
+              productsFiltered.add(element);
             i++;
           }
         }
 
         return productsFiltered;
       };
+      const productsResult = Array.from(filters());
+      console.log("productsResult", productsResult);
       return {
         ...state,
-        products: filters(),
+        products: productsResult,
       };
 
     case "FILTER_BY_TYPE":
