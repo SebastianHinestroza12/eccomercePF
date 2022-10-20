@@ -8,10 +8,9 @@ const ItemCount = ({
   setQuantity,
   carrito,
   index,
+  stock,
 }) => {
-  const dispatch = useDispatch(); 
-
-
+  const dispatch = useDispatch();
 
   function addQuantityToCart(actionButton) {
     if (!carrito) {
@@ -23,7 +22,7 @@ const ItemCount = ({
     } else {
       console.log("entro al carrito", productDetail);
       if (actionButton === "minus") {
-        dispatch(DecreaseQuantity(index))
+        dispatch(DecreaseQuantity(index));
       } else {
         dispatch(IncreaseQuantity(index));
       }
@@ -57,7 +56,7 @@ const ItemCount = ({
       <button
         className="cartButtons increase"
         onClick={() => addQuantityToCart("plus")}
-        disabled={quantity === productDetail.stock}
+        disabled={quantity === stock}
       >
         <Unicons.UilPlus />
       </button>

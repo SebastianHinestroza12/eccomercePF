@@ -72,23 +72,21 @@ export const envioForm = (data) => {
   };
 };
 
-export function addProductToCart(payload, quantity, actionButton) {
+export function addProductToCart(payload, quantity, sizePicked) {
   return {
     type: "ADD_PRODUCTS_TO_CART",
-    payload: { ...payload, quantity },
+    payload: { ...payload, quantity, sizePicked },
     quantity,
-    actionButton,
   };
 }
 
-export function deleteProductFromCart(payload){
-  return{
-    type: 'DELETE_PRODUCT_FROM_CART',
+export function deleteProductFromCart(payload, quantity) {
+  return {
+    type: "DELETE_PRODUCT_FROM_CART",
     payload,
-  }
+    quantity,
+  };
 }
-
-
 
 export function IncreaseQuantity(payload) {
   return {
@@ -103,16 +101,17 @@ export function DecreaseQuantity(payload) {
   };
 }
 
-export function RemoveItemFromCart(payload) {
+export function RemoveItemFromCart(payload, quantity) {
   return {
     type: "REMOVE_ITEM_FROM_CART",
     payload,
+    quantity,
   };
 }
 
 export const filterBySize = (payload) => {
   return {
-    type: "FILTER_BY_SIZE",
+    type: "ALL_FILTERS",
     payload,
   };
 };
