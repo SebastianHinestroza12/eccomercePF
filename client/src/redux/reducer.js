@@ -31,15 +31,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByPrice =
         payload === "MayorPrecio"
           ? state.products.sort((a, b) => {
-            if (parseInt(a.price) > parseInt(b.price)) return -1;
-            if (parseInt(a.price) < parseInt(b.price)) return 1;
-            return 0;
-          })
+              if (parseInt(a.price) > parseInt(b.price)) return -1;
+              if (parseInt(a.price) < parseInt(b.price)) return 1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (parseInt(a.price) < parseInt(b.price)) return -1;
-            if (parseInt(a.price) > parseInt(b.price)) return 1;
-            return 0;
-          });
+              if (parseInt(a.price) < parseInt(b.price)) return -1;
+              if (parseInt(a.price) > parseInt(b.price)) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: filterByPrice,
@@ -49,15 +49,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByRating =
         payload === "MayorRating"
           ? state.products.sort((a, b) => {
-            if (parseInt(a.stars) > parseInt(b.stars)) return -1;
-            if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-            return 0;
-          })
+              if (parseInt(a.stars) > parseInt(b.stars)) return -1;
+              if (parseInt(a.stars) < parseInt(b.stars)) return 1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (parseInt(a.stars) < parseInt(b.stars)) return -1;
-            if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-            return 0;
-          });
+              if (parseInt(a.stars) < parseInt(b.stars)) return -1;
+              if (parseInt(a.stars) > parseInt(b.stars)) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: filterByRating,
@@ -67,15 +67,15 @@ const rootReducer = (state = initialState, action) => {
       const orderedByName =
         action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-            if (a.name > b.name) return 1;
-            if (a.name < b.name) return -1;
-            return 0;
-          })
+              if (a.name > b.name) return 1;
+              if (a.name < b.name) return -1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (a.name > b.name) return -1;
-            if (a.name < b.name) return 1;
-            return 0;
-          });
+              if (a.name > b.name) return -1;
+              if (a.name < b.name) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: orderedByName,
@@ -135,32 +135,19 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: payload,
       };
-
+    /*
     case "ADD_PRODUCTS_TO_CART":
-      console.log("cartProducts", state.cartProducts);
+      console.log("ADD_PRODUCTS_TO_CART payload", payload, quantity);
       let productAlreadyInTheCart = state.cartProducts.find(
         (element) => element.id === payload.id
       );
       if (productAlreadyInTheCart) {
-        /* Aca falta agregar que si el producto.id es el mismo que esta en
-        el carrito, agregar solo la cantidad de ese producto.id al carrito
-        -----------------------------------------------
-        return state.cartProducts.map((item, index) => {
-          if (index.id !== payload.id) {
-            return {
-              ...state,
-              quantityProductsAdded: state.quantityProductsAdded + quantity,
-            };
-          }
-          return {
-            ...state,
-            quantityProductsAdded: state.quantityProductsAdded + quantity,
-          };
-        });
-        */
+        //state.quantityProductsAdded++;
+        state.cartProducts.map
+        state.cartProducts[payload].quantity =
+          state.cartProducts[payload].quantity + quantity;
         return {
           ...state,
-          quantityProductsAdded: state.quantityProductsAdded + quantity,
         };
       } else {
         console.log("state", state.cartProducts);
@@ -170,22 +157,38 @@ const rootReducer = (state = initialState, action) => {
           quantityProductsAdded: state.quantityProductsAdded + quantity,
         };
       }
+*/
+    case "ADD_PRODUCTS_TO_CART":
+      let productAlreadyInTheCart = state.cartProducts.findIndex(
+        (element) => element.id === payload.id
+      );
 
-    case 'DELETE_PRODUCT_FROM_CART':
-      console.log('ACAAA', state.cartProducts[payload])
-      let quantity_ = state.cartProducts[action.payload].quantity
+      if (productAlreadyInTheCart >= 0) {
+        console.log("productAlreadyInTheCart", productAlreadyInTheCart);
+        state.quantityProductsAdded += quantity;
+        state.cartProducts[productAlreadyInTheCart].quantity += quantity;
+        return {
+          ...state,
+        };
+      } else {
+        return {
+          ...state,
+          cartProducts: [...state.cartProducts, payload],
+          quantityProductsAdded: state.quantityProductsAdded + quantity,
+        };
+      }
+
+    case "DELETE_PRODUCT_FROM_CART":
+      let quantity_ = state.cartProducts[action.payload].quantity;
       return {
         ...state,
         quantityProductsAdded: state.quantityProductsAdded - quantity_,
-        cartProducts: state.cartProducts.filter(item => {
-          return item.id != state.cartProducts[action.payload].id
-        })
-      }
-      
+        cartProducts: state.cartProducts.filter((item) => {
+          return item.id != state.cartProducts[action.payload].id;
+        }),
+      };
 
     case "INCREASE_QUANTITY":
-      console.log("payload", payload);
-      console.log("STATE", state.cartProducts[payload]);
       state.quantityProductsAdded++;
       state.cartProducts[payload].quantity++;
 
@@ -204,7 +207,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-      
+
     case "REMOVE_ITEM_FROM_CART":
       console.log("state.cartProducts", state.cartProducts);
       let productUpdated = state.cartProducts.filter(

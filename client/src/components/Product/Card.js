@@ -1,9 +1,11 @@
 import Card from "react-bootstrap/Card";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
+import { addProductToCart } from "../../redux/action";
 
 function writeRatingStars(stars) {
   let ratingStars = [];
@@ -16,15 +18,17 @@ function writeRatingStars(stars) {
   return ratingStars.join("");
 }
 
-const ProductCard = ({ name, price, image, stars, id }) => {
+const ProductCard = (props) => {
+  const { name, price, image, stars, id } = props;
   const history = useHistory();
   const goToDetail = (id) => {
     history.push(`/detail/${id}`);
   };
 
+  const dispatch = useDispatch();
   function addToCart(e) {
     e.stopPropagation();
-    history.push(`/`);
+    dispatch(addProductToCart(props, 1));
   }
 
   return (

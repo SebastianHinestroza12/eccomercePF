@@ -72,23 +72,20 @@ export const envioForm = (data) => {
   };
 };
 
-export function addProductToCart(payload, quantity, actionButton) {
+export function addProductToCart(payload, quantity) {
   return {
     type: "ADD_PRODUCTS_TO_CART",
     payload: { ...payload, quantity },
     quantity,
-    actionButton,
   };
 }
 
-export function deleteProductFromCart(payload){
-  return{
-    type: 'DELETE_PRODUCT_FROM_CART',
+export function deleteProductFromCart(payload) {
+  return {
+    type: "DELETE_PRODUCT_FROM_CART",
     payload,
-  }
+  };
 }
-
-
 
 export function IncreaseQuantity(payload) {
   return {
