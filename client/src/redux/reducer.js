@@ -160,8 +160,6 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case "INCREASE_QUANTITY":
-      console.log("payload", payload);
-      console.log("STATE", state.cartProducts[payload]);
       state.quantityProductsAdded++;
       state.cartProducts[payload].quantity++;
 
