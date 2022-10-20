@@ -11,7 +11,7 @@ const ProductDetail = () => {
 
   //loader hasta que se carga el detalle del producto
   const [loading, setLoading] = useState([true]);
-  const [idSizeStock, setidSizeStock] = useState();
+  const [idSizeStock, setidSizeStock] = useState(0);
 
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
@@ -57,6 +57,7 @@ const ProductDetail = () => {
             </section>
             <section className="sizesPicker">
               <div>
+                Seleccionar talla: &nbsp;&nbsp;&nbsp;
                 <select
                   className="product-size"
                   name="select"
@@ -64,7 +65,6 @@ const ProductDetail = () => {
                     setidSizeStock(e.target.value);
                   }}
                 >
-                  <option>Seleccionar talla</option>
                   {productDetail.size_stock.map((sizeArray, index) => (
                     <option value={index}>{sizeArray.size}</option>
                   ))}
@@ -77,7 +77,10 @@ const ProductDetail = () => {
               </span>
             </section>
             <section className="buttonsAddToCart">
-              <AddToCart />
+              <AddToCart
+                sizePicked={productDetail.size_stock[idSizeStock].size}
+                stock={productDetail.size_stock[idSizeStock].stock}
+              />
             </section>
           </Col>
         </Row>

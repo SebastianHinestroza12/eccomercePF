@@ -135,36 +135,15 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: payload,
       };
-    /*
+
     case "ADD_PRODUCTS_TO_CART":
-      console.log("ADD_PRODUCTS_TO_CART payload", payload, quantity);
-      let productAlreadyInTheCart = state.cartProducts.find(
-        (element) => element.id === payload.id
-      );
-      if (productAlreadyInTheCart) {
-        //state.quantityProductsAdded++;
-        state.cartProducts.map
-        state.cartProducts[payload].quantity =
-          state.cartProducts[payload].quantity + quantity;
-        return {
-          ...state,
-        };
-      } else {
-        console.log("state", state.cartProducts);
-        return {
-          ...state,
-          cartProducts: [...state.cartProducts, payload],
-          quantityProductsAdded: state.quantityProductsAdded + quantity,
-        };
-      }
-*/
-    case "ADD_PRODUCTS_TO_CART":
+      console.log("payload.sizePicked", payload.sizePicked);
       let productAlreadyInTheCart = state.cartProducts.findIndex(
-        (element) => element.id === payload.id
+        (element) =>
+          element.id === payload.id && element.sizePicked === payload.sizePicked
       );
 
       if (productAlreadyInTheCart >= 0) {
-        console.log("productAlreadyInTheCart", productAlreadyInTheCart);
         state.quantityProductsAdded += quantity;
         state.cartProducts[productAlreadyInTheCart].quantity += quantity;
         return {
@@ -177,16 +156,6 @@ const rootReducer = (state = initialState, action) => {
           quantityProductsAdded: state.quantityProductsAdded + quantity,
         };
       }
-
-    case "DELETE_PRODUCT_FROM_CART":
-      let quantity_ = state.cartProducts[action.payload].quantity;
-      return {
-        ...state,
-        quantityProductsAdded: state.quantityProductsAdded - quantity_,
-        cartProducts: state.cartProducts.filter((item) => {
-          return item.id != state.cartProducts[action.payload].id;
-        }),
-      };
 
     case "INCREASE_QUANTITY":
       state.quantityProductsAdded++;
@@ -209,13 +178,13 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "REMOVE_ITEM_FROM_CART":
-      console.log("state.cartProducts", state.cartProducts);
-      let productUpdated = state.cartProducts.filter(
-        (product) => product.id !== payload
-      );
+      //borrado por index del elemento en el array
+      let cartProductsUpdated = state.cartProducts;
+      cartProductsUpdated.splice(payload, 1);
+      state.quantityProductsAdded -= quantity;
       return {
         ...state,
-        cartProducts: productUpdated,
+        cartProducts: cartProductsUpdated,
       };
 
     default:
