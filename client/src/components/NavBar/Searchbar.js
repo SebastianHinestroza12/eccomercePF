@@ -15,18 +15,12 @@ const Searchbar = ({ setLoading }) => {
   //se dispara cuando se presiona el btn de busqueda
 
   const handleSubmit = (e) => {
-    let filterSearch = products.filter((p) => p.name.includes(name.toUpperCase()))
-
 
     e.preventDefault();
     if (!name.length) {
       seterrors({ name: 'Colocar un producto !!' })
     }
     dispatch(SearchByName(name))
-
-    if (filterSearch.length === 0) {
-      seterrors({ name: 'El producto no existe' })
-    }
   };
 
   //control del input de busqueda

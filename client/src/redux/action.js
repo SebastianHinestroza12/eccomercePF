@@ -46,10 +46,10 @@ export const SearchByName = (name) => {
         dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
       })
       .catch((error) => {
+        dispatch({ type: "SEARCH_PRODUCTS", payload: error.response.data.error})
         console.log("AXIOS error", typeof error.response.data.error);
         return error.response.data.error;
         // console.log(error)
-        // dispatch({ type: "SEARCH_PRODUCTS", payload:[] })
       });
   };
 };
