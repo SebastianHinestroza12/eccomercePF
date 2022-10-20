@@ -7,11 +7,10 @@ import Footer from "./components/Footer/footer";
 import ProductDetail from "./components/Product/ProductDetail";
 import NewProduct from "./components/NewProduct/NewProduct";
 import Home from "./components/Home/home";
-import User from "./components/Login/User";
-import Shopping from "./components/Login/Shopping";
+import User from "./components/Login/User/User";
+import Shopping from "./components/Login/User/Shopping";
 import Cart from "./components/Cart/Cart";
 import { Fragment } from "react";
-import FormAdress from "./components/Login/FormAdress";
 
 function App() {
   return (
