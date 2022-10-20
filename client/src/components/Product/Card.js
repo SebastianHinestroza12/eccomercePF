@@ -2,7 +2,11 @@ import Card from "react-bootstrap/Card";
 <<<<<<< HEAD
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
+import {addProductToCart} from "../../redux/action"
+=======
 
+>>>>>>> 4b48d3a183be1a3575cb30be1f5cc9568107be3f
 import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
@@ -48,7 +52,6 @@ const ProductCard = (props) => {
     e.stopPropagation();
     dispatch(addProductToCart(props, 1));
   }
-
   return (
     <>
       <Toast
