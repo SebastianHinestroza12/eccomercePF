@@ -7,11 +7,14 @@ import Footer from "./components/Footer/footer";
 import ProductDetail from "./components/Product/ProductDetail";
 import NewProduct from "./components/NewProduct/NewProduct";
 import Home from "./components/Home/home";
+import User from "./components/Login/User";
+import Shopping from "./components/Login/Shopping";
 import Cart from "./components/Cart/Cart";
+import { Fragment } from "react";
 
 function App() {
   return (
-    <>
+    <Fragment>
       <Route>
         <NavScrollExample />
       </Route>
@@ -27,13 +30,20 @@ function App() {
       <Route path={"/new"}>
         <NewProduct />
       </Route>
+      <Route path={"/user"}>
+        <User />
+      </Route>
+      <Route path={"/shopping"}>
+        <Shopping />
+      </Route>
       <Route path={"/carrito"}>
         <Cart />
       </Route>
       <Route>
         <Footer />
       </Route>
-    </>
+      </Fragment>
+    
   );
 }
 

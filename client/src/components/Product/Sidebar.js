@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import {
   getAllProducts,
   filterBySize,
-  filterByType,
   filterByCategory,
 } from "../../redux/action";
 
@@ -64,7 +63,6 @@ const Sidebar = ({
     },
   ];
 
-  //const [allFilters, setAllFilters] = useState([]);
   const handleFilterBySize = (e) => {
     const { value, checked } = e.target;
     setActualPage(1);
@@ -79,15 +77,6 @@ const Sidebar = ({
     dispatch(filterBySize(allFilters));
   };
 
-  const handleFilterByType = (e) => {
-    if (e.target.value === "LOCAL" || e.target.value === "VISITANTE") {
-      setActualPage(1);
-      setMinPageNumber(0);
-      setMaxPageNumber(5);
-      dispatch(filterByType(e.target.value));
-    }
-  };
-
   const handleFilterByCategory = (e) => {
     setActualPage(1);
     setMinPageNumber(0);
@@ -97,7 +86,6 @@ const Sidebar = ({
 
   useEffect(() => {
     dispatch(getAllProducts());
-    //setAllFilters([...allFilters]);
   }, [dispatch]);
 
   let checks = document.querySelectorAll(".check");
@@ -185,7 +173,7 @@ const Sidebar = ({
           {type.map((t) => (
             <div key={`default-${t.type}`} className="mb-1">
               <Form.Check
-                onChange={(e) => handleFilterByType(e)}
+                onChange={(e) => handleFilterBySize(e)}
                 label={t.type}
                 value={t.type}
               />

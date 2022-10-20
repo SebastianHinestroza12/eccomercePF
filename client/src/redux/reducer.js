@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  const { type, payload, quantity, actionButton } = action;
+  const { type, payload, quantity } = action;
   switch (type) {
     case "GET_ALL_PRODUCTS":
       return {
@@ -31,15 +31,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByPrice =
         payload === "MayorPrecio"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.price) > parseInt(b.price)) return -1;
-              if (parseInt(a.price) < parseInt(b.price)) return 1;
-              return 0;
-            })
+            if (parseInt(a.price) > parseInt(b.price)) return -1;
+            if (parseInt(a.price) < parseInt(b.price)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.price) < parseInt(b.price)) return -1;
-              if (parseInt(a.price) > parseInt(b.price)) return 1;
-              return 0;
-            });
+            if (parseInt(a.price) < parseInt(b.price)) return -1;
+            if (parseInt(a.price) > parseInt(b.price)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByPrice,
@@ -49,15 +49,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByRating =
         payload === "MayorRating"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.stars) > parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-              return 0;
-            })
+            if (parseInt(a.stars) > parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) < parseInt(b.stars)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.stars) < parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-              return 0;
-            });
+            if (parseInt(a.stars) < parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) > parseInt(b.stars)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByRating,
@@ -67,15 +67,15 @@ const rootReducer = (state = initialState, action) => {
       const orderedByName =
         action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-              if (a.name > b.name) return 1;
-              if (a.name < b.name) return -1;
-              return 0;
-            })
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (a.name > b.name) return -1;
-              if (a.name < b.name) return 1;
-              return 0;
-            });
+            if (a.name > b.name) return -1;
+            if (a.name < b.name) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: orderedByName,
@@ -90,11 +90,14 @@ const rootReducer = (state = initialState, action) => {
         };
       }
       let productsFiltered = [];
-      const filterBySize = () => {
+      const filters = () => {
         for (let element of allProducts) {
           let i = 0;
           while (i < payload.length) {
-            if (element.size === payload[i])
+            if (
+              element.size === payload[i] ||
+              element.name.includes(payload[i])
+            )
               productsFiltered = [...productsFiltered, element];
             i++;
           }
@@ -104,7 +107,7 @@ const rootReducer = (state = initialState, action) => {
       };
       return {
         ...state,
-        products: filterBySize(),
+        products: filters(),
       };
 
     case "FILTER_BY_TYPE":
@@ -118,7 +121,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "FILTER_BY_CATEGORY":
-      const allProducts3 = state.products;
+      const allProducts3 = state.allProducts;
       const filterByCategory = allProducts3.filter((p) =>
         p.name.includes(action.payload)
       );
@@ -133,53 +136,57 @@ const rootReducer = (state = initialState, action) => {
         products: payload,
       };
 
-    case "ADD_PRODUCTS_TO_CART":
-      console.log("cartProducts", state.cartProducts);
-      let productAlreadyInTheCart = state.cartProducts.find(
-        (element) => element.id === payload.id
-      );
-      if (productAlreadyInTheCart) {
-        return state.cartProducts.map((item, index) => {
-          if (index.id !== payload.id) {
-            // This isn't the item we care about - keep it as-is
-            return item;
-          }
-          // Otherwise, this is the one we want - return an updated value
+      case "ADD_PRODUCTS_TO_CART":
+        let productAlreadyInTheCart = state.cartProducts.findIndex(
+          (element) => element.id === payload.id
+        );
+  
+        if (productAlreadyInTheCart >= 0) {
+          console.log("productAlreadyInTheCart", productAlreadyInTheCart);
+          state.quantityProductsAdded += quantity;
+          state.cartProducts[productAlreadyInTheCart].quantity += quantity;
           return {
-            ...item,
-            ...action.item,
+            ...state,
           };
-        });
-      } else {
-        console.log("state", state.cartProducts);
-        return {
-          ...state,
-          cartProducts: [...state.cartProducts, payload],
-          quantityProductsAdded: state.quantityProductsAdded + quantity,
-        };
-      }
+        } else {
+          return {
+            ...state,
+            cartProducts: [...state.cartProducts, payload],
+            quantityProductsAdded: state.quantityProductsAdded + quantity,
+          };
+        }
+      
+
     case "INCREASE_QUANTITY":
-      console.log("payload", payload);
-      console.log("STATE", state.cartProducts[payload]);
       state.quantityProductsAdded++;
       state.cartProducts[payload].quantity++;
 
       return {
         ...state,
       };
-    /*
+
     case "DECREASE_QUANTITY":
-      let quantity = state.Carts[action.payload].quantity;
+      let quantity1 = state.cartProducts[action.payload].quantity;
       console.log("quantity", action.payload);
-      if (quantity > 1) {
-        state.numberCart--;
-        state.Carts[action.payload].quantity--;
+      if (quantity1 > 1) {
+        state.quantityProductsAdded--;
+        state.cartProducts[payload].quantity--;
       }
 
       return {
         ...state,
       };
-      */
+      
+    case "REMOVE_ITEM_FROM_CART":
+      console.log("state.cartProducts", state.cartProducts);
+      let productUpdated = state.cartProducts.filter(
+        (product) => product.id !== payload
+      );
+      return {
+        ...state,
+        cartProducts: productUpdated,
+      };
+
     default:
       return state;
   }
