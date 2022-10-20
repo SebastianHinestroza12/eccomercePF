@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import "../NewProduct/newProduct.css";
 import { useDispatch } from "react-redux";
 import { envioForm } from "../../redux/action";
 
+
 function NewProduct() {
   const dispatch = useDispatch();
+  const [values, setValues] = useState('')
 
   const {
     register,
@@ -19,7 +21,6 @@ function NewProduct() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     alert("Se enviaron los datos correctamente");
     dispatch(envioForm(data));
     reset();
@@ -29,6 +30,11 @@ function NewProduct() {
     return value !== "---";
   };
 
+  const value = (e) => {
+    setValues(e.target.value)
+    console.log('function', values)
+  }
+  console.log('nop', values)
   return (
     <div class="container">
       <h1
@@ -71,15 +77,22 @@ function NewProduct() {
           <label htmlFor="category" class="form-label">
             Categoría
           </label>
-          <input
+          <select
+            onClick={value}
             class="form-control"
-            type="text"
+            name="category"
             id="category"
+            aria-label="Default select example"
             {...register("category", {
               required: true,
               pattern: /^[a-zA-Z\s]{0,255}$/,
             })}
-          />
+          >
+            <option selected disabled>---</option>
+            <option value="Camisetas">Camisetas</option>
+            <option value="Botines">Botines</option>
+            <option value="Balones">Balones</option>
+          </select>
           {errors.category?.type === "required" && (
             <p className="textoError">El campo Categoría es requerido</p>
           )}
@@ -172,6 +185,7 @@ function NewProduct() {
             Tamaño
           </label>
           <select
+            onChange={value}
             id="size"
             name="size"
             class="form-select"
@@ -180,13 +194,31 @@ function NewProduct() {
               validate: selectValidator,
             })}
           >
-            <option selected>---</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
+            {
+              values === 'Camisetas' ? (
+                <>
+                  <option selected>---</option>
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                </>
+              ) : values === 'Botines' ? (
+                <>
+                  <option value="1">1</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </>
+              ) : (
+                <>
+                  <option value="5.5">5.5</option>
+                  <option value="6.5">6.5</option>
+                  <option value="7">7</option>
+                </>
+              )
+            }
           </select>
           {errors.size && (
             <p className="textoError">Debes seleccionar una opción</p>
