@@ -1,27 +1,21 @@
 import Cards from "../components/Cards/cards";
+import React, { useState } from "react";
+
 import "./store.css";
 /**
  * BOOTSTRAP IMPORTS
  */
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Sidebar from "../components/Product/Sidebar";
-const recetasJsonLocal = require("../utils/productos");
+import { Container, Row } from "react-bootstrap";
 
 const Store = () => {
+  //estado para la carga
+  const [loading, setLoading] = useState([true]);
+
   return (
     <>
-      {console.log("recetasJsonLocal", recetasJsonLocal[0].id)}
       <Container>
-        Tienda
         <Row>
-          <Col md={3} className="sidebar">
-            <Sidebar />
-          </Col>
-          <Col>
-            <Cards />
-          </Col>
+          <Cards loading={loading} setLoading={setLoading} />
         </Row>
       </Container>
     </>

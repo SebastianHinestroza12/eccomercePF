@@ -1,70 +1,60 @@
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import logo1 from '../Footer/logoqatartransp.png'
-import carrito from './carrito1.png'
-import './navBar.css'
-import Footer from '../Footer/footer'
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import logo from "./logoNavbar.png";
+import * as Unicons from "@iconscout/react-unicons";
+import { Link } from "react-router-dom";
+import "./navBar.css";
+import Searchbar from "./Searchbar";
+import CartWidget from "../Cart/CartWidget";
+import Login from "../Login/Login";
 
 function NavScrollExample() {
   return (
-    <Navbar className='navv' variant='dark' expand="lg" >
-      <Container fluid>
-        <Navbar.Brand href="/home"><a><img src={logo1} class='img-fluid' height='120px' width='120px' /> </a></Navbar.Brand>
+    <Navbar className="navv" variant="dark" expand="lg">
+      <Container className="navbar">
+        <Link to={`/home`} className="navbar-brand">
+          <img src={logo} alt="QATAR SHOP" className="img-fluid img-logo" />
+        </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
+          <Searchbar />
 
+          <Nav className="me-auto my-2 my-lg-0" navbarScroll>
+            <div className="divNav">
+              <Link to={`/`} className="navLinks nav-link">
+                Inicio
+              </Link>
+              <Link to={`/store`} className="navLinks nav-link">
+                Productos
+              </Link>
+              <CartWidget />
+              <Link to={`/`} className="navLinks nav-link w-20">
+                <Login />
+              </Link>
 
-
-          <Form className="d-flex w-50">
-            <Form.Control
-              type="search"
-              placeholder="Buscar"
-              className="me-3"
-              aria-label="Search"
-
-
-            />
-            <Button variant="outline-success" className='but'>Buscar</Button>
-          </Form>
-
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            <div class='divNav' >
-              <Nav.Link href="/home" className='navLinks'>Inicio</Nav.Link>
-              <Nav.Link href="/productos" className='navLinks'>Productos</Nav.Link>
-
-              <NavDropdown title="Link"  id="navbarScrollingDropdown" className='linkcs'>
+              <NavDropdown
+                title="Mi cuenta"
+                id="navbarScrollingDropdown"
+                className="linkcs"
+              >
+                <Link to={'/user'}>
                 <NavDropdown.Item href="#action3">Mi perfil</NavDropdown.Item>
-                <NavDropdown.Item href="#action4">
-                  Mis compras
-                </NavDropdown.Item>
+                </Link>
+                <Link to="/shopping">
+                <NavDropdown.Item href="#action4">Mis compras</NavDropdown.Item>
+                </Link>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action5">
-                  Something else here
+                  Something else
                 </NavDropdown.Item>
               </NavDropdown>
             </div>
-            <Nav.Link href="#" class='w-20' >
-              <a><img class='img-fluid ml-5' height='32px' width='32px' src={carrito} /> </a>
-            </Nav.Link>
-            <div className='iyr'>
-            <Nav.Link href="/productos" className='navLinks'>Ingresar</Nav.Link>
-            <Nav.Link href="/productos" className='navLinks'>Registrarse</Nav.Link>
-            </div>
           </Nav>
-
-
         </Navbar.Collapse>
       </Container>
     </Navbar>
-      
   );
 }
 

@@ -1,7 +1,8 @@
 import React from 'react'
-import image1 from '../Carousel/laguna.jpg'
-import image2 from '../Carousel/lago.jpg'
-import image3 from '../Carousel/montaña.jpg'
+import image1 from '../Carousel/imagen1.jpg'
+import image2 from '../Carousel/imagen2.jpg'
+import image3 from '../Carousel/imagen3.jpg'
+import image4 from '../Carousel/imagen4.jpg'
 
 function Carousel() {
   return (
@@ -20,6 +21,9 @@ function Carousel() {
     </div>
     <div class="carousel-item">
       <img src={image3} class="d-block w-100" alt="..." />
+    </div>
+    <div class="carousel-item">
+      <img src={image4} class="d-block w-100" alt="..." />
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

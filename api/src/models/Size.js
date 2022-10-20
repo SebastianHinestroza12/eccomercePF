@@ -2,22 +2,19 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "comment",
+    "size",
     {
-      id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true,
-      },
-      description: {
+      name: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      stock: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },
     {
       timestamps: false,
-      createdAt: false,
-      updatedAt: false,
     }
   );
 };

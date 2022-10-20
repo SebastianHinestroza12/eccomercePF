@@ -15,29 +15,27 @@ module.exports = (sequelize) => {
       },
       shipping_address: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       postal_code: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       state: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       sent_date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
       delivered_date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
       },
     },
     {
       timestamps: false,
-      createdAt: false,
-      updatedAt: false,
     }
   );
 };
