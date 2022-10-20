@@ -38,7 +38,7 @@ function Profile() {
       </div>
     </Fragment>
   ) : (
-    "NECESITAS LOGUEARTE !!"
+    <h2>NECESITAS LOGUEARTE !!</h2>
   );
 }
 

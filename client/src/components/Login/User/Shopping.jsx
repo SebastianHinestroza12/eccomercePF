@@ -1,11 +1,12 @@
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function Shopping() {
   const estadoPedido = "Entregado";
   const fechaCompra = "10-10-2022";
   const fechaEntrega = "15-10-2022";
-
-  return (
+  const { isAuthenticated } = useAuth0();
+  return isAuthenticated ? (
     <div class="card mb-3 mb-auto bg-secondary">
       <div class="row g-0" style={{ height: "auto" }}>
         <div
@@ -60,7 +61,12 @@ function Shopping() {
         </div>
       </div>
     </div>
-  );
+  ) : (
+    <div class="container">
+
+      <h2>NECESITAS LOGUEARTE !!</h2>
+    </div>
+  )
 }
 
 export default Shopping;
