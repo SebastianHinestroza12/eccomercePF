@@ -26,7 +26,7 @@ const AddToCart = () => {
       <Toast
         onClose={() => setShow(false)}
         show={show}
-        delay={3000}
+        delay={5000}
         autohide
         //containerPosition={"absolute"}
         // position={"top-end"}
