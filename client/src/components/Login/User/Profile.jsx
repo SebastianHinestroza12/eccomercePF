@@ -6,6 +6,7 @@ import FormAdress from "./FormAdress";
 
 function Profile() {
   const { user, isAuthenticated } = useAuth0();
+  console.log(user)
   return isAuthenticated ? (
     <Fragment>
       {/* MODAL */}
@@ -32,7 +33,7 @@ function Profile() {
             Añade dirección de envío
           </button>
 
-          {/* <JSONPretty data={user} /> */}
+          <JSONPretty data={user} />
         </div>
       </div>
     </Fragment>

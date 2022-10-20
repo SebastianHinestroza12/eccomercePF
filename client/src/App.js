@@ -28,9 +28,6 @@ function App() {
       <Route path={"/detail/:productId"}>
         <ProductDetail />
       </Route>
-      <Route path={"/new"}>
-        <LogAdmin />
-      </Route>
       <Route path={"/user"}>
         <User />
       </Route>
@@ -39,6 +36,12 @@ function App() {
       </Route>
       <Route path={"/carrito"}>
         <Cart />
+      </Route>
+      <Route path={"/new"}>
+        <LogAdmin />
+      </Route>
+      <Route path={"/form"}>
+        <NewProduct />
       </Route>
       <Route>
         <Footer />
