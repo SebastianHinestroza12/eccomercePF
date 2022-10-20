@@ -11,6 +11,7 @@ const ProductDetail = () => {
 
   //loader hasta que se carga el detalle del producto
   const [loading, setLoading] = useState([true]);
+  const [idSizeStock, setidSizeStock] = useState(0);
 
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
@@ -20,9 +21,6 @@ const ProductDetail = () => {
     }).then((res) => {
       setLoading(false);
     });
-
-    window.localStorage.setItem("name", "Lissette");
-    console.log("montaje");
   }, [dispatch, productId]);
 
   function writeRatingStars(rating) {
@@ -38,6 +36,7 @@ const ProductDetail = () => {
 
   return (
     <Container className="product-detail">
+      {console.log("productDetail", productDetail)}
       {loading ? (
         <img src="/images/loader-blue.gif" className="loading" alt="loader" />
       ) : (
@@ -51,15 +50,37 @@ const ProductDetail = () => {
               <div className="rating">
                 {writeRatingStars(productDetail.stars)}
               </div>
-              <span className="stock">
-                Disponibles: {productDetail.stock} unidades
-              </span>
+
               <hr></hr>
               <h4>$ {productDetail.price}</h4>
               <p className="detail-text">{productDetail.detail}</p>
             </section>
+            <section className="sizesPicker">
+              <div>
+                Seleccionar talla: &nbsp;&nbsp;&nbsp;
+                <select
+                  className="product-size"
+                  name="select"
+                  onChange={(e) => {
+                    setidSizeStock(e.target.value);
+                  }}
+                >
+                  {productDetail.size_stock.map((sizeArray, index) => (
+                    <option value={index}>{sizeArray.size}</option>
+                  ))}
+                </select>
+              </div>
+              <span className="stock">
+                {idSizeStock >= 0
+                  ? `Disponibles: ${productDetail.size_stock[idSizeStock].stock} unidades`
+                  : ""}
+              </span>
+            </section>
             <section className="buttonsAddToCart">
-              <AddToCart />
+              <AddToCart
+                sizePicked={productDetail.size_stock[idSizeStock].size}
+                stock={productDetail.size_stock[idSizeStock].stock}
+              />
             </section>
           </Col>
         </Row>

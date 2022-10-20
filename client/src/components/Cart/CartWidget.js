@@ -14,7 +14,6 @@ const CartWidget = () => {
   //En quantityAddedToCart, llegan TODOS los productos que agrego,
   //mientras que en productsInTheCart solo llega la cantidad de producto 1vez que se agregan.
   const productsInTheCart = useSelector((state) => state.cartProducts);
-  
 
   function goToProduct(id) {
     history.push(`/detail/${id}`);
@@ -45,8 +44,10 @@ const CartWidget = () => {
               />
               <div className="detailsCart">
                 <span className="title">{product.name}</span>
+                <span className="">Talla: {product.sizePicked}</span>
+
                 <span>
-                  {product.quantity} x ${product.price}
+                  {product.quantity} unds. x ${product.price}
                 </span>
               </div>
             </Dropdown.Item>

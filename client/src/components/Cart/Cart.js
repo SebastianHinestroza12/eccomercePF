@@ -35,9 +35,8 @@ const Cart = () => {
     totalPrice = subtotal + impuestos;
   }
 
-  function removeItemFromCart(id, quantity) {
-    console.log("remove");
-    dispatch(RemoveItemFromCart(id, quantity));
+  function removeItemFromCart(index, quantity) {
+    dispatch(RemoveItemFromCart(index, quantity));
   }
 
   useEffect(() => {}, []);
@@ -69,7 +68,10 @@ const Cart = () => {
                         alt={element.name}
                       />
                     </td>
-                    <td>{element.name}</td>
+                    <td>
+                      {element.name}
+                      <p>Talla: {element.sizePicked}</p>
+                    </td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
                       <ItemCount
@@ -84,7 +86,7 @@ const Cart = () => {
                     <td>
                       <div
                         onClick={() =>
-                          removeItemFromCart(element.id, element.quantity)
+                          removeItemFromCart(index, element.quantity)
                         }
                         className="remove-item"
                       >

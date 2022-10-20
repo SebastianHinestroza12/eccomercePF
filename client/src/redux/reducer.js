@@ -112,6 +112,16 @@ const rootReducer = (state = initialState, action) => {
         products: productsResult,
       };
 
+    case "FILTER_BY_TYPE":
+      const allProducts2 = state.products;
+      const filterByType = allProducts2.filter((p) =>
+        p.name.includes(action.payload)
+      );
+      return {
+        ...state,
+        products: filterByType,
+      };
+
     case "FILTER_BY_CATEGORY":
       const allProducts3 = state.allProducts;
       const filterByCategory = allProducts3.filter((p) =>
@@ -129,12 +139,13 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "ADD_PRODUCTS_TO_CART":
+      console.log("payload.sizePicked", payload.sizePicked);
       let productAlreadyInTheCart = state.cartProducts.findIndex(
-        (element) => element.id === payload.id
+        (element) =>
+          element.id === payload.id && element.sizePicked === payload.sizePicked
       );
 
       if (productAlreadyInTheCart >= 0) {
-        console.log("productAlreadyInTheCart", productAlreadyInTheCart);
         state.quantityProductsAdded += quantity;
         state.cartProducts[productAlreadyInTheCart].quantity += quantity;
         return {
@@ -169,15 +180,13 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "REMOVE_ITEM_FROM_CART":
-      console.log("payload remove", payload, quantity);
-      let productUpdated = state.cartProducts.filter(
-        (product) => product.id !== payload
-      );
+      //borrado por index del elemento en el array
+      let cartProductsUpdated = state.cartProducts;
+      cartProductsUpdated.splice(payload, 1);
       state.quantityProductsAdded -= quantity;
-
       return {
         ...state,
-        cartProducts: productUpdated,
+        cartProducts: cartProductsUpdated,
       };
 
     default:

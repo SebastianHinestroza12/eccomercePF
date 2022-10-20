@@ -7,7 +7,7 @@ import "./addToCart.css";
 import ItemCount from "../Cart/ItemCount";
 import { Link } from "react-router-dom";
 
-const AddToCart = () => {
+const AddToCart = ({ sizePicked, stock }) => {
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
   const [quantity, setQuantity] = useState(1);
 
@@ -18,9 +18,9 @@ const AddToCart = () => {
 
   function addToCartButton() {
     setShow(true);
-    dispatch(addProductToCart(productDetail, quantity));
+    dispatch(addProductToCart(productDetail, quantity, sizePicked));
   }
-  
+
   return (
     <>
       <Toast
@@ -52,6 +52,8 @@ const AddToCart = () => {
           productDetail={productDetail}
           quantity={quantity}
           setQuantity={setQuantity}
+          sizePicked={sizePicked}
+          stock={stock}
         />
       </div>
       <Button className="buy" onClick={() => addToCartButton()}>

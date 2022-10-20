@@ -23,15 +23,6 @@ export const getProductDetail = (productId) => {
       });
   };
 };
-export const postRegister = (user) => {
-  return async (dispatch) => {
-    await axios.post(`/user/register`, user);
-    dispatch({
-      type: "POST_REGISTER",
-      payload: user,
-    });
-  };
-};
 
 export function filterByPrice(payload) {
   return {
@@ -55,10 +46,10 @@ export const SearchByName = (name) => {
         dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
       })
       .catch((error) => {
+        dispatch({ type: "SEARCH_PRODUCTS", payload: error.response.data.error})
         console.log("AXIOS error", typeof error.response.data.error);
         return error.response.data.error;
         // console.log(error)
-        // dispatch({ type: "SEARCH_PRODUCTS", payload:[] })
       });
   };
 };
@@ -81,19 +72,19 @@ export const envioForm = (data) => {
   };
 };
 
-export function addProductToCart(payload, quantity, actionButton) {
+export function addProductToCart(payload, quantity, sizePicked) {
   return {
     type: "ADD_PRODUCTS_TO_CART",
-    payload: { ...payload, quantity },
+    payload: { ...payload, quantity, sizePicked },
     quantity,
-    actionButton,
   };
 }
 
-export function deleteProductFromCart(payload) {
+export function deleteProductFromCart(payload, quantity) {
   return {
     type: "DELETE_PRODUCT_FROM_CART",
     payload,
+    quantity,
   };
 }
 
