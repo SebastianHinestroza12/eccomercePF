@@ -14,7 +14,7 @@ function NavScrollExample() {
   return (
     <Navbar className="navv" variant="dark" expand="lg">
       <Container className="navbar">
-        <Link to={`/home`} className="navbar-brand">
+        <Link to={`/`} className="navbar-brand">
           <img src={logo} alt="QATAR SHOP" className="img-fluid img-logo" />
         </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
