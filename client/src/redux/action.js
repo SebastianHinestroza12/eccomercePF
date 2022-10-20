@@ -111,7 +111,7 @@ export function RemoveItemFromCart(payload, quantity) {
 
 export const filterBySize = (payload) => {
   return {
-    type: "FILTER_BY_SIZE",
+    type: "ALL_FILTERS",
     payload,
   };
 };

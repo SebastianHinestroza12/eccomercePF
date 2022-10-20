@@ -69,6 +69,7 @@ const Sidebar = ({
     setMinPageNumber(0);
     setMaxPageNumber(5);
     if (checked) {
+      console.log(allFilters);
       allFilters = [...allFilters, value];
     } else {
       allFilters = allFilters.filter((e) => e !== value);
