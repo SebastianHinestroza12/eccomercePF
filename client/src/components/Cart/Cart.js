@@ -35,9 +35,9 @@ const Cart = () => {
     totalPrice = subtotal + impuestos;
   }
 
-  function removeItemFromCart(index) {
+  function removeItemFromCart(id, quantity) {
     console.log("remove");
-    dispatch(RemoveItemFromCart(index));
+    dispatch(RemoveItemFromCart(id, quantity));
   }
 
   useEffect(() => {}, []);
@@ -61,8 +61,7 @@ const Cart = () => {
               </thead>
               <tbody>
                 {productsInTheCart.map((element, index) => (
-                  <tr key={index} id={index} >
-                    
+                  <tr key={index} id={index}>
                     <td>
                       <img
                         src={element.image}
@@ -84,7 +83,9 @@ const Cart = () => {
                     <td>$ {TotalPrice(element.price, element.quantity)} </td>
                     <td>
                       <div
-                        onClick={() => removeItemFromCart(element.id)}
+                        onClick={() =>
+                          removeItemFromCart(element.id, element.quantity)
+                        }
                         className="remove-item"
                       >
                         <Unicons.UilTrash />

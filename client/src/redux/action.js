@@ -81,14 +81,12 @@ export function addProductToCart(payload, quantity, actionButton) {
   };
 }
 
-export function deleteProductFromCart(payload){
-  return{
-    type: 'DELETE_PRODUCT_FROM_CART',
+export function deleteProductFromCart(payload) {
+  return {
+    type: "DELETE_PRODUCT_FROM_CART",
     payload,
-  }
+  };
 }
-
-
 
 export function IncreaseQuantity(payload) {
   return {
@@ -103,10 +101,11 @@ export function DecreaseQuantity(payload) {
   };
 }
 
-export function RemoveItemFromCart(payload) {
+export function RemoveItemFromCart(payload, quantity) {
   return {
     type: "REMOVE_ITEM_FROM_CART",
     payload,
+    quantity,
   };
 }
 
