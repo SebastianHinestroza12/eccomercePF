@@ -17,25 +17,28 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
-const { Category, Size } = require('./src/db.js');
+const server = require("./src/app.js");
+const { conn } = require("./src/db.js");
+const { Category, Size } = require("./src/db.js");
+
+const port = process.env.PORT || 3001;
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+conn
+  .sync({ alter: true })
+  .then(() => {
+    server.listen(port, () => {
+      console.log("%s listening at 3001"); // eslint-disable-line no-console
+    });
   })
-})
-.then(() => {
+  .then(() => {
+    Category.create({ name: "Jersey" });
+    Category.create({ name: "Balon" });
+    Category.create({ name: "Calzado" });
+    Category.create({ name: "Short" });
 
-  Category.create({ name: 'Jersey' })
-  Category.create({ name: 'Balon' })
-  Category.create({ name: 'Calzado' })
-  Category.create({ name: 'Short' })
-
-  console.log("Categorias creadas");
-})
+    console.log("Categorias creadas");
+  });
 
 /*
 
