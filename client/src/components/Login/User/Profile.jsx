@@ -10,7 +10,7 @@ function Profile() {
       {/* MODAL */}
       <FormAdress />
       {/* CARD */}
-      <div style={{ width: "400px" }} class="card text-center bg-secondary container">
+      <div style={{ width: "400px", backgroundColor:"#f8efed"}} class="card text-center container">
         <div class="d-flex justify-content-center">
           <img
             style={{ width: "150px", height: "150px" }}
@@ -24,7 +24,7 @@ function Profile() {
           <p class="card-text">{user.email}</p>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-danger"
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >
