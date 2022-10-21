@@ -81,6 +81,15 @@ const rootReducer = (state = initialState, action) => {
         products: orderedByName,
       };
 
+
+
+
+
+
+
+
+
+
       case "ALL_FILTERS":
       const allProducts = state.allProducts;
       if (payload.length === 0) {
@@ -91,17 +100,26 @@ const rootReducer = (state = initialState, action) => {
       }
       const productsFiltered = new Set();
       const filters = () => {
-        for (let element of allProducts) {
-          let i = 0;
-          while (i < payload.length) {
-            if (
-              element.size === payload[i] ||
-              element.name.includes(payload[i])
-            )
-              productsFiltered.add(element);
-            i++;
+      
+      for (let element of payload) {
+        console.log('payload',element)
+        console.log(allProducts.length)
+
+        for (let i=0; i<allProducts.length ; i++){
+          console.log('all', allProducts[i])
+          let s =0
+
+          while (s < allProducts[i].size_stock.length) {
+            console.log('while',allProducts[i].size_stock[s])
+            console.log('if',allProducts[i].size_stock[s].size, element)
+            if (allProducts[i].size_stock[s].size === element) {
+              console.log('iguales')
+              productsFiltered.add(allProducts[i])
+            }
+            s++
           }
         }
+      }
 
         return productsFiltered;
       };
@@ -112,15 +130,15 @@ const rootReducer = (state = initialState, action) => {
         products: productsResult,
       };
 
-    case "FILTER_BY_TYPE":
-      const allProducts2 = state.products;
-      const filterByType = allProducts2.filter((p) =>
-        p.name.includes(action.payload)
-      );
-      return {
-        ...state,
-        products: filterByType,
-      };
+
+
+
+
+
+
+
+
+
 
     case "FILTER_BY_CATEGORY":
       const allProducts3 = state.allProducts;
