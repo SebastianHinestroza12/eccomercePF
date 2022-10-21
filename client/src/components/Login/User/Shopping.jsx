@@ -63,7 +63,6 @@ function Shopping() {
     </div>
   ) : (
     <div class="container">
-
       <h2>NECESITAS LOGUEARTE !!</h2>
     </div>
   )
