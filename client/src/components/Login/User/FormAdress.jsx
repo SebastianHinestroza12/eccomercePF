@@ -110,7 +110,7 @@ function FormAdress() {
                     required: true,
                   })}
                 />
-                {errors.name?.type === "required" && (
+                {errors.address?.type === "required" && (
                   <p className="textoError">El campo Dirección es requerido</p>
                 )}
               </div>

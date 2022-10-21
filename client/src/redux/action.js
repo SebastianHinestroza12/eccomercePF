@@ -28,6 +28,7 @@ export const getProductDetail = (productId) => {
 //REGISTRAR USUARIOS LOGUADOS EN DB
 export const postRegister = (user) => {
   return async () => {
+    console.log(user)
     await axios.post(`/user/register`, user);
   };
 };
