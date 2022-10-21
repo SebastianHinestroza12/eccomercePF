@@ -25,14 +25,10 @@ export const getProductDetail = (productId) => {
   };
 };
 
+//REGISTRAR USUARIOS LOGUADOS EN DB
 export const postRegister = (user) => {
-  return async (dispatch) => {
-    console.log('action', user)
+  return async () => {
     await axios.post(`/user/register`, user);
-    dispatch({
-      type: "POST_REGISTER",
-      payload: user,
-    });
   };
 };
 
@@ -74,13 +70,20 @@ export function filterByName(payload) {
 }
 
 //CREACION DE PRODUCTO
-export const envioForm = (data) => {
+export const newProductForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postProduct`, data);
     dispatch({
       type: "LOAD_PRODUCTS",
       payload: data,
     });
+  };
+};
+//EDITAR PRODUCTO
+export const editUserForm = (data) => {
+  console.log(data)
+  return async () => {
+    await axios.post(`/`, data);
   };
 };
 

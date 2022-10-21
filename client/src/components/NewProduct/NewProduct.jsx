@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import "../NewProduct/newProduct.css";
 import { useDispatch } from "react-redux";
-import { envioForm } from "../../redux/action";
+import { newProductForm } from "../../redux/action";
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ddl3snuoe/image/upload';
 const CLOUDINARY_UPLOAD_PRESET = 'pzsfr2g4';
 
@@ -40,7 +40,7 @@ function NewProduct() {
 
   const onSubmit = (data) => {
     alert("Se enviaron los datos correctamente");
-    dispatch(envioForm(data));
+    dispatch(newProductForm(data));
     reset();
   };
 
