@@ -8,7 +8,8 @@ import { postRegister } from "../../../redux/action";
 function Login() {
   const dispatch = useDispatch()
   const { isAuthenticated, isLoading, user } = useAuth0();
-  
+  console.log('login', user)
+  console.log('login', isAuthenticated)
   useEffect(() => {
     dispatch(postRegister(user))
   }, [isAuthenticated])
