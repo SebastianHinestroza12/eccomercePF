@@ -1,8 +1,9 @@
 import React from "react";
 import { Container, Table } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Unicons from "@iconscout/react-unicons";
+import { useAuth0 } from "@auth0/auth0-react";
 import "./shopping.css";
 
 function Shopping() {
@@ -11,12 +12,13 @@ function Shopping() {
     const fechaCompra = '10-10-2022'
     const fechaEntrega = '15-10-2022'
     const purchasedProducts = useSelector((state) => state.cartProducts);
+    const { isAuthenticated } = useAuth0();
 
     function TotalPrice(price, quantity) {
       return Number(price * quantity).toLocaleString("en-US");
     }
 
-  return (
+  return isAuthenticated ? (
     <Container>
       <div>
       <h2 className="cart-title">Mis compras</h2>
@@ -96,7 +98,12 @@ function Shopping() {
         
       </div>
       </Container>
-  );
+  ) : (
+    <div class="container">
+
+      <h2>NECESITAS LOGUEARTE !!</h2>
+    </div>
+  )
 }
 
 export default Shopping;
