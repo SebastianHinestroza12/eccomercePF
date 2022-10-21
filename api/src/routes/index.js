@@ -9,6 +9,10 @@ const getFilterType = require('../controllers/getFilterType');
 const getFilterSize = require('../controllers/getFilterSize');
 const getFilterEquipement = require('../controllers/getFilterEquipment');
 
+const getLogin = require('../controllers/User/getLogin');
+const postRegister = require('../controllers/User/postRegister');
+const modifyUser = require('../controllers/User/modifyUser');
+
 const postProduct = require('./postProduct');
 const postCategory = require('./postCategory');
 const postOrder = require('./postOrder');
@@ -33,5 +37,10 @@ router.use('/getCategories', getCategories);
 router.use('/postAdmin', postAdmin);
 router.use('/postClient', postClient);
 router.use('/postOrder', postOrder);
+// login , register Y recuperePaaswword users
+
+router.use('/user/login', getLogin);
+router.use('/user/register', postRegister);
+router.use('/user/modify', modifyUser);
 
 module.exports = router;

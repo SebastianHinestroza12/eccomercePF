@@ -8,10 +8,11 @@ import { getAllProducts, postRegister } from "../../../redux/action";
 function Login() {
   const dispatch = useDispatch()
   const { isAuthenticated, isLoading, user } = useAuth0();
+  console.log(user)
   useEffect(() => {
     console.log('post enviado')
     dispatch(postRegister(user))
-  }, [])
+  }, [isAuthenticated])
 
 
   if(isLoading) return <h6>Loading...</h6>
