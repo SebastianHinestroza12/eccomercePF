@@ -11,12 +11,13 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import dotenv from "dotenv";
 require("dotenv").config();
 
-//axios.defaults.baseURL =  "https://api-production-e274.up.railway.app/" || "http://localhost:3001";
+axios.defaults.baseURL =
+  "https://api-production-e274.up.railway.app/" || "http://localhost:3001";
 //const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 // const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
 // console.log(process.env.REACT_APP_AUTH0_DOMAIN)
 
-axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
+//axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 ReactDOM.render(
   <Provider store={store}>
