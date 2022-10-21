@@ -1,15 +1,9 @@
 import * as Unicons from "@iconscout/react-unicons";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { IncreaseQuantity, DecreaseQuantity } from "../../redux/action";
 
-const ItemCount = ({
-  productDetail,
-  quantity,
-  setQuantity,
-  carrito,
-  index,
-  stock,
-}) => {
+const ItemCount = ({ quantity, setQuantity, carrito, index, stock }) => {
   const dispatch = useDispatch();
 
   function addQuantityToCart(actionButton) {
@@ -20,7 +14,6 @@ const ItemCount = ({
         setQuantity(quantity + 1);
       }
     } else {
-      console.log("entro al carrito", productDetail);
       if (actionButton === "minus") {
         dispatch(DecreaseQuantity(index));
       } else {
@@ -28,6 +21,10 @@ const ItemCount = ({
       }
     }
   }
+
+  useEffect(() => {
+    console.log("me actualizo");
+  }, []);
 
   return (
     <div className="qty-box">

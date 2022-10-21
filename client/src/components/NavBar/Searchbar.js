@@ -6,7 +6,7 @@ import { SearchByName } from "../../redux/action";
 
 const Searchbar = ({ setLoading }) => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products)
+ 
 
   //estado local para coger el nombre que se quiere buscar
   const [name, setName] = useState("");

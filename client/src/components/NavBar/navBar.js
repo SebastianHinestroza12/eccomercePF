@@ -12,6 +12,7 @@ import Login from "../Login/User/Login.jsx";
 
 function NavScrollExample() {
   return (
+    
     <Navbar className="navv" variant="dark" expand="lg">
       <Container className="navbar">
         <Link to={`/`} className="navbar-brand">
