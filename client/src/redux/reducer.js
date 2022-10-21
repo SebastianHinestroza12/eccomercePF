@@ -11,6 +11,7 @@ const initialState = {
   products: [],
   productDetail: [],
   newProducts: [],
+  cartTotal: 0,
   cartProducts: localStorage.getItem("cartProductsAdded")
     ? JSON.parse(localStorage.getItem("cartProductsAdded"))
     : [],
@@ -39,7 +40,7 @@ const rootReducer = (state = initialState, action) => {
         productDetail: payload,
       };
     case "POST_REGISTER":
-      console.log('reducer', payload)
+      console.log("reducer", payload);
       return {
         ...state,
         usuario: payload,
@@ -99,7 +100,7 @@ const rootReducer = (state = initialState, action) => {
         products: orderedByName,
       };
 
-      case "ALL_FILTERS":
+    case "ALL_FILTERS":
       const allProducts = state.allProducts;
       if (payload.length === 0) {
         return {
@@ -109,26 +110,25 @@ const rootReducer = (state = initialState, action) => {
       }
       const productsFiltered = new Set();
       const filters = () => {
-      
-      for (let element of payload) {
-        console.log('payload',element)
-        console.log(allProducts.length)
+        for (let element of payload) {
+          console.log("payload", element);
+          console.log(allProducts.length);
 
-        for (let i=0; i<allProducts.length ; i++){
-          console.log('all', allProducts[i])
-          let s =0
+          for (let i = 0; i < allProducts.length; i++) {
+            console.log("all", allProducts[i]);
+            let s = 0;
 
-          while (s < allProducts[i].size_stock.length) {
-            console.log('while',allProducts[i].size_stock[s])
-            console.log('if',allProducts[i].size_stock[s].size, element)
-            if (allProducts[i].size_stock[s].size === element) {
-              console.log('iguales')
-              productsFiltered.add(allProducts[i])
+            while (s < allProducts[i].size_stock.length) {
+              console.log("while", allProducts[i].size_stock[s]);
+              console.log("if", allProducts[i].size_stock[s].size, element);
+              if (allProducts[i].size_stock[s].size === element) {
+                console.log("iguales");
+                productsFiltered.add(allProducts[i]);
+              }
+              s++;
             }
-            s++
           }
         }
-      }
 
         return productsFiltered;
       };
@@ -217,6 +217,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cartProducts: cartProductsUpdated,
+      };
+
+    case "GET_TOTAL_CART":
+      return {
+        ...state,
+        cartTotal: payload,
       };
 
     default:

@@ -5,7 +5,7 @@ export const getAllProducts = () => {
     return axios("/product")
       .then((response) => response.data)
       .then((products) => {
-        console.log(products)
+        console.log(products);
         dispatch({ type: "GET_ALL_PRODUCTS", payload: products });
       })
       .catch((error) => {
@@ -27,7 +27,7 @@ export const getProductDetail = (productId) => {
 
 export const postRegister = (user) => {
   return async (dispatch) => {
-    console.log('action', user)
+    console.log("action", user);
     await axios.post(`/user/register`, user);
     dispatch({
       type: "POST_REGISTER",
@@ -58,7 +58,10 @@ export const SearchByName = (name) => {
         dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
       })
       .catch((error) => {
-        dispatch({ type: "SEARCH_PRODUCTS", payload: error.response.data.error})
+        dispatch({
+          type: "SEARCH_PRODUCTS",
+          payload: error.response.data.error,
+        });
         console.log("AXIOS error", typeof error.response.data.error);
         return error.response.data.error;
         // console.log(error)
@@ -138,6 +141,13 @@ export const filterByType = (payload) => {
 export const filterByCategory = (payload) => {
   return {
     type: "FILTER_BY_CATEGORY",
+    payload,
+  };
+};
+
+export const getCartTotal = (payload) => {
+  return {
+    type: "GET_TOTAL_CART",
     payload,
   };
 };

@@ -12,42 +12,58 @@ import Shopping from "./components/Login/User/Shopping";
 import Cart from "./components/Cart/Cart";
 import { Fragment } from "react";
 import LogAdmin from "./components/Login/Admin/LogAdmin";
+import Checkout from "./Pages/Checkout";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function App() {
   return (
-    <Fragment>
-      <Route>
-        <NavScrollExample />
-      </Route>
-      <Route exact path={"/"}>
-        <Home />
-      </Route>
-      <Route exact path={"/store"}>
-        <Store />
-      </Route>
-      <Route path={"/detail/:productId"}>
-        <ProductDetail />
-      </Route>
-      <Route path={"/user"}>
-        <User />
-      </Route>
-      <Route path={"/shopping"}>
-        <Shopping />
-      </Route>
-      <Route path={"/carrito"}>
-        <Cart />
-      </Route>
-      <Route path={"/new"}>
-        <LogAdmin />
-      </Route>
-      <Route path={"/form"}>
-        <NewProduct />
-      </Route>
-      <Route>
-        <Footer />
-      </Route>
+    <PayPalScriptProvider
+      //options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID }}
+      options={{
+        "client-id":
+          "AfDNE98mgkMy8dhaS7qGfn9KML3r3kSIsXt3-jAMMR_gsL2-1bFGijHeHAunQJGSytq1QUWdtMWW02go",
+      }}
+    >
+      {console.log(
+        "process.env.REACT_APP_PAYPAL_CLIENT_ID",
+        process.env.REACT_APP_PAYPAL_CLIENT_ID
+      )}
+      <Fragment>
+        <Route>
+          <NavScrollExample />
+        </Route>
+        <Route exact path={"/"}>
+          <Home />
+        </Route>
+        <Route exact path={"/store"}>
+          <Store />
+        </Route>
+        <Route path={"/detail/:productId"}>
+          <ProductDetail />
+        </Route>
+        <Route path={"/user"}>
+          <User />
+        </Route>
+        <Route path={"/shopping"}>
+          <Shopping />
+        </Route>
+        <Route path={"/carrito"}>
+          <Cart />
+        </Route>
+        <Route path={"/new"}>
+          <LogAdmin />
+        </Route>
+        <Route path={"/form"}>
+          <NewProduct />
+        </Route>
+        <Route path={"/pagar"}>
+          <Checkout />
+        </Route>
+        <Route>
+          <Footer />
+        </Route>
       </Fragment>
-    
+    </PayPalScriptProvider>
   );
 }
 

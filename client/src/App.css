@@ -72,3 +72,16 @@ footer img {
 .btn {
   padding: 15px 2rem;
 }
+@media (max-width: 600px) {
+  .container,
+  nav .container.navbar {
+    padding: 1rem;
+  }
+  .sidebar .filters_container {
+    margin-right: 0;
+  }
+  .product-detail .buttonsAddToCart button.buy {
+    padding: 15px 2rem;
+    margin-bottom: 3rem;
+  }
+}

@@ -1,7 +1,7 @@
 import { Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { RemoveItemFromCart } from "../../redux/action";
+import { getCartTotal, RemoveItemFromCart } from "../../redux/action";
 import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import * as Unicons from "@iconscout/react-unicons";
@@ -31,6 +31,7 @@ const Cart = () => {
   }
 
   let totalPrice = 0;
+  //const [total, setTotal] = useState();
   if (subtotal > 0) {
     totalPrice = subtotal + impuestos;
   }
@@ -39,7 +40,10 @@ const Cart = () => {
     dispatch(RemoveItemFromCart(index, quantity));
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    //setTotal(totalPrice);
+    dispatch(getCartTotal(totalPrice));
+  }, [totalPrice]);
 
   return (
     <>
@@ -133,7 +137,7 @@ const Cart = () => {
                   </div>
                 </div>
                 <Link
-                  to="/store"
+                  to="/pagar"
                   className="checkout buy btn btn-primary buttons-cart"
                 >
                   <Unicons.UilCreditCard />
