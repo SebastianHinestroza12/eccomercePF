@@ -22,6 +22,7 @@ function Profile() {
           />
         </div>
         <div class="card-body">
+          <p>Hola a todos!</p>
           <h5 class="card-title">{user.nickname}</h5>
           <p class="card-text">{user.email}</p>
           <button
