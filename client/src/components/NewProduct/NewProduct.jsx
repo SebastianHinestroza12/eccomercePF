@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "../NewProduct/newProduct.css";
 import { useDispatch } from "react-redux";
-import { envioForm } from "../../redux/action";
+import { newProductForm } from "../../redux/action";
 
 function NewProduct() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function NewProduct() {
 
   const onSubmit = (data) => {
     alert("Se enviaron los datos correctamente");
-    dispatch(envioForm(data));
+    dispatch(newProductForm(data));
     reset();
   };
 

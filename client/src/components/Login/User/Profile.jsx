@@ -1,18 +1,16 @@
 import React, { Fragment } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import JSONPretty from "react-json-pretty";
 import "react-json-pretty/themes/monikai.css";
 import FormAdress from "./FormAdress";
 
 function Profile() {
   const { user, isAuthenticated } = useAuth0();
-  console.log(user)
   return isAuthenticated ? (
     <Fragment>
       {/* MODAL */}
       <FormAdress />
-       {/* CARD */}
-      <div style={{ width: "400px" }} class="card text-center bg-secondary">
+      {/* CARD */}
+      <div style={{ width: "400px" }} class="card text-center bg-secondary container">
         <div class="d-flex justify-content-center">
           <img
             style={{ width: "150px", height: "150px" }}
@@ -22,7 +20,6 @@ function Profile() {
           />
         </div>
         <div class="card-body">
-          <p>Hola a todos!</p>
           <h5 class="card-title">{user.nickname}</h5>
           <p class="card-text">{user.email}</p>
           <button
@@ -34,12 +31,13 @@ function Profile() {
             Añade dirección de envío
           </button>
 
-          <JSONPretty data={user} />
         </div>
       </div>
     </Fragment>
   ) : (
-    "NECESITAS LOGUEARTE !!"
+   
+      <h2>NECESITAS LOGUEARTE !!</h2>
+ 
   );
 }
 
