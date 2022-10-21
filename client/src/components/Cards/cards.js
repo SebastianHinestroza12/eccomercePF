@@ -56,7 +56,7 @@ const Cards = ({ loading, setLoading }) => {
       });
 
     return () => {};
-  }, [dispatch]);
+  }, [dispatch, setLoading]);
 
   return loading ? (
     <>
@@ -109,6 +109,8 @@ const Cards = ({ loading, setLoading }) => {
           products={Array.isArray(allProducts) ? allProducts.length : 1}
           pages={pages}
         />
+
+        {console.log(order, setproductsPerPage)}
       </Col>
     </>
   );

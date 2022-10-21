@@ -6,20 +6,16 @@ import { useDispatch } from "react-redux";
 import { postRegister } from "../../../redux/action";
 
 function Login() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { isAuthenticated, isLoading, user } = useAuth0();
-  console.log('login', user)
-  console.log('login', isAuthenticated)
+  console.log("login", user);
+  console.log("login", isAuthenticated);
   useEffect(() => {
-    dispatch(postRegister(user))
-  }, [isAuthenticated])
+    dispatch(postRegister(user));
+  }, [dispatch, user, isAuthenticated]);
 
-  if(isLoading) return <h6>Loading...</h6>
-  return (
-    <div>
-      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-    </div>
-  );
+  if (isLoading) return <h6>Loading...</h6>;
+  return <div>{isAuthenticated ? <LogoutButton /> : <LoginButton />}</div>;
 }
 
 export default Login;
