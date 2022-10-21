@@ -22,6 +22,7 @@ function Profile() {
           />
         </div>
         <div class="card-body">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quo nesciunt eum quia assumenda facilis molestias nemo doloremque. Quibusdam recusandae placeat totam nam aliquam quaerat natus voluptate dignissimos voluptas. Dolorem!</p>
           <h5 class="card-title">{user.nickname}</h5>
           <p class="card-text">{user.email}</p>
           <button

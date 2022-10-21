@@ -5,6 +5,7 @@ const initialState = {
   newProducts: [],
   cartProducts: [],
   quantityProductsAdded: 0,
+  usuario:{}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -25,6 +26,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         productDetail: payload,
+      };
+    case "POST_REGISTER":
+      return {
+        ...state,
+        usuario: payload,
       };
 
     case "ORDER_BY_PRICE":
