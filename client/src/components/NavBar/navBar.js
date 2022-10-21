@@ -8,10 +8,11 @@ import { Link } from "react-router-dom";
 import "./navBar.css";
 import Searchbar from "./Searchbar";
 import CartWidget from "../Cart/CartWidget";
-import Login from "../Login/Login";
+import Login from "../Login/User/Login.jsx";
 
 function NavScrollExample() {
   return (
+    
     <Navbar className="navv" variant="dark" expand="lg">
       <Container className="navbar">
         <Link to={`/`} className="navbar-brand">

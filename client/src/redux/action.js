@@ -5,6 +5,7 @@ export const getAllProducts = () => {
     return axios("/product")
       .then((response) => response.data)
       .then((products) => {
+        console.log(products)
         dispatch({ type: "GET_ALL_PRODUCTS", payload: products });
       })
       .catch((error) => {
@@ -26,6 +27,7 @@ export const getProductDetail = (productId) => {
 
 export const postRegister = (user) => {
   return async (dispatch) => {
+    console.log('action', user)
     await axios.post(`/user/register`, user);
     dispatch({
       type: "POST_REGISTER",
