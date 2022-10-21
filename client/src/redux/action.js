@@ -24,6 +24,16 @@ export const getProductDetail = (productId) => {
   };
 };
 
+export const postRegister = (user) => {
+  return async (dispatch) => {
+    await axios.post(`/user/register`, user);
+    dispatch({
+      type: "POST_REGISTER",
+      payload: user,
+    });
+  };
+};
+
 export function filterByPrice(payload) {
   return {
     type: "ORDER_BY_PRICE",
