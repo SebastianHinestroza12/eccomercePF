@@ -8,8 +8,6 @@ import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import { Auth0Provider } from "@auth0/auth0-react";
-import dotenv from "dotenv";
-require("dotenv").config();
 
 axios.defaults.baseURL =
   "https://api-production-e274.up.railway.app/" || "http://localhost:3001";
