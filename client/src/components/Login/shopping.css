@@ -1,0 +1,20 @@
+.ter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 2rem;
+    max-width: 100%;
+  }
+
+.border-product {
+    color: rgb(5, 5, 5);
+    margin-left: 2rem;
+    border: 1px solid rgb(255, 255, 255);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 2rem;
+    max-width: 100%;
+}
