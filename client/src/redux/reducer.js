@@ -31,15 +31,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByPrice =
         payload === "MayorPrecio"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.price) > parseInt(b.price)) return -1;
-              if (parseInt(a.price) < parseInt(b.price)) return 1;
-              return 0;
-            })
+            if (parseInt(a.price) > parseInt(b.price)) return -1;
+            if (parseInt(a.price) < parseInt(b.price)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.price) < parseInt(b.price)) return -1;
-              if (parseInt(a.price) > parseInt(b.price)) return 1;
-              return 0;
-            });
+            if (parseInt(a.price) < parseInt(b.price)) return -1;
+            if (parseInt(a.price) > parseInt(b.price)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByPrice,
@@ -49,15 +49,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByRating =
         payload === "MayorRating"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.stars) > parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-              return 0;
-            })
+            if (parseInt(a.stars) > parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) < parseInt(b.stars)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.stars) < parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-              return 0;
-            });
+            if (parseInt(a.stars) < parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) > parseInt(b.stars)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByRating,
@@ -67,21 +67,21 @@ const rootReducer = (state = initialState, action) => {
       const orderedByName =
         action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-              if (a.name > b.name) return 1;
-              if (a.name < b.name) return -1;
-              return 0;
-            })
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (a.name > b.name) return -1;
-              if (a.name < b.name) return 1;
-              return 0;
-            });
+            if (a.name > b.name) return -1;
+            if (a.name < b.name) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: orderedByName,
       };
 
-    case "ALL_FILTERS":
+    case "FILTER_BY_SIZE":
       const allProducts = state.allProducts;
       if (payload.length === 0) {
         return {
@@ -89,7 +89,7 @@ const rootReducer = (state = initialState, action) => {
           products: allProducts,
         };
       }
-      const productsFiltered = new Set();
+      let productsFiltered = [];
       const filters = () => {
         for (let element of allProducts) {
           let i = 0;
@@ -98,18 +98,16 @@ const rootReducer = (state = initialState, action) => {
               element.size === payload[i] ||
               element.name.includes(payload[i])
             )
-              productsFiltered.add(element);
+              productsFiltered = [...productsFiltered, element];
             i++;
           }
         }
 
         return productsFiltered;
       };
-      const productsResult = Array.from(filters());
-      console.log("productsResult", productsResult);
       return {
         ...state,
-        products: productsResult,
+        products: filters(),
       };
 
     case "FILTER_BY_TYPE":
@@ -138,26 +136,26 @@ const rootReducer = (state = initialState, action) => {
         products: payload,
       };
 
-    case "ADD_PRODUCTS_TO_CART":
-      console.log("payload.sizePicked", payload.sizePicked);
-      let productAlreadyInTheCart = state.cartProducts.findIndex(
-        (element) =>
-          element.id === payload.id && element.sizePicked === payload.sizePicked
-      );
-
-      if (productAlreadyInTheCart >= 0) {
-        state.quantityProductsAdded += quantity;
-        state.cartProducts[productAlreadyInTheCart].quantity += quantity;
-        return {
-          ...state,
-        };
-      } else {
-        return {
-          ...state,
-          cartProducts: [...state.cartProducts, payload],
-          quantityProductsAdded: state.quantityProductsAdded + quantity,
-        };
-      }
+      case "ADD_PRODUCTS_TO_CART":
+        let productAlreadyInTheCart = state.cartProducts.findIndex(
+          (element) => element.id === payload.id
+        );
+  
+        if (productAlreadyInTheCart >= 0) {
+          console.log("productAlreadyInTheCart", productAlreadyInTheCart);
+          state.quantityProductsAdded += quantity;
+          state.cartProducts[productAlreadyInTheCart].quantity += quantity;
+          return {
+            ...state,
+          };
+        } else {
+          return {
+            ...state,
+            cartProducts: [...state.cartProducts, payload],
+            quantityProductsAdded: state.quantityProductsAdded + quantity,
+          };
+        }
+      
 
     case "INCREASE_QUANTITY":
       state.quantityProductsAdded++;
@@ -178,15 +176,15 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-
+      
     case "REMOVE_ITEM_FROM_CART":
-      //borrado por index del elemento en el array
-      let cartProductsUpdated = state.cartProducts;
-      cartProductsUpdated.splice(payload, 1);
-      state.quantityProductsAdded -= quantity;
+      console.log("state.cartProducts", state.cartProducts);
+      let productUpdated = state.cartProducts.filter(
+        (product) => product.id !== payload
+      );
       return {
         ...state,
-        cartProducts: cartProductsUpdated,
+        cartProducts: productUpdated,
       };
 
     default:
