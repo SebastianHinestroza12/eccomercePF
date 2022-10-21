@@ -1,23 +1,53 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Landing from "./components/Landing/Landing";
 import Store from "./Pages/Store";
 import { Route } from "react-router-dom";
-import Carousel from "./components/Carousel/Carousel";
+import NavScrollExample from "./components/NavBar/navBar";
+import Footer from "./components/Footer/footer";
+import ProductDetail from "./components/Product/ProductDetail";
+import NewProduct from "./components/NewProduct/NewProduct";
+import Home from "./components/Home/home";
+import User from "./components/Login/User/User";
+import Shopping from "./components/Login/User/Shopping";
+import Cart from "./components/Cart/Cart";
+import { Fragment } from "react";
+import LogAdmin from "./components/Login/Admin/LogAdmin";
 
 function App() {
   return (
-    <>
-      <Route exact path={"/"}>
-        <Landing />
+    <Fragment>
+      <Route>
+        <NavScrollExample />
       </Route>
-      <Route path={"/store"}>
+      <Route exact path={"/"}>
+        <Home />
+      </Route>
+      <Route exact path={"/store"}>
         <Store />
       </Route>
-      <Route path={"/carousel"}>
-        <Carousel />
+      <Route path={"/detail/:productId"}>
+        <ProductDetail />
       </Route>
-    </>
+      <Route path={"/user"}>
+        <User />
+      </Route>
+      <Route path={"/shopping"}>
+        <Shopping />
+      </Route>
+      <Route path={"/carrito"}>
+        <Cart />
+      </Route>
+      <Route path={"/new"}>
+        <LogAdmin />
+      </Route>
+      <Route path={"/form"}>
+        <NewProduct />
+      </Route>
+      <Route>
+        <Footer />
+      </Route>
+      </Fragment>
+    
   );
 }
 

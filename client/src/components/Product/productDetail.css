@@ -1,0 +1,59 @@
+.qty {
+  border-width: 0;
+  width: 60px;
+  padding: 10px 0;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  -webkit-appearance: textfield;
+  text-align: center;
+  font-weight: 600;
+  color: #000;
+  display: inline-block;
+  background-color: transparent;
+}
+select.product-size {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.sizesPicker {
+  margin-bottom: 2rem;
+}
+.product-detail .qty-box,
+select {
+  border: 1px solid var(--grey200);
+  padding: 0 20px;
+  transition: 0.5s;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  border-radius: 6px;
+}
+.cartButtons {
+  cursor: pointer;
+}
+.buttonsAddToCart {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
+.product-detail .rating {
+  color: var(--third-color);
+  font-size: 1.5rem;
+}
+.product-detail p.detail-text {
+  line-height: 2rem;
+  margin: 2rem 0;
+}
+.product-detail button.buy {
+  padding: 0 3rem;
+}
+
+label.form-check-label,
+.form-check-input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.activeSize {
+  color: aliceblue;
+}
