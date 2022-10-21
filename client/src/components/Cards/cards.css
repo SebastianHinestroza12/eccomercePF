@@ -12,3 +12,6 @@
 label.form-check-label:hover {
   color: var(--third-color);
 }
+.fade.alert.alert-warning.show {
+  text-align: center;
+}

@@ -1,11 +1,22 @@
+let sum = 0;
+const cartWidgetNumber = () => {
+  for (let i of JSON.parse(localStorage.getItem("cartProductsAdded"))) {
+    sum += i.quantity;
+  }
+  return sum;
+};
+
 const initialState = {
   allProducts: [],
   products: [],
   productDetail: [],
   newProducts: [],
-  cartProducts: [],
-  quantityProductsAdded: 0,
-  usuario:{}
+  cartProducts: localStorage.getItem("cartProductsAdded")
+    ? JSON.parse(localStorage.getItem("cartProductsAdded"))
+    : [],
+  quantityProductsAdded: localStorage.getItem("cartProductsAdded")
+    ? cartWidgetNumber()
+    : 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -38,15 +49,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByPrice =
         payload === "MayorPrecio"
           ? state.products.sort((a, b) => {
-            if (parseInt(a.price) > parseInt(b.price)) return -1;
-            if (parseInt(a.price) < parseInt(b.price)) return 1;
-            return 0;
-          })
+              if (parseInt(a.price) > parseInt(b.price)) return -1;
+              if (parseInt(a.price) < parseInt(b.price)) return 1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (parseInt(a.price) < parseInt(b.price)) return -1;
-            if (parseInt(a.price) > parseInt(b.price)) return 1;
-            return 0;
-          });
+              if (parseInt(a.price) < parseInt(b.price)) return -1;
+              if (parseInt(a.price) > parseInt(b.price)) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: filterByPrice,
@@ -56,15 +67,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByRating =
         payload === "MayorRating"
           ? state.products.sort((a, b) => {
-            if (parseInt(a.stars) > parseInt(b.stars)) return -1;
-            if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-            return 0;
-          })
+              if (parseInt(a.stars) > parseInt(b.stars)) return -1;
+              if (parseInt(a.stars) < parseInt(b.stars)) return 1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (parseInt(a.stars) < parseInt(b.stars)) return -1;
-            if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-            return 0;
-          });
+              if (parseInt(a.stars) < parseInt(b.stars)) return -1;
+              if (parseInt(a.stars) > parseInt(b.stars)) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: filterByRating,
@@ -74,28 +85,19 @@ const rootReducer = (state = initialState, action) => {
       const orderedByName =
         action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-            if (a.name > b.name) return 1;
-            if (a.name < b.name) return -1;
-            return 0;
-          })
+              if (a.name > b.name) return 1;
+              if (a.name < b.name) return -1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (a.name > b.name) return -1;
-            if (a.name < b.name) return 1;
-            return 0;
-          });
+              if (a.name > b.name) return -1;
+              if (a.name < b.name) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: orderedByName,
       };
-
-
-
-
-
-
-
-
-
 
       case "ALL_FILTERS":
       const allProducts = state.allProducts;
@@ -137,16 +139,6 @@ const rootReducer = (state = initialState, action) => {
         products: productsResult,
       };
 
-
-
-
-
-
-
-
-
-
-
     case "FILTER_BY_CATEGORY":
       const allProducts3 = state.allProducts;
       const filterByCategory = allProducts3.filter((p) =>
@@ -173,10 +165,19 @@ const rootReducer = (state = initialState, action) => {
       if (productAlreadyInTheCart >= 0) {
         state.quantityProductsAdded += quantity;
         state.cartProducts[productAlreadyInTheCart].quantity += quantity;
+        localStorage.setItem(
+          "cartProductsAdded",
+          JSON.stringify(state.cartProducts)
+        );
         return {
           ...state,
         };
       } else {
+        localStorage.setItem(
+          "cartProductsAdded",
+          JSON.stringify([...state.cartProducts, payload])
+        );
+
         return {
           ...state,
           cartProducts: [...state.cartProducts, payload],
@@ -209,6 +210,10 @@ const rootReducer = (state = initialState, action) => {
       let cartProductsUpdated = state.cartProducts;
       cartProductsUpdated.splice(payload, 1);
       state.quantityProductsAdded -= quantity;
+      localStorage.setItem(
+        "cartProductsAdded",
+        JSON.stringify(cartProductsUpdated)
+      );
       return {
         ...state,
         cartProducts: cartProductsUpdated,

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/action";
 import Filters from "../Filters/Filters";
 import Sidebar from "../Product/Sidebar";
-import { Col } from "react-bootstrap";
+import { Alert, Col } from "react-bootstrap";
 
 const Cards = ({ loading, setLoading }) => {
   const allProducts = useSelector((state) => state.products);
@@ -60,7 +60,6 @@ const Cards = ({ loading, setLoading }) => {
 
   return loading ? (
     <>
-      {console.log("allProducts", allProducts)}
       <img src="/images/loader-blue.gif" className="loading" alt="loader" />
     </>
   ) : (
@@ -95,7 +94,10 @@ const Cards = ({ loading, setLoading }) => {
             ))
           ) : (
             <>
-              <p className="errors">{allProducts}</p>
+              <Alert key={"warning"} variant={"warning"}>
+                {allProducts}
+              </Alert>
+              <p className="errors"></p>
             </>
           )}
         </div>
