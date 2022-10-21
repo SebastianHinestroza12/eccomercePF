@@ -9,9 +9,7 @@ import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import { Auth0Provider } from "@auth0/auth0-react";
 
-axios.defaults.baseURL =
-  "https://backend-production-6681.up.railway.app/" ||
-  "http://localhost:3001";
+axios.defaults.baseURL = "http://localhost:3001";
 // const domain = process.env.REACT_APP_AUTH0_DOMAIN
 // const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID
 // console.log(process.env.REACT_APP_AUTH0_DOMAIN)
