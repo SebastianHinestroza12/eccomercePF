@@ -23,12 +23,12 @@
     "nodemailer": "^6.8.0",
     "pg": "^8.5.1",
     "postgres": "^3.3.1",
-    "sequelize": "^6.25.0"
+    "sequelize": "^6.25.0",
+    "nodemon": "^2.0.20"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
-    "nodemon": "^2.0.20",
     "supertest": "^6.0.1",
     "supertest-session": "^4.1.0"
   }
