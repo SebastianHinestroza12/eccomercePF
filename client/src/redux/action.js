@@ -26,6 +26,7 @@ export const getProductDetail = (productId) => {
 
 export const postRegister = (user) => {
   return async (dispatch) => {
+    console.log('action', user)
     await axios.post(`/user/register`, user);
     dispatch({
       type: "POST_REGISTER",
