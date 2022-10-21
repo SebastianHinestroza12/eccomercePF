@@ -39,7 +39,13 @@ const Cart = () => {
     dispatch(RemoveItemFromCart(index, quantity));
   }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("me actualizo");
+    localStorage.setItem(
+      "cartProductsAdded",
+      JSON.stringify(productsInTheCart)
+    );
+  }, [productsInTheCart]);
 
   return (
     <>
