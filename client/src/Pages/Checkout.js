@@ -73,7 +73,8 @@ const Checkout = () => {
             )}
             <hr></hr>
             <p className="totalsCheckout">
-              <span className="totalTitle">Total:</span> {getTotal}
+              <span className="totalTitle">Total: </span>$
+              {getTotal.toLocaleString("en-US")}
             </p>
           </section>
           <PaypalCheckoutButton product={product} />
