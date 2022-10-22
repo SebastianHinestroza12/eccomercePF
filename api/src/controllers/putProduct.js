@@ -3,24 +3,24 @@ const { Product } = require('../db');
 
 
 router.put('/', async (req, res) => {
-  const { productId } = req.body;
-  const { name, price, detail, size, image, stock, stars, visible } = req.body;
+  const { id } = req.body;
+  const { name, price, detail, size_stock, image, stars, visible } = req.body;
 
   try {
-    if (name || price || detail || size || image || stock || stars || visible) {
+    if (name || price || detail || image || size_stock || stars || visible) {
 
-      await Product.update({ name, price, detail, size, image, stock, stars, visible }, {
+      await Product.update({ name, price, detail, image, size_stock, stars, visible }, {
         where: {
-          id: productId
+          id: id
         }
       }
       );
       return res.status(200).json({
-        IdProduct: productId,
+        IdProduct: id,
         modificado: true,
         dataActualizada: await Product.findOne({
           where: {
-            id: productId
+            id: id
           }
         })
       });
