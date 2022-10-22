@@ -16,7 +16,7 @@ function FormAdress() {
 
   const onSubmit = (data) => {
     console.log("enviando formulario", data);
-    alert("Se enviaron los datos correctamente");
+    // alert("Se enviaron los datos correctamente");
     // dispatch(editUserForm(data));
     reset();
   };
@@ -110,7 +110,7 @@ function FormAdress() {
                     required: true,
                   })}
                 />
-                {errors.name?.type === "required" && (
+                {errors.address?.type === "required" && (
                   <p className="textoError">El campo Dirección es requerido</p>
                 )}
               </div>
@@ -256,9 +256,18 @@ function FormAdress() {
               type="submit"
               class="btn btn-danger"
               onClick={handleSubmit(onSubmit)}
-            >
-              Guardar cambios
+            >Guardar cambios
             </button>
+
+            <div class="alert alert-warning alert-dismissible fade show">
+              <strong>Importante!</strong> Debes llenar los campos correctamente. De lo contratio tus datos no serán convalidados
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
           </div>
         </div>
       </div>
