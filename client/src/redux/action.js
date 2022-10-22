@@ -34,11 +34,12 @@ export const postRegister = (user) => {
 
 // EDITAR DATOS DE USUARIO
 
-export const putUser = (payload) => {
+export const putUser = (data) => {
   return async function (dispatch) {
     try {
-      let json = await axios.put('/user/modify', payload)
-      console.log(json);
+      console.log('llega action', data)
+      let json = await axios.put('/user/modify', data)
+      console.log("action ok ",json);
       return dispatch({
         type: 'PUT_USER',
         payload: json.data
@@ -48,6 +49,7 @@ export const putUser = (payload) => {
     }
   }
 };
+
 
 export function filterByPrice(payload) {
   return {
@@ -94,13 +96,6 @@ export const newProductForm = (data) => {
       type: "LOAD_PRODUCTS",
       payload: data,
     });
-  };
-};
-//EDITAR PRODUCTO
-export const editUserForm = (data) => {
-  console.log(data)
-  return async () => {
-    await axios.post(`/`, data);
   };
 };
 

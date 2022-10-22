@@ -8,12 +8,11 @@ import { postRegister } from "../../../redux/action";
 function Login() {
   const dispatch = useDispatch();
   const { isAuthenticated, isLoading, user } = useAuth0()
-  console.log(isAuthenticated);
 
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(postRegister(user))
-      console.log(user);
+  
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [isAuthenticated])

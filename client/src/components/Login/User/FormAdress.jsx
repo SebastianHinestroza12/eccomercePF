@@ -9,47 +9,31 @@ function FormAdress() {
   const dispatch = useDispatch();
   const { user } = useAuth0();
   const {
-    // register,
+    register,
+    reset,
     formState: { errors },
+    handleSubmit,
   } = useForm({
-    defaultValues: {},
+    defaultValues: {
+    },
   });
+  
 
-
-  const [input, setInput] = useState({
-    name: "",
-    email: user.email,
-    surnames: "",
-    address: "",
-    country: "",
-    city: "",
-    phone: 0,
-    postal_code: 0,
-    dni: 0,
-  })
-
-  const handleChange = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value
-    });
-    console.log(input)
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault(e);
-    dispatch(putUser(input))
+  const onSubmit = (data) => {
+    console.log("enviando formulario", data.email);
+    dispatch(putUser(data));
     Swal.fire({
       title: ` Datos guardados con exitos `,
       icon: 'success',
       timer: 2000,
       confirmButtonColor: 'green',
     })
+    reset();
   };
 
-  // const selectValidator = (value) => {
-  //   return value !== "---";
-  // };
+  const selectValidator = (value) => {
+    return value !== "---";
+  };
 
   return (
     <div
@@ -73,20 +57,22 @@ function FormAdress() {
             ></button>
           </div>
           <div class="modal-body">
-            <form class="row g-1" onSubmit={e => handleSubmit(e)}>
+            <form class="row g-1">
 
-              {/* INPUT EMAIL */}
-
-              <div class="col-md-6">
+              {/* -------INPUT EMAIL-------- */}
+                      <div class="col-md-6">
                 <label class="form-label" htmlFor="name">
                   Email
                 </label>
                 <input
                   class="form-control"
                   type="text"
-                  value={input.email}
+                  value={user.email}
                   name="email"
-                  disabled={true}
+                  id="email"
+                  // disabled={true}
+                  {...register("email", {
+                  })}
                 />
               </div>
 
@@ -98,15 +84,14 @@ function FormAdress() {
                 <input
                   class="form-control"
                   type="text"
-                  value={input.name}
                   name="name"
                   id="name"
-                  required
-                  onChange={e => handleChange(e)}
-                // {...register(`${input.name}`, {
-                //   required: true,
-                //   pattern: /^[a-zA-Z\s]{0,255}$/,
-                // })}
+                  // value={input.name}
+                  // onChange={e => handleChange(e)}
+                  {...register("name", {
+                    required: true,
+                    pattern: /^[a-zA-Z\s]{0,255}$/,
+                  })}
                 />
                 {errors.name?.type === "required" && (
                   <p className="textoError">El campo Nombre es requerido</p>
@@ -126,13 +111,12 @@ function FormAdress() {
                   class="form-control"
                   type="text"
                   name="surnames"
-                  required
-                  value={input.surnames}
-                  onChange={e => handleChange(e)}
-                // {...register("surnames", {
-                //   required: true,
-                //   pattern: /^[a-zA-Z\s]{0,255}$/,
-                // })}
+                  id="surnames"
+                  // onChange={e => handleChange(e)}
+                  {...register("surnames", {
+                    required: true,
+                    pattern: /^[a-zA-Z\s]{0,255}$/,
+                  })}
                 />
                 {errors.surnames?.type === "required" && (
                   <p className="textoError">El campo Apellido es requerido</p>
@@ -152,15 +136,12 @@ function FormAdress() {
                   class="form-control"
                   type="text"
                   name="address"
-                  required
                   id="address"
-                  value={input.address}
-                  onChange={e => handleChange(e)}
-                // {...register("address", {
-                //   required: true,
-                // })}
+                  {...register("address", {
+                    required: true,
+                  })}
                 />
-                {errors.name?.type === "required" && (
+                {errors.address?.type === "required" && (
                   <p className="textoError">El campo Dirección es requerido</p>
                 )}
               </div>
@@ -173,14 +154,11 @@ function FormAdress() {
                   class="form-control"
                   type="text"
                   name="city"
-                  required
                   id="city"
-                  value={input.city}
-                  onChange={e => handleChange(e)}
-                // {...register("city", {
-                //   required: true,
-                //   pattern: /^[a-zA-Z\s]{0,255}$/,
-                // })}
+                  {...register("city", {
+                    required: true,
+                    pattern: /^[a-zA-Z\s]{0,255}$/,
+                  })}
                 />
                 {errors.city?.type === "required" && (
                   <p className="textoError">El campo Ciudad es requerido</p>
@@ -199,14 +177,11 @@ function FormAdress() {
                 <select
                   id="country"
                   name="country"
-                  required
                   class="form-select"
-                  value={input.country}
-                  onChange={e => handleChange(e)}
                   aria-label="Default select example"
-                // {...register("country", {
-                //   validate: selectValidator,
-                // })}
+                  {...register("country", {
+                    validate: selectValidator,
+                  })}
                 >
                   <option selected>---</option>
                   <option value="Argentina">Argentina</option>
@@ -232,15 +207,12 @@ function FormAdress() {
                   class="form-control"
                   type="text"
                   name="phone"
-                  required
                   id="phone"
-                  value={input.phone}
-                  onChange={e => handleChange(e)}
-                // {...register("phone", {
-                //   required: true,
-                //   pattern:
-                //     /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
-                // })}
+                  {...register("phone", {
+                    required: true,
+                    pattern:
+                      /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
+                  })}
                 />
                 <small>Format: 1234-56-7890</small>
                 {errors.phone?.type === "required" && (
@@ -261,15 +233,12 @@ function FormAdress() {
                   class="form-control"
                   type="text"
                   name="postal_code"
-                  required
                   id="postal_code"
-                  value={input.postal_code}
-                  onChange={e => handleChange(e)}
-                // {...register("postal_code", {
-                //   required: true,
-                //   maxLength: 4,
-                //   pattern: /^-?\d*(\.\d+)?$/,
-                // })}
+                  {...register("postal_code", {
+                    required: true,
+                    maxLength: 4,
+                    pattern: /^-?\d*(\.\d+)?$/,
+                  })}
                 />
                 {errors.postal_code?.type === "required" && (
                   <p className="textoError">El campo CP es requerido</p>
@@ -290,16 +259,13 @@ function FormAdress() {
                   class="form-control"
                   type="text"
                   name="dni"
-                  required
                   id="dni"
-                  value={input.dni}
-                  onChange={e => handleChange(e)}
-                // {...register("dni", {
-                //   required: true,
-                //   maxLength: 8,
-                //   minLength: 8,
-                //   pattern: /^-?\d*(\.\d+)?$/,
-                // })}
+                  {...register("dni", {
+                    required: true,
+                    maxLength: 8,
+                    minLength: 8,
+                    pattern: /^-?\d*(\.\d+)?$/,
+                  })}
                 />
                 {errors.dni?.type === "required" && (
                   <p className="textoError">El campo DNI es requerido</p>
@@ -314,18 +280,26 @@ function FormAdress() {
                   <p className="textoError">Mínimo de carácteres permitidos</p>
                 )}
               </div>
-
-              <div class="modal-footer">
-                <button
-                  type="submit"
-                  class="btn btn-danger"
-                >
-                  Guardar cambios
-                </button>
-              </div>
             </form>
           </div>
+          <div class="modal-footer">
+            <button
+              type="submit"
+              class="btn btn-danger"
+              onClick={handleSubmit(onSubmit)}
+            >Guardar cambios
+            </button>
 
+            <div class="alert alert-warning alert-dismissible fade show">
+              <strong>Importante!</strong> Debes llenar los campos correctamente para que tus datos sean convalidados
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
