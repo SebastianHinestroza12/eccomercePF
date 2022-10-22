@@ -32,6 +32,23 @@ export const postRegister = (user) => {
   };
 };
 
+// EDITAR DATOS DE USUARIO
+
+export const putUser = (payload) => {
+  return async function (dispatch) {
+    try {
+      let json = await axios.put('/user/modify', payload)
+      console.log(json);
+      return dispatch({
+        type: 'PUT_USER',
+        payload: json.data
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
 export function filterByPrice(payload) {
   return {
     type: "ORDER_BY_PRICE",
@@ -54,7 +71,7 @@ export const SearchByName = (name) => {
         dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
       })
       .catch((error) => {
-        dispatch({ type: "SEARCH_PRODUCTS", payload: error.response.data.error})
+        dispatch({ type: "SEARCH_PRODUCTS", payload: error.response.data.error })
         console.log("AXIOS error", typeof error.response.data.error);
         return error.response.data.error;
         // console.log(error)

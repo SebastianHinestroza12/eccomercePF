@@ -7,6 +7,7 @@ const cartWidgetNumber = () => {
 };
 
 const initialState = {
+  user: [],
   allProducts: [],
   products: [],
   productDetail: [],
@@ -44,20 +45,25 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         usuario: payload,
       };
+    case 'PUT_USER':
+      return {
+        ...state,
+        user: payload
+      }
 
     case "ORDER_BY_PRICE":
       const filterByPrice =
         payload === "MayorPrecio"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.price) > parseInt(b.price)) return -1;
-              if (parseInt(a.price) < parseInt(b.price)) return 1;
-              return 0;
-            })
+            if (parseInt(a.price) > parseInt(b.price)) return -1;
+            if (parseInt(a.price) < parseInt(b.price)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.price) < parseInt(b.price)) return -1;
-              if (parseInt(a.price) > parseInt(b.price)) return 1;
-              return 0;
-            });
+            if (parseInt(a.price) < parseInt(b.price)) return -1;
+            if (parseInt(a.price) > parseInt(b.price)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByPrice,
@@ -67,15 +73,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByRating =
         payload === "MayorRating"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.stars) > parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-              return 0;
-            })
+            if (parseInt(a.stars) > parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) < parseInt(b.stars)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.stars) < parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-              return 0;
-            });
+            if (parseInt(a.stars) < parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) > parseInt(b.stars)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByRating,
@@ -85,21 +91,21 @@ const rootReducer = (state = initialState, action) => {
       const orderedByName =
         action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-              if (a.name > b.name) return 1;
-              if (a.name < b.name) return -1;
-              return 0;
-            })
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (a.name > b.name) return -1;
-              if (a.name < b.name) return 1;
-              return 0;
-            });
+            if (a.name > b.name) return -1;
+            if (a.name < b.name) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: orderedByName,
       };
 
-      case "ALL_FILTERS":
+    case "ALL_FILTERS":
       const allProducts = state.allProducts;
       if (payload.length === 0) {
         return {
@@ -109,26 +115,26 @@ const rootReducer = (state = initialState, action) => {
       }
       const productsFiltered = new Set();
       const filters = () => {
-      
-      for (let element of payload) {
-        console.log('payload',element)
-        console.log(allProducts.length)
 
-        for (let i=0; i<allProducts.length ; i++){
-          console.log('all', allProducts[i])
-          let s =0
+        for (let element of payload) {
+          console.log('payload', element)
+          console.log(allProducts.length)
 
-          while (s < allProducts[i].size_stock.length) {
-            console.log('while',allProducts[i].size_stock[s])
-            console.log('if',allProducts[i].size_stock[s].size, element)
-            if (allProducts[i].size_stock[s].size === element) {
-              console.log('iguales')
-              productsFiltered.add(allProducts[i])
+          for (let i = 0; i < allProducts.length; i++) {
+            console.log('all', allProducts[i])
+            let s = 0
+
+            while (s < allProducts[i].size_stock.length) {
+              console.log('while', allProducts[i].size_stock[s])
+              console.log('if', allProducts[i].size_stock[s].size, element)
+              if (allProducts[i].size_stock[s].size === element) {
+                console.log('iguales')
+                productsFiltered.add(allProducts[i])
+              }
+              s++
             }
-            s++
           }
         }
-      }
 
         return productsFiltered;
       };
