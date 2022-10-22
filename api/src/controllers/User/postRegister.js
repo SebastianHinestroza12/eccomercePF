@@ -12,9 +12,12 @@ router.post('/', async (req, res) => {
         email
       }
     })
-    if (verifique) return res.status(404).json({
-      message: `YA EXISTE EL USUARIO ${email}`
-    })
+    if (verifique) {
+        console.log(`YA EXISTE EL USUARIO ${email}`);
+        return res.status(404).json({
+        message: `YA EXISTE EL USUARIO ${email}`
+      })
+    }
 
     await User.findOrCreate({
       where: {
@@ -30,7 +33,8 @@ router.post('/', async (req, res) => {
       subject: "Se aproxima el mundial de qatar, tenemos los articulos deportivos perfectos para ti", // Subject line
       html: message
     });
-
+    
+    console.log(`¡EL USUARIO '${email}' FUE REGISTRADO CON EXITO✅😉!`);
     return res.status(201).json({
       status: `¡EL USUARIO '${email}' FUE REGISTRADO CON EXITO✅😉!`,
       message: `REVISE SU BANDEJA DE ENTRADA O SPAM`,
