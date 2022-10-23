@@ -83,7 +83,7 @@ function Profile() {
             <button
               style={{ marginTop: "20px" }}
               type="button"
-              class="btn btn-danger"
+              class="btn btn-primary"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >
