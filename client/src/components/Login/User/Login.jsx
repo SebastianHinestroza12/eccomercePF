@@ -5,28 +5,24 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
 import { postRegister } from "../../../redux/action";
 
+const AuthNAv = () => {
+  const { isAuthenticated } = useAuth0();
+  return <div> {isAuthenticated ? <LogoutButton /> : <LoginButton />} </div>;
+};
+export const Loading = () => {
+  const { isLoading } = useAuth0();
+  return isLoading && <h6>Loading...</h6>;
+};
 function Login() {
   const dispatch = useDispatch();
-  const { isAuthenticated, isLoading, user } = useAuth0()
-
-  const AuthNAv = () => {
-    const {isAuthenticated} = useAuth0()
-    return (
-      <div> {isAuthenticated ? <LogoutButton /> : <LoginButton />} </div>
-    )
-  }
+  const { isAuthenticated, isLoading, user } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated) {
-      dispatch(postRegister(user))
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps 
-  }, [isAuthenticated])
-
-  if(isLoading) return <h6>Loading...</h6>
-  return (
-  <AuthNAv />
-  );
+      dispatch(postRegister(user));
+    }
+  }, [isAuthenticated]);
+  return <>{isLoading ? <Loading /> : <AuthNAv />}</>;
 }
 
 export default Login;
