@@ -4,12 +4,13 @@ import "react-json-pretty/themes/monikai.css";
 import FormAdress from "./FormAdress";
 import { useSelector } from "react-redux";
 import "./css/Table.css";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 
 function Profile() {
   const { user, isAuthenticated } = useAuth0();
   const profileUser = useSelector((state) => state.user);
   console.log(profileUser.update_Data);
+  console.log(isAuthenticated);
   return isAuthenticated ? (
     <Fragment>
       {/* MODAL */}
@@ -69,14 +70,14 @@ function Profile() {
                   <td>{profileUser.update_Data.dni}</td>
                 </tr>
               </table>
-              <Link to={'/store'}>
-              <button
-                style={{ marginTop: "20px" }}
-                type="button"
-                class="btn btn-danger"
-              >
-                Ir a la tienda
-              </button>
+              <Link to={"/store"}>
+                <button
+                  style={{ marginTop: "20px" }}
+                  type="button"
+                  class="btn btn-danger"
+                >
+                  Ir a la tienda
+                </button>
               </Link>
             </>
           ) : (
@@ -94,7 +95,9 @@ function Profile() {
       </div>
     </Fragment>
   ) : (
-    <h2>NECESITAS LOGUEARTE !!</h2>
+    <>
+      <h2>NECESITAS LOGUEARTE !!</h2>
+    </>
   );
 }
 
