@@ -1,7 +1,6 @@
 import { Col, Container, Form, Row } from "react-bootstrap";
 import PaypalCheckoutButton from "./PaypalCheckoutButton";
 import { useSelector } from "react-redux";
-
 import "./checkout.css";
 
 const Checkout = () => {
@@ -69,7 +68,14 @@ const Checkout = () => {
             {productsInTheCart.length === 0 ? (
               <div>Aún no hay productos en el carrito</div>
             ) : (
-              productsInTheCart.map((element) => element.name)
+              productsInTheCart.map((element) => (
+                <div>
+                  {element.name} x
+                  {element.quantity === 1
+                    ? ` ${element.quantity} unidad`
+                    : ` ${element.quantity} unds.`}
+                </div>
+              ))
             )}
             <hr></hr>
             <p className="totalsCheckout">

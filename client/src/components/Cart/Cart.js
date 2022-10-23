@@ -43,7 +43,7 @@ const Cart = () => {
   useEffect(() => {
     //setTotal(totalPrice);
     dispatch(getCartTotal(totalPrice));
-  }, [totalPrice]);
+  }, [totalPrice, dispatch]);
 
   return (
     <>
