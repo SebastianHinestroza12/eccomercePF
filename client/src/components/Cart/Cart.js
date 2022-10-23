@@ -9,7 +9,7 @@ import "./cart.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Cart = () => {
-  const { loginWithRedirect } = useAuth0();
+  // const { loginWithRedirect } = useAuth0();
 
   const dispatch = useDispatch();
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
@@ -139,15 +139,16 @@ const Cart = () => {
                     <span>$ {totalPrice.toLocaleString("en-US")}</span>
                   </div>
                 </div>
-
+                <Link to={'/pagar'}>
                 <button
                   className="checkout buy btn btn-primary buttons-cart"
                   type="button"
-                  onClick={() => loginWithRedirect()}
+                  // onClick={() => loginWithRedirect()}
                 >
                   <Unicons.UilCreditCard />
                   &nbsp;FINALIZAR COMPRA
                 </button>
+                </Link>
               </div>
             </section>
           ) : (
