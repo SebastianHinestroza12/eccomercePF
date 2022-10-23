@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/action";
 import Filters from "../Filters/Filters";
 import Sidebar from "../Product/Sidebar";
-import { Alert, Col } from "react-bootstrap";
+import { Alert, Col, Row } from "react-bootstrap";
 
 const Cards = ({ loading, setLoading }) => {
   const allProducts = useSelector((state) => state.products);
@@ -56,7 +56,7 @@ const Cards = ({ loading, setLoading }) => {
       });
 
     return () => {};
-  }, [dispatch]);
+  }, [dispatch, setLoading]);
 
   return loading ? (
     <>
@@ -79,10 +79,10 @@ const Cards = ({ loading, setLoading }) => {
           setActualPage={setActualPage}
           setOrder={setOrder}
         />
-        <div className="row">
+        <Row className="row">
           {Array.isArray(actualproducts) ? (
             actualproducts.map((products) => (
-              <div className="col-md-3" key={products.id}>
+              <Col md={3} xs={6} key={products.id}>
                 <ProductCard
                   name={products.name}
                   price={products.price}
@@ -90,7 +90,7 @@ const Cards = ({ loading, setLoading }) => {
                   stars={products.stars}
                   id={products.id}
                 />
-              </div>
+              </Col>
             ))
           ) : (
             <>
@@ -100,7 +100,7 @@ const Cards = ({ loading, setLoading }) => {
               <p className="errors"></p>
             </>
           )}
-        </div>
+        </Row>
         <Pages
           actualPage={actualPage}
           minPageNumber={minPageNumber}
@@ -109,6 +109,8 @@ const Cards = ({ loading, setLoading }) => {
           products={Array.isArray(allProducts) ? allProducts.length : 1}
           pages={pages}
         />
+
+        {console.log(order, setproductsPerPage)}
       </Col>
     </>
   );

@@ -12,6 +12,7 @@ const initialState = {
   products: [],
   productDetail: [],
   newProducts: [],
+  cartTotal: 0,
   cartProducts: localStorage.getItem("cartProductsAdded")
     ? JSON.parse(localStorage.getItem("cartProductsAdded"))
     : [],
@@ -40,30 +41,30 @@ const rootReducer = (state = initialState, action) => {
         productDetail: payload,
       };
     case "POST_REGISTER":
-      console.log('reducer', payload)
+      console.log("reducer", payload);
       return {
         ...state,
         usuario: payload,
       };
-    case 'PUT_USER':
+    case "PUT_USER":
       return {
         ...state,
-        user: payload
-      }
+        user: payload,
+      };
 
     case "ORDER_BY_PRICE":
       const filterByPrice =
         payload === "MayorPrecio"
           ? state.products.sort((a, b) => {
-            if (parseInt(a.price) > parseInt(b.price)) return -1;
-            if (parseInt(a.price) < parseInt(b.price)) return 1;
-            return 0;
-          })
+              if (parseInt(a.price) > parseInt(b.price)) return -1;
+              if (parseInt(a.price) < parseInt(b.price)) return 1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (parseInt(a.price) < parseInt(b.price)) return -1;
-            if (parseInt(a.price) > parseInt(b.price)) return 1;
-            return 0;
-          });
+              if (parseInt(a.price) < parseInt(b.price)) return -1;
+              if (parseInt(a.price) > parseInt(b.price)) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: filterByPrice,
@@ -73,15 +74,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByRating =
         payload === "MayorRating"
           ? state.products.sort((a, b) => {
-            if (parseInt(a.stars) > parseInt(b.stars)) return -1;
-            if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-            return 0;
-          })
+              if (parseInt(a.stars) > parseInt(b.stars)) return -1;
+              if (parseInt(a.stars) < parseInt(b.stars)) return 1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (parseInt(a.stars) < parseInt(b.stars)) return -1;
-            if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-            return 0;
-          });
+              if (parseInt(a.stars) < parseInt(b.stars)) return -1;
+              if (parseInt(a.stars) > parseInt(b.stars)) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: filterByRating,
@@ -91,15 +92,15 @@ const rootReducer = (state = initialState, action) => {
       const orderedByName =
         action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-            if (a.name > b.name) return 1;
-            if (a.name < b.name) return -1;
-            return 0;
-          })
+              if (a.name > b.name) return 1;
+              if (a.name < b.name) return -1;
+              return 0;
+            })
           : state.products.sort((a, b) => {
-            if (a.name > b.name) return -1;
-            if (a.name < b.name) return 1;
-            return 0;
-          });
+              if (a.name > b.name) return -1;
+              if (a.name < b.name) return 1;
+              return 0;
+            });
       return {
         ...state,
         products: orderedByName,
@@ -115,23 +116,22 @@ const rootReducer = (state = initialState, action) => {
       }
       const productsFiltered = new Set();
       const filters = () => {
-
         for (let element of payload) {
-          console.log('payload', element)
-          console.log(allProducts.length)
+          console.log("payload", element);
+          console.log(allProducts.length);
 
           for (let i = 0; i < allProducts.length; i++) {
-            console.log('all', allProducts[i])
-            let s = 0
+            console.log("all", allProducts[i]);
+            let s = 0;
 
             while (s < allProducts[i].size_stock.length) {
-              console.log('while', allProducts[i].size_stock[s])
-              console.log('if', allProducts[i].size_stock[s].size, element)
+              console.log("while", allProducts[i].size_stock[s]);
+              console.log("if", allProducts[i].size_stock[s].size, element);
               if (allProducts[i].size_stock[s].size === element) {
-                console.log('iguales')
-                productsFiltered.add(allProducts[i])
+                console.log("iguales");
+                productsFiltered.add(allProducts[i]);
               }
-              s++
+              s++;
             }
           }
         }
@@ -158,8 +158,8 @@ const rootReducer = (state = initialState, action) => {
       );
       return {
         ...state,
-        products: filterByType
-      }
+        products: filterByType,
+      };
 
     case "FILTER_BY_CATEGORY":
       const allProducts3 = state.allProducts;
@@ -239,6 +239,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cartProducts: cartProductsUpdated,
+      };
+
+    case "GET_TOTAL_CART":
+      return {
+        ...state,
+        cartTotal: payload,
       };
 
     default:

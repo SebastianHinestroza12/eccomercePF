@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { InputGroup, Form, Button } from "react-bootstrap";
 import { SearchByName } from "../../redux/action";
 
 const Searchbar = ({ setLoading }) => {
   const dispatch = useDispatch();
- 
 
   //estado local para coger el nombre que se quiere buscar
   const [name, setName] = useState("");
@@ -15,12 +14,11 @@ const Searchbar = ({ setLoading }) => {
   //se dispara cuando se presiona el btn de busqueda
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     if (!name.length) {
-      seterrors({ name: 'Colocar un producto !!' })
+      seterrors({ name: "Colocar un producto !!" });
     }
-    dispatch(SearchByName(name))
+    dispatch(SearchByName(name));
   };
 
   //control del input de busqueda
