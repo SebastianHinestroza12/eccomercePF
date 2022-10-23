@@ -59,6 +59,11 @@ const AddToCart = ({ sizePicked, stock }) => {
       <Button className="buy" onClick={() => addToCartButton()}>
         COMPRAR
       </Button>
+      <Link to={'/store'}>
+      <Button class="btn-primary">
+        SEGUIR COMPRANDO
+      </Button>
+      </Link>
     </>
   );
 };
