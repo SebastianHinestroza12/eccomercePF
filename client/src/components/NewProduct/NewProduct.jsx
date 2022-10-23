@@ -12,7 +12,7 @@ function NewProduct() {
   const [values, setValues] = useState("");
 
   const handleInputValue = (async (e) => {
-    console.log('entre')
+    console.log('entredd')
     const file = e.target.files[0];
   
     const formData = new FormData();
