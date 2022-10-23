@@ -56,10 +56,10 @@ const Sidebar = ({
   ];
   const type = [
     {
-      type: "LOCAL",
+      type: "JERSEY LOCAL",
     },
     {
-      type: "VISITANTE",
+      type: "JERSEY VISITANTE",
     },
   ];
 

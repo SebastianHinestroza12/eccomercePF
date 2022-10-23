@@ -1,12 +1,31 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 import "../NewProduct/newProduct.css";
 import { useDispatch } from "react-redux";
-import { envioForm } from "../../redux/action";
+import { newProductForm } from "../../redux/action";
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ddl3snuoe/image/upload';
+const CLOUDINARY_UPLOAD_PRESET = 'pzsfr2g4';
 
 function NewProduct() {
   const dispatch = useDispatch();
   const [values, setValues] = useState("");
+
+  const handleInputValue = (async (e) => {
+    console.log('entre')
+    const file = e.target.files[0];
+  
+    const formData = new FormData();
+    formData.append('file',file);
+    formData.append('upload_preset',CLOUDINARY_UPLOAD_PRESET);
+  
+    const res = await axios.post(CLOUDINARY_URL, formData, {
+      headers:{
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    console.log(res.data.secure_url);
+  })
 
   const {
     register,
@@ -16,12 +35,19 @@ function NewProduct() {
   } = useForm({
     defaultValues: {
       image: "https://picsum.photos/200/200",
+      name:'Pelota adidas',
+      category:"Balones",
+      price: 99999,
+      stock: 2,
+      stars: 5,
+      size: 7,
+      detail: "NADA EN PARTICULAR"
     },
   });
 
   const onSubmit = (data) => {
-    alert("Se enviaron los datos correctamente");
-    dispatch(envioForm(data));
+    console.log(data)
+    dispatch(newProductForm(data));
     reset();
   };
 
@@ -33,7 +59,7 @@ function NewProduct() {
     setValues(e.target.value);
     console.log("function", values);
   };
-  console.log("nop", values);
+ 
   return (
     <div class="container">
       <h1
@@ -139,9 +165,10 @@ function NewProduct() {
           <label htmlFor="image" class="form-label">
             Imagen
           </label>
+          <input type="file" onChange={handleInputValue}/>
           <input
-            class="form-control"
             type="text"
+            class="form-control"
             id="image"
             {...register("image", {
               required: true,
@@ -239,6 +266,17 @@ function NewProduct() {
           <button type="submit" class="btn btn-danger">
             Enviar
           </button>
+        </div>
+        <div class="container">
+        <div class="alert alert-danger alert-dismissible fade show">
+              <strong>Importante!</strong> Debes llenar los campos correctamente. De lo contrario tus datos no serán convalidados
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
         </div>
       </form>
     </div>

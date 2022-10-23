@@ -42,7 +42,7 @@ const ProductCard = (props) => {
         <hr></hr>
         <Card.Title>{name}</Card.Title>
         <div className={"buttons_shop"}>
-          <Unicons.UilShoppingCartAlt onClick={(e) => addToCart(e)} />
+          <Unicons.UilShoppingCartAlt />
           <Unicons.UilHeart />
         </div>
         <div className="rating">{writeRatingStars(stars)}</div>

@@ -63,12 +63,6 @@ const { Admin, Product, User, Order, Category, Review } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Admin.hasMany(Product);
-Product.belongsToMany(Admin, { through: 'admin-product' });
-
-Admin.hasMany(User);
-User.belongsToMany(Admin, { through: 'admin-client' });
-
 User.hasMany(Order);
 Order.belongsTo(User);
 

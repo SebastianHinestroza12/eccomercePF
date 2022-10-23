@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
     let { name, price, detail, size_stock, image, stars, category, visible } = req.body;
 
     let newProduct = await Product.create({
-        name: name, price: price, detail: detail, size_stock: size_stock, image: image, stock: stock, stars: stars, visible: visible
+        name: name, price: price, detail: detail, size_stock: size_stock, image: image, stars: stars, visible: visible
     });
 
     Category.findOrCreate({ 

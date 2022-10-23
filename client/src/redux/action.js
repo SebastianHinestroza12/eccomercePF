@@ -5,6 +5,7 @@ export const getAllProducts = () => {
     return axios("/product")
       .then((response) => response.data)
       .then((products) => {
+        console.log(products)
         dispatch({ type: "GET_ALL_PRODUCTS", payload: products });
       })
       .catch((error) => {
@@ -24,15 +25,31 @@ export const getProductDetail = (productId) => {
   };
 };
 
+//REGISTRAR USUARIOS LOGUADOS EN DB
 export const postRegister = (user) => {
-  return async (dispatch) => {
+  return async () => {
     await axios.post(`/user/register`, user);
-    dispatch({
-      type: "POST_REGISTER",
-      payload: user,
-    });
   };
 };
+
+// EDITAR DATOS DE USUARIO
+
+export const putUser = (data) => {
+  return async function (dispatch) {
+    try {
+      console.log('llega action', data)
+      let json = await axios.put('/user/modify', data)
+      console.log("action ok ",json);
+      return dispatch({
+        type: 'PUT_USER',
+        payload: json.data
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
 
 export function filterByPrice(payload) {
   return {
@@ -56,7 +73,7 @@ export const SearchByName = (name) => {
         dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
       })
       .catch((error) => {
-        dispatch({ type: "SEARCH_PRODUCTS", payload: error.response.data.error})
+        dispatch({ type: "SEARCH_PRODUCTS", payload: error.response.data.error })
         console.log("AXIOS error", typeof error.response.data.error);
         return error.response.data.error;
         // console.log(error)
@@ -72,7 +89,7 @@ export function filterByName(payload) {
 }
 
 //CREACION DE PRODUCTO
-export const envioForm = (data) => {
+export const newProductForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postProduct`, data);
     dispatch({
