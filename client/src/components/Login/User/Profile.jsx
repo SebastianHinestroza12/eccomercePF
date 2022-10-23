@@ -35,7 +35,7 @@ function Profile() {
 
           {profileUser.update_Data ? (
             <>
-              <table className="default">
+              <table className="default sizeFixed">
                 <tr>
                   <th>Nombre</th>
                   <td>{profileUser.update_Data.name}</td>

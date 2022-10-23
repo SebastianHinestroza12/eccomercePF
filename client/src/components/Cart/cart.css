@@ -39,3 +39,17 @@ h2.cart-title,
   background: var(--third-color);
   color: white;
 }
+
+@media (max-width: 600px) {
+  .totals-cart {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+  .totals {
+    width: 100%;
+  }
+}

@@ -15,3 +15,23 @@ label.form-check-label:hover {
 .fade.alert.alert-warning.show {
   text-align: center;
 }
+@media (max-width: 600px) {
+  .filters_container.top_filters {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  .buttonsAddToCart {
+    flex-direction: column;
+  }
+  .product-detail .buttonsAddToCart .qty-box,
+  .product-detail select {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.5rem;
+  }
+  .sizesPicker {
+    display: flex;
+    justify-content: space-between;
+  }
+}

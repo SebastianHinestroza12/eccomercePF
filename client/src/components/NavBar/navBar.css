@@ -123,6 +123,8 @@ ESTILOS PARA MOBILE
   }
   .navbar .divNav {
     margin-left: 0;
+    grid-gap: 0;
     gap: 0;
+    margin-top: 2rem;
   }
 }
