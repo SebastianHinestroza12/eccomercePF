@@ -35,11 +35,18 @@ function NewProduct() {
   } = useForm({
     defaultValues: {
       image: "https://picsum.photos/200/200",
+      name:'Pelota adidas',
+      category:"Balones",
+      price: 99999,
+      stock: 2,
+      stars: 5,
+      size: 7,
+      detail: "NADA EN PARTICULAR"
     },
   });
 
   const onSubmit = (data) => {
-    alert("Se enviaron los datos correctamente");
+    console.log(data)
     dispatch(newProductForm(data));
     reset();
   };
@@ -262,7 +269,7 @@ function NewProduct() {
         </div>
         <div class="container">
         <div class="alert alert-danger alert-dismissible fade show">
-              <strong>Importante!</strong> Debes llenar los campos correctamente. De lo contratio tus datos no serán convalidados
+              <strong>Importante!</strong> Debes llenar los campos correctamente. De lo contrario tus datos no serán convalidados
               <button
                 type="button"
                 class="btn-close"
