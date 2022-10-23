@@ -145,6 +145,22 @@ const rootReducer = (state = initialState, action) => {
         products: productsResult,
       };
 
+    case "FILTER_BY_TYPE":
+      const allProducts4 = state.allProducts;
+      if (payload.length === 0) {
+        return {
+          ...state,
+          products: allProducts4,
+        };
+      }
+      const filterByType = allProducts4.filter((p) =>
+        p.name.includes(action.payload)
+      );
+      return {
+        ...state,
+        products: filterByType
+      }
+
     case "FILTER_BY_CATEGORY":
       const allProducts3 = state.allProducts;
       const filterByCategory = allProducts3.filter((p) =>
