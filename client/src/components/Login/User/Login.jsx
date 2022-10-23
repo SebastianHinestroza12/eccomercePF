@@ -9,19 +9,23 @@ function Login() {
   const dispatch = useDispatch();
   const { isAuthenticated, isLoading, user } = useAuth0()
 
+  const AuthNAv = () => {
+    const {isAuthenticated} = useAuth0()
+    return (
+      <div> {isAuthenticated ? <LogoutButton /> : <LoginButton />} </div>
+    )
+  }
+
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(postRegister(user))
-  
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [isAuthenticated])
 
   if(isLoading) return <h6>Loading...</h6>
   return (
-    <div>
-      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
-    </div>
+  <AuthNAv />
   );
 }
 
