@@ -6,6 +6,7 @@ import {
   getAllProducts,
   filterBySize,
   filterByCategory,
+  filterByType,
 } from "../../redux/action";
 
 let allFilters = [];
@@ -32,9 +33,12 @@ const Sidebar = ({
       size: "XL",
     },
   ];
-  const balones = [
+  const balonesCalzados = [
     {
       size: 1,
+    },
+    {
+      size: 3,
     },
     {
       size: 4,
@@ -42,16 +46,20 @@ const Sidebar = ({
     {
       size: 5,
     },
-  ];
-  const zapatos = [
     {
-      size: 5.5,
-    },
-    {
-      size: 6.5,
+      size: 6,
     },
     {
       size: 7,
+    },
+    {
+      size: 8,
+    },
+    {
+      size: 9,
+    },
+    {
+      size: 10,
     },
   ];
   const type = [
@@ -82,6 +90,13 @@ const Sidebar = ({
     setMinPageNumber(0);
     setMaxPageNumber(5);
     dispatch(filterByCategory(e.target.value));
+  };
+
+  const handleFilterByType = (e) => {
+    setActualPage(1);
+    setMinPageNumber(0);
+    setMaxPageNumber(5);
+    dispatch(filterByType(e.target.value));
   };
 
   useEffect(() => {
@@ -140,23 +155,10 @@ const Sidebar = ({
             </div>
           ))}
         </Form>
-        <h6>Balones</h6>
+        <h6>Balones y Calzado</h6>
         <Form name="f1" id="formElement">
-          {balones.map((product) => (
+          {balonesCalzados.map((product) => (
             <div key={`default-${product.size}`} className="mb-2">
-              <Form.Check
-                className="check"
-                onChange={(e) => handleFilterBySize(e)}
-                label={product.size}
-                value={product.size}
-              />
-            </div>
-          ))}
-        </Form>
-        <h6>Zapatos</h6>
-        <Form name="f1" id="formElement">
-          {zapatos.map((product) => (
-            <div key={`default-${product.size}`} className="mb-1">
               <Form.Check
                 className="check"
                 onChange={(e) => handleFilterBySize(e)}
@@ -173,7 +175,7 @@ const Sidebar = ({
           {type.map((t) => (
             <div key={`default-${t.type}`} className="mb-1">
               <Form.Check
-                onChange={(e) => handleFilterBySize(e)}
+                onChange={(e) => handleFilterByType(e)}
                 label={t.type}
                 value={t.type}
               />
