@@ -10,4 +10,10 @@ span.totalTitle {
 }
 p.totalsCheckout {
   font-size: 1.22rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.input-required {
+  color: red;
 }

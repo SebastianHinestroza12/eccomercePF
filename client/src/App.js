@@ -10,24 +10,21 @@ import Home from "./components/Home/home";
 import User from "./components/Login/User/User";
 import Shopping from "./components/Login/User/Shopping";
 import Cart from "./components/Cart/Cart";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import LogAdmin from "./components/Login/Admin/LogAdmin";
 import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
+const initialOptions = {
+  "client-id":
+    "AfDNE98mgkMy8dhaS7qGfn9KML3r3kSIsXt3-jAMMR_gsL2-1bFGijHeHAunQJGSytq1QUWdtMWW02go",
+  currency: "USD",
+  intent: "capture",
+};
+
 function App() {
   return (
-    <PayPalScriptProvider
-      //options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID }}
-      options={{
-        "client-id":
-          "AfDNE98mgkMy8dhaS7qGfn9KML3r3kSIsXt3-jAMMR_gsL2-1bFGijHeHAunQJGSytq1QUWdtMWW02go",
-      }}
-    >
-      {console.log(
-        "process.env.REACT_APP_PAYPAL_CLIENT_ID",
-        process.env.REACT_APP_PAYPAL_CLIENT_ID
-      )}
+    <PayPalScriptProvider options={initialOptions}>
       <Fragment>
         <Route>
           <NavScrollExample />
