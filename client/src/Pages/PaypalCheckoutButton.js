@@ -1,7 +1,7 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 
-const PaypalCheckoutButton = ({ product }) => {
+const PaypalCheckoutButton = ({ product, inputErrors }) => {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState();
 
@@ -18,7 +18,9 @@ const PaypalCheckoutButton = ({ product }) => {
 
   return (
     <PayPalScriptProvider>
+      {console.log("inputErrors", inputErrors)}
       <PayPalButtons
+        disabled={Object.entries(inputErrors).length !== 0}
         onClick={(data, actions) => {
           const hasAlreadyBoughtCourse = false;
           if (hasAlreadyBoughtCourse) {
@@ -43,6 +45,9 @@ const PaypalCheckoutButton = ({ product }) => {
         onApprove={async (data, actions) => {
           const order = await actions.order.capture();
           console.log("order", order);
+          if (order.status === "COMPLETED") {
+            localStorage.removeItem("cartProductsAdded");
+          }
           /**
            * PAYPAL RESPONSE
            * 

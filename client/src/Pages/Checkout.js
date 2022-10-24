@@ -2,7 +2,7 @@ import { Alert, Col, Container, Form, Row } from "react-bootstrap";
 import PaypalCheckoutButton from "./PaypalCheckoutButton";
 import { useSelector } from "react-redux";
 import "./checkout.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 //recibe los datos de los input y verficia errores
 function validateForm(dataFromInput) {
@@ -67,10 +67,10 @@ const Checkout = () => {
     lastname: currentUser.surnames ? currentUser.surnames : "",
     email: currentUser.email ? currentUser.email : "",
     province: "",
-    city: "",
-    postalCode: "",
-    phone: "",
-    address: "",
+    city: currentUser.city ? currentUser.city : "",
+    postalCode: currentUser.postal_code ? currentUser.postal_code : "",
+    phone: currentUser.phone ? currentUser.phone : "",
+    address: currentUser.address ? currentUser.address : "",
   });
   //controlo todos los input del formulario
   const handleChange = (e) => {
@@ -92,8 +92,18 @@ const Checkout = () => {
     description: "Pedido en Qatar e-shop",
     price: getTotal,
   };
+
+  useEffect(() => {
+    setErrors(
+      validateForm({
+        ...input,
+      })
+    );
+  }, []);
+
   return (
     <Container>
+      {console.log("currentUser", currentUser)}
       <h2 className="cart-title">Finalizar compra</h2>
 
       <Row>
@@ -193,12 +203,13 @@ const Checkout = () => {
                 value={input.address}
                 name="address"
               />
+              {errors.address && (
+                <Alert key={"danger"} variant={"danger"}>
+                  {errors.address}
+                </Alert>
+              )}
             </Form.Group>
-            {errors.address && (
-              <Alert key={"danger"} variant={"danger"}>
-                {errors.address}
-              </Alert>
-            )}
+
             <Form.Group className="mb-3">
               <Form.Label>
                 Teléfono <span className="input-required">*</span>
@@ -242,7 +253,7 @@ const Checkout = () => {
               <span>${getTotal.toLocaleString("en-US")}</span>
             </p>
           </section>
-          <PaypalCheckoutButton product={product} />
+          <PaypalCheckoutButton product={product} inputErrors={errors} />
         </Col>
       </Row>
     </Container>

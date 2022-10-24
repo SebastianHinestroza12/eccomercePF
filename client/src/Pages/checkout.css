@@ -17,3 +17,6 @@ p.totalsCheckout {
 .input-required {
   color: red;
 }
+.pay-disabled {
+  cursor: none;
+}
