@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
+import * as Unicons from "@iconscout/react-unicons";
 import axios from "axios";
 import "../NewProduct/newProduct.css";
 import { useDispatch } from "react-redux";
@@ -7,12 +8,27 @@ import { newProductForm } from "../../redux/action";
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/ddl3snuoe/image/upload";
 const CLOUDINARY_UPLOAD_PRESET = "pzsfr2g4";
 
+let noRepeat = new Set();
+
 function NewProduct() {
   const dispatch = useDispatch();
   const [values, setValues] = useState("");
 
+  const [sizeStock, setSizeStock] = useState([{}]);
+
+  const [sizes, setSizes] = useState("");
+
+  // const [ formData, setFormData ] = useState({
+  //   image: "",
+  //     name:'',
+  //     category:"",
+  //     price: '',
+  //     stock: '',
+  //     size: '',
+  //     detail: ""
+  // })
+
   const handleInputValue = async (e) => {
-    console.log("entredd");
     const file = e.target.files[0];
 
     const formData = new FormData();
@@ -32,24 +48,21 @@ function NewProduct() {
     reset,
     formState: { errors },
     handleSubmit,
+    control,
   } = useForm({
     defaultValues: {
-      image: "https://picsum.photos/200/200",
+      image: "",
       name: "Pelota adidas",
       category: "Balones",
       price: 99999,
-      stock: 2,
-      stars: 5,
-      size: "",
+      size_stock: [{ size: "S", stock: "1" }],
       detail: "NADA EN PARTICULAR",
     },
   });
-
-  const onSubmit = (data) => {
-    console.log(data);
-    dispatch(newProductForm(data));
-    reset();
-  };
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "size_stock",
+  });
 
   const selectValidator = (value) => {
     return value !== "---";
@@ -57,11 +70,27 @@ function NewProduct() {
 
   const value = (e) => {
     setValues(e.target.value);
+    noRepeat.clear();
+    setSizes("");
     console.log("function", values);
   };
 
+  const sizeAndStock = (e) => {
+    setSizeStock({
+      ...sizeStock,
+      size: e.target.previousSibling.innerHTML,
+      stock: e.target.value,
+    });
+  };
+
+  const onSubmit = (data) => {
+    console.log("DATAA", data);
+    dispatch(newProductForm(data));
+    reset();
+  };
+
   return (
-    <div class="container">
+    <div className="container">
       <h1
         style={{
           fontFamily: "Verdana",
@@ -73,14 +102,14 @@ function NewProduct() {
         Nuevo Producto
       </h1>
       <hr />
-      <form class="row g-3 mt-3" onSubmit={handleSubmit(onSubmit)}>
-        <div class="col-md-3">
-          <label htmlFor="name" class="form-label">
+      <form className="row g-3 mt-3" onSubmit={handleSubmit(onSubmit)}>
+        <div className="col-md-3">
+          <label htmlFor="name" className="form-label">
             Nombre
           </label>
           <input
             id="name"
-            class="form-control"
+            className="form-control"
             type="text"
             {...register("name", {
               required: true,
@@ -98,13 +127,13 @@ function NewProduct() {
             <p className="textoError">No se permiten números o símbolos</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="category" class="form-label">
+        <div className="col-md-3">
+          <label htmlFor="category" className="form-label">
             Categoría
           </label>
           <select
             onClick={value}
-            class="form-control"
+            className="form-control"
             name="category"
             id="category"
             aria-label="Default select example"
@@ -121,12 +150,12 @@ function NewProduct() {
             <p className="textoError">Debes seleccionar una opción</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="price" class="form-label">
+        <div className="col-md-3">
+          <label htmlFor="price" className="form-label">
             Precio
           </label>
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             id="price"
             {...register("price", {
@@ -141,115 +170,36 @@ function NewProduct() {
             <p className="textoError">Sólo números permitidos</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="stock" class="form-label">
-            Stock
-          </label>
-          <input
-            class="form-control"
-            type="text"
-            id="stock"
-            {...register("stock", {
-              required: true,
-              pattern: /^-?\d*(\.\d+)?$/,
-            })}
-          />
-          {errors.stock?.type === "required" && (
-            <p className="textoError">El campo Stock es requerido</p>
-          )}
-          {errors.stock?.type === "pattern" && (
-            <p className="textoError">Sólo números permitidos</p>
-          )}
-        </div>
-        <div class="col-md-3">
-          <label htmlFor="image" class="form-label">
+        <div className="col-md-3">
+          <label htmlFor="image" className="form-label">
             Imagen
           </label>
-          <input type="file" onChange={handleInputValue} />
           <input
+            ref={register}
+            type="file"
+            id="image"
+            {...register("image", {
+              required: true,
+              onChange: (e) => handleInputValue(e),
+            })}
+          />
+
+          {/* <input
             type="text"
             class="form-control"
             id="image"
             {...register("image", {
               required: true,
             })}
-          />
+          /> */}
           {errors.image?.type === "required" && (
             <p className="textoError">El campo Imagen es requerido</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="stars" class="form-label">
-            Puntuación
-          </label>
-          <select
-            id="stars"
-            name="stars"
-            class="form-select"
-            aria-label="Default select example"
-            {...register("stars", {
-              validate: selectValidator,
-            })}
-          >
-            <option selected>---</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          {errors.stars && (
-            <p className="textoError">Debes seleccionar una opción</p>
-          )}
-        </div>
-        <div class="col-md-3">
-          <label htmlFor="size" class="form-label">
-            Tamaño
-          </label>
-          <select
-            onChange={value}
-            id="size"
-            name="size"
-            class="form-select"
-            aria-label="Default select example"
-            {...register("size", {
-              validate: selectValidator,
-            })}
-          >
-            {values === "Camisetas" ? (
-              <>
-                <option selected>---</option>
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-              </>
-            ) : values === "Botines" ? (
-              <>
-                <option selected>---</option>
-                <option value="1">1</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </>
-            ) : (
-              <>
-                <option selected>---</option>
-                <option value="5.5">5.5</option>
-                <option value="6.5">6.5</option>
-                <option value="7">7</option>
-              </>
-            )}
-          </select>
-          {errors.size && (
-            <p className="textoError">Debes seleccionar una opción</p>
-          )}
-        </div>
-        <div class="col-md-6">
-          <div class="form-floating">
+        <div className="col-md-6">
+          <div className="form-floating">
             <textarea
-              class="form-control"
+              className="form-control"
               placeholder="Leave a comment here"
               id="floatingTextarea"
               {...register("detail", {
@@ -262,18 +212,98 @@ function NewProduct() {
             )}
           </div>
         </div>
-        <div class="col-12 mt-5">
-          <button type="submit" class="btn btn-danger">
+        <div>
+          <span>
+            {sizes.length > 0
+              ? sizes.map((e, index) => (
+                  <div key={index}>
+                    <span>{e}</span>
+                    <input
+                      placeholder="Stock"
+                      onChange={(e) => sizeAndStock(e)}
+                    ></input>
+                  </div>
+                ))
+              : null}
+          </span>
+        </div>
+        {/* PRUEBA */}
+        Tamaño:
+        {fields.map((item, index) => {
+          return (
+            <li className="size-stock" key={item.id}>
+              <select
+                name="select"
+                {...register(`size_stock.${index}.size`, { required: true })}
+              >
+                {values === "Camisetas" ? (
+                  <>
+                    <option selected>---</option>
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                  </>
+                ) : values === "Botines" ? (
+                  <>
+                    <option selected>---</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </>
+                ) : (
+                  <>
+                    <option selected>---</option>
+                    <option value="5.5">5.5</option>
+                    <option value="6.5">6.5</option>
+                    <option value="7">7</option>
+                  </>
+                )}
+              </select>
+
+              {errors.size && (
+                <p className="textoError">Debes seleccionar una opción</p>
+              )}
+
+              <Controller
+                render={({ field }) => <input {...field} />}
+                name={`size_stock.${index}.stock`}
+                control={control}
+              />
+              <button type="button" onClick={() => remove(index)}>
+                <Unicons.UilTrash />
+              </button>
+            </li>
+          );
+        })}
+        <button
+          type="button"
+          onClick={() => {
+            append({ size: "", stock: "" });
+          }}
+        >
+          AGREGAR
+        </button>
+        {/* PRUEBA */}
+        <div className="col-12 mt-5">
+          <button type="submit" className="btn btn-danger">
             Enviar
           </button>
         </div>
-        <div class="container">
-          <div class="alert alert-danger alert-dismissible fade show">
+        <div className="container">
+          <div className="alert alert-danger alert-dismissible fade show">
             <strong>Importante!</strong> Debes llenar los campos correctamente.
             De lo contrario tus datos no serán convalidados
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="alert"
               aria-label="Close"
             ></button>

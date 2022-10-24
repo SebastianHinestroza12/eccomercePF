@@ -1,4 +1,6 @@
-.textoError{
-    color: red;
-    
+.textoError {
+  color: red;
+}
+li.size-stock {
+  list-style: none;
 }

@@ -33,6 +33,7 @@ const rootReducer = (state = initialState, action) => {
         allProducts: payload,
       };
     case "LOAD_PRODUCTS":
+      console.log("reducer payload", payload);
       return {
         ...state,
         newProducts: payload,
@@ -200,12 +201,18 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case "INCREASE_QUANTITY":
-      state.quantityProductsAdded++;
-      state.cartProducts[payload].quantity++;
-      localStorage.setItem(
-        "cartProductsAdded",
-        JSON.stringify([...state.cartProducts])
+      let quantity2 = state.cartProducts[action.payload].quantity;
+      let sizePicked = state.cartProducts[action.payload].sizePicked;
+      let stock_product = state.cartProducts[action.payload].size_stock.filter(
+        (e) => e.size === sizePicked
       );
+      let stock = stock_product[0].stock;
+
+      if (quantity2 < stock) {
+        state.quantityProductsAdded++;
+        state.cartProducts[payload].quantity++;
+      }
+
       return {
         ...state,
       };
