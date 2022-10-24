@@ -26,19 +26,32 @@ function validateForm(dataFromInput) {
   ) {
     errors.lastname = "Ingrese un apellido válido";
   }
-  //email
+  //validacion de provincia
   if (
-    !dataFromInput.lastname ||
-    !regex.test(dataFromInput.lastname) ||
-    dataFromInput.lastname.length < 2
+    !dataFromInput.province ||
+    !regex.test(dataFromInput.province) ||
+    dataFromInput.province.length < 2
   ) {
-    errors.lastname = "Ingrese un apellido válido";
+    errors.province = "Ingrese un nombre de provincia válido";
   }
-  //validar saludable que sea numero
-  if (typeof dataFromInput.phone !== "number") {
-    errors.healthScore = "Ingrese solo números";
+  //validacion de ciudad
+  if (
+    !dataFromInput.city ||
+    !regex.test(dataFromInput.city) ||
+    dataFromInput.city.length < 2
+  ) {
+    errors.city = "Ingrese un nombre de ciudad válido";
   }
-  // console.log("errors", errors);
+
+  //validacion de phone
+  if (dataFromInput.phone.length < 7) {
+    errors.phone = "Ingrese un número de teléfono válido";
+  }
+  //validacion de address
+  if (!dataFromInput.address || dataFromInput.address.length < 5) {
+    errors.address = "Ingrese una dirección válida";
+  }
+  //console.log("errors", errors);
   return errors;
 }
 
@@ -46,7 +59,6 @@ const Checkout = () => {
   const getTotal = useSelector((state) => state.cartTotal);
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const currentUser = useSelector((state) => state.user);
-
   //aqui se guardan los errores
   const [errors, setErrors] = useState({});
   //aqui voy a guardar todos los datos del formulario
@@ -82,7 +94,6 @@ const Checkout = () => {
   };
   return (
     <Container>
-      {console.log("currentUser", currentUser.email)}
       <h2 className="cart-title">Finalizar compra</h2>
 
       <Row>
@@ -151,27 +162,58 @@ const Checkout = () => {
               </Form.Label>
               <Form.Control
                 type="text"
+                onChange={(e) => handleChange(e)}
+                value={input.province}
+                name="province"
                 placeholder="Provincia"
-                className="col-md-6"
               />
               <Form.Control
-                className="col-md-6"
                 type="text"
+                onChange={(e) => handleChange(e)}
+                value={input.city}
+                name="city"
                 placeholder="Ciudad"
               />
+              {errors.city || errors.province ? (
+                <Alert key={"danger"} variant={"danger"}>
+                  {errors.city} <br></br>
+                  {errors.province}
+                </Alert>
+              ) : (
+                ""
+              )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>
                 Dirección <span className="input-required">*</span>
               </Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="text"
+                onChange={(e) => handleChange(e)}
+                value={input.address}
+                name="address"
+              />
             </Form.Group>
-
+            {errors.address && (
+              <Alert key={"danger"} variant={"danger"}>
+                {errors.address}
+              </Alert>
+            )}
             <Form.Group className="mb-3">
               <Form.Label>
                 Teléfono <span className="input-required">*</span>
               </Form.Label>
-              <Form.Control type="text" />
+              <Form.Control
+                type="number"
+                onChange={(e) => handleChange(e)}
+                value={input.phone}
+                name="phone"
+              />
+              {errors.phone && (
+                <Alert key={"danger"} variant={"danger"}>
+                  {errors.phone}
+                </Alert>
+              )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Código postal </Form.Label>
