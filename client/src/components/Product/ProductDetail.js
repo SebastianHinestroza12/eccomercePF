@@ -1,20 +1,20 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
-import React, { useState, useEffect } from "react";
-import * as Unicons from "@iconscout/react-unicons";
+import { Col, Container, Row } from "react-bootstrap";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./productDetail.css";
 import { getProductDetail } from "../../redux/action";
 import { useParams } from "react-router-dom";
+import AddToCart from "./AddToCart";
 
 const ProductDetail = () => {
   const { productId } = useParams();
 
   //loader hasta que se carga el detalle del producto
   const [loading, setLoading] = useState([true]);
+  const [idSizeStock, setidSizeStock] = useState(0);
 
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
-
   useEffect(() => {
     new Promise((resolve) => {
       resolve(dispatch(getProductDetail(productId)));
@@ -22,19 +22,6 @@ const ProductDetail = () => {
       setLoading(false);
     });
   }, [dispatch, productId]);
-
-  /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
-  const [quantity, setQuantity] = useState(0);
-
-  function addQuantityToCart(actionButton) {
-    if (quantity === 0 && actionButton === "minus") {
-      console.log("no puedo restar mas");
-    } else if (actionButton === "minus") {
-      setQuantity(quantity - 1);
-    } else {
-      setQuantity(quantity + 1);
-    }
-  }
 
   function writeRatingStars(rating) {
     let ratingStars = [];
@@ -49,6 +36,7 @@ const ProductDetail = () => {
 
   return (
     <Container className="product-detail">
+      {console.log("productDetail", productDetail)}
       {loading ? (
         <img src="/images/loader-blue.gif" className="loading" alt="loader" />
       ) : (
@@ -62,45 +50,37 @@ const ProductDetail = () => {
               <div className="rating">
                 {writeRatingStars(productDetail.stars)}
               </div>
+
               <hr></hr>
               <h4>$ {productDetail.price}</h4>
               <p className="detail-text">{productDetail.detail}</p>
             </section>
-            <section className="buttonsAddToCart">
+            <section className="sizesPicker">
               <div>
-                Cantidad
-                <div className="qty-box">
-                  <span
-                    className="cartButtons decrease"
-                    onClick={() => addQuantityToCart("minus")}
-                  >
-                    <Unicons.UilMinus />
-                  </span>
-                  <input
-                    type="number"
-                    id="quantity_6347dd6ab108a"
-                    className="input-text qty text"
-                    step="1"
-                    min="1"
-                    max=""
-                    name="quantity"
-                    value={quantity}
-                    title="Qty"
-                    size="4"
-                    placeholder=""
-                    inputMode="numeric"
-                    readOnly={true}
-                  />
-                  <span
-                    className="cartButtons increase"
-                    onClick={() => addQuantityToCart("plus")}
-                  >
-                    <Unicons.UilPlus />
-                  </span>
-                </div>
+                Seleccionar talla: &nbsp;&nbsp;&nbsp;
+                <select
+                  className="product-size"
+                  name="select"
+                  onChange={(e) => {
+                    setidSizeStock(e.target.value);
+                  }}
+                >
+                  {productDetail.size_stock.map((sizeArray, index) => (
+                    <option value={index}>{sizeArray.size}</option>
+                  ))}
+                </select>
               </div>
-
-              <Button className="buy">COMPRAR</Button>
+              <span className="stock">
+                {idSizeStock >= 0
+                  ? `Disponibles: ${productDetail.size_stock[idSizeStock].stock} unidades`
+                  : ""}
+              </span>
+            </section>
+            <section className="buttonsAddToCart">
+              <AddToCart
+                sizePicked={productDetail.size_stock[idSizeStock].size}
+                stock={productDetail.size_stock[idSizeStock].stock}
+              />
             </section>
           </Col>
         </Row>

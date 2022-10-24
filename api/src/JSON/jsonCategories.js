@@ -3,10 +3,13 @@ const jsonCategories = [
     "name": "Jersey"
   },
   {
-    "name": "Balón"
+    "name": "Balon"
   },
   {
-    "name": "Botínclear"
+    "name": "Calzado"
+  },
+  {
+    "name": "Short"
   },
 ];
 

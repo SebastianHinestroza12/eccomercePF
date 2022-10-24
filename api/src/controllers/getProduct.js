@@ -33,26 +33,56 @@ router.get("/", async (req, res) => {
       return product[e.name] ? false : (product[e.name] = true);
     });
 
-    productSet.forEach((el) => {
+    /*productSet.forEach((el) => {
       Product.findOrCreate({
         where: {
           name: el.name,
           price: el.price,
           detail: el.detail,
-          size: el.size,
+          size_stock: el.size_stock,
           image: el.image,
-          stock: el.stock,
           stars: el.stars,
           visible: el.visible,
+          category: el.category,
         },
-      });
+      })
+    });*/
+
+    const consult1 = await Product.findAll({
+      where: {
+        name: productSet[0].name
+      }
     });
 
+    if(!consult1[0]){
+      for (let i = 0; i < productSet.length; i++) {
+  
+        const matchingCategorys = await Category.findAll({
+          where: {
+              name: {
+                  [Op.eq]: productSet[i].category,
+              },
+          },
+        });
+
+        let newProduct = await Product.create({
+          name: productSet[i].name,
+          price: productSet[i].price,
+          detail: productSet[i].detail,
+          size_stock: productSet[i].size_stock,
+          image: productSet[i].image,
+          stars: productSet[i].stars,
+          visible: productSet[i].visible,
+        })
+        await newProduct.setCategories(matchingCategorys);
+      };
+    }
+
     const consult = await Product.findAll({ include: Category });
-    // console.log(consult.length);
+
     return res.status(200).json(consult);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 });
 

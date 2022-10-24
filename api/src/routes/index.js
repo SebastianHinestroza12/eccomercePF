@@ -9,9 +9,15 @@ const getFilterType = require('../controllers/getFilterType');
 const getFilterSize = require('../controllers/getFilterSize');
 const getFilterEquipement = require('../controllers/getFilterEquipment');
 
-const postProduct = require('./postProduct');
-const postAdmin = require('./postAdmin');
+const getLogin = require('../controllers/User/getLogin');
+const postRegister = require('../controllers/User/postRegister');
+const modifyUser = require('../controllers/User/modifyUser');
 
+const postProduct = require('./postProduct');
+const postCategory = require('./postCategory');
+const postOrder = require('./postOrder');
+
+const postAdmin = require('./postAdmin');
 const getCategories = require('./getCategories');
 
 router.use('/product', getProduct);
@@ -22,11 +28,16 @@ router.use('/filterType', getFilterType);
 router.use('/filterSize', getFilterSize);
 router.use('/filterEquipement', getFilterEquipement);
 
-
 router.use('/postProduct', postProduct);
+router.use('/postCategory', postCategory);
 router.use('/getCategories', getCategories);
 
-//
 router.use('/postAdmin', postAdmin);
+router.use('/postOrder', postOrder);
+
+// login , register Y recuperePaaswword users
+router.use('/user/login', getLogin);
+router.use('/user/register', postRegister);
+router.use('/user/modify', modifyUser);
 
 module.exports = router;

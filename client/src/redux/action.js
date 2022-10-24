@@ -5,6 +5,7 @@ export const getAllProducts = () => {
     return axios("/product")
       .then((response) => response.data)
       .then((products) => {
+        console.log(products);
         dispatch({ type: "GET_ALL_PRODUCTS", payload: products });
       })
       .catch((error) => {
@@ -21,6 +22,32 @@ export const getProductDetail = (productId) => {
       .then((productDetail) => {
         dispatch({ type: "GET_PRODUCT_DETAIL", payload: productDetail });
       });
+  };
+};
+
+//REGISTRAR USUARIOS LOGUADOS EN DB
+export const postRegister = (user) => {
+  return async (dispatch) => {
+    console.log("action", user);
+    await axios.post(`/user/register`, user);
+  };
+};
+
+// EDITAR DATOS DE USUARIO
+
+export const putUser = (data) => {
+  return async function (dispatch) {
+    try {
+      console.log("llega action", data);
+      let json = await axios.put("/user/modify", data);
+      console.log("action ok ", json);
+      return dispatch({
+        type: "PUT_USER",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -46,8 +73,13 @@ export const SearchByName = (name) => {
         dispatch({ type: "SEARCH_PRODUCTS", payload: productFound });
       })
       .catch((error) => {
+        dispatch({
+          type: "SEARCH_PRODUCTS",
+          payload: error.response.data.error,
+        });
         console.log("AXIOS error", typeof error.response.data.error);
         return error.response.data.error;
+        // console.log(error)
       });
   };
 };
@@ -60,12 +92,77 @@ export function filterByName(payload) {
 }
 
 //CREACION DE PRODUCTO
-export const envioForm = (data) => {
+export const newProductForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postProduct`, data);
     dispatch({
       type: "LOAD_PRODUCTS",
       payload: data,
-    })
+    });
+  };
+};
+
+export function addProductToCart(payload, quantity, sizePicked) {
+  return {
+    type: "ADD_PRODUCTS_TO_CART",
+    payload: { ...payload, quantity, sizePicked },
+    quantity,
+  };
+}
+
+export function deleteProductFromCart(payload, quantity) {
+  return {
+    type: "DELETE_PRODUCT_FROM_CART",
+    payload,
+    quantity,
+  };
+}
+
+export function IncreaseQuantity(payload) {
+  return {
+    type: "INCREASE_QUANTITY",
+    payload,
+  };
+}
+export function DecreaseQuantity(payload) {
+  return {
+    type: "DECREASE_QUANTITY",
+    payload,
+  };
+}
+
+export function RemoveItemFromCart(payload, quantity) {
+  return {
+    type: "REMOVE_ITEM_FROM_CART",
+    payload,
+    quantity,
+  };
+}
+
+export const filterBySize = (payload) => {
+  return {
+    type: "ALL_FILTERS",
+    payload,
+  };
+};
+
+export const filterByType = (payload) => {
+  return {
+    type: "FILTER_BY_TYPE",
+    payload,
+  };
+};
+
+export const filterByCategory = (payload) => {
+  return {
+    type: "FILTER_BY_CATEGORY",
+    payload,
+  };
+};
+
+export const getCartTotal = (payload) => {
+  return {
+    type: "GET_TOTAL_CART",
+    payload,
   };
 };

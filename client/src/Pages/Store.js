@@ -5,12 +5,7 @@ import "./store.css";
 /**
  * BOOTSTRAP IMPORTS
  */
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Sidebar from "../components/Product/Sidebar";
-import TopStoreFilters from "../components/Filter/TopStoreFilters";
-import Carousel from "../components/Carousel/Carousel";
+import { Container, Row } from "react-bootstrap";
 
 const Store = () => {
   //estado para la carga
@@ -18,15 +13,9 @@ const Store = () => {
 
   return (
     <>
-      <Carousel />
       <Container>
         <Row>
-          <Col md={3} className="sidebar">
-            <Sidebar />
-          </Col>
-          <Col>
-            <Cards loading={loading} setLoading={setLoading} />
-          </Col>
+          <Cards loading={loading} setLoading={setLoading} />
         </Row>
       </Container>
     </>

@@ -9,12 +9,15 @@ const Searchbar = ({ setLoading }) => {
 
   //estado local para coger el nombre que se quiere buscar
   const [name, setName] = useState("");
-  const [errors, seterrors] = useState({ name: "vacio" });
+  const [errors, seterrors] = useState({ name: "" });
 
   //se dispara cuando se presiona el btn de busqueda
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!name.length) {
+      seterrors({ name: "Colocar un producto !!" });
+    }
     dispatch(SearchByName(name));
   };
 
@@ -42,7 +45,7 @@ const Searchbar = ({ setLoading }) => {
       errors.name = "Enter minimum 2 characters";
     }
     if (value.name.length === 0) {
-      errors.name = "vacio";
+      errors.name = "";
     }
     return errors;
   }
@@ -64,6 +67,11 @@ const Searchbar = ({ setLoading }) => {
       >
         BUSCAR
       </Button>
+      {errors.name && (
+        <div className="alert alert-danger" role="alert">
+          <p>{errors.name}</p>
+        </div>
+      )}
     </InputGroup>
   );
 };

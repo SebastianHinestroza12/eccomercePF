@@ -9,6 +9,10 @@ module.exports = (sequelize) => {
         autoIncrement: true,
         primaryKey: true,
       },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,

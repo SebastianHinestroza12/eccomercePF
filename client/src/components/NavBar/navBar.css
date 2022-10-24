@@ -33,7 +33,25 @@
   color: white;
   font-size: 1.1rem;
   font-weight: 300;
+  display: flex;
 }
+a.navLinks.loginButton {
+  border-radius: 4px;
+}
+
+a.navLinks.loginButton button {
+  background: none;
+  color: white;
+  border: none;
+}
+a.navLinks.loginButton:hover {
+  background: white;
+  color: var(--primary-color);
+}
+a.navLinks.loginButton:hover button {
+  color: var(--primary-color);
+}
+
 .navbar a:hover {
   border-bottom: 1px solid white;
   color: white;
@@ -55,18 +73,32 @@
 .navbar-nav .show > .nav-link {
   color: white;
 }
+.navbar button.carrito a,
 .navbar .carrito {
   color: white;
   width: max-content;
-  border-radius: 500px;
+  border-radius: 7px;
+  background: none;
 }
-.navbar a.carrito:hover {
+.navbar a.carrito:hover,
+.navbar button.carrito:hover {
   border-bottom: 1px solid white;
+  color: var(--primary-color);
+  background: white;
+}
+
+.navbar button.carrito:hover a {
   color: var(--primary-color);
   background: white;
 }
 .navbar .dropdown-item:hover {
   background-color: var(--grey200);
+  color: var(--primary-color);
+}
+.navbar .divNav a.navLinks.carrito button.buttonCartWidget {
+  background: none;
+}
+.navbar a.carrito:hover button {
   color: var(--primary-color);
 }
 .navbar-toggler {
@@ -91,6 +123,8 @@ ESTILOS PARA MOBILE
   }
   .navbar .divNav {
     margin-left: 0;
+    grid-gap: 0;
     gap: 0;
+    margin-top: 2rem;
   }
 }

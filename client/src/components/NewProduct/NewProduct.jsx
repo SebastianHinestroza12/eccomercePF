@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from 'axios';
 import "../NewProduct/newProduct.css";
 import { useDispatch } from "react-redux";
-import { envioForm } from "../../redux/action";
+import { newProductForm } from "../../redux/action";
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ddl3snuoe/image/upload';
+const CLOUDINARY_UPLOAD_PRESET = 'pzsfr2g4';
 
 function NewProduct() {
   const dispatch = useDispatch();
+  const [values, setValues] = useState("");
+
+  const handleInputValue = (async (e) => {
+    console.log('entredd')
+    const file = e.target.files[0];
+  
+    const formData = new FormData();
+    formData.append('file',file);
+    formData.append('upload_preset',CLOUDINARY_UPLOAD_PRESET);
+  
+    const res = await axios.post(CLOUDINARY_URL, formData, {
+      headers:{
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    console.log(res.data.secure_url);
+  })
 
   const {
     register,
@@ -15,20 +35,31 @@ function NewProduct() {
   } = useForm({
     defaultValues: {
       image: "https://picsum.photos/200/200",
+      name:'Pelota adidas',
+      category:"Balones",
+      price: 99999,
+      stock: 2,
+      stars: 5,
+      size: 7,
+      detail: "NADA EN PARTICULAR"
     },
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    alert("Se enviaron los datos correctamente");
-    dispatch(envioForm(data));
-    reset()
+    console.log(data)
+    dispatch(newProductForm(data));
+    reset();
   };
 
   const selectValidator = (value) => {
     return value !== "---";
   };
 
+  const value = (e) => {
+    setValues(e.target.value);
+    console.log("function", values);
+  };
+ 
   return (
     <div class="container">
       <h1
@@ -71,20 +102,23 @@ function NewProduct() {
           <label htmlFor="category" class="form-label">
             Categoría
           </label>
-          <input
+          <select
+            onClick={value}
             class="form-control"
-            type="text"
+            name="category"
             id="category"
+            aria-label="Default select example"
             {...register("category", {
-              required: true,
-              pattern: /^[a-zA-Z\s]{0,255}$/,
+              validate: selectValidator,
             })}
-          />
-          {errors.category?.type === "required" && (
-            <p className="textoError">El campo Categoría es requerido</p>
-          )}
-          {errors.category?.type === "pattern" && (
-            <p className="textoError">No se permiten números o símbolos</p>
+          >
+            <option selected>---</option>
+            <option value="Camisetas">Camisetas</option>
+            <option value="Botines">Botines</option>
+            <option value="Balones">Balones</option>
+          </select>
+          {errors.category && (
+            <p className="textoError">Debes seleccionar una opción</p>
           )}
         </div>
         <div class="col-md-3">
@@ -103,7 +137,9 @@ function NewProduct() {
           {errors.price?.type === "required" && (
             <p className="textoError">El campo Precio es requerido</p>
           )}
-          {errors.price?.type === "pattern" && <p className="textoError">Sólo números permitidos</p>}
+          {errors.price?.type === "pattern" && (
+            <p className="textoError">Sólo números permitidos</p>
+          )}
         </div>
         <div class="col-md-3">
           <label htmlFor="stock" class="form-label">
@@ -121,21 +157,24 @@ function NewProduct() {
           {errors.stock?.type === "required" && (
             <p className="textoError">El campo Stock es requerido</p>
           )}
-          {errors.stock?.type === "pattern" && <p className="textoError">Sólo números permitidos</p>}
+          {errors.stock?.type === "pattern" && (
+            <p className="textoError">Sólo números permitidos</p>
+          )}
         </div>
         <div class="col-md-3">
           <label htmlFor="image" class="form-label">
             Imagen
           </label>
+          <input type="file" onChange={handleInputValue}/>
           <input
-            class="form-control"
             type="text"
+            class="form-control"
             id="image"
             {...register("image", {
               required: true,
             })}
           />
-          {errors.image ?.type === "required" && (
+          {errors.image?.type === "required" && (
             <p className="textoError">El campo Imagen es requerido</p>
           )}
         </div>
@@ -159,13 +198,16 @@ function NewProduct() {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          {errors.stars && <p className="textoError">Debes seleccionar una opción</p>}
+          {errors.stars && (
+            <p className="textoError">Debes seleccionar una opción</p>
+          )}
         </div>
         <div class="col-md-3">
           <label htmlFor="size" class="form-label">
             Tamaño
           </label>
           <select
+            onChange={value}
             id="size"
             name="size"
             class="form-select"
@@ -174,15 +216,35 @@ function NewProduct() {
               validate: selectValidator,
             })}
           >
-            <option selected>---</option>
-            <option value="XS">XS</option>
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
+            {values === "Camisetas" ? (
+              <>
+                <option selected>---</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </>
+            ) : values === "Botines" ? (
+              <>
+                <option selected>---</option>
+                <option value="1">1</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </>
+            ) : (
+              <>
+                <option selected>---</option>
+                <option value="5.5">5.5</option>
+                <option value="6.5">6.5</option>
+                <option value="7">7</option>
+              </>
+            )}
           </select>
-          {errors.size && <p className="textoError">Debes seleccionar una opción</p>}
+          {errors.size && (
+            <p className="textoError">Debes seleccionar una opción</p>
+          )}
         </div>
         <div class="col-md-6">
           <div class="form-floating">
@@ -204,6 +266,17 @@ function NewProduct() {
           <button type="submit" class="btn btn-danger">
             Enviar
           </button>
+        </div>
+        <div class="container">
+        <div class="alert alert-danger alert-dismissible fade show">
+              <strong>Importante!</strong> Debes llenar los campos correctamente. De lo contrario tus datos no serán convalidados
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
         </div>
       </form>
     </div>

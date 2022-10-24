@@ -21,26 +21,24 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(1000),
         allowNull: false,
       },
-      size: {
-        type: DataTypes.STRING,
+      size_stock: {
+        type: DataTypes.ARRAY(DataTypes.JSONB),
         allowNull: false,
       },
       image: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      stock: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
       stars: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        defaultValue: 0
       },
       visible: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
-      }
+        defaultValue: true
+      },
     },
     {
       timestamps: false,
