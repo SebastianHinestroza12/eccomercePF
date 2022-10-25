@@ -83,6 +83,7 @@ const Cards = ({ loading, setLoading }) => {
           {Array.isArray(actualproducts) ? (
             actualproducts.map((products) => (
               <Col md={3} xs={6} key={products.id}>
+                {console.log("products", products)}
                 <ProductCard
                   name={products.name}
                   price={products.price}
