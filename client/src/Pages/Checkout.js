@@ -99,7 +99,7 @@ const Checkout = () => {
         ...input,
       })
     );
-  }, []);
+  }, [input]);
 
   return (
     <Container>

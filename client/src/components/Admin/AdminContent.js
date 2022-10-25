@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom";
+import CreateProduct from "./views/CreateProduct";
 import ListProducts from "./views/ListProducts";
-import NewProduct from "./views/NewProduct";
 const ADMIN_ROUTE = "panel-control";
 
 const AdminContent = () => {
@@ -10,7 +10,7 @@ const AdminContent = () => {
         <ListProducts />
       </Route>
       <Route exact path={`/${ADMIN_ROUTE}/nuevo-producto`}>
-        <NewProduct />
+        <CreateProduct />
       </Route>
     </>
   );
