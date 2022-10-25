@@ -21,7 +21,6 @@ const initialOptions = {
   currency: "USD",
   intent: "capture",
 };
-
 function App() {
   return (
     <PayPalScriptProvider options={initialOptions}>
@@ -35,7 +34,7 @@ function App() {
         <Route exact path={"/store"}>
           <Store />
         </Route>
-        <Route path={"/detail/:productId"}>
+        <Route path={"/store/:productId"}>
           <ProductDetail />
         </Route>
         <Route path={"/user"}>

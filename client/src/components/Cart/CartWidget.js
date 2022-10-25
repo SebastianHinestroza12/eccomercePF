@@ -13,7 +13,7 @@ const CartWidget = () => {
   const productsInTheCart = useSelector((state) => state.cartProducts);
 
   function goToProduct(id) {
-    history.push(`/detail/${id}`);
+    history.push(`/store/${id}`);
   }
 
   return (

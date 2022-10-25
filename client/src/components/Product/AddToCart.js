@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, Toast } from "react-bootstrap";
 import { useState } from "react";
 import { addProductToCart } from "../../redux/action";
-import * as Unicons from "@iconscout/react-unicons";
 import "./addToCart.css";
 import ItemCount from "../Cart/ItemCount";
 import { Link } from "react-router-dom";
@@ -59,12 +58,6 @@ const AddToCart = ({ sizePicked, stock }) => {
       <Button className="buy" onClick={() => addToCartButton()}>
         COMPRAR
       </Button>
-      <Link to={'/store'}>
-      <Button className="btn-primary">
-      <Unicons.UilArrowLeft />
-                  SEGUIR COMPRANDO
-      </Button>
-      </Link>
     </>
   );
 };
