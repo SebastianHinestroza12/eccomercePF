@@ -7,7 +7,9 @@ const cartWidgetNumber = () => {
 };
 
 const initialState = {
-  user: [],
+  user: localStorage.getItem("currentUser")
+    ? JSON.parse(localStorage.getItem("currentUser"))
+    : [],
   allProducts: [],
   products: [],
   productDetail: [],
@@ -31,6 +33,7 @@ const rootReducer = (state = initialState, action) => {
         allProducts: payload,
       };
     case "LOAD_PRODUCTS":
+      console.log("reducer payload", payload);
       return {
         ...state,
         newProducts: payload,
@@ -41,15 +44,15 @@ const rootReducer = (state = initialState, action) => {
         productDetail: payload,
       };
     case "POST_REGISTER":
-      console.log("reducer", payload);
       return {
         ...state,
         usuario: payload,
       };
     case "PUT_USER":
+      localStorage.setItem("currentUser", JSON.stringify(payload.update_Data));
       return {
         ...state,
-        user: payload,
+        user: payload.update_Data,
       };
 
     case "ORDER_BY_PRICE":
@@ -117,18 +120,10 @@ const rootReducer = (state = initialState, action) => {
       const productsFiltered = new Set();
       const filters = () => {
         for (let element of payload) {
-          console.log("payload", element);
-          console.log(allProducts.length);
-
           for (let i = 0; i < allProducts.length; i++) {
-            console.log("all", allProducts[i]);
             let s = 0;
-
             while (s < allProducts[i].size_stock.length) {
-              console.log("while", allProducts[i].size_stock[s]);
-              console.log("if", allProducts[i].size_stock[s].size, element);
               if (allProducts[i].size_stock[s].size === element) {
-                console.log("iguales");
                 productsFiltered.add(allProducts[i]);
               }
               s++;
@@ -139,7 +134,6 @@ const rootReducer = (state = initialState, action) => {
         return productsFiltered;
       };
       const productsResult = Array.from(filters());
-      console.log("productsResult", productsResult);
       return {
         ...state,
         products: productsResult,
@@ -178,7 +172,6 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "ADD_PRODUCTS_TO_CART":
-      console.log("payload.sizePicked", payload.sizePicked);
       let productAlreadyInTheCart = state.cartProducts.findIndex(
         (element) =>
           element.id === payload.id && element.sizePicked === payload.sizePicked
@@ -209,10 +202,12 @@ const rootReducer = (state = initialState, action) => {
 
     case "INCREASE_QUANTITY":
       let quantity2 = state.cartProducts[action.payload].quantity;
-      let sizePicked = state.cartProducts[action.payload].sizePicked
-      let stock_product = state.cartProducts[action.payload].size_stock.filter((e) => e.size === sizePicked)
-      let stock = stock_product[0].stock
-      
+      let sizePicked = state.cartProducts[action.payload].sizePicked;
+      let stock_product = state.cartProducts[action.payload].size_stock.filter(
+        (e) => e.size === sizePicked
+      );
+      let stock = stock_product[0].stock;
+
       if (quantity2 < stock) {
         state.quantityProductsAdded++;
         state.cartProducts[payload].quantity++;
@@ -224,12 +219,15 @@ const rootReducer = (state = initialState, action) => {
 
     case "DECREASE_QUANTITY":
       let quantity1 = state.cartProducts[action.payload].quantity;
-      console.log("quantity", action.payload);
       if (quantity1 > 1) {
         state.quantityProductsAdded--;
         state.cartProducts[payload].quantity--;
       }
 
+      localStorage.setItem(
+        "cartProductsAdded",
+        JSON.stringify([...state.cartProducts])
+      );
       return {
         ...state,
       };

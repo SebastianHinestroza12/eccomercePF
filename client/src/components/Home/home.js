@@ -1,47 +1,56 @@
-import React from "react";
 import Carousel from "../Carousel/Carousel";
 import Nav from "react-bootstrap/Nav";
+import { getAllProducts } from "../../redux/action";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
 import './home.css'
 
 const Home = () => {
+    
+    const dispatch = useDispatch();
+    useEffect(()=> {
+        dispatch(getAllProducts());
+    }, [dispatch]);
+
     return (
         <div>
             <Carousel />
             <div className="filters_container mt-3">
-            <main class="page-content">
-                <div class="home-card">
-                    <div class="content">
-                        <h2 class="title">Camisetas</h2>
-                        <p class="copy">Todas las camisetas de las mejores selecciones del mundo</p>
+            <main className="page-content">
+                <div className="home-card">
+                    <div className="content">
+                        <h2 className="title">Camisetas</h2>
+                        <p className="copy">Todas las camisetas de las mejores selecciones del mundo</p>
                         <Nav.Link href="/store" className="navLinks">
-                            <button class="home-btn">Ir a tienda</button>
+                            <button className="home-btn">Ir a tienda</button>
                         </Nav.Link>
                     </div>
                 </div>
-                <div class="home-card">
-                <div class="content">
-                      <h2 class="title">Pantalones</h2>
-                      <p class="copy">Todos los pantalones de las mejores selecciones del mundo</p>
+                <div className="home-card">
+                <div className="content">
+                      <h2 className="title">Pantalones</h2>
+                      <p className="copy">Todos los pantalones de las mejores selecciones del mundo</p>
                       <Nav.Link href="/store" className="navLinks">
-                        <button class="home-btn">Ir a tienda</button>
+                        <button className="home-btn">Ir a tienda</button>
                       </Nav.Link>
                     </div>
                 </div>
-                <div class="home-card">
-                  <div class="content">
-                    <h2 class="title">Botines</h2>
-                    <p class="copy">Botines de los mejores jugadores del mundo</p>
+                <div className="home-card">
+                  <div className="content">
+                    <h2 className="title">Botines</h2>
+                    <p className="copy">Botines de los mejores jugadores del mundo</p>
                     <Nav.Link href="/store" className="navLinks">
-                        <button class="home-btn">Ir a tienda</button>
+                        <button className="home-btn">Ir a tienda</button>
                     </Nav.Link>
                   </div>
                 </div>
-                <div class="home-card">
-                  <div class="content">
-                    <h2 class="title">Balones</h2>
-                    <p class="copy">Balones oficiales del mundial, incluido el balon de entrenamiento!</p>
+                <div className="home-card">
+                  <div className="content">
+                    <h2 className="title">Balones</h2>
+                    <p className="copy">Balones oficiales del mundial, incluido el balon de entrenamiento!</p>
                     <Nav.Link href="/store" className="navLinks">
-                        <button class="home-btn">Ir a tienda</button>
+                        <button className="home-btn">Ir a tienda</button>
                     </Nav.Link>
                   </div>
                 </div>

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { User } = require('../../db');
 
 router.put('/', async (req, res) => {
-  const { name, email, surnames, picture, address, country, city, postal_code, phone, dni } = req.body;
+  const { name, email, surnames, picture, address, country, city, postal_code, phone, dni, favorites } = req.body;
 
   try {
 
@@ -17,7 +17,7 @@ router.put('/', async (req, res) => {
     })
     else {
       if (name || surnames || picture || address || country || city || postal_code || phone || dni) {
-        await User.update({ name, surnames, picture, address, country, city, postal_code, phone, dni }, {
+        await User.update({ name, surnames, picture, address, country, city, postal_code, phone, dni, favorites }, {
           where: {
             email
           }

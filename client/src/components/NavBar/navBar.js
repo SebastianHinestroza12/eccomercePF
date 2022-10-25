@@ -41,22 +41,15 @@ function NavScrollExample() {
                 <NavDropdown
                   title="Mi cuenta"
                   id="navbarScrollingDropdown"
-                  className="linkcs"
-                >
-                  <Link to={"/user"}>
-                    <NavDropdown.Item href="#action3">
-                      Mi perfil
-                    </NavDropdown.Item>
-                  </Link>
-                  <Link to="/shopping">
-                    <NavDropdown.Item href="#action4">
-                      Mis compras
-                    </NavDropdown.Item>
-                  </Link>
+                  className="linkcs">
+                    
+                  <NavDropdown.Item as={Link} to="/user"> Mi perfil </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/shopping"> Mis compras </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action5">
-                    Something else
+                  Something else
                   </NavDropdown.Item>
+                  
                 </NavDropdown>
               )}
             </div>
