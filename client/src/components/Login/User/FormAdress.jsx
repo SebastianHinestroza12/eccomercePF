@@ -1,9 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { putUser } from '../../../redux/action';
+import { putUser } from "../../../redux/action";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function FormAdress() {
   const dispatch = useDispatch();
@@ -15,19 +15,26 @@ function FormAdress() {
     handleSubmit,
   } = useForm({
     defaultValues: {
+      name: "Liss",
+      surnames: "Lindao",
+      address: "Italia 316",
+      city: "Cordoba",
+      country: "Argentina",
+      phone: 9543757605859,
+      postal_code: 5000,
+      dni: 31256762,
     },
   });
-  
 
   const onSubmit = (data) => {
     console.log("enviando formulario", data.email);
     dispatch(putUser(data));
     Swal.fire({
       title: ` Datos guardados con exitos `,
-      icon: 'success',
+      icon: "success",
       timer: 2000,
-      confirmButtonColor: 'green',
-    })
+      confirmButtonColor: "green",
+    });
     reset();
   };
 
@@ -58,9 +65,8 @@ function FormAdress() {
           </div>
           <div class="modal-body">
             <form class="row g-1">
-
               {/* -------INPUT EMAIL-------- */}
-                      <div class="col-md-6">
+              <div class="col-md-6">
                 <label class="form-label" htmlFor="name">
                   Email
                 </label>
@@ -71,8 +77,7 @@ function FormAdress() {
                   name="email"
                   id="email"
                   // disabled={true}
-                  {...register("email", {
-                  })}
+                  {...register("email", {})}
                 />
               </div>
 
@@ -287,11 +292,13 @@ function FormAdress() {
               type="submit"
               class="btn btn-danger"
               onClick={handleSubmit(onSubmit)}
-            >Guardar cambios
+            >
+              Guardar cambios
             </button>
 
             <div class="alert alert-warning alert-dismissible fade show">
-              <strong>Importante!</strong> Debes llenar los campos correctamente para que tus datos sean convalidados
+              <strong>Importante!</strong> Debes llenar los campos correctamente
+              para que tus datos sean convalidados
               <button
                 type="button"
                 class="btn-close"

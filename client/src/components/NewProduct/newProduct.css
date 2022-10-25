@@ -1,4 +1,14 @@
-.textoError{
-    color: red;
-    
+.textoError {
+  color: red;
+}
+li.size-stock {
+  list-style: none;
+  display: flex;
+}
+.new-product div,
+form button.buy.btn.btn-primary {
+  margin-top: 1.2rem;
+}
+select.form-control {
+  padding: 1rem;
 }
