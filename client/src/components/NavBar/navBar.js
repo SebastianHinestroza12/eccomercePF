@@ -9,10 +9,12 @@ import "./navBar.css";
 import Searchbar from "./Searchbar";
 import CartWidget from "../Cart/CartWidget";
 import Login from "../Login/User/Login.jsx";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function NavScrollExample() {
+  const { isAuthenticated } = useAuth0();
+
   return (
-    
     <Navbar className="navv" variant="dark" expand="lg">
       <Container className="navbar">
         <Link to={`/`} className="navbar-brand">
@@ -35,17 +37,21 @@ function NavScrollExample() {
                 <Unicons.UilUser />
                 <Login />
               </Link>
-              <NavDropdown
-                title="Mi cuenta"
-                id="navbarScrollingDropdown"
-                className="linkcs">
+              {isAuthenticated && (
+                <NavDropdown
+                  title="Mi cuenta"
+                  id="navbarScrollingDropdown"
+                  className="linkcs">
+                    
                   <NavDropdown.Item as={Link} to="/user"> Mi perfil </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/shopping"> Mis compras </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action5">
                   Something else
                   </NavDropdown.Item>
-              </NavDropdown>
+                  
+                </NavDropdown>
+              )}
             </div>
           </Nav>
         </Navbar.Collapse>

@@ -3,6 +3,12 @@
   min-height: 380px;
   margin-bottom: 2rem;
 }
+.card.user-profile {
+  border: none;
+  min-height: 380px;
+  margin-bottom: 2rem;
+  padding: 4rem;
+}
 .card-title.h5 {
   font-size: 1rem;
 }
