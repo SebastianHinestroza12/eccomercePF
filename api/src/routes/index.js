@@ -17,6 +17,7 @@ const modifyUser = require('../controllers/User/modifyUser');
 // orden del cliente
 const postOrder = require('../controllers/Orders/postOrder');
 const modifyStatusOrder = require('../controllers/Orders/modifyStatus');
+const OrderId = require('../controllers/Orders/OrderId');
 
 
 
@@ -48,5 +49,6 @@ router.use('/user/modify', modifyUser);
 // Ordenes de usuarios
 router.use('/order', modifyStatusOrder);
 router.use('/order', postOrder);
+router.use('/order', OrderId);
 
 module.exports = router;
