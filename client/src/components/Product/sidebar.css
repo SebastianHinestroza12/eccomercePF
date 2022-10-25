@@ -1,4 +1,15 @@
 .sidebar-btn {
-    border: 1px solid black;
-    background-color: aqua;
+  border: 1px solid black;
+  background-color: aqua;
+}
+.filters_container.list-group.list-group-flush {
+  padding: 2rem;
+}
+.sidebar .filters_container button::before {
+  content: ">";
+  margin-right: 18px;
+}
+.sidebar .filters_container button:hover {
+  background: var(--third-color);
+  color: white;
 }

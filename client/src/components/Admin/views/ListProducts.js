@@ -3,6 +3,7 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../redux/action";
 import * as Unicons from "@iconscout/react-unicons";
+
 import "./listProducts.css";
 
 const ListProducts = () => {
@@ -72,7 +73,11 @@ const ListProducts = () => {
                 <input id="agotado" type="checkbox" />
               </td>
               <td style={{ width: "80px", fontSize: "small" }}>
-                <button className="edit btn btn-primary">
+                <button
+                  className="edit btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
                   <Unicons.UilEdit />
                 </button>
               </td>

@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../../redux/action";
-import ReactDOM from "react-dom";
+import { getAllProducts, getProductDetail } from "../../../redux/action";
+import * as Unicons from "@iconscout/react-unicons";
 import DataTable from "react-data-table-component";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.css";
@@ -22,12 +23,13 @@ function toPages(pages) {
 
 const columns = [
   {
-    name: "Title",
+    name: "Nombre",
     selector: (row) => row.name,
     sortable: true,
+    grow: 3,
   },
   {
-    name: "Price",
+    name: "Precio",
     selector: (row) => row.price,
     sortable: true,
   },
@@ -35,53 +37,13 @@ const columns = [
     name: "Estado",
     selector: (row) => (row.visible === true ? "Publicado" : "Borrador"),
     sortable: true,
-    right: true,
   },
   {
-    button: true,
-    cell: () => (
-      <div className="App">
-        <div class="openbtn text-center">
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#myModal"
-          >
-            Open modal
-          </button>
-          <div class="modal" tabindex="-1" id="myModal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div class="modal-body">
-                  <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="button" class="btn btn-primary">
-                    Save changes
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    name: "Editar",
+    cell: (row) => (
+      <Link to={`/panel-control/nuevo-producto/${row.id}`}>
+        <Unicons.UilEdit />
+      </Link>
     ),
   },
 ];
@@ -172,12 +134,22 @@ const BootyCheckbox = React.forwardRef(({ onClick, ...rest }, ref) => (
 ));
 
 function AllProducts() {
+  const { productId } = useParams();
+
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
+
+  //carga de detalle
+  useEffect(() => {
+    new Promise((resolve) => {
+      resolve(dispatch(getProductDetail(productId)));
+    });
+  }, [dispatch, productId]);
+
   return (
     <div className="App">
       <div>
