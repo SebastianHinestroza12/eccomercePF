@@ -14,6 +14,7 @@ import LogAdmin from "./components/Login/Admin/LogAdmin";
 import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
+import PanelAdmin from "./components/PanelAdmin/PanelAdmin";
 
 const initialOptions = {
   "client-id":
@@ -46,8 +47,11 @@ function App() {
         <Route path={"/carrito"}>
           <Cart />
         </Route>
-        <Route path={"/new"}>
+        <Route path={"/admin"}>
           <LogAdmin />
+        </Route>
+        <Route path={"/panel"}>
+          <PanelAdmin />
         </Route>
         <Route path={"/pagar"}>
           <Checkout />
