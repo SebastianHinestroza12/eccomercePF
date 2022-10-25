@@ -60,7 +60,7 @@ const AddToCart = ({ sizePicked, stock }) => {
         COMPRAR
       </Button>
       <Link to={'/store'}>
-      <Button class="btn-primary">
+      <Button className="btn-primary">
       <Unicons.UilArrowLeft />
                   SEGUIR COMPRANDO
       </Button>

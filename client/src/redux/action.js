@@ -5,7 +5,7 @@ export const getAllProducts = () => {
     return axios("/product")
       .then((response) => response.data)
       .then((products) => {
-        console.log(products);
+        //console.log(products);
         dispatch({ type: "GET_ALL_PRODUCTS", payload: products });
       })
       .catch((error) => {

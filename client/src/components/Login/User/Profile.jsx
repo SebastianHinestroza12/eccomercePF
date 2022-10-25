@@ -18,18 +18,18 @@ function Profile() {
       {/* CARD */}
       <div
         style={{ width: "400px", backgroundColor: "#f8efed" }}
-        class="card text-center container"
+        className="card text-center container"
       >
-        <div class="d-flex justify-content-center">
+        <div className="d-flex justify-content-center">
           <img
             style={{ width: "150px", height: "150px" }}
             src={user.picture}
             alt={user.name}
-            class="card-img-top mt-4"
+            className="card-img-top mt-4"
           />
         </div>
-        <div class="card-body">
-          <h5 class="card-title">
+        <div className="card-body">
+          <h5 className="card-title">
             <strong>{`${user.email}`}</strong>
           </h5>
 
@@ -74,7 +74,7 @@ function Profile() {
                 <button
                   style={{ marginTop: "20px" }}
                   type="button"
-                  class="btn btn-danger"
+                  className="btn btn-danger"
                 >
                   Ir a la tienda
                 </button>
@@ -84,7 +84,7 @@ function Profile() {
             <button
               style={{ marginTop: "20px" }}
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               data-bs-toggle="modal"
               data-bs-target="#exampleModal"
             >

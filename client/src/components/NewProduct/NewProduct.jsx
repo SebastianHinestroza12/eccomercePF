@@ -73,14 +73,14 @@ function NewProduct() {
         Nuevo Producto
       </h1>
       <hr />
-      <form class="row g-3 mt-3" onSubmit={handleSubmit(onSubmit)}>
-        <div class="col-md-3">
+      <form className="row g-3 mt-3" onSubmit={handleSubmit(onSubmit)}>
+        <div className="col-md-3">
           <label htmlFor="name" class="form-label">
             Nombre
           </label>
           <input
             id="name"
-            class="form-control"
+            className="form-control"
             type="text"
             {...register("name", {
               required: true,
@@ -104,7 +104,7 @@ function NewProduct() {
           </label>
           <select
             onClick={value}
-            class="form-control"
+            className="form-control"
             name="category"
             id="category"
             aria-label="Default select example"
@@ -121,12 +121,12 @@ function NewProduct() {
             <p className="textoError">Debes seleccionar una opción</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="price" class="form-label">
+        <div className="col-md-3">
+          <label htmlFor="price" className="form-label">
             Precio
           </label>
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             id="price"
             {...register("price", {
@@ -141,12 +141,12 @@ function NewProduct() {
             <p className="textoError">Sólo números permitidos</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="stock" class="form-label">
+        <div className="col-md-3">
+          <label htmlFor="stock" className="form-label">
             Stock
           </label>
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             id="stock"
             {...register("stock", {
@@ -161,14 +161,14 @@ function NewProduct() {
             <p className="textoError">Sólo números permitidos</p>
           )}
         </div>
-        <div class="col-md-3">
+        <div className="col-md-3">
           <label htmlFor="image" class="form-label">
             Imagen
           </label>
           <input type="file" onChange={handleInputValue}/>
           <input
             type="text"
-            class="form-control"
+            className="form-control"
             id="image"
             {...register("image", {
               required: true,
@@ -178,14 +178,14 @@ function NewProduct() {
             <p className="textoError">El campo Imagen es requerido</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="stars" class="form-label">
+        <div className="col-md-3">
+          <label htmlFor="stars" className="form-label">
             Puntuación
           </label>
           <select
             id="stars"
             name="stars"
-            class="form-select"
+            className="form-select"
             aria-label="Default select example"
             {...register("stars", {
               validate: selectValidator,
@@ -202,15 +202,15 @@ function NewProduct() {
             <p className="textoError">Debes seleccionar una opción</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="size" class="form-label">
+        <div className="col-md-3">
+          <label htmlFor="size" className="form-label">
             Tamaño
           </label>
           <select
             onChange={value}
             id="size"
             name="size"
-            class="form-select"
+            className="form-select"
             aria-label="Default select example"
             {...register("size", {
               validate: selectValidator,
@@ -246,10 +246,10 @@ function NewProduct() {
             <p className="textoError">Debes seleccionar una opción</p>
           )}
         </div>
-        <div class="col-md-6">
-          <div class="form-floating">
+        <div className="col-md-6">
+          <div className="form-floating">
             <textarea
-              class="form-control"
+              className="form-control"
               placeholder="Leave a comment here"
               id="floatingTextarea"
               {...register("detail", {
@@ -262,17 +262,17 @@ function NewProduct() {
             )}
           </div>
         </div>
-        <div class="col-12 mt-5">
-          <button type="submit" class="btn btn-danger">
+        <div className="col-12 mt-5">
+          <button type="submit" className="btn btn-danger">
             Enviar
           </button>
         </div>
-        <div class="container">
-        <div class="alert alert-danger alert-dismissible fade show">
+        <div className="container">
+        <div className="alert alert-danger alert-dismissible fade show">
               <strong>Importante!</strong> Debes llenar los campos correctamente. De lo contrario tus datos no serán convalidados
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="alert"
                 aria-label="Close"
               ></button>
