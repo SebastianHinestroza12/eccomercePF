@@ -2,6 +2,8 @@ import React, { Fragment, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../redux/action";
+import * as Unicons from "@iconscout/react-unicons";
+import "./listProducts.css";
 
 const ListProducts = () => {
   const dispatch = useDispatch();
@@ -48,33 +50,40 @@ const ListProducts = () => {
             <th style={{ width: "100px" }}>Precio</th>
             <th style={{ width: "100px" }}>Estado</th>
             <th style={{ width: "350px" }}>Detalle</th>
-            <th style={{ width: "100px" }}>checkbox</th>
-            <th style={{ width: "80px" }}>boton1</th>
-            <th style={{ width: "80px" }}>boton2</th>
+            <th style={{ width: "100px" }}>Agotado</th>
+            <th style={{ width: "80px" }}>Editar</th>
+            <th style={{ width: "80px" }}>Eliminar</th>
           </tr>
         </thead>
-        {products.map((e) => (
-          <tbody>
+        <tbody>
+          {products.map((e) => (
             <tr>
               <td style={{ width: "350px", fontSize: "small" }}>{e.name}</td>
               <td style={{ width: "100px", fontSize: "small" }}>{e.price}</td>
               <td style={{ width: "100px", fontSize: "small" }}>
-                {e.visible.toString()}
+                {e.visible === true ? (
+                  <span>Publicado</span>
+                ) : (
+                  <span>Borrador</span>
+                )}
               </td>
               <td style={{ width: "350px", fontSize: "small" }}>{e.detail}</td>
               <td style={{ width: "100px", fontSize: "small" }}>
-                <label htmlFor="agotado">Agotado&nbsp;</label>
                 <input id="agotado" type="checkbox" />
               </td>
               <td style={{ width: "80px", fontSize: "small" }}>
-                <button>Editar</button>
+                <button className="edit btn btn-primary">
+                  <Unicons.UilEdit />
+                </button>
               </td>
               <td style={{ width: "80px", fontSize: "small" }}>
-                <button>Eliminar</button>
+                <button className="edit btn btn-primary">
+                  <Unicons.UilTrash />
+                </button>
               </td>
             </tr>
-          </tbody>
-        ))}
+          ))}
+        </tbody>
       </Table>
     </Fragment>
   );
