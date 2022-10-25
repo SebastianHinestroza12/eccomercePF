@@ -28,7 +28,7 @@ function NewProduct() {
         "Content-Type": "multipart/form-data",
       },
     });
-    setImage(res.data.secure_url);
+    setValue("image", res.data.secure_url);
     console.log(res.data.secure_url);
   };
 
@@ -38,6 +38,7 @@ function NewProduct() {
     formState: { errors },
     handleSubmit,
     control,
+    setValue,
   } = useForm({
     defaultValues: {
       image: "",
@@ -201,7 +202,7 @@ function NewProduct() {
                           <option selected value="5.5">
                             5
                           </option>
-                          <option value="6.5">6</option>
+                          <option value="6">6</option>
                           <option value="7">7</option>
                         </>
                       )}
@@ -252,13 +253,16 @@ function NewProduct() {
                 <img src="/images/thumb.png" alt="img-product" width="100%" />
               )}
               <input
-                ref={register}
+                disabled
+                id="image"
+                className="form-control"
+                type="text"
+                {...register("image", {})}
+              />
+              <input
                 type="file"
                 id="image"
-                {...register("image", {
-                  required: true,
-                  onChange: (e) => handleInputValue(e),
-                })}
+                onChange={(e) => handleInputValue(e)}
               />
               {errors.image?.type === "required" && (
                 <p className="textoError">El campo Imagen es requerido</p>
