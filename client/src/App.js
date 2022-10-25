@@ -14,6 +14,7 @@ import { Fragment } from "react";
 import LogAdmin from "./components/Login/Admin/LogAdmin";
 import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import PanelAdmin from "./components/PanelAdmin/PanelAdmin";
 
 function App() {
   return (
@@ -50,8 +51,11 @@ function App() {
         <Route path={"/carrito"}>
           <Cart />
         </Route>
-        <Route path={"/new"}>
+        <Route path={"/admin"}>
           <LogAdmin />
+        </Route>
+        <Route path={"/panel"}>
+          <PanelAdmin />
         </Route>
         <Route path={"/form"}>
           <NewProduct />
