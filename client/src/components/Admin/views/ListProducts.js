@@ -1,96 +1,94 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../redux/action";
-import { Alert } from "react-bootstrap";
-import Pages from "./PageAdmin";
+import * as Unicons from "@iconscout/react-unicons";
+
+import "./listProducts.css";
 
 const ListProducts = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products); //allProducts
-
-  const [actualAdminPage, setActualAdminPage] = useState(1);
-  const [adminProductsPage, setProductsPage] = useState(12);
-  const indexOfLastAdminProduct = actualAdminPage * adminProductsPage;
-  const indexOfFirstAdminProduct = indexOfLastAdminProduct - adminProductsPage;
-  const actualAdminProducts = products.slice (
-    indexOfFirstAdminProduct,
-    indexOfLastAdminProduct
-  )
-  const [minPage, setMinPage] = useState(0);
-  const [maxPage, setMaxPage] = useState(5);
-
-  const adminPages = (pageNumber) => {
-    setActualAdminPage(pageNumber);
-    if (pageNumber >= maxPage) {
-      setMinPage(minPage + 3);
-      setMaxPage(maxPage + 3);
-    } else if (pageNumber <= minPage + 1 && pageNumber !== 1) {
-      setMinPage(minPage - 3);
-      setMaxPage(maxPage - 3);
-    }
-  }
-
+  const products = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(getAllProducts());
   }, []);
 
   return (
     <Fragment>
-      <br/>
-      <Pages
-          actualAdminPage={actualAdminPage}
-          minPage={minPage}
-          maxPage={maxPage}
-          adminProductsPage={adminProductsPage}
-          adminProducts={Array.isArray(products) ? products.length : 1}
-          adminPages={adminPages}
-      />
+      <br />
+      <nav aria-label="Page navigation example">
+        <ul className="pagination justify-content-center">
+          <li className="page-item disabled">
+            <a className="page-link">Previous</a>
+          </li>
+          <li className="page-item">
+            <a className="page-link" href="#">
+              1
+            </a>
+          </li>
+          <li className="page-item">
+            <a className="page-link" href="#">
+              2
+            </a>
+          </li>
+          <li className="page-item">
+            <a className="page-link" href="#">
+              3
+            </a>
+          </li>
+          <li className="page-item">
+            <a className="page-link" href="#">
+              Next
+            </a>
+          </li>
+        </ul>
+      </nav>
 
-        <Table striped bordered hover>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th style={{ width: "350px" }}>Nombre</th>
             <th style={{ width: "100px" }}>Precio</th>
             <th style={{ width: "100px" }}>Estado</th>
             <th style={{ width: "350px" }}>Detalle</th>
-            <th style={{ width: "100px" }}>checkbox</th>
-            <th style={{ width: "80px" }}>boton1</th>
-            <th style={{ width: "80px" }}>boton2</th>
+            <th style={{ width: "100px" }}>Agotado</th>
+            <th style={{ width: "80px" }}>Editar</th>
+            <th style={{ width: "80px" }}>Eliminar</th>
           </tr>
         </thead>
-      {
-        Array.isArray(actualAdminProducts) ? (
-          actualAdminProducts.map((e) => (
-            <tbody>
+        <tbody>
+          {products.map((e) => (
             <tr>
               <td style={{ width: "350px", fontSize: "small" }}>{e.name}</td>
               <td style={{ width: "100px", fontSize: "small" }}>{e.price}</td>
               <td style={{ width: "100px", fontSize: "small" }}>
-                {e.visible.toString()}
+                {e.visible === true ? (
+                  <span>Publicado</span>
+                ) : (
+                  <span>Borrador</span>
+                )}
               </td>
               <td style={{ width: "350px", fontSize: "small" }}>{e.detail}</td>
               <td style={{ width: "100px", fontSize: "small" }}>
-                <label htmlFor="agotado">Agotado&nbsp;</label>
                 <input id="agotado" type="checkbox" />
               </td>
               <td style={{ width: "80px", fontSize: "small" }}>
-                <button>Editar</button>
+                <button
+                  className="edit btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <Unicons.UilEdit />
+                </button>
               </td>
               <td style={{ width: "80px", fontSize: "small" }}>
-                <button>Eliminar</button>
+                <button className="edit btn btn-primary">
+                  <Unicons.UilTrash />
+                </button>
               </td>
             </tr>
-          </tbody>
-      ))) : (
-        <>
-              <Alert key={"warning"} variant={"warning"}>
-                {products}
-              </Alert>
-              <p className="errors"></p>
-            </>
-      )
-      }
+          ))}
+        </tbody>
       </Table>
     </Fragment>
   );

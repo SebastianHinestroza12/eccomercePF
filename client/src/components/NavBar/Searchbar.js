@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { InputGroup, Form, Button } from "react-bootstrap";
 import { SearchByName } from "../../redux/action";
 
-import { useHistory } from "react-router-dom" 
+import { useHistory } from "react-router-dom";
 
 const Searchbar = ({ setLoading }) => {
   const dispatch = useDispatch();
@@ -14,18 +14,17 @@ const Searchbar = ({ setLoading }) => {
   const [errors, seterrors] = useState({ name: "" });
 
   //se dispara cuando se presiona el btn de busqueda
-  let history = useHistory()
+  let history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(window.location.href === "http://localhost:3000/") {
-      history.push("/store")
+    if (window.location.href === "http://localhost:3000/") {
+      history.push("/store");
     }
     if (!name.length) {
       seterrors({ name: "Colocar un producto !!" });
     }
     dispatch(SearchByName(name));
-
   };
 
   //control del input de busqueda
@@ -35,12 +34,12 @@ const Searchbar = ({ setLoading }) => {
     seterrors(validateInput({ name: e.target.value }));
     if (e.keyCode === 13) {
       console.log("enter");
-      history.push("/store")
+      history.push("/store");
       if (name) {
         dispatch(SearchByName(name));
       }
-      }
-    };
+    }
+  };
 
   function validateInput(value) {
     let errors = {};
@@ -65,7 +64,7 @@ const Searchbar = ({ setLoading }) => {
       />
       <Button
         variant="outline-success"
-        className="but"
+        className="but search-nav"
         onClick={(e) => handleSubmit(e)}
       >
         BUSCAR

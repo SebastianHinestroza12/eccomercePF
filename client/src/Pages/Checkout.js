@@ -26,14 +26,6 @@ function validateForm(dataFromInput) {
   ) {
     errors.lastname = "Ingrese un apellido válido";
   }
-  //validacion de provincia
-  if (
-    !dataFromInput.province ||
-    !regex.test(dataFromInput.province) ||
-    dataFromInput.province.length < 2
-  ) {
-    errors.province = "Ingrese un nombre de provincia válido";
-  }
   //validacion de ciudad
   if (
     !dataFromInput.city ||
@@ -66,7 +58,6 @@ const Checkout = () => {
     name: currentUser.name ? currentUser.name : "",
     lastname: currentUser.surnames ? currentUser.surnames : "",
     email: currentUser.email ? currentUser.email : "",
-    province: "",
     city: currentUser.city ? currentUser.city : "",
     postalCode: currentUser.postal_code ? currentUser.postal_code : "",
     phone: currentUser.phone ? currentUser.phone : "",
@@ -170,13 +161,7 @@ const Checkout = () => {
               <Form.Label>
                 Ubicación <span className="input-required">*</span>
               </Form.Label>
-              <Form.Control
-                type="text"
-                onChange={(e) => handleChange(e)}
-                value={input.province}
-                name="province"
-                placeholder="Provincia"
-              />
+
               <Form.Control
                 type="text"
                 onChange={(e) => handleChange(e)}

@@ -12,3 +12,6 @@ form button.buy.btn.btn-primary {
 select.form-control {
   padding: 1rem;
 }
+ul.pagination {
+  margin: 3rem auto;
+}

@@ -33,7 +33,6 @@ const rootReducer = (state = initialState, action) => {
         allProducts: payload,
       };
     case "LOAD_PRODUCTS":
-      console.log("reducer payload", payload);
       return {
         ...state,
         newProducts: payload,
