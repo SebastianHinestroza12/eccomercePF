@@ -5,7 +5,6 @@ import { Route } from "react-router-dom";
 import NavScrollExample from "./components/NavBar/navBar";
 import Footer from "./components/Footer/footer";
 import ProductDetail from "./components/Product/ProductDetail";
-import NewProduct from "./components/NewProduct/NewProduct";
 import Home from "./components/Home/home";
 import User from "./components/Login/User/User";
 import Shopping from "./components/Login/User/Shopping";
@@ -14,6 +13,7 @@ import React, { Fragment } from "react";
 import LogAdmin from "./components/Login/Admin/LogAdmin";
 import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import LayoutAdmin from "./components/Admin/LayoutAdmin";
 
 const initialOptions = {
   "client-id":
@@ -49,11 +49,11 @@ function App() {
         <Route path={"/new"}>
           <LogAdmin />
         </Route>
-        <Route path={"/form"}>
-          <NewProduct />
-        </Route>
         <Route path={"/pagar"}>
           <Checkout />
+        </Route>
+        <Route path={"/panel-control"}>
+          <LayoutAdmin />
         </Route>
         <Route>
           <Footer />
