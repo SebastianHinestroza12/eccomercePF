@@ -90,6 +90,12 @@ const ProductDetail = () => {
                 stock={productDetail.size_stock[idSizeStock].stock}
               />
             </section>
+            <hr></hr>
+            <section>
+              <h3>Reviews</h3>
+              <br></br>
+              <p>asa</p>
+            </section>
           </Col>
         </Row>
       )}
