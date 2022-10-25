@@ -53,7 +53,7 @@ const ProductDetail = () => {
                 {writeRatingStars(productDetail.stars)}
               </div>
               <span className="stock">
-                Disponibles: {productDetail.stock} unidades
+                Disponibles: s {productDetail.stock} unidades
               </span>
               <hr></hr>
               <h4>$ {productDetail.price}</h4>
@@ -61,6 +61,10 @@ const ProductDetail = () => {
             </section>
             <section className="buttonsAddToCart">
               <AddToCart />
+            </section>
+            <section>
+              <h2>Reviews</h2>
+              <p>asa</p>
             </section>
           </Col>
         </Row>

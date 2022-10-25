@@ -1,10 +1,35 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../redux/action";
+import { Alert } from "react-bootstrap";
+import Pages from "./PageAdmin";
 
 function PanelAdmin() {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.products); //allProducts
+
+  const [actualAdminPage, setActualAdminPage] = useState(1);
+  const [adminProductsPage, setProductsPage] = useState(12);
+  const indexOfLastAdminProduct = actualAdminPage * adminProductsPage;
+  const indexOfFirstAdminProduct = indexOfLastAdminProduct - adminProductsPage;
+  const actualAdminProducts = products.slice (
+    indexOfFirstAdminProduct,
+    indexOfLastAdminProduct
+  )
+  const [minPage, setMinPage] = useState(0);
+  const [maxPage, setMaxPage] = useState(5);
+
+  const adminPages = (pageNumber) => {
+    setActualAdminPage(pageNumber);
+    if (pageNumber >= maxPage) {
+      setMinPage(minPage + 3);
+      setMaxPage(maxPage + 3);
+    } else if (pageNumber <= minPage + 1 && pageNumber !== 1) {
+      setMinPage(minPage - 3);
+      setMaxPage(maxPage - 3);
+    }
+  }
+
   console.log(products);
   const getProducts = () => {
     dispatch(getAllProducts());
@@ -13,33 +38,14 @@ function PanelAdmin() {
   return (
     <Fragment>
       <br/>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              3
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <Pages
+          actualAdminPage={actualAdminPage}
+          minPage={minPage}
+          maxPage={maxPage}
+          adminProductsPage={adminProductsPage}
+          adminProducts={Array.isArray(products) ? products.length : 1}
+          adminPages={adminPages}
+      />
 
       <button onClick={getProducts}>Cargar productos</button>
       <div class="table-responsive">
@@ -58,7 +64,9 @@ function PanelAdmin() {
           </thead>
         </table>
       </div>
-      {products.map((e) => (
+      {
+        Array.isArray(actualAdminProducts) ? (
+          actualAdminProducts.map((e) => (
         <div class="table-responsive">
           <table style={{ width: "100%" }} class="table table-striped">
             <tbody>
@@ -86,7 +94,15 @@ function PanelAdmin() {
             </tbody>
           </table>
         </div>
-      ))}
+      ))) : (
+        <>
+              <Alert key={"warning"} variant={"warning"}>
+                {products}
+              </Alert>
+              <p className="errors"></p>
+            </>
+      )
+      }
     </Fragment>
   );
 }
