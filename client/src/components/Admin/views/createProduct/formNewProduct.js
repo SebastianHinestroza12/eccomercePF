@@ -74,9 +74,10 @@ const FormNewProduct = ({ productId }) => {
   const productDetail = useSelector((state) => state.productDetail);
   useEffect(() => {
     dispatch(getProductDetail(productId));
-  }, [dispatch]);
+    setImage(productDetail.image);
+  }, [dispatch, setImage]);
 
-  function fillInputs() {
+  function fillInputs(productDetail) {
     setValue("name", productDetail.name);
     setValue("price", productDetail.price);
     setValue("detail", productDetail.detail);
@@ -86,7 +87,8 @@ const FormNewProduct = ({ productId }) => {
   return (
     <>
       <form className="" onSubmit={handleSubmit(onSubmit)}>
-        {productDetail.length > 0 && fillInputs()}
+        {console.log("productDetail", [productDetail])}
+        {[productDetail].length > 0 && fillInputs(productDetail)}
         <Row>
           <Col md={8} className="new-product">
             <div>
