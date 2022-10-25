@@ -9,13 +9,19 @@ const getFilterType = require('../controllers/getFilterType');
 const getFilterSize = require('../controllers/getFilterSize');
 const getFilterEquipement = require('../controllers/getFilterEquipment');
 
+// login y register
 const getLogin = require('../controllers/User/getLogin');
 const postRegister = require('../controllers/User/postRegister');
 const modifyUser = require('../controllers/User/modifyUser');
 
+// orden del cliente
+const postOrder = require('../controllers/Orders/postOrder');
+const modifyStatusOrder = require('../controllers/Orders/modifyStatus');
+
+
+
 const postProduct = require('./postProduct');
 const postCategory = require('./postCategory');
-const postOrder = require('./postOrder');
 
 const postAdmin = require('./postAdmin');
 const getCategories = require('./getCategories');
@@ -33,11 +39,14 @@ router.use('/postCategory', postCategory);
 router.use('/getCategories', getCategories);
 
 router.use('/postAdmin', postAdmin);
-router.use('/postOrder', postOrder);
 
 // login , register Y recuperePaaswword users
 router.use('/user/login', getLogin);
 router.use('/user/register', postRegister);
 router.use('/user/modify', modifyUser);
+
+// Ordenes de usuarios
+router.use('/order', modifyStatusOrder);
+router.use('/order', postOrder);
 
 module.exports = router;
