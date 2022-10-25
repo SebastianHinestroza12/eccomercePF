@@ -1,12 +1,9 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD:client/src/components/PanelAdmin/PanelAdmin.jsx
-import { getAllProducts } from "../../redux/action";
+import { getAllProducts } from "../../../redux/action";
 import { Alert } from "react-bootstrap";
 import Pages from "./PageAdmin";
-=======
-import { getAllProducts } from "../../../redux/action";
->>>>>>> 6449e88df028f0bd5a308b7babea64cc8986655f:client/src/components/Admin/views/ListProducts.js
 
 const ListProducts = () => {
   const dispatch = useDispatch();
@@ -34,14 +31,12 @@ const ListProducts = () => {
     }
   }
 
-  console.log(products);
-  const getProducts = () => {
+  useEffect(() => {
     dispatch(getAllProducts());
-  };
+  }, []);
 
   return (
     <Fragment>
-<<<<<<< HEAD:client/src/components/PanelAdmin/PanelAdmin.jsx
       <br/>
       <Pages
           actualAdminPage={actualAdminPage}
@@ -51,90 +46,42 @@ const ListProducts = () => {
           adminProducts={Array.isArray(products) ? products.length : 1}
           adminPages={adminPages}
       />
-=======
-      <br />
-      <nav aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          <li className="page-item disabled">
-            <a className="page-link">Previous</a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              3
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
->>>>>>> 6449e88df028f0bd5a308b7babea64cc8986655f:client/src/components/Admin/views/ListProducts.js
 
-      <button onClick={getProducts}>Cargar productos</button>
-      <div className="table-responsive">
-        <table className="table" style={{ width: "100%" }}>
-          <thead>
-            <tr>
-              <th style={{ width: "330px" }}>#</th>
-              <th style={{ width: "350px" }}>Nombre</th>
-              <th style={{ width: "100px" }}>Precio</th>
-              <th style={{ width: "100px" }}>Visible</th>
-              <th style={{ width: "350px" }}>Detalle</th>
-              <th style={{ width: "100px" }}>checkbox</th>
-              <th style={{ width: "80px" }}>boton1</th>
-              <th style={{ width: "80px" }}>boton2</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-<<<<<<< HEAD:client/src/components/PanelAdmin/PanelAdmin.jsx
+        <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th style={{ width: "350px" }}>Nombre</th>
+            <th style={{ width: "100px" }}>Precio</th>
+            <th style={{ width: "100px" }}>Estado</th>
+            <th style={{ width: "350px" }}>Detalle</th>
+            <th style={{ width: "100px" }}>checkbox</th>
+            <th style={{ width: "80px" }}>boton1</th>
+            <th style={{ width: "80px" }}>boton2</th>
+          </tr>
+        </thead>
       {
         Array.isArray(actualAdminProducts) ? (
           actualAdminProducts.map((e) => (
-        <div class="table-responsive">
-          <table style={{ width: "100%" }} class="table table-striped">
-=======
-      {products.map((e) => (
-        <div className="table-responsive">
-          <table style={{ width: "100%" }} className="table table-striped">
->>>>>>> 6449e88df028f0bd5a308b7babea64cc8986655f:client/src/components/Admin/views/ListProducts.js
             <tbody>
-              <tr>
-                <th style={{ width: "330px", fontSize: "small" }}>{e.id}</th>
-                <td style={{ width: "350px", fontSize: "small" }}>{e.name}</td>
-                <td style={{ width: "100px", fontSize: "small" }}>{e.price}</td>
-                <td style={{ width: "100px", fontSize: "small" }}>
-                  {e.visible.toString()}
-                </td>
-                <td style={{ width: "350px", fontSize: "small" }}>
-                  {e.detail}
-                </td>
-                <td style={{ width: "100px", fontSize: "small" }}>
-                  <label htmlFor="agotado">Agotado&nbsp;</label>
-                  <input id="agotado" type="checkbox" />
-                </td>
-                <td style={{ width: "80px", fontSize: "small" }}>
-                  <button>Editar</button>
-                </td>
-                <td style={{ width: "80px", fontSize: "small" }}>
-                  <button>Eliminar</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+            <tr>
+              <td style={{ width: "350px", fontSize: "small" }}>{e.name}</td>
+              <td style={{ width: "100px", fontSize: "small" }}>{e.price}</td>
+              <td style={{ width: "100px", fontSize: "small" }}>
+                {e.visible.toString()}
+              </td>
+              <td style={{ width: "350px", fontSize: "small" }}>{e.detail}</td>
+              <td style={{ width: "100px", fontSize: "small" }}>
+                <label htmlFor="agotado">Agotado&nbsp;</label>
+                <input id="agotado" type="checkbox" />
+              </td>
+              <td style={{ width: "80px", fontSize: "small" }}>
+                <button>Editar</button>
+              </td>
+              <td style={{ width: "80px", fontSize: "small" }}>
+                <button>Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
       ))) : (
         <>
               <Alert key={"warning"} variant={"warning"}>
@@ -144,6 +91,7 @@ const ListProducts = () => {
             </>
       )
       }
+      </Table>
     </Fragment>
   );
 };

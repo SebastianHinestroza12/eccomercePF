@@ -53,7 +53,7 @@ const ProductDetail = () => {
                 {writeRatingStars(productDetail.stars)}
               </div>
               <span className="stock">
-                Disponibles: s {productDetail.stock} unidades
+                Disponibles: {productDetail.stock} unidades
               </span>
               <hr></hr>
               <h4>$ {productDetail.price}</h4>
