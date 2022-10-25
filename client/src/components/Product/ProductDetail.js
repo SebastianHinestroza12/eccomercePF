@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./productDetail.css";
 import { getProductDetail } from "../../redux/action";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AddToCart from "./AddToCart";
+import * as Unicons from "@iconscout/react-unicons";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -41,6 +42,10 @@ const ProductDetail = () => {
         <img src="/images/loader-blue.gif" className="loading" alt="loader" />
       ) : (
         <Row>
+          <Link to={"/store"} className="mb-5">
+            <Unicons.UilArrowLeft />
+            SEGUIR COMPRANDO
+          </Link>
           <Col md={5} className="sidebar">
             <img src={productDetail.image} alt="product-name" />
           </Col>
