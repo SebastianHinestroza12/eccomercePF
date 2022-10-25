@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../redux/action";
+import { getAllProducts } from "../../../redux/action";
 
-function PanelAdmin() {
+const ListProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
   console.log(products);
@@ -12,29 +12,29 @@ function PanelAdmin() {
 
   return (
     <Fragment>
-      <br/>
+      <br />
       <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
+        <ul className="pagination justify-content-center">
+          <li className="page-item disabled">
+            <a className="page-link">Previous</a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               1
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               2
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               3
             </a>
           </li>
-          <li class="page-item">
-            <a class="page-link" href="#">
+          <li className="page-item">
+            <a className="page-link" href="#">
               Next
             </a>
           </li>
@@ -42,8 +42,8 @@ function PanelAdmin() {
       </nav>
 
       <button onClick={getProducts}>Cargar productos</button>
-      <div class="table-responsive">
-        <table class="table" style={{ width: "100%" }}>
+      <div className="table-responsive">
+        <table className="table" style={{ width: "100%" }}>
           <thead>
             <tr>
               <th style={{ width: "330px" }}>#</th>
@@ -59,8 +59,8 @@ function PanelAdmin() {
         </table>
       </div>
       {products.map((e) => (
-        <div class="table-responsive">
-          <table style={{ width: "100%" }} class="table table-striped">
+        <div className="table-responsive">
+          <table style={{ width: "100%" }} className="table table-striped">
             <tbody>
               <tr>
                 <th style={{ width: "330px", fontSize: "small" }}>{e.id}</th>
@@ -89,6 +89,6 @@ function PanelAdmin() {
       ))}
     </Fragment>
   );
-}
+};
 
-export default PanelAdmin;
+export default ListProducts;

@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import * as Unicons from "@iconscout/react-unicons";
 import axios from "axios";
-import "../NewProduct/newProduct.css";
+import "./newProduct.css";
 import { useDispatch } from "react-redux";
-import { newProductForm } from "../../redux/action";
+import { newProductForm } from "../../../redux/action";
 import { Col, Row } from "react-bootstrap";
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/ddl3snuoe/image/upload";
 const CLOUDINARY_UPLOAD_PRESET = "pzsfr2g4";
 
 let noRepeat = new Set();
 
-function NewProduct() {
+const CreateProduct = () => {
   const dispatch = useDispatch();
   const [values, setValues] = useState("");
   const [image, setImage] = useState("");
@@ -28,6 +28,7 @@ function NewProduct() {
         "Content-Type": "multipart/form-data",
       },
     });
+    setImage(res.data.secure_url);
     setValue("image", res.data.secure_url);
     console.log(res.data.secure_url);
   };
@@ -270,29 +271,15 @@ function NewProduct() {
             </div>
           </Col>
         </Row>
-        {/* PRUEBA */}
 
-        {/* PRUEBA */}
         <div className="col-12 mt-5">
           <button type="submit" className="btn btn-danger">
             Enviar
           </button>
         </div>
-        <div className="container">
-          <div className="alert alert-danger alert-dismissible fade show">
-            <strong>Importante!</strong> Debes llenar los campos correctamente.
-            De lo contrario tus datos no serán convalidados
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-        </div>
       </form>
     </div>
   );
-}
+};
 
-export default NewProduct;
+export default CreateProduct;
