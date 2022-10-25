@@ -30,7 +30,7 @@ const ProductCard = (props) => {
       </div>
 
       <Card.Body>
-        <Card.Text>CATEGORIA</Card.Text>
+        <Card.Text></Card.Text>
         <hr></hr>
         <Card.Title>{name}</Card.Title>
         <div className={"buttons_shop"}>
