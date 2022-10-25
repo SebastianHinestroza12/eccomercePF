@@ -44,34 +44,34 @@ function FormAdress() {
 
   return (
     <div
-      class="modal fade"
+      className="modal fade"
       id="exampleModal"
-      tabindex="-1"
+      tabIndex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
+      <div className="modal-dialog">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h1 className="modal-title fs-5" id="exampleModalLabel">
               Completa los campos
             </h1>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <form class="row g-1">
+          <div className="modal-body">
+            <form className="row g-1">
               {/* -------INPUT EMAIL-------- */}
-              <div class="col-md-6">
-                <label class="form-label" htmlFor="name">
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="name">
                   Email
                 </label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   value={user.email}
                   name="email"
@@ -82,12 +82,12 @@ function FormAdress() {
               </div>
 
               {/* -------INPUT NOMBRE-------- */}
-              <div class="col-md-6">
-                <label class="form-label" htmlFor="name">
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="name">
                   Nombre
                 </label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   name="name"
                   id="name"
@@ -108,12 +108,12 @@ function FormAdress() {
                 )}
               </div>
               {/* -------INPUT APELLIDO-------- */}
-              <div class="col-md-6">
-                <label class="form-label" htmlFor="surnames">
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="surnames">
                   Apellido
                 </label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   name="surnames"
                   id="surnames"
@@ -133,12 +133,12 @@ function FormAdress() {
                 )}
               </div>
               {/* -------INPUT DIRECCION-------- */}
-              <div class="col-md-6">
-                <label class="form-label" htmlFor="address">
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="address">
                   Dirección
                 </label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   name="address"
                   id="address"
@@ -151,12 +151,12 @@ function FormAdress() {
                 )}
               </div>
               {/* -------INPUT CIUDAD-------- */}
-              <div class="col-md-6">
-                <label class="form-label" htmlFor="city">
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="city">
                   Ciudad
                 </label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   name="city"
                   id="city"
@@ -175,20 +175,20 @@ function FormAdress() {
                 )}
               </div>
               {/* -------INPUT PAIS-------- */}
-              <div class="col-md-6">
-                <label htmlFor="country" class="form-label">
+              <div className="col-md-6">
+                <label htmlFor="country" className="form-label">
                   País
                 </label>
                 <select
                   id="country"
                   name="country"
-                  class="form-select"
+                  className="form-select"
                   aria-label="Default select example"
                   {...register("country", {
                     validate: selectValidator,
                   })}
                 >
-                  <option selected>---</option>
+                  <option>---</option>
                   <option value="Argentina">Argentina</option>
                   <option value="Bolivia">Bolivia</option>
                   <option value="Chile">Chile</option>
@@ -204,12 +204,12 @@ function FormAdress() {
                 )}
               </div>
               {/* -------INPUT TELEFONO-------- */}
-              <div class="col-md-6">
-                <label class="form-label" htmlFor="phone">
+              <div className="col-md-6">
+                <label className="form-label" htmlFor="phone">
                   Teléfono
                 </label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   name="phone"
                   id="phone"
@@ -230,12 +230,12 @@ function FormAdress() {
                 )}
               </div>
               {/* -------INPUT CP-------- */}
-              <div class="col-md-3">
-                <label class="form-label" htmlFor="postal_code">
+              <div className="col-md-3">
+                <label className="form-label" htmlFor="postal_code">
                   Código Postal
                 </label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   name="postal_code"
                   id="postal_code"
@@ -256,12 +256,12 @@ function FormAdress() {
                 )}
               </div>
               {/* -------DNI-------- */}
-              <div class="col-md-3">
-                <label class="form-label" htmlFor="dni">
+              <div className="col-md-3">
+                <label className="form-label" htmlFor="dni">
                   DNI
                 </label>
                 <input
-                  class="form-control"
+                  className="form-control"
                   type="text"
                   name="dni"
                   id="dni"
@@ -287,21 +287,21 @@ function FormAdress() {
               </div>
             </form>
           </div>
-          <div class="modal-footer">
+          <div className="modal-footer">
             <button
               type="submit"
-              class="btn btn-danger"
+              className="btn btn-danger"
               onClick={handleSubmit(onSubmit)}
             >
               Guardar cambios
             </button>
 
-            <div class="alert alert-warning alert-dismissible fade show">
+            <div className="alert alert-warning alert-dismissible fade show">
               <strong>Importante!</strong> Debes llenar los campos correctamente
               para que tus datos sean convalidados
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="alert"
                 aria-label="Close"
               ></button>

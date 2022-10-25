@@ -77,7 +77,7 @@ function Profile() {
                   <button
                     style={{ marginTop: "20px" }}
                     type="button"
-                    class="btn btn-danger"
+                    className="btn btn-danger"
                   >
                     Ir a la tienda
                   </button>

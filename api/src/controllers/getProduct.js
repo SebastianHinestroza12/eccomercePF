@@ -1,7 +1,7 @@
 const jsonProducts = require("../JSON/JsonProducts");
 const router = require("express").Router();
 const { Product, Category } = require("../db");
-const { Op } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 
 /* Una ruta que devuelve una lista de productos, o todos los productos que en su nombre contienen la
 entrada ingresada por el cliente, ademas guarda los productos en la tabla Product. */
@@ -12,17 +12,16 @@ router.get("/", async (req, res) => {
   try {
     if (name) {
       const filterName = await Product.findAll({
-        where: {
-          name: {
-            [Op.iLike]: `%${name}%`,
-          },
-        },
+        where: Sequelize.where(
+          Sequelize.fn('unaccent', Sequelize.col('name')), {
+              [Op.iLike]:`%${name}%`
+        }),
       });
 
       if (filterName.length > 0) return res.status(200).json(filterName);
       else
         return res.status(404).json({
-          error: "no tenemos este producto disponible",
+          error: "Sin resultados",
           message:
             "verifique si tiene la base de datos llena, haga la peticion a la ruta get  /product",
         });

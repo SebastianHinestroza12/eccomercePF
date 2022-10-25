@@ -21,7 +21,7 @@ function Login() {
     if (isAuthenticated) {
       dispatch(postRegister(user));
     }
-  }, [isAuthenticated]);
+  }, [dispatch, isAuthenticated, user]);
   return <>{isLoading ? <Loading /> : <AuthNAv />}</>;
 }
 

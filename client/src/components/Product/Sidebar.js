@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import {
-  getAllProducts,
+  //getAllProducts,
   filterBySize,
   filterByCategory,
   filterByType,
@@ -99,9 +99,9 @@ const Sidebar = ({
     dispatch(filterByType(e.target.value));
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(getAllProducts());
-  }, [dispatch]);
+  }, [dispatch]);*/
 
   let checks = document.querySelectorAll(".check");
 

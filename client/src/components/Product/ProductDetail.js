@@ -71,7 +71,7 @@ const ProductDetail = () => {
                   }}
                 >
                   {productDetail.size_stock.map((sizeArray, index) => (
-                    <option value={index}>{sizeArray.size}</option>
+                    <option value={index} key={index}>{sizeArray.size}</option>
                   ))}
                 </select>
               </div>

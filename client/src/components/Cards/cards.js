@@ -10,11 +10,12 @@ import { Alert, Col, Row } from "react-bootstrap";
 
 const Cards = ({ loading, setLoading }) => {
   const allProducts = useSelector((state) => state.products);
+  const superAllProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
-
   /**
    * PAGINADO
    */
+  /* eslint-disable no-unused-vars */
   const appTopRef = useRef();
   const [order, setOrder] = useState("");
   const [actualPage, setActualPage] = useState(1); //arrancamos desde la page 1
@@ -42,23 +43,20 @@ const Cards = ({ loading, setLoading }) => {
   /**
    * FIN PAGINADO
    */
-
+  console.log(allProducts.length, superAllProducts.length);
   useEffect(() => {
-    new Promise((resolve, reject) => {
-      resolve(dispatch(getAllProducts()));
-    })
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("error", error);
-        return error.response.data.error;
-      });
 
-    return () => {};
-  }, [dispatch, setLoading]);
+    /*if (allProducts.length > superAllProducts.length) {
+      dispatch(getAllProducts())
 
-  return loading ? (
+    } else */if (superAllProducts.length === 0) {
+      dispatch(getAllProducts());
+    }
+  
+  }, [allProducts.length, dispatch, setLoading, superAllProducts.length]);
+
+
+  return !allProducts[0] ? (
     <>
       <img src="/images/loader-blue.gif" className="loading" alt="loader" />
     </>
@@ -111,7 +109,7 @@ const Cards = ({ loading, setLoading }) => {
           pages={pages}
         />
 
-        {console.log(order, setproductsPerPage)}
+        {/*console.log(order, setproductsPerPage)*/}
       </Col>
     </>
   );
