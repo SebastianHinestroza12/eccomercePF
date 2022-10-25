@@ -7,14 +7,35 @@ import { newProductForm } from "../../redux/action";
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/ddl3snuoe/image/upload';
 const CLOUDINARY_UPLOAD_PRESET = 'pzsfr2g4';
 
+let noRepeat = new Set()
+
+
 function NewProduct() {
   const dispatch = useDispatch();
   const [values, setValues] = useState("");
 
+ const [ sizeStock, setSizeStock ] = useState([{
+
+ }])
+
+  const [sizes, setSizes ] = useState('');
+
+
+  
+  // const [ formData, setFormData ] = useState({
+  //   image: "",
+  //     name:'',
+  //     category:"",
+  //     price: '',
+  //     stock: '',
+  //     size: '',
+  //     detail: ""
+  // })
+
   const handleInputValue = (async (e) => {
     console.log('entredd')
     const file = e.target.files[0];
-  
+    
     const formData = new FormData();
     formData.append('file',file);
     formData.append('upload_preset',CLOUDINARY_UPLOAD_PRESET);
@@ -31,22 +52,34 @@ function NewProduct() {
     register,
     reset,
     formState: { errors },
-    handleSubmit,
+    handleSubmit, getValues
   } = useForm({
     defaultValues: {
       image: "https://picsum.photos/200/200",
       name:'Pelota adidas',
       category:"Balones",
       price: 99999,
-      stock: 2,
-      stars: 5,
-      size: 7,
+      stock: "",
+      size: '',
       detail: "NADA EN PARTICULAR"
     },
   });
 
+  const [ dataForm, setDataForm ] = useState([
+    {
+      "name": (JSON.stringify(getValues(["name"]))),
+      "price": (JSON.stringify(getValues(["price"]))),
+      "detail": (JSON.stringify(getValues(["detail"]))),
+      "size_stock": [
+        
+      ],
+      "image": (JSON.stringify(getValues(["image"]))),
+      "visible": true,
+      "category": (JSON.stringify(getValues(["category"])))
+  }
+  ])
   const onSubmit = (data) => {
-    console.log(data)
+    console.log('DATAA', data)
     dispatch(newProductForm(data));
     reset();
   };
@@ -57,7 +90,30 @@ function NewProduct() {
 
   const value = (e) => {
     setValues(e.target.value);
+    noRepeat.clear()
+    setSizes('')
     console.log("function", values);
+ 
+  };
+
+  const sizeAndStock = (e) => {
+    setSizeStock({
+      ...sizeStock, 
+      size: e.target.previousSibling.innerHTML,
+      stock: e.target.value
+    })
+    console.log(sizeStock)
+  }
+
+  
+  const valueSize = (e) => {
+    
+    noRepeat.add(e.target.value);
+    let result =  Array.from(noRepeat);
+    setSizes(result);
+
+
+    console.log("SIZE", sizes);
   };
  
   return (
@@ -141,111 +197,30 @@ function NewProduct() {
             <p className="textoError">Sólo números permitidos</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="stock" class="form-label">
-            Stock
-          </label>
-          <input
-            class="form-control"
-            type="text"
-            id="stock"
-            {...register("stock", {
-              required: true,
-              pattern: /^-?\d*(\.\d+)?$/,
-            })}
-          />
-          {errors.stock?.type === "required" && (
-            <p className="textoError">El campo Stock es requerido</p>
-          )}
-          {errors.stock?.type === "pattern" && (
-            <p className="textoError">Sólo números permitidos</p>
-          )}
-        </div>
+        
         <div class="col-md-3">
           <label htmlFor="image" class="form-label">
             Imagen
           </label>
-          <input type="file" onChange={handleInputValue}/>
-          <input
+          <input type="file" onChange={handleInputValue} id="image"
+            {...register("image", {
+              required: true,
+            })}/>
+          
+          
+          {/* <input
             type="text"
             class="form-control"
             id="image"
             {...register("image", {
               required: true,
             })}
-          />
+          /> */}
           {errors.image?.type === "required" && (
             <p className="textoError">El campo Imagen es requerido</p>
           )}
         </div>
-        <div class="col-md-3">
-          <label htmlFor="stars" class="form-label">
-            Puntuación
-          </label>
-          <select
-            id="stars"
-            name="stars"
-            class="form-select"
-            aria-label="Default select example"
-            {...register("stars", {
-              validate: selectValidator,
-            })}
-          >
-            <option selected>---</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          {errors.stars && (
-            <p className="textoError">Debes seleccionar una opción</p>
-          )}
-        </div>
-        <div class="col-md-3">
-          <label htmlFor="size" class="form-label">
-            Tamaño
-          </label>
-          <select
-            onChange={value}
-            id="size"
-            name="size"
-            class="form-select"
-            aria-label="Default select example"
-            {...register("size", {
-              validate: selectValidator,
-            })}
-          >
-            {values === "Camisetas" ? (
-              <>
-                <option selected>---</option>
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-              </>
-            ) : values === "Botines" ? (
-              <>
-                <option selected>---</option>
-                <option value="1">1</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </>
-            ) : (
-              <>
-                <option selected>---</option>
-                <option value="5.5">5.5</option>
-                <option value="6.5">6.5</option>
-                <option value="7">7</option>
-              </>
-            )}
-          </select>
-          {errors.size && (
-            <p className="textoError">Debes seleccionar una opción</p>
-          )}
-        </div>
+      
         <div class="col-md-6">
           <div class="form-floating">
             <textarea
@@ -262,6 +237,65 @@ function NewProduct() {
             )}
           </div>
         </div>
+        <div class="col-md-3">
+          <label htmlFor="size" class="form-label">
+            Tamaño
+          </label>
+          <select
+            id="size"
+            name="size"
+            class="form-select"
+            // aria-label="Default select example"
+            {...register("size", {
+              
+              onChange: (e)=>valueSize(e)
+            })}
+          >
+            {values === "Camisetas" ? (
+              <>
+                <option selected>---</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
+              </>
+            ) : values === "Botines" ? (
+              <>
+                <option selected>---</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </>
+            ) : (
+              <>
+                <option selected>---</option>
+                <option value="5.5">5.5</option>
+                <option value="6.5">6.5</option>
+                <option value="7">7</option>
+              </>
+            )}
+          </select>
+          {errors.size && (
+            <p className="textoError">Debes seleccionar una opción</p>
+          )}
+        </div>
+        
+        <div>
+        <span>
+          {
+            sizes.length > 0 ? sizes.map((e , index) =><div key={index}><span>{e}</span><input placeholder="Stock" onChange={e => sizeAndStock(e)} ></input></div>)
+            : null
+          }
+          </span>   
+        </div>
+      
         <div class="col-12 mt-5">
           <button type="submit" class="btn btn-danger">
             Enviar
@@ -278,7 +312,10 @@ function NewProduct() {
               ></button>
             </div>
         </div>
+
       </form>
+
+      
     </div>
   );
 }
