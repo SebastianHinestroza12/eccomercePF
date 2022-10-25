@@ -13,6 +13,7 @@ const initialState = {
   allProducts: [],
   products: [],
   productDetail: [],
+  pruebaProduct: [],
   newProducts: [],
   cartTotal: 0,
   cartProducts: localStorage.getItem("cartProductsAdded")
@@ -43,6 +44,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productDetail: payload,
       };
+
+      case "PUT_PRODUCT_DETAIL":
+        console.log('REDUCER', payload)
+        return {
+          ...state,
+          productDetail: payload,
+        };
+
     case "POST_REGISTER":
       return {
         ...state,
@@ -137,6 +146,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         products: productsResult,
+      };
+
+    case 'PUT_PRODUCT':
+      console.log('REDUCER', payload.data)
+      return {
+        ...state,
+        pruebaProduct: payload.data,
       };
 
     case "FILTER_BY_TYPE":

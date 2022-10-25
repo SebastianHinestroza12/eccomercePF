@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../redux/action";
+import EditButton from "./EditButton";
 
 const ListProducts = () => {
   const dispatch = useDispatch();
@@ -77,7 +78,17 @@ const ListProducts = () => {
                   <input id="agotado" type="checkbox" />
                 </td>
                 <td style={{ width: "80px", fontSize: "small" }}>
-                  <button>Editar</button>
+                  <EditButton idProduct={e.id}/>
+                  <button
+                style={{ marginTop: "20px" }}
+                type="button"
+                className="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                id={e.id}
+              >
+                Editar
+              </button>
                 </td>
                 <td style={{ width: "80px", fontSize: "small" }}>
                   <button>Eliminar</button>
