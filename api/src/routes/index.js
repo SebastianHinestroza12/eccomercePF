@@ -37,6 +37,10 @@ const deleteProduct = require('../controllers/Cart/deleteProduct');
 const addUnit = require('../controllers/Cart/addUnit');
 const removeUnit = require('../controllers/Cart/removeUnit');
 
+const postReview = require('./postReview');
+const getUsers = require('./getUsers');
+
+
 router.use('/product', getProduct);
 router.use('/product', putProduct);
 router.use('/product', productId);
@@ -55,6 +59,7 @@ router.use('/postAdmin', postAdmin);
 router.use('/user/login', getLogin);
 router.use('/user/register', postRegister);
 router.use('/user/modify', modifyUser);
+router.use('/getUsers', getUsers);
 
 //cart
 router.use('/cart', addProductToCart);
@@ -73,5 +78,7 @@ router.use('/order', OrderId);
 router.use('/order', getOrder);
 router.use('/filterStatusOrder', filterStatusOrder);
 
+//review
+router.use('/postReview', postReview);
 
 module.exports = router;
