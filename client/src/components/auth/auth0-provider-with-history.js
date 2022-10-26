@@ -17,7 +17,10 @@ const Auth0ProviderWithHistory = ({ children }) => {
       domain={domain}
       clientId={clientId}
       redirectUri={window.location.origin}
-      onRedirectCallback={onRedirectCallback}
+      // onRedirectCallback={onRedirectCallback}
+      audience="This is a unique identifier"
+      scope='openid profile email'
+
     >
       {children}
     </Auth0Provider>

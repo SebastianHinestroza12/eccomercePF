@@ -11,6 +11,7 @@ const getFilterEquipement = require('../controllers/getFilterEquipment');
 
 // login y register
 const getLogin = require('../controllers/User/getLogin');
+const getPrueba = require('../controllers/User/getPrueba');
 const postRegister = require('../controllers/User/postRegister');
 const modifyUser = require('../controllers/User/modifyUser');
 
@@ -44,6 +45,7 @@ router.use('/postAdmin', postAdmin);
 
 // login , register Y recuperePaaswword users
 router.use('/user/login', getLogin);
+router.use('/user/prueba', getPrueba);
 router.use('/user/register', postRegister);
 router.use('/user/modify', modifyUser);
 

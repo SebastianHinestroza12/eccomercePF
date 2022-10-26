@@ -13,6 +13,7 @@ import React, { Fragment } from "react";
 import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
+import RutasBloqueadas from "./components/Login/RutasBloqueadas";
 
 const initialOptions = {
   "client-id":
@@ -50,6 +51,9 @@ function App() {
         </Route>
         <Route path={"/panel-control"}>
           <LayoutAdmin />
+        </Route>
+        <Route path={"/rutas"}>
+          <RutasBloqueadas />
         </Route>
         <Route>
           <Footer />
