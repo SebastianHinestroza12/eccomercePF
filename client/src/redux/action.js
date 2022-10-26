@@ -92,6 +92,8 @@ export function filterByName(payload) {
 }
 
 //CREACION DE PRODUCTO
+
+
 export const newProductForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postProduct`, data);
@@ -163,6 +165,17 @@ export const filterByType = (payload) => {
   };
 };
 
+export const linkCategory = (category) => {
+  return function (dispatch) {
+    return axios(`/filterType?type=${category}`)
+    .then((response) => response.data)
+    .then((dataCategory) => {
+      dispatch({ type: "LINK_CATEGORY", payload: dataCategory });
+      console.log('ACAAA', category)
+      });
+  };
+};
+
 export const filterByCategory = (payload) => {
   return {
     type: "FILTER_BY_CATEGORY",
@@ -176,3 +189,4 @@ export const getCartTotal = (payload) => {
     payload,
   };
 };
+

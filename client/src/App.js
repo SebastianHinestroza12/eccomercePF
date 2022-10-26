@@ -16,6 +16,8 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
 import RedirectToLogin from "./components/Login/ReditectToLogin";
 
+
+
 const initialOptions = {
   "client-id":
     "AfDNE98mgkMy8dhaS7qGfn9KML3r3kSIsXt3-jAMMR_gsL2-1bFGijHeHAunQJGSytq1QUWdtMWW02go",
@@ -37,6 +39,9 @@ function App() {
         </Route>
         <Route path={"/store/:productId"}>
           <ProductDetail />
+        </Route>
+        <Route path={"/store/:category"}>
+          <Store />
         </Route>
         <Route path={"/user"}>
           <User />
