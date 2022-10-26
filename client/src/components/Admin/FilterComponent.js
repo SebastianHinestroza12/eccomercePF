@@ -35,12 +35,12 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
       className="filter-product"
       id="search"
       type="text"
-      placeholder="Buscar producto ..."
+      placeholder="Buscar  ..."
       value={filterText}
       onChange={onFilter}
     />
     <ClearButton className="delete-filter" onClick={onClear}>
-      X
+      x
     </ClearButton>
   </>
 );
