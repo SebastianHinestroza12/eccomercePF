@@ -19,6 +19,7 @@ const postOrder = require('../controllers/Orders/postOrder');
 const modifyStatusOrder = require('../controllers/Orders/modifyStatus');
 const OrderId = require('../controllers/Orders/OrderId');
 const getOrder = require('../controllers/Orders/getOrder');
+const filterStatusOrder = require('../controllers/FilterOrders/filterStatus');
 
 
 
@@ -52,6 +53,7 @@ router.use('/order', modifyStatusOrder);
 router.use('/order', postOrder);
 router.use('/order', OrderId);
 router.use('/order', getOrder);
+router.use('/filterStatusOrder', filterStatusOrder);
 
 
 module.exports = router;
