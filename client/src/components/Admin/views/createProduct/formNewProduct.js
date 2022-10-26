@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import * as Unicons from "@iconscout/react-unicons";
 import axios from "axios";
 import "./newProduct.css";
-import { useDispatch } from "react-redux";
-import { newProductForm } from "../../../redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetail } from "../../../../redux/action";
+import { newProductForm } from "../../../../redux/action";
 import { Col, Row } from "react-bootstrap";
+
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/ddl3snuoe/image/upload";
 const CLOUDINARY_UPLOAD_PRESET = "pzsfr2g4";
 
 let noRepeat = new Set();
-
-const NewProduct = () => {
+const FormNewProduct = ({ productId }) => {
   const dispatch = useDispatch();
+
   const [values, setValues] = useState("");
   const [image, setImage] = useState("");
 
@@ -28,8 +30,9 @@ const NewProduct = () => {
         "Content-Type": "multipart/form-data",
       },
     });
+
+    setImage(res.data.secure_url);
     setValue("image", res.data.secure_url);
-    console.log(res.data.secure_url);
   };
 
   const {
@@ -42,11 +45,11 @@ const NewProduct = () => {
   } = useForm({
     defaultValues: {
       image: "",
-      name: "Pelota adidas",
-      category: "Balones",
-      price: 1,
+      name: "",
+      category: "",
+      price: "",
       size_stock: [{ size: "S", stock: "1" }],
-      detail: "NADA EN PARTICULAR",
+      detail: "",
     },
   });
   const { fields, append, remove } = useFieldArray({
@@ -61,20 +64,31 @@ const NewProduct = () => {
   const value = (e) => {
     setValues(e.target.value);
     noRepeat.clear();
-    console.log("function", values);
   };
 
   const onSubmit = (data) => {
-    console.log("DATAA", data);
     dispatch(newProductForm(data));
     reset();
   };
 
+  const productDetail = useSelector((state) => state.productDetail);
+  useEffect(() => {
+    dispatch(getProductDetail(productId));
+    setImage(productDetail.image);
+  }, [dispatch, setImage]);
+
+  function fillInputs(productDetail) {
+    setValue("name", productDetail.name);
+    setValue("price", productDetail.price);
+    setValue("detail", productDetail.detail);
+    setValue("image", productDetail.image);
+  }
+
   return (
-    <div className="container">
-      <h1>Crear nuevo producto</h1>
-      <hr />
-      <form className="row g-3 mt-3" onSubmit={handleSubmit(onSubmit)}>
+    <>
+      <form className="" onSubmit={handleSubmit(onSubmit)}>
+        {console.log("productDetail", [productDetail])}
+        {[productDetail].length > 0 && fillInputs(productDetail)}
         <Row>
           <Col md={8} className="new-product">
             <div>
@@ -128,7 +142,7 @@ const NewProduct = () => {
                 <textarea
                   rows={10}
                   className="form-control"
-                  placeholder="Leave a comment here"
+                  placeholder=""
                   id="floatingTextarea"
                   {...register("detail", {
                     required: true,
@@ -270,29 +284,13 @@ const NewProduct = () => {
             </div>
           </Col>
         </Row>
-        {/* PRUEBA */}
-
-        {/* PRUEBA */}
         <div className="col-12 mt-5">
           <button type="submit" className="btn btn-danger">
             Enviar
           </button>
         </div>
-        <div className="container">
-          <div className="alert alert-danger alert-dismissible fade show">
-            <strong>Importante!</strong> Debes llenar los campos correctamente.
-            De lo contrario tus datos no serán convalidados
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-        </div>
       </form>
-    </div>
+    </>
   );
 };
-
-export default NewProduct;
+export default FormNewProduct;
