@@ -10,6 +10,7 @@ const Table = (props) => {
   const columns = [
     {
       name: "Nombre",
+      selector: (row) => row.name,
       grow: 3,
       cell: (row) => (
         <Link target="_blank" to={`/store/${row.id}`}>
