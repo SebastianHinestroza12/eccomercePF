@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, getProductDetail } from "../../../redux/action";
-import * as Unicons from "@iconscout/react-unicons";
-import DataTable from "react-data-table-component";
+import FilterComponent from "../FilterComponent";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.css";
+import Table from "./DataTable";
 
 function getNumberOfPages(rowCount, rowsPerPage) {
   return Math.ceil(rowCount / rowsPerPage);
@@ -20,33 +20,6 @@ function toPages(pages) {
 
   return results;
 }
-
-const columns = [
-  {
-    name: "Nombre",
-    selector: (row) => row.name,
-    sortable: true,
-    grow: 3,
-  },
-  {
-    name: "Precio",
-    selector: (row) => row.price,
-    sortable: true,
-  },
-  {
-    name: "Estado",
-    selector: (row) => (row.visible === true ? "Publicado" : "Borrador"),
-    sortable: true,
-  },
-  {
-    name: "Editar",
-    cell: (row) => (
-      <Link to={`/panel-control/nuevo-producto/${row.id}`}>
-        <Unicons.UilEdit />
-      </Link>
-    ),
-  },
-];
 
 // RDT exposes the following internal pagination properties
 const BootyPagination = ({
@@ -150,19 +123,12 @@ function AllProducts() {
     });
   }, [dispatch, productId]);
 
+  const clickhandler = (name) => console.log("delete", name);
+
   return (
     <div className="App">
       <div>
-        <DataTable
-          title="Productos"
-          columns={columns}
-          data={products}
-          defaultSortFieldID={1}
-          pagination
-          paginationComponent={BootyPagination}
-          selectableRows
-          selectableRowsComponent={BootyCheckbox}
-        />
+        <Table data={products} click={clickhandler} />
       </div>
     </div>
   );
