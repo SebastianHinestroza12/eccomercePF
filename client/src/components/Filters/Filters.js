@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { /*useEffect*/ useState } from "react";
 import {
   filterByPrice,
   filterByRating,
@@ -48,12 +48,12 @@ const Filters = ({
     if (!filterState.includes(e.target.value)) setFilterState([e.target.value]);
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     new Promise((resolve) => {
       resolve(dispatch(getAllProducts()));
     });
     //cargo todos los cards de recetas
-  }, [dispatch]);
+  }, [dispatch]);*/
 
   const handleRefresh = (e) => {
     dispatch(getAllProducts());

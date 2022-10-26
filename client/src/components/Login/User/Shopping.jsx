@@ -1,9 +1,10 @@
 import React from "react";
-import { Container, Table } from "react-bootstrap";
+import { Button, Container, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Unicons from "@iconscout/react-unicons";
 import { useAuth0 } from "@auth0/auth0-react";
+import Reviews from "./Reviews";
 import "./shopping.css";
 
 function Shopping() {
@@ -65,12 +66,15 @@ function Shopping() {
                       <td style={{fontWeight:"bold", marginTop: "50px", marginLeft: "180px"}}>
                         $ {TotalPrice(e.price, e.quantity)} 
                       </td>
+                      <td style={{ width: "10px", padding: "50px"}}>
+                        <Reviews />
+                      </td>
                     </tr>
                   ))
                 }
                 </tbody>
                   <div>
-                    <div class="card-body">      
+                    <div className="card-body">      
                       <Link to="/store" className="buy btn btn-primary  buttons-cart">
                         <Unicons.UilArrowLeft />
                         VOLVER A LA TIENDA
@@ -99,7 +103,7 @@ function Shopping() {
       </div>
       </Container>
   ) : (
-    <div class="container">
+    <div className="container">
 
       <h2>NECESITAS LOGUEARTE !!</h2>
     </div>

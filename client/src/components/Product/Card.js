@@ -20,7 +20,7 @@ const ProductCard = (props) => {
   const { name, price, image, stars, id } = props;
   const history = useHistory();
   const goToDetail = (id) => {
-    history.push(`/detail/${id}`);
+    history.push(`/store/${id}`);
   };
 
   return (
@@ -30,7 +30,7 @@ const ProductCard = (props) => {
       </div>
 
       <Card.Body>
-        <Card.Text>CATEGORIA</Card.Text>
+        <Card.Text></Card.Text>
         <hr></hr>
         <Card.Title>{name}</Card.Title>
         <div className={"buttons_shop"}>

@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./productDetail.css";
 import { getProductDetail } from "../../redux/action";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AddToCart from "./AddToCart";
+import * as Unicons from "@iconscout/react-unicons";
 
 const ProductDetail = () => {
   const { productId } = useParams();
@@ -36,11 +37,16 @@ const ProductDetail = () => {
 
   return (
     <Container className="product-detail">
-      {console.log("productDetail", productDetail)}
+      {console.log("productId", productDetail)}
+
       {loading ? (
         <img src="/images/loader-blue.gif" className="loading" alt="loader" />
       ) : (
         <Row>
+          <Link to={"/store"} className="mb-5">
+            <Unicons.UilArrowLeft />
+            SEGUIR COMPRANDO
+          </Link>
           <Col md={5} className="sidebar">
             <img src={productDetail.image} alt="product-name" />
           </Col>
@@ -66,7 +72,9 @@ const ProductDetail = () => {
                   }}
                 >
                   {productDetail.size_stock.map((sizeArray, index) => (
-                    <option value={index}>{sizeArray.size}</option>
+                    <option value={index} key={index}>
+                      {sizeArray.size}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -81,6 +89,12 @@ const ProductDetail = () => {
                 sizePicked={productDetail.size_stock[idSizeStock].size}
                 stock={productDetail.size_stock[idSizeStock].stock}
               />
+            </section>
+            <hr></hr>
+            <section>
+              <h3>Reviews</h3>
+              <br></br>
+              <p>asa</p>
             </section>
           </Col>
         </Row>

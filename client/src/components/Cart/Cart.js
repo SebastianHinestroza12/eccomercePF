@@ -2,14 +2,17 @@ import { Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCartTotal, RemoveItemFromCart } from "../../redux/action";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import * as Unicons from "@iconscout/react-unicons";
 import "./cart.css";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Cart = () => {
-  // const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect } = useAuth0();
+
+  let history = useHistory();
+  const { isAuthenticated } = useAuth0();
 
   const dispatch = useDispatch();
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
@@ -47,6 +50,15 @@ const Cart = () => {
     //setTotal(totalPrice);
     dispatch(getCartTotal(totalPrice));
   }, [totalPrice, dispatch]);
+
+  /*
+  function loginWithRedirect() {
+    if (isAuthenticated) {
+      history.push("/pagar");
+    } else {
+      history.push("/pagar");
+    }
+  }*/
 
   return (
     <>
@@ -139,16 +151,29 @@ const Cart = () => {
                     <span>$ {totalPrice.toLocaleString("en-US")}</span>
                   </div>
                 </div>
-                <Link to={'/pagar'}>
-                <button
-                  className="checkout buy btn btn-primary buttons-cart"
-                  type="button"
-                  // onClick={() => loginWithRedirect()}
-                >
-                  <Unicons.UilCreditCard />
-                  &nbsp;FINALIZAR COMPRA
-                </button>
-                </Link>
+                {isAuthenticated ? (
+                  <Link to={`/pagar`}>
+                    <button
+                      className="checkout buy btn btn-primary buttons-cart"
+                      type="button"
+                      //onClick={() => loginWithRedirect()}
+                    >
+                      <Unicons.UilCreditCard />
+                      &nbsp;FINALIZAR COMPRA
+                    </button>
+                  </Link>
+                ) : (
+                  <Link to={`/login`} className="">
+                    <button
+                      className="checkout buy btn btn-primary buttons-cart"
+                      type="button"
+                      onClick={() => loginWithRedirect()}
+                    >
+                      <Unicons.UilCreditCard />
+                      &nbsp;FINALIZAR COMPRA
+                    </button>
+                  </Link>
+                )}
               </div>
             </section>
           ) : (

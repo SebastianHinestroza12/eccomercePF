@@ -39,6 +39,10 @@ module.exports = (sequelize) => {
       email_verified: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+      },
+      favorites: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
+        allowNull: true,
       }
     },
     {

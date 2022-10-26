@@ -10,11 +10,12 @@ import { Alert, Col, Row } from "react-bootstrap";
 
 const Cards = ({ loading, setLoading }) => {
   const allProducts = useSelector((state) => state.products);
+  const superAllProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
-
   /**
    * PAGINADO
    */
+  /* eslint-disable no-unused-vars */
   const appTopRef = useRef();
   const [order, setOrder] = useState("");
   const [actualPage, setActualPage] = useState(1); //arrancamos desde la page 1
@@ -44,23 +45,21 @@ const Cards = ({ loading, setLoading }) => {
    */
 
   useEffect(() => {
-    new Promise((resolve, reject) => {
-      resolve(dispatch(getAllProducts()));
-    })
-      .then(() => {
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("error", error);
-        return error.response.data.error;
-      });
+    if (superAllProducts.length === 0) {
+      dispatch(getAllProducts());
+    }
+  }, [allProducts.length, dispatch, setLoading, superAllProducts.length]);
 
-    return () => {};
-  }, [dispatch, setLoading]);
-
-  return loading ? (
+  return !allProducts[0] ? (
     <>
-      <img src="/images/loader-blue.gif" className="loading" alt="loader" />
+      <Col>
+        <img
+          src="/images/loader-blue.gif"
+          width="200px"
+          className="loading"
+          alt="loader"
+        />
+      </Col>
     </>
   ) : (
     <>
@@ -83,6 +82,7 @@ const Cards = ({ loading, setLoading }) => {
           {Array.isArray(actualproducts) ? (
             actualproducts.map((products) => (
               <Col md={3} xs={6} key={products.id}>
+                {console.log("products", products)}
                 <ProductCard
                   name={products.name}
                   price={products.price}
@@ -97,7 +97,6 @@ const Cards = ({ loading, setLoading }) => {
               <Alert key={"warning"} variant={"warning"}>
                 {allProducts}
               </Alert>
-              <p className="errors"></p>
             </>
           )}
         </Row>
@@ -110,7 +109,7 @@ const Cards = ({ loading, setLoading }) => {
           pages={pages}
         />
 
-        {console.log(order, setproductsPerPage)}
+        {/*console.log(order, setproductsPerPage)*/}
       </Col>
     </>
   );

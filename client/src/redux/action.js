@@ -5,7 +5,7 @@ export const getAllProducts = () => {
     return axios("/product")
       .then((response) => response.data)
       .then((products) => {
-        console.log(products);
+        //console.log(products);
         dispatch({ type: "GET_ALL_PRODUCTS", payload: products });
       })
       .catch((error) => {
@@ -97,6 +97,16 @@ export const newProductForm = (data) => {
     await axios.post(`/postProduct`, data);
     dispatch({
       type: "LOAD_PRODUCTS",
+      payload: data,
+    });
+  };
+};
+
+export const newComentForm = (data) => {
+  return async (dispatch) => {
+    await axios.post(`/postReview`, data);
+    dispatch({
+      type: "LOAD_REVIEW",
       payload: data,
     });
   };

@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
-import ListGroup from "react-bootstrap/ListGroup";
+import React from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
 import {
-  getAllProducts,
+  //getAllProducts,
   filterBySize,
   filterByCategory,
   filterByType,
 } from "../../redux/action";
+import "./sidebar.css";
 
 let allFilters = [];
 
@@ -99,9 +99,9 @@ const Sidebar = ({
     dispatch(filterByType(e.target.value));
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     dispatch(getAllProducts());
-  }, [dispatch]);
+  }, [dispatch]);*/
 
   let checks = document.querySelectorAll(".check");
 
@@ -113,7 +113,7 @@ const Sidebar = ({
 
   return (
     <>
-      <ListGroup variant="flush" className="filters_container">
+      <div className="filters_container mt-3">
         <h5>CATEGORIAS</h5>
         <button
           onClick={(e) => handleFilterByCategory(e)}
@@ -136,15 +136,15 @@ const Sidebar = ({
         >
           Balones
         </button>
-      </ListGroup>
+      </div>
 
       <div className="filters_container mt-3">
         <h5>TALLA</h5>
         <br />
-        <h6>Camisetas</h6>
+        <h6 className="mb-3">Camisetas</h6>
         <Form name="f1" id="formElement">
           {camisetas.map((product) => (
-            <div key={`default-${product.size}`} className="mb-2">
+            <div key={`default-${product.size}`} className="mb-3">
               <Form.Check
                 id={product.size}
                 className="check"
@@ -155,10 +155,10 @@ const Sidebar = ({
             </div>
           ))}
         </Form>
-        <h6>Balones y Calzado</h6>
+        <h6 className="mb-3 mt-5">Balones y Calzado</h6>
         <Form name="f1" id="formElement">
           {balonesCalzados.map((product) => (
-            <div key={`default-${product.size}`} className="mb-2">
+            <div key={`default-${product.size}`} className="mb-3">
               <Form.Check
                 className="check"
                 onChange={(e) => handleFilterBySize(e)}
@@ -170,10 +170,10 @@ const Sidebar = ({
         </Form>
       </div>
       <div className="filters_container mt-3">
-        <h5>TIPO</h5>
+        <h5 className="mb-3">TIPO</h5>
         <Form name="f1" id="formElement">
           {type.map((t) => (
-            <div key={`default-${t.type}`} className="mb-1">
+            <div key={`default-${t.type}`} className="mb-3">
               <Form.Check
                 onChange={(e) => handleFilterByType(e)}
                 label={t.type}
