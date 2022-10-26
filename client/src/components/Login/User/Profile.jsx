@@ -98,7 +98,39 @@ function Profile() {
         </Col>
 
         <Col>
-          <h4>Datos</h4>
+          <section className="data-profile m-5">
+            <h3>Mis Datos</h3>
+            <div>
+              <strong>Nombre: </strong>
+              {profileUser.name}
+            </div>
+            <div>
+              <strong>Apellido: </strong>
+              {profileUser.surnames}
+            </div>
+            <div>
+              <strong>Correo electrónico: </strong>
+              {profileUser.email}
+            </div>
+            <div>
+              <strong>Teléfono: </strong>
+              {profileUser.phone}
+            </div>
+            <div>
+              <strong>Dirección: </strong>
+              {profileUser.address}
+            </div>
+            <div>
+              <strong>Localidad: </strong>
+              {profileUser.country}, {profileUser.city}
+            </div>
+            <div>
+              <strong>DNI: </strong>
+              {profileUser.dni}
+            </div>
+          </section>
+
+          <div>{console.log("profileUser", profileUser)}</div>
         </Col>
       </Row>
     </Fragment>
