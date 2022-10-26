@@ -4,6 +4,12 @@
   height: 50px;
 }
 
+.reviews-errors {
+  color: red;
+  font-style: italic;
+  text-align: center;
+}
+
 .form-stars p {
   text-align: center;
 }
