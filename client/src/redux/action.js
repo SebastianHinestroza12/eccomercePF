@@ -102,6 +102,16 @@ export const newProductForm = (data) => {
   };
 };
 
+export const newComentForm = (data) => {
+  return async (dispatch) => {
+    await axios.post(`/postReview`, data);
+    dispatch({
+      type: "LOAD_REVIEW",
+      payload: data,
+    });
+  };
+};
+
 export function addProductToCart(payload, quantity, sizePicked) {
   return {
     type: "ADD_PRODUCTS_TO_CART",
