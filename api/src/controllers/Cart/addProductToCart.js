@@ -1,89 +1,55 @@
-const { Cart, Product, Product_Cart } = require('../../db');
 const router = require("express").Router();
+const { Cart, Product, User, Product_Cart, Item } = require("../../db.js");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
+router.post("/", async (req, res) => {
+  try {
+    let { size, units, price, cartId, productId, userId } = req.body;
 
-router.post('/', async (req, res, next) => {
+		let product = await Item.findOne({
+      where:{
+				size: size.toUpperCase(),
+        productId: productId
+				
+      }
+    })
 
-	let { size, units, cartId, productId, userId } = req.body; //por body envian el id del producto y el id del usuario
-
-	try {
-		let product = await Product.findOne({		//busco en la tabla productos donde el id sea igual al id que me pasan
-			where: {
-				id: productId,
-			},
-		});
-
-		if (!product)			//si no lo encuentro devuelvo un error y se corta la ejecucion
-			return res.status(400).send('No product was found with that ID');
-
-		let cart = await Cart.findOne({  //si lo encuentro busco el carrito del usuario que me pasan por parametro (userId)
+		let cart = await Cart.findOne({  
 			where: {
 				userId: userId,
 				status: 'Active',
 			},
 			include: {
-				model: Product,
+				model: Item,
 			},
-			through: { attributes: ['units', 'size'] },
 		});
 
-		const total = units * product.price;
+		let total = units * price;
 
-		//declaro una variable para modificar el precio total del carrito
 		let newPrice = (
 			cart.totalPrice + total
 		);
 
-		let cartProduct = await Product_Cart.findOne({
-			where:{
-				productId: productId,
-				size: size.toUpperCase()
-			}
-		})
-
-		// console.log('1', cart.products)
-		// console.log('2', containProduct)
-		console.log('3', cartProduct)
-
-		if (cartProduct) {
-			return res.status(400).send(`${product.name} is already in the cart`)
-
-		} else {
-			
-
-    await Product_Cart.create({
-        size: size,
+		if(product)
+		return res.status(400).send(`Product is already in the cart`)
+		
+    let newItem = await Item.create({
+        size: size.toUpperCase(),
         units: units,
-        //price: price,
-        cartId: cartId,
+        price: price,
+        cartId: cartId,	
         productId: productId
-        //productx: productx
     });
-		// await cart.addProduct(product); //se agrega el producto al carrito
-		await cart.update({  //se actualiza el precio del carrito
+
+		await cart.update({ 
 			totalPrice: newPrice
 		});
-
-		// let productCart = await Product_Cart.findOne({
-		// 	where:{
-		// 		productId: productId
-		// 	}
-		// })
-
-		// //console.log('product cart', productCart)
-
-		// await productCart.update({ 
-		// 	size: size.toUpperCase(),
-		// 	units
-		// });
-
-		return res.send(`${product.name} added to cart!`);
-	}
-	} catch (err) {
-		next(err);
-	}
-  
-
+		return res.send(newItem)
+  } catch (err) {
+    res.status(400).send("Error al agregar producto al carrito");
+    console.log("Error", err.message);
+  }
 });
 
 module.exports = router;

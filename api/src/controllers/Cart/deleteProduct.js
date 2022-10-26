@@ -1,17 +1,20 @@
-const { Cart, Product, Product_Cart } = require('../../db');
+const { Cart, Product, Item } = require('../../db');
 const router = require("express").Router();
 
 
-router.put('/', async (req, res, next) => {
-	let { userId, productId } = req.query;
+router.delete('/', async (req, res, next) => {
+	let { userId, productId, size } = req.query;
 
 	try {
-		let product = await Product.findOne({
+		let product = await Item.findOne({
 			where: {
-				id: productId,
+				size: size.toUpperCase(),
+				productId: productId,
+			
 			},
 		});
-
+		
+		console.log('prroduc', product)
 		if (!product)
 			return res.status(400).send('No product was found with that ID');
 
@@ -20,27 +23,32 @@ router.put('/', async (req, res, next) => {
 				userId: userId,
 				status: 'Active',
 			},
-			include: {
-				model: Product,
-			},
 		});
 
+		let subtotalProduct = product.units * product.price;
+
+		console.log('cart', cart)
 		let newPrice = (
-			cart.totalPrice - product.price
+			cart.totalPrice - subtotalProduct
 		).toFixed(2);
 
 		if (!cart)
 			return res.status(400).send('No cart was found with that user ID');
 
-    if (await cart.removeProduct(product)) {
       await cart.update({
         totalPrice: newPrice,
       });
+			await Item.destroy({
+				where:{
+					size: size.toUpperCase(),
+					productId: productId,
+				}
+			})
       return res.send(
         `Product ${product.name} removed from cart`
       );
-    } else
-      return res.send(`No product ${product.name} in cart!`);
+			
+      // return res.send(`No product ${product.name} in cart!`);
 	} catch (err) {
 		next(err);
 	}

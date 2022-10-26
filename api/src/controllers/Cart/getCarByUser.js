@@ -1,4 +1,4 @@
-const { Cart, Product } = require('../../db');
+const { Cart, Item } = require('../../db');
 const router = require("express").Router();
 
 router.get('/', async (req, res, next) => {
@@ -11,16 +11,7 @@ router.get('/', async (req, res, next) => {
           status: 'Active',
         },
         include: {
-          model: Product,
-          attributes: [
-            'id',
-            'name',
-            // 'size_stock',
-            'price',
-            // 'detail',
-            'image',
-          ],
-          through: { attributes: ['units', 'size'] },
+          model: Item,
         },
       });
       if (userCart) res.status(200).json(userCart);

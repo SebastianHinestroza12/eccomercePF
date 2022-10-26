@@ -1,4 +1,4 @@
-const { Cart, Product, Product_Cart } = require('../../db');
+const { Cart, Product, Item } = require('../../db');
 const router = require("express").Router();
 
 
@@ -12,35 +12,30 @@ router.put('/', async (req, res, next) => {
 				status: 'Active',
 			},
 			include: {
-				model: Product,
+				model: Item,
 			},
 		});
 
-    let product = await Product.findOne({
+    let product = await Item.findOne({
       where:{
-        id: productId
+				size: size.toUpperCase(),
+        productId: productId
+				
       }
     })
-
-		let productCart = await Product_Cart.findOne({
-			where:{
-				productId,
-        size: size.toUpperCase()
-			}
-		})
-    
-    let newPrice = cart.totalPrice - product.price
-    let newUnits = productCart.units - 1;
-
+		
+    let newPrice = cart.totalPrice - product.price;
+    let newUnits = product.units - 1;
+		console.log(product)
     await cart.update({
 			totalPrice: newPrice,
 		});
-    
-    await productCart.update({ 
-			units: newUnits
-		});
 
-    return res.send(`${product.name} remove`);
+		await product.update({
+			units: newUnits,
+		});
+    
+    return res.send(product);
 
 	} catch (err) {
 		next(err);
