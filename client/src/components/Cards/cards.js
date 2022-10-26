@@ -43,22 +43,23 @@ const Cards = ({ loading, setLoading }) => {
   /**
    * FIN PAGINADO
    */
-  console.log(allProducts.length, superAllProducts.length);
+
   useEffect(() => {
-
-    /*if (allProducts.length > superAllProducts.length) {
-      dispatch(getAllProducts())
-
-    } else */if (superAllProducts.length === 0) {
+    if (superAllProducts.length === 0) {
       dispatch(getAllProducts());
     }
-  
   }, [allProducts.length, dispatch, setLoading, superAllProducts.length]);
-
 
   return !allProducts[0] ? (
     <>
-      <img src="/images/loader-blue.gif" className="loading" alt="loader" />
+      <Col>
+        <img
+          src="/images/loader-blue.gif"
+          width="200px"
+          className="loading"
+          alt="loader"
+        />
+      </Col>
     </>
   ) : (
     <>
@@ -96,7 +97,6 @@ const Cards = ({ loading, setLoading }) => {
               <Alert key={"warning"} variant={"warning"}>
                 {allProducts}
               </Alert>
-              <p className="errors"></p>
             </>
           )}
         </Row>

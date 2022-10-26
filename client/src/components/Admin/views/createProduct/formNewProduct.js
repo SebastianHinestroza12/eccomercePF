@@ -46,9 +46,10 @@ const FormNewProduct = ({ productId }) => {
     defaultValues: {
       image: "",
       name: "",
-      category: "",
+      category: "Camisetas",
       price: "",
-      size_stock: [{ size: "S", stock: "1" }],
+      status: "",
+      size_stock: [{ size: "XS", stock: "1" }],
       detail: "",
     },
   });
@@ -75,22 +76,22 @@ const FormNewProduct = ({ productId }) => {
   useEffect(() => {
     dispatch(getProductDetail(productId));
     setImage(productDetail.image);
-  }, [dispatch, setImage]);
+  }, [dispatch, setImage, productDetail.image, productId]);
 
   function fillInputs(productDetail) {
     setValue("name", productDetail.name);
     setValue("price", productDetail.price);
     setValue("detail", productDetail.detail);
     setValue("image", productDetail.image);
+    setValue("status", productDetail.visible ? "Publicado" : "Borrador");
   }
 
   return (
     <>
       <form className="" onSubmit={handleSubmit(onSubmit)}>
-        {console.log("productDetail", [productDetail])}
         {[productDetail].length > 0 && fillInputs(productDetail)}
-        <Row>
-          <Col md={8} className="new-product">
+        <Row className="new-product">
+          <Col md={8}>
             <div>
               <label htmlFor="name" className="form-label">
                 Nombre
@@ -101,8 +102,7 @@ const FormNewProduct = ({ productId }) => {
                 type="text"
                 {...register("name", {
                   required: true,
-                  pattern: /^[a-zA-Z\s]{0,255}$/,
-                  maxLength: 20,
+                  maxLength: 50,
                 })}
               />
               {errors.name?.type === "required" && (
@@ -110,9 +110,6 @@ const FormNewProduct = ({ productId }) => {
               )}
               {errors.name?.type === "maxLength" && (
                 <p className="textoError">Máximo de carácteres permitidos</p>
-              )}
-              {errors.name?.type === "pattern" && (
-                <p className="textoError">No se permiten números o símbolos</p>
               )}
             </div>
             <div>
@@ -159,7 +156,6 @@ const FormNewProduct = ({ productId }) => {
               </label>
               <select
                 onClick={value}
-                className="form-control"
                 name="category"
                 id="category"
                 aria-label="Default select example"
@@ -176,22 +172,19 @@ const FormNewProduct = ({ productId }) => {
               )}
             </div>
             <div>
-              Tamaño:
+              <label>Tamaño:</label>
               {fields.map((item, index) => {
                 return (
                   <li className="size-stock" key={item.id}>
                     <select
                       name="select"
-                      className="form-control"
                       {...register(`size_stock.${index}.size`, {
                         required: true,
                       })}
                     >
                       {values === "Camisetas" ? (
                         <>
-                          <option selected value="XS">
-                            XS
-                          </option>
+                          <option value="XS">XS</option>
                           <option value="S">S</option>
                           <option value="M">M</option>
                           <option value="L">L</option>
@@ -200,9 +193,7 @@ const FormNewProduct = ({ productId }) => {
                         </>
                       ) : values === "Calzado" ? (
                         <>
-                          <option selected value="3">
-                            3
-                          </option>
+                          <option value="3">3</option>
                           <option value="4">4</option>
                           <option value="5">5</option>
                           <option value="6">6</option>
@@ -213,9 +204,7 @@ const FormNewProduct = ({ productId }) => {
                         </>
                       ) : (
                         <>
-                          <option selected value="5.5">
-                            5
-                          </option>
+                          <option value="5.5">5</option>
                           <option value="6">6</option>
                           <option value="7">7</option>
                         </>
@@ -235,7 +224,7 @@ const FormNewProduct = ({ productId }) => {
                     />
                     <button
                       type="button"
-                      className="remove-item"
+                      className="remove-item btn btn-danger"
                       onClick={() => remove(index)}
                     >
                       <Unicons.UilTrash />
@@ -244,7 +233,7 @@ const FormNewProduct = ({ productId }) => {
                 );
               })}
               <button
-                className="buy btn btn-primary"
+                className="btn btn-warning mt-3"
                 type="button"
                 onClick={() => {
                   append({ size: "", stock: "" });
@@ -255,7 +244,24 @@ const FormNewProduct = ({ productId }) => {
             </div>
           </Col>
           <Col md={4}>
-            <div>
+            <div className="actions-new-product">
+              <h4>ACCIONES</h4>
+              <label htmlFor="status" className="form-label">
+                Estado:
+              </label>
+              <select name="status" id="status" {...register("status", {})}>
+                <option value="Publicado">Publicado</option>
+                <option value="Borrador">Borrador</option>
+              </select>
+              <button
+                type="submit"
+                variant="success"
+                className="save-product btn btn-primary mt-2"
+              >
+                Guardar
+              </button>
+            </div>
+            <div className="actions-new-product">
               <label htmlFor="image" className="form-label">
                 Imagen
               </label>
@@ -284,11 +290,6 @@ const FormNewProduct = ({ productId }) => {
             </div>
           </Col>
         </Row>
-        <div className="col-12 mt-5">
-          <button type="submit" className="btn btn-danger">
-            Enviar
-          </button>
-        </div>
       </form>
     </>
   );
