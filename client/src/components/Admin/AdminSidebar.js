@@ -11,8 +11,11 @@ const AdminSidebar = () => {
         <Link to={"/panel-control/nuevo-producto"}>
           <li>Nuevo producto </li>
         </Link>
+        <Link to={"#"}>
+          <li>Valoraciones </li>
+        </Link>
       </ul>
-      <h4>Tienda</h4>
+      <h4>TIENDA</h4>
       <ul>
         <Link to={"#"}>
           <li>Pedidos</li>

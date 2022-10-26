@@ -104,34 +104,15 @@ export const newProductForm = (data) => {
   };
 };
 
-
-// EDICION DE PRODUCTO
-
-// export const putProduct = (data) => {
-//   console.log('MODIFICANDO', data)
-//   return async () => {
-    
-//     const puttProd = await axios.put(`/product`, data);
-//     console.log('ACAA', puttProd.data)
-//   };
-// }
-
-export const putProduct2 = (data) => {
-  return async function (dispatch) {
-    try {
-      console.log("llega action", data);
-      let json = await axios.put("/product", data);
-      console.log("action ok ", json);
-      return dispatch({
-        type: "PUT_PRODUCT_DETAIL",
-        payload: json.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+export const newComentForm = (data) => {
+  return async (dispatch) => {
+    await axios.post(`/postReview`, data);
+    dispatch({
+      type: "LOAD_REVIEW",
+      payload: data,
+    });
   };
 };
-
 
 export function addProductToCart(payload, quantity, sizePicked) {
   return {

@@ -15,6 +15,7 @@ const initialState = {
   productDetail: [],
   pruebaProduct: [],
   newProducts: [],
+  reviews: [],
   cartTotal: 0,
   cartProducts: localStorage.getItem("cartProductsAdded")
     ? JSON.parse(localStorage.getItem("cartProductsAdded"))
@@ -34,10 +35,14 @@ const rootReducer = (state = initialState, action) => {
         allProducts: payload,
       };
     case "LOAD_PRODUCTS":
-      console.log("reducer payload", payload);
       return {
         ...state,
         newProducts: payload,
+      };
+    case "LOAD_REVIEW":
+      return {
+        ...state,
+        reviews: payload,
       };
     case "GET_PRODUCT_DETAIL":
       return {

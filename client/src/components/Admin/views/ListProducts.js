@@ -1,15 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
+import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../../../redux/action";
-import EditButton from "./EditButton";
+import * as Unicons from "@iconscout/react-unicons";
+
+import "./listProducts.css";
 
 const ListProducts = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
-  console.log(products);
-  const getProducts = () => {
+  useEffect(() => {
     dispatch(getAllProducts());
-  };
+  }, []);
 
   return (
     <Fragment>
@@ -42,62 +44,52 @@ const ListProducts = () => {
         </ul>
       </nav>
 
-      <button onClick={getProducts}>Cargar productos</button>
-      <div className="table-responsive">
-        <table className="table" style={{ width: "100%" }}>
-          <thead>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th style={{ width: "350px" }}>Nombre</th>
+            <th style={{ width: "100px" }}>Precio</th>
+            <th style={{ width: "100px" }}>Estado</th>
+            <th style={{ width: "350px" }}>Detalle</th>
+            <th style={{ width: "100px" }}>Agotado</th>
+            <th style={{ width: "80px" }}>Editar</th>
+            <th style={{ width: "80px" }}>Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((e) => (
             <tr>
-              <th style={{ width: "330px" }}>#</th>
-              <th style={{ width: "350px" }}>Nombre</th>
-              <th style={{ width: "100px" }}>Precio</th>
-              <th style={{ width: "100px" }}>Visible</th>
-              <th style={{ width: "350px" }}>Detalle</th>
-              <th style={{ width: "100px" }}>checkbox</th>
-              <th style={{ width: "80px" }}>boton1</th>
-              <th style={{ width: "80px" }}>boton2</th>
+              <td style={{ width: "350px", fontSize: "small" }}>{e.name}</td>
+              <td style={{ width: "100px", fontSize: "small" }}>{e.price}</td>
+              <td style={{ width: "100px", fontSize: "small" }}>
+                {e.visible === true ? (
+                  <span>Publicado</span>
+                ) : (
+                  <span>Borrador</span>
+                )}
+              </td>
+              <td style={{ width: "350px", fontSize: "small" }}>{e.detail}</td>
+              <td style={{ width: "100px", fontSize: "small" }}>
+                <input id="agotado" type="checkbox" />
+              </td>
+              <td style={{ width: "80px", fontSize: "small" }}>
+                <button
+                  className="edit btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  <Unicons.UilEdit />
+                </button>
+              </td>
+              <td style={{ width: "80px", fontSize: "small" }}>
+                <button className="edit btn btn-primary">
+                  <Unicons.UilTrash />
+                </button>
+              </td>
             </tr>
-          </thead>
-        </table>
-      </div>
-      {products.map((e) => (
-        <div className="table-responsive">
-          <table style={{ width: "100%" }} className="table table-striped">
-            <tbody>
-              <tr>
-                <th style={{ width: "330px", fontSize: "small" }}>{e.id}</th>
-                <td style={{ width: "350px", fontSize: "small" }}>{e.name}</td>
-                <td style={{ width: "100px", fontSize: "small" }}>{e.price}</td>
-                <td style={{ width: "100px", fontSize: "small" }}>
-                  {e.visible.toString()}
-                </td>
-                <td style={{ width: "350px", fontSize: "small" }}>
-                  {e.detail}
-                </td>
-                <td style={{ width: "100px", fontSize: "small" }}>
-                  <label htmlFor="agotado">Agotado&nbsp;</label>
-                  <input id="agotado" type="checkbox" />
-                </td>
-                <td style={{ width: "80px", fontSize: "small" }}>
-                  <EditButton idProduct={e.id}/>
-                  <button
-                style={{ marginTop: "20px" }}
-                type="button"
-                className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                id={e.id}
-              >
-                Editar
-              </button>
-                </td>
-                <td style={{ width: "80px", fontSize: "small" }}>
-                  <button>Eliminar</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      ))}
+          ))}
+        </tbody>
+      </Table>
     </Fragment>
   );
 };

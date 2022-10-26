@@ -10,7 +10,7 @@ button#dropdown-cart {
 img.cart-image {
   width: 20%;
 }
-.listItem {
+.dropdown .listItem {
   display: flex;
   font-size: 1rem;
   align-items: center;
