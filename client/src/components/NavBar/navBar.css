@@ -12,16 +12,15 @@
 .navbar-brand {
   max-width: 110px;
 }
-.but {
+.but.search-nav {
   background-color: var(--grey200);
   border-left: var(--primary-color);
   color: var(--primary-color);
   border: none;
 }
-
-.but:hover {
-  background-color: var(--grey500);
-  border-color: var(--primary-color);
+.but.search-nav:hover {
+  background: var(--third-color);
+  color: white;
 }
 .navbar .divNav {
   display: flex;

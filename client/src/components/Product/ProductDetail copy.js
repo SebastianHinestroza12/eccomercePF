@@ -62,6 +62,10 @@ const ProductDetail = () => {
             <section className="buttonsAddToCart">
               <AddToCart />
             </section>
+            <section>
+              <h2>Reviews</h2>
+              <p>asa</p>
+            </section>
           </Col>
         </Row>
       )}

@@ -18,3 +18,11 @@
     margin-top: 2rem;
     max-width: 100%;
 }
+
+.review-btn {
+  border: none;
+  background-color: #0D6EFD;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}

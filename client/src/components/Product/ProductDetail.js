@@ -37,7 +37,8 @@ const ProductDetail = () => {
 
   return (
     <Container className="product-detail">
-      {console.log("productDetail", productDetail)}
+      {console.log("productId", productDetail)}
+
       {loading ? (
         <img src="/images/loader-blue.gif" className="loading" alt="loader" />
       ) : (
@@ -71,7 +72,9 @@ const ProductDetail = () => {
                   }}
                 >
                   {productDetail.size_stock.map((sizeArray, index) => (
-                    <option value={index} key={index}>{sizeArray.size}</option>
+                    <option value={index} key={index}>
+                      {sizeArray.size}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -86,6 +89,12 @@ const ProductDetail = () => {
                 sizePicked={productDetail.size_stock[idSizeStock].size}
                 stock={productDetail.size_stock[idSizeStock].stock}
               />
+            </section>
+            <hr></hr>
+            <section>
+              <h3>Reviews</h3>
+              <br></br>
+              <p>asa</p>
             </section>
           </Col>
         </Row>
