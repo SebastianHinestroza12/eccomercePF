@@ -29,6 +29,14 @@ const postCategory = require('./postCategory');
 const postAdmin = require('./postAdmin');
 const getCategories = require('./getCategories');
 
+const addProductToCart = require('../controllers/Cart/addProductToCart');
+const getCartByUser = require('../controllers/Cart/getCarByUser');
+const getAllCarts = require('../controllers/Cart/getAllCarts');
+const clearCart = require('../controllers/Cart/clearCart');
+const deleteProduct = require('../controllers/Cart/deleteProduct');
+const addUnit = require('../controllers/Cart/addUnit');
+const removeUnit = require('../controllers/Cart/removeUnit');
+
 router.use('/product', getProduct);
 router.use('/product', putProduct);
 router.use('/product', productId);
@@ -47,6 +55,16 @@ router.use('/postAdmin', postAdmin);
 router.use('/user/login', getLogin);
 router.use('/user/register', postRegister);
 router.use('/user/modify', modifyUser);
+
+//cart
+router.use('/cart', addProductToCart);
+router.use('/cart', getCartByUser);
+router.use('/cart/all', getAllCarts);
+router.use('/', deleteProduct);
+router.use('/clear', clearCart);
+router.use('/cart/add', addUnit);
+router.use('/cart/remove', removeUnit);
+
 
 // Ordenes de usuarios
 router.use('/order', modifyStatusOrder);
