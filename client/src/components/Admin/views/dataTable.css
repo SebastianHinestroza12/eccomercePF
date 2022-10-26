@@ -9,7 +9,8 @@
   background: var(--third-color);
   color: white;
 }
-nav.sc-ezOQGI.fISISQ.rdt_Pagination {
+nav.rdt_Pagination {
+  width: -moz-fit-content;
   width: fit-content;
   margin: 3rem auto;
   border: none;
