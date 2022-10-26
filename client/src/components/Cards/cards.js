@@ -1,14 +1,19 @@
 import React, { useRef, useEffect, useState } from "react";
+
 import ProductCard from "../Product/Card";
 import "./cards.css";
 import Pages from "../Pagination/pagination";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../redux/action";
+import { getAllProducts, linkCategory } from "../../redux/action";
 import Filters from "../Filters/Filters";
 import Sidebar from "../Product/Sidebar";
 import { Alert, Col, Row } from "react-bootstrap";
+import { useParams } from "react-router-dom";
 
 const Cards = ({ loading, setLoading }) => {
+
+  const { category } = useParams();
+
   const allProducts = useSelector((state) => state.products);
   const superAllProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
@@ -49,7 +54,12 @@ const Cards = ({ loading, setLoading }) => {
     /*if (allProducts.length > superAllProducts.length) {
       dispatch(getAllProducts())
 
-    } else */if (superAllProducts.length === 0) {
+    } else */
+    if(category){
+      console.log('CATEGORY',category)
+      dispatch(linkCategory(category))
+    }
+    else if (superAllProducts.length === 0) {
       dispatch(getAllProducts());
     }
   

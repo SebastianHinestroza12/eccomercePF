@@ -39,6 +39,9 @@ function App() {
         <Route path={"/store/:productId"}>
           <ProductDetail />
         </Route>
+        <Route path={"/store/:category"}>
+          <Store />
+        </Route>
         <Route path={"/user"}>
           <User />
         </Route>

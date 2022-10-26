@@ -49,6 +49,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productDetail: payload,
       };
+    case "LINK_CATEGORY":
+      return {
+        ...state,
+        products: payload,
+      };
 
       case "PUT_PRODUCT_DETAIL":
         console.log('REDUCER', payload)
