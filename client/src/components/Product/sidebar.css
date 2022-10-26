@@ -35,3 +35,15 @@
   padding: 1rem;
   list-style: square;
 }
+
+.home-btn {
+  
+    margin-left: 15px;
+    border: none;
+    background-color: #0D6EFD;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 0.4rem 1rem;
+
+
+}
