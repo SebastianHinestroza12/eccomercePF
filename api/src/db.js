@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
@@ -71,7 +71,28 @@ sequelize.models = Object.fromEntries(capsEntries);
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
 
-const { Admin, Product, User, Order, Category, Review } = sequelize.models;
+const { Admin, Product, User, Order, Category, Review, Cart, Product_Cart} = sequelize.models;
+// const Product_Cart = sequelize.define("Product_Cart", 
+//   {
+//     size: {
+//       type: DataTypes.STRING,
+//       defaultValue: "S",
+//       allowNull: false
+//     },
+//     units: {
+//       type: DataTypes.INTEGER,
+//       defaultValue: 1,
+//       allowNull: false
+//     },
+//     price: {
+//       type: DataTypes.INTEGER,
+//       defaultValue: 1,
+//       allowNull: false
+//     },
+//   }, 
+//   {timestamps: false}
+// )
+
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -95,6 +116,20 @@ Product.hasMany(Review);
 Review.belongsTo(Product);
 
 Product.belongsToMany(Order, { through: "order-product" });
+
+Cart.belongsToMany(Product, { through: Product_Cart });
+Product.belongsToMany(Cart, { through: Product_Cart });
+
+User.hasOne(Cart);
+Cart.belongsTo(User);
+
+// //Muchos productos pueden estar en una misma orden y distintas ordenes pueden tener a los mismos productos
+// Product.belongsToMany(Cart, { through: "Product_cart" }); //orders
+// Cart.belongsToMany(Product, { through: "Product_cart" }); //products
+
+// //Un usuario puede tener varias ordenes, pero cada orden pertenece a un único usuario
+// Cart.belongsToMany(User, { through: "user_cart" }); //orders
+// User.belongsToMany(Cart, { through: "user_cart" }); //products
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
