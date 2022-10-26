@@ -1,35 +1,35 @@
 .form-stars {
-    width: 250px;
-    margin: 0 auto;
-    height: 50px;
-  }
-  
-  .form-stars p {
-    text-align: center;
-  }
-  
-  .form-stars .stars {
-    font-size: 20px;
-  }
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
 
-  input[type="radio"] {
-    display: none;
-  }
-  
-  .stars {
-    color: grey;
-  }
-  
-  .clasificacion {
-    direction: rtl;
-    unicode-bidi: bidi-override;
-  }
-  
-  .stars:hover,
-  .stars:hover ~ .stars {
-    color: orange;
-  }
-  
-  input[type="radio"]:checked ~ .stars {
-    color: orange;
-  }
+.form-stars p {
+  text-align: center;
+}
+
+.form-stars .stars {
+  font-size: 20px;
+  cursor: pointer;
+}
+input[type="radio"] {
+  display: none;
+}
+
+.stars {
+  color: grey;
+}
+
+.clasificacion {
+  direction: rtl;
+  unicode-bidi: bidi-override;
+}
+
+.stars:hover,
+.stars:hover ~ .stars {
+  color: orange;
+}
+
+input[type="radio"]:checked ~ .stars {
+  color: orange;
+}

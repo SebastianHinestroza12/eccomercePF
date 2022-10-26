@@ -13,3 +13,25 @@
   background: var(--third-color);
   color: white;
 }
+.sidebar .filters_container button::before {
+  content: ">";
+}
+.sidebar .filters_container button:hover {
+  background: var(--third-color);
+  color: white;
+}
+.sidebar .filters_container button {
+  border: none;
+  text-align: left;
+  background: none;
+  padding: 1rem;
+  list-style: square;
+  width: 100%;
+}
+.sidebar .filters_container button {
+  border: none;
+  text-align: left;
+  background: none;
+  padding: 1rem;
+  list-style: square;
+}

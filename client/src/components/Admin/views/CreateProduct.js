@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import FormNewProduct from "./createProduct/formNewProduct";
 import { useParams } from "react-router-dom";
 

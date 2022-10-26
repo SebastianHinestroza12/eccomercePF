@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, getProductDetail } from "../../../redux/action";
 import * as Unicons from "@iconscout/react-unicons";
@@ -141,7 +141,7 @@ function AllProducts() {
   const products = useSelector((state) => state.products);
   useEffect(() => {
     dispatch(getAllProducts());
-  }, []);
+  }, [dispatch]);
 
   //carga de detalle
   useEffect(() => {
@@ -168,5 +168,4 @@ function AllProducts() {
   );
 }
 
-const rootElement = document.getElementById("root");
 export default AllProducts;

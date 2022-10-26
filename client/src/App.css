@@ -69,8 +69,8 @@ footer .container {
 footer img {
   width: 70%;
 }
-.btn {
-  padding: 15px 2rem;
+.btn.btn-primary {
+  padding: 1rem;
 }
 @media (max-width: 600px) {
   .container,
