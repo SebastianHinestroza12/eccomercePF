@@ -14,6 +14,7 @@ import LogAdmin from "./components/Login/Admin/LogAdmin";
 import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
+import RedirectToLogin from "./components/Login/ReditectToLogin";
 
 
 
@@ -59,6 +60,9 @@ function App() {
         </Route>
         <Route path={"/panel-control"}>
           <LayoutAdmin />
+        </Route>
+        <Route path={"/login"}>
+          <RedirectToLogin />
         </Route>
         <Route>
           <Footer />

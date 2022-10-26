@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require('../../db');
+const { User, Cart } = require('../../db');
 const transporter = require('../../config/nodemailer');
 const message = require('../../templates/message');
 
@@ -19,13 +19,23 @@ router.post('/', async (req, res) => {
       })
     }
 
-    await User.findOrCreate({
+    let newUser = await User.findOrCreate({
       where: {
         name,
         email,
         picture
       }
     });
+
+    /*User.findAll({
+
+    })*/
+    //console.log(newUser[0].id);
+    Cart.create({
+      userId: newUser[0].id
+    });
+
+
     // SEND EMAIL WITH NODEMAILER
     await transporter.sendMail({
       from: '"QatarEshop🏪" <qatareshop08@gmail.com>', // sender address
