@@ -1,0 +1,16 @@
+.admin .body header .filter-product {
+  padding: 1.5rem;
+}
+.delete-filter {
+  border: 1px solid var(--grey-200);
+  padding: 22px;
+}
+.delete-filter:hover {
+  background: var(--third-color);
+  color: white;
+}
+nav.sc-ezOQGI.fISISQ.rdt_Pagination {
+  width: fit-content;
+  margin: 3rem auto;
+  border: none;
+}

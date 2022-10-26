@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, getProductDetail } from "../../../redux/action";
-import FilterComponent from "../FilterComponent";
+import * as Unicons from "@iconscout/react-unicons";
+import DataTable from "react-data-table-component";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.css";
-import Table from "./DataTable";
 
 function getNumberOfPages(rowCount, rowsPerPage) {
   return Math.ceil(rowCount / rowsPerPage);
@@ -20,6 +20,42 @@ function toPages(pages) {
 
   return results;
 }
+
+const columns = [
+  {
+    name: "Nombre",
+    grow: 3,
+    cell: (row) => (
+      <Link target="_blank" to={`/store/${row.id}`}>
+        {row.name}
+      </Link>
+    ),
+    sortable: true,
+  },
+  {
+    name: "Precio",
+    selector: (row) => row.price,
+    sortable: true,
+  },
+  {
+    name: "Valoraciones",
+    selector: (row) => Array(row.stars).fill("★"),
+    sortable: true,
+  },
+  {
+    name: "Estado",
+    selector: (row) => (row.visible === true ? "Publicado" : "Borrador"),
+    sortable: true,
+  },
+  {
+    name: "Editar",
+    cell: (row) => (
+      <Link to={`/panel-control/nuevo-producto/${row.id}`}>
+        <Unicons.UilEdit />
+      </Link>
+    ),
+  },
+];
 
 // RDT exposes the following internal pagination properties
 const BootyPagination = ({
@@ -123,12 +159,21 @@ function AllProducts() {
     });
   }, [dispatch, productId]);
 
-  const clickhandler = (name) => console.log("delete", name);
-
   return (
     <div className="App">
       <div>
-        <Table data={products} click={clickhandler} />
+        <DataTable
+          title="Productos"
+          columns={columns}
+          data={products}
+          defaultSortFieldID={1}
+          pagination
+          paginationComponent={BootyPagination}
+          selectableRows
+          selectableRowsComponent={BootyCheckbox}
+          highlightOnHover
+          pointerOnHover
+        />
       </div>
     </div>
   );

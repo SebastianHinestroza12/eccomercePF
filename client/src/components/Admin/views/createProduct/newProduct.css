@@ -42,3 +42,6 @@ ul.pagination {
 .new-product label {
   font-weight: 600;
 }
+.stars-product {
+  color: gold;
+}
