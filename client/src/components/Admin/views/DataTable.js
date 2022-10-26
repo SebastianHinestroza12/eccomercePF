@@ -85,6 +85,8 @@ const Table = (props) => {
       pagination
       subHeader
       subHeaderComponent={subHeaderComponent}
+      highlightOnHover
+      pointerOnHover
     />
   );
 };
