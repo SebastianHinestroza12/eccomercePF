@@ -15,7 +15,13 @@ const ProductDetail = () => {
   const [idSizeStock, setidSizeStock] = useState(0);
 
   const dispatch = useDispatch();
+  const reviews = useSelector((state) => state.newReviews);
+  console.log('oa',reviews)
+
   const productDetail = useSelector((state) => state.productDetail);
+  productDetail.reviews = reviews
+  console.log(productDetail)
+
   useEffect(() => {
     new Promise((resolve) => {
       resolve(dispatch(getProductDetail(productId)));
@@ -34,6 +40,8 @@ const ProductDetail = () => {
     }
     return ratingStars.join("");
   }
+  console.log('ea',productDetail)
+
 
   return (
     <Container className="product-detail">
@@ -90,13 +98,35 @@ const ProductDetail = () => {
                 stock={productDetail.size_stock[idSizeStock].stock}
               />
             </section>
+          </Col>
             <hr></hr>
             <section>
-              <h3>Reviews</h3>
+              <h3 className="reviews">Reviews</h3>
               <br></br>
-              <p>asa</p>
+              {
+                productDetail.reviews.length ? (
+                  productDetail.reviews.map ((e) => (
+                    <>
+                    <div className="product-review">
+                      <h6 className="product-user">User name</h6>
+                      {
+                        e.stars === '5' ? <p className="product-stars">★★★★★</p> :
+                        e.stars === '4' ? <p className="product-stars">★★★★</p> :
+                        e.stars === '3' ? <p className="product-stars">★★★</p> :
+                        e.stars === '2' ? <p className="product-stars">★★</p> : <p className="product-stars">★</p>
+                      }
+                      
+                      <p className="product-comment">"{e.comment}"</p>
+                    </div>
+                  </>
+                  ))
+                ) : (
+                  <>
+                    <p className="reviews">No hay reseñas de este producto</p>
+                  </>
+                )
+              }
             </section>
-          </Col>
         </Row>
       )}
     </Container>
