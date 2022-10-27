@@ -1,6 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 function RutasBloqueadas() {
@@ -13,41 +12,40 @@ function RutasBloqueadas() {
     getAccessTokenSilently,
   } = useAuth0();
 
-  const callApi = () => {
+  const accederPublica = () => {
     axios
       .get("/user/prueba")
       .then((res) => console.log(res.data))
       .catch((error) => console.log(error.message));
   };
-  const callProtectedApi = async () => {
+  const accederProtegida = async () => {
     try {
-        const token = await getAccessTokenSilently()
-        console.log(token)
-        const response = await axios.get("/user/prueba/protected",{
-            headers: {
-                authorization: `Bearer ${token}`
-            }
-        })
-        console.log(response.data)
-        
+      const token = await getAccessTokenSilently();
+      console.log(token);
+      const response = await axios.get("/user/prueba/protected", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
     } catch (error) {
-        console.log(error.message)
+      console.log(error.message);
     }
   };
-  const callRoles = async () => {
+  const accederRoles = async () => {
     try {
-        const token = await getAccessTokenSilently()
-        const response = await axios.get("/user/prueba/role",{
-            headers: {
-                authorization: `Bearer ${token}`
-            }
-        })
-        console.log(response.data)
-        
+      const token = await getAccessTokenSilently();
+      const response = await axios.get("/user/prueba/role", {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data); //Respuesta de la ruta del Back
     } catch (error) {
-        console.log(error.message)
+      console.log(error.message);
     }
   };
+
 
   return (
     <div>
@@ -67,27 +65,29 @@ function RutasBloqueadas() {
           <button onClick={logout}>Logout</button>
         </li>
       </ul>
-      <h3>User is {isAuthenticated ? "Loggued in" : "No logueado"}</h3>
-
+      <br />
+      <br />
+      <h3>El usuario esta: {isAuthenticated ? "LOGUEADO" : "NO LOGUEADO"}</h3>
+      <br />
+      <br />
       <ul>
         <li>
-          <button onClick={callApi}>Call API route</button>
+          <button onClick={accederPublica}>RUTA PUBLICA</button>
         </li>
       </ul>
       <ul>
         <li>
-          <button onClick={callProtectedApi}>Call Protected API route</button>
+          <button onClick={accederProtegida}>RUTA PROTEGIDA</button>
         </li>
       </ul>
       <ul>
         <li>
-          <button onClick={callRoles}>Call with roles</button>
+          <button onClick={accederRoles}>RUTA CON ROLES</button>
         </li>
       </ul>
 
       {isAuthenticated && (
         <>
-          <Redirect to={"/rutas"} />
           <pre style={{ textAlign: "start" }}>
             {JSON.stringify(user, null, 2)}
           </pre>

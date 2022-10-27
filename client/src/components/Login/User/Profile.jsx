@@ -9,8 +9,9 @@ import { Col, Container, Row } from "react-bootstrap";
 
 function Profile() {
   const { user, isAuthenticated } = useAuth0();
+  console.log(user)
   const profileUser = useSelector((state) => state.user);
-  console.log(profileUser.update_Data);
+  console.log(profileUser.email);
   console.log(isAuthenticated);
   return isAuthenticated ? (
     <Fragment>
