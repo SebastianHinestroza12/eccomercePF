@@ -97,7 +97,7 @@ const Home = () => {
               Nike, Puma confian en nosotros y vos tambien podes hacerlo. Hace
               tu pedido ya!
             </p>
-            <Link class="btn btn-primary align-center" to="/product/balón">
+            <Link class="btn btn-primary align-center" to="/store/balón">
               VER MÁS <Unicons.UilArrowRight />
             </Link>
           </Col>
