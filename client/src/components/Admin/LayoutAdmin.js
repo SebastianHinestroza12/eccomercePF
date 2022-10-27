@@ -3,6 +3,7 @@ import AdminContent from "./AdminContent";
 import AdminHeader from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
 import "./admin.css";
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 
 const LayoutAdmin = () => {
   return (
@@ -21,4 +22,4 @@ const LayoutAdmin = () => {
     </Container>
   );
 };
-export default LayoutAdmin;
+export default withAuthenticationRequired(LayoutAdmin);
