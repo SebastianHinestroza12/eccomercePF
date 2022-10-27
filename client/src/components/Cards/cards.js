@@ -11,7 +11,6 @@ import { Alert, Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const Cards = ({ loading, setLoading }) => {
-
   const { category } = useParams();
 
   const allProducts = useSelector((state) => state.products);
@@ -50,16 +49,13 @@ const Cards = ({ loading, setLoading }) => {
    */
 
   useEffect(() => {
-
     /*if (allProducts.length > superAllProducts.length) {
       dispatch(getAllProducts())
 
     } else */
-    if(category){
-      console.log('CATEGORY',category)
-      dispatch(linkCategory(category))
-    }
-    else if (superAllProducts.length === 0) {
+    if (category) {
+      dispatch(linkCategory(category));
+    } else if (superAllProducts.length === 0) {
       dispatch(getAllProducts());
     }
   }, [allProducts.length, dispatch, setLoading, superAllProducts.length]);
@@ -96,7 +92,6 @@ const Cards = ({ loading, setLoading }) => {
           {Array.isArray(actualproducts) ? (
             actualproducts.map((products) => (
               <Col md={3} xs={6} key={products.id}>
-                {console.log("products", products)}
                 <ProductCard
                   name={products.name}
                   price={products.price}
