@@ -3,14 +3,14 @@ const router = require("express").Router();
 
 
 router.delete('/', async (req, res, next) => {
-	let { userId, productId, size } = req.query;
+	let { userId, productId, size, cartId } = req.body;
 
 	try {
 		let product = await Item.findOne({
 			where: {
 				size: size.toUpperCase(),
 				productId: productId,
-			
+				cartId: cartId
 			},
 		});
 		
@@ -42,6 +42,7 @@ router.delete('/', async (req, res, next) => {
 				where:{
 					size: size.toUpperCase(),
 					productId: productId,
+					cartId: cartId
 				}
 			})
       return res.send(

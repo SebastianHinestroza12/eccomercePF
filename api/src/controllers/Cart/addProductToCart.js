@@ -10,8 +10,8 @@ router.post("/", async (req, res) => {
 		let product = await Item.findOne({
       where:{
 				size: size.toUpperCase(),
-        productId: productId
-				
+        productId: productId,
+				cartId: cartId
       }
     })
 

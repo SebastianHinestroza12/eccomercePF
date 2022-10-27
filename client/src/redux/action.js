@@ -27,9 +27,18 @@ export const getProductDetail = (productId) => {
 
 //REGISTRAR USUARIOS LOGUADOS EN DB
 export const postRegister = (user) => {
-  return async (dispatch) => {
+  return async () => {
     console.log("action", user);
     await axios.post(`/user/register`, user);
+  };
+};
+
+//Crear una orden
+
+export const postOrder = (user) => {
+  return async () => {
+    console.log("action", user);
+    await axios.post(`/order`, user);
   };
 };
 
@@ -168,10 +177,10 @@ export const filterByType = (payload) => {
 export const linkCategory = (category) => {
   return function (dispatch) {
     return axios(`/filterType?type=${category}`)
-    .then((response) => response.data)
-    .then((dataCategory) => {
-      dispatch({ type: "LINK_CATEGORY", payload: dataCategory });
-      console.log('ACAAA', category)
+      .then((response) => response.data)
+      .then((dataCategory) => {
+        dispatch({ type: "LINK_CATEGORY", payload: dataCategory });
+        console.log('ACAAA', category)
       });
   };
 };
