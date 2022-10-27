@@ -24,21 +24,21 @@ const checkPermissions = jwtAuthz(["read:users"], {
     // debe cumplir todos los permisos especificados
 })
 
-router.get('/role', verifyJwt, checkPermissions, (req, res)=>{
-  res.send({ msg: "Hello from ROLES endpoint" });
+router.get('/role', verifyJwt, (req, res)=>{
+  res.send("Accediendo a ruta ROLES");
 })
 
 router.get("/", (req, res) => {
   try {
-    res.send("Hello from index route");
+    res.send("Accediendo a ruta PUBLICA");
   } catch (error) {
     console.log({ error });
   }
 });
 
-router.get("/protected", (req, res) => {
+router.get("/protected", verifyJwt, (req, res) => {
   try {
-    res.send({ msg: "Hello from protected route" });
+    res.send("Accediendo a ruta PROTEGIDA");
   } catch (error) {
     console.log(error.message);
   }
