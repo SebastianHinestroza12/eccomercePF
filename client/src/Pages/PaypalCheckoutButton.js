@@ -1,19 +1,43 @@
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { postOrder } from "../redux/action";
+import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
 
 const PaypalCheckoutButton = ({ product, inputErrors }) => {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState();
+  const productsInTheCart = useSelector((state) => state.cartProducts);
+  const dispatch = useDispatch();
+  const { user } = useAuth0();
+  const history = useHistory();
 
   const handleApprove = (orderId) => {
     setPaidFor(true);
   };
 
   if (paidFor) {
-    alert("Gracias por su compra");
+    Swal.fire({
+      title: 'Transacción exitosa!',
+      icon: "success",
+      timer: 2000,
+      showCancelButton: false,
+      showConfirmButton: false
+    });
+    setTimeout(() => {
+      history.push('/')
+    }, 3000)
   }
   if (error) {
-    alert("Error: ", error);
+    Swal.fire({
+      title: 'Error en la transacción',
+      icon: "error",
+      timer: 2000,
+      showConfirmButton: false,
+      showCancelButton: false
+    });
   }
 
   return (
@@ -34,36 +58,29 @@ const PaypalCheckoutButton = ({ product, inputErrors }) => {
           return actions.order.create({
             purchase_units: [
               {
-                description: product.description,
                 amount: {
                   value: product.price,
                 },
-              },
+              }
             ],
           });
         }}
         onApprove={async (data, actions) => {
           const order = await actions.order.capture();
-          console.log("order", order);
+          console.log("DataOrden", order);
           if (order.status === "COMPLETED") {
             localStorage.removeItem("cartProductsAdded");
           }
-          /**
-           * PAYPAL RESPONSE
-           * 
-           * create_time:"2022-10-24T15:58:02Z"
-                id:"3X590867BH785111R"
-              intent:"CAPTURE"
-              links:[{…}]
-              payer:{name: {…}, email_address: 'liss-compras@personal.example.com', payer_id: '2QCYRLT3R3RVC', phone: {…}, address: {…}}
-              purchase_units:[{…}]
-              status:"COMPLETED"
-              update_time:"2022-10-24T15:58:16Z"
-           */
+          dispatch(postOrder({
+            products: productsInTheCart.map(data => `${data.name} X ${data.quantity} Unidad`),
+            total_purchase: parseInt(order.purchase_units[0].amount.value),
+            client: user.email,
+            status: order.status
+          }))
 
           handleApprove(data.orderID);
         }}
-        onCancel={() => {}}
+        onCancel={() => { }}
         onError={(error) => {
           setError(error);
           console.log("Paypal error", error);
