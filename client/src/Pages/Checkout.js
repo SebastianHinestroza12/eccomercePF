@@ -76,13 +76,12 @@ const Checkout = () => {
         [e.target.name]: e.target.value,
       })
     );
-    //console.log("input", input);
   };
 
   const product = {
-    description: "Pedido en Qatar e-shop",
     price: getTotal,
   };
+
 
   useEffect(() => {
     setErrors(
