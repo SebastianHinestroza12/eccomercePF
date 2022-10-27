@@ -15,11 +15,11 @@ function FormAdress() {
     handleSubmit,
   } = useForm({
     defaultValues: {
-      name: "Liss",
-      surnames: "Lindao",
-      address: "Italia 316",
-      city: "Cordoba",
-      country: "Argentina",
+      name: "",
+      surnames: "",
+      address: "",
+      city: "",
+      country: "",
       phone: 9543757605859,
       postal_code: 5000,
       dni: 31256762,
