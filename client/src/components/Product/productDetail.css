@@ -57,3 +57,32 @@ label.form-check-label,
 .activeSize {
   color: aliceblue;
 }
+
+.product-review {
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: rgb(159, 159, 159);
+  margin: 10px;
+}
+
+.product-stars {
+  margin-top: 5px;
+  text-align: center;
+  color: orange;
+  font-size: 20px;
+}
+
+.product-comment {
+  text-align: center;
+  font-style: italic;
+}
+
+.product-user {
+  margin-top: 5px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.reviews {
+  text-align: center;
+}
