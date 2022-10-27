@@ -69,6 +69,7 @@ function Shopping() {
                       <td style={{ width: "10px", padding: "50px"}}>
                       <Reviews 
                           name = {e.name}
+                          id = {e.id}
                         />
                       </td>
                     </tr>
