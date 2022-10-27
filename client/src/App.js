@@ -14,6 +14,9 @@ import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
 import RutasBloqueadas from "./components/Login/RutasBloqueadas";
+import RedirectToLogin from "./components/Login/ReditectToLogin";
+
+
 
 const initialOptions = {
   "client-id":
@@ -37,6 +40,9 @@ function App() {
         <Route path={"/store/:productId"}>
           <ProductDetail />
         </Route>
+        <Route path={"/store/:category"}>
+          <Store />
+        </Route>
         <Route path={"/user"}>
           <User />
         </Route>
@@ -52,8 +58,13 @@ function App() {
         <Route path={"/panel-control"}>
           <LayoutAdmin />
         </Route>
+<<<<<<< HEAD
         <Route path={"/rutas"}>
           <RutasBloqueadas />
+=======
+        <Route path={"/login"}>
+          <RedirectToLogin />
+>>>>>>> ae6011a2c542f062bf8f2c82e6809b55ff976dbe
         </Route>
         <Route>
           <Footer />

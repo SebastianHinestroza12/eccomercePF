@@ -67,7 +67,9 @@ function Shopping() {
                         $ {TotalPrice(e.price, e.quantity)} 
                       </td>
                       <td style={{ width: "10px", padding: "50px"}}>
-                        <Reviews />
+                      <Reviews 
+                          name = {e.name}
+                        />
                       </td>
                     </tr>
                   ))

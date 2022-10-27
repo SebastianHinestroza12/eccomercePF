@@ -20,6 +20,7 @@ const postOrder = require('../controllers/Orders/postOrder');
 const modifyStatusOrder = require('../controllers/Orders/modifyStatus');
 const OrderId = require('../controllers/Orders/OrderId');
 const getOrder = require('../controllers/Orders/getOrder');
+const filterStatusOrder = require('../controllers/FilterOrders/filterStatus');
 
 
 
@@ -28,6 +29,18 @@ const postCategory = require('./postCategory');
 
 const postAdmin = require('./postAdmin');
 const getCategories = require('./getCategories');
+
+const addProductToCart = require('../controllers/Cart/addProductToCart');
+const getCartByUser = require('../controllers/Cart/getCarByUser');
+const getAllCarts = require('../controllers/Cart/getAllCarts');
+const clearCart = require('../controllers/Cart/clearCart');
+const deleteProduct = require('../controllers/Cart/deleteProduct');
+const addUnit = require('../controllers/Cart/addUnit');
+const removeUnit = require('../controllers/Cart/removeUnit');
+
+const postReview = require('./postReview');
+const getUsers = require('./getUsers');
+
 
 router.use('/product', getProduct);
 router.use('/product', putProduct);
@@ -48,12 +61,26 @@ router.use('/user/login', getLogin);
 router.use('/user/prueba', getPrueba);
 router.use('/user/register', postRegister);
 router.use('/user/modify', modifyUser);
+router.use('/getUsers', getUsers);
+
+//cart
+router.use('/cart', addProductToCart);
+router.use('/cart', getCartByUser);
+router.use('/cart/all', getAllCarts);
+router.use('/', deleteProduct);
+router.use('/clear', clearCart);
+router.use('/cart/add', addUnit);
+router.use('/cart/remove', removeUnit);
+
 
 // Ordenes de usuarios
 router.use('/order', modifyStatusOrder);
 router.use('/order', postOrder);
 router.use('/order', OrderId);
 router.use('/order', getOrder);
+router.use('/filterStatusOrder', filterStatusOrder);
 
+//review
+router.use('/postReview', postReview);
 
 module.exports = router;
