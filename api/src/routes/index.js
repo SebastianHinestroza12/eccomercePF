@@ -65,7 +65,7 @@ router.use('/getUsers', getUsers);
 router.use('/cart', addProductToCart);
 router.use('/cart', getCartByUser);
 router.use('/cart/all', getAllCarts);
-router.use('/', deleteProduct);
+router.use('/cart', deleteProduct);
 router.use('/clear', clearCart);
 router.use('/cart/add', addUnit);
 router.use('/cart/remove', removeUnit);
