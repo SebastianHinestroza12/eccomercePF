@@ -3,7 +3,7 @@ const { Order } = require("../../db");
 
 router.post("/", async (req, res) => {
   try {
-    let { products, total_purchase, status } = req.body;
+    let { products, total_purchase, status, client } = req.body;
 
     if (!products || !total_purchase || !status) {
       return res.status(404).json({
@@ -15,7 +15,8 @@ router.post("/", async (req, res) => {
       let newOrder = await Order.create({
         products,
         total_purchase,
-        status
+        status,
+        client
       });
 
       return res.status(201).json({
