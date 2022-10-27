@@ -9,7 +9,7 @@ export const getAllProducts = () => {
         dispatch({ type: "GET_ALL_PRODUCTS", payload: products });
       })
       .catch((error) => {
-        console.log("AXIOS error get all", error.response.data);
+        console.log("AXIOS error get all", error);
         return error.response.data.error;
       });
   };
@@ -102,7 +102,6 @@ export function filterByName(payload) {
 
 //CREACION DE PRODUCTO
 
-
 export const newProductForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postProduct`, data);
@@ -180,7 +179,7 @@ export const linkCategory = (category) => {
       .then((response) => response.data)
       .then((dataCategory) => {
         dispatch({ type: "LINK_CATEGORY", payload: dataCategory });
-        console.log('ACAAA', category)
+        console.log("ACAAA", category);
       });
   };
 };
@@ -198,4 +197,3 @@ export const getCartTotal = (payload) => {
     payload,
   };
 };
-

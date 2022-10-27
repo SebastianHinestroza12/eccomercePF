@@ -35,11 +35,11 @@ function App() {
         <Route exact path={"/store"}>
           <Store />
         </Route>
-        <Route path={"/store/:productId"}>
-          <ProductDetail />
-        </Route>
-        <Route path={"/store/:category"}>
+        <Route exact path={"/store/:category"}>
           <Store />
+        </Route>
+        <Route path={"/product/:productId"}>
+          <ProductDetail />
         </Route>
         <Route path={"/user"}>
           <User />

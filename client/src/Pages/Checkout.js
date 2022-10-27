@@ -1,5 +1,5 @@
 import { Alert, Col, Container, Form, Row } from "react-bootstrap";
-import PaypalCheckoutButton from "./PaypalCheckoutButton";
+import PaypalCheckoutButton from "../components/Checkout/PaypalCheckoutButton";
 import { useSelector } from "react-redux";
 import "./checkout.css";
 import { useEffect, useState } from "react";
@@ -81,7 +81,6 @@ const Checkout = () => {
   const product = {
     price: getTotal,
   };
-
 
   useEffect(() => {
     setErrors(

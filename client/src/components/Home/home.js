@@ -1,84 +1,116 @@
-import Carousel from "../Carousel/Carousel";
-import Nav from "react-bootstrap/Nav";
-import { getAllProducts } from "../../redux/action";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-
-
-import './home.css'
+import Carousel from "../Carousel/Carousel";
+import { Col, Container, Nav, Row } from "react-bootstrap";
+import { getAllProducts } from "../../redux/action";
+import { useDispatch, useSelector } from "react-redux";
+import "./home.css";
+import ProductCard from "../Product/Card";
+import { Link } from "react-router-dom";
+import * as Unicons from "@iconscout/react-unicons";
 
 const Home = () => {
-    
-    const dispatch = useDispatch();
-    useEffect(()=> {
-        dispatch(getAllProducts());
-    }, [dispatch]);
+  const dispatch = useDispatch();
+  const allProducts = useSelector((state) => state.allProducts);
 
-    return (
-        <div>
-            <Carousel />
-            <div className="filters_container mt-3">
-            <main className="page-content">
-                <div className="home-card">
-                    <div className="content">
-                        <h2 className="title">Camisetas</h2>
-                        <p className="copy">Todas las camisetas de las mejores selecciones del mundo</p>
-                        <Nav.Link href="/store/jersey" className="navLinks">
-                            <button className="home-btn">Ir a tienda</button>
-                        </Nav.Link>
-                    </div>
-                </div>
-                <div className="home-card">
-                <div className="content">
-                      <h2 className="title">Pantalones</h2>
-                      <p className="copy">Todos los pantalones de las mejores selecciones del mundo</p>
-                      <Nav.Link href="/store/shorts" className="navLinks">
-                        <button className="home-btn">Ir a tienda</button>
-                      </Nav.Link>
-                    </div>
-                </div>
-                <div className="home-card">
-                  <div className="content">
-                    <h2 className="title">Botines</h2>
-                    <p className="copy">Botines de los mejores jugadores del mundo</p>
-                    <Nav.Link href="/store/calzado" className="navLinks">
-                        <button className="home-btn">Ir a tienda</button>
-                    </Nav.Link>
-                  </div>
-                </div>
-                <div className="home-card">
-                  <div className="content">
-                    <h2 className="title">Balones</h2>
-                    <p className="copy">Balones oficiales del mundial, incluido el balon de entrenamiento!</p>
-                    <Nav.Link href="/store/balón" className="navLinks">
-                        <button className="home-btn">Ir a tienda</button>
-                    </Nav.Link>
-                  </div>
-                </div>
-            </main>
-            </div>
-            <div className="page-content-z">
-                <div className="one">
-                    <h1>Mejores marcas</h1>
-                    <p>Contamos con las mejores marcas y productos del mundo. Adidas, Nike, Puma confian en nosotros y vos tambien podes hacerlo. Hace tu pedido ya!</p>
-                </div>
-                <div className="two">
-                    <img src="https://essential.vtexassets.com/arquivos/ids/543838-800-auto?v=637849500637700000&width=800&height=auto&aspect=true" alt="ea"></img>
-                </div>
-                <div className="three">
-                    <img src="https://i1.t4s.cz/products/DB2367/adidas-nemeziz-messi-18-3-fg-j-138823-db2370-960.jpg" alt="ea" className="home-img"></img>
-                </div>
-                <div className="four">
-                    <h1>Mejores productos</h1>
-                    <p>Tenemos los mejores productos de las mejores selecciones de este mundial de Qatar 2022. </p>
-                </div>
-            </div>
-            <div className="testimonios">
-                <h1>Testimonios</h1>
-                <p>proximamente</p>
-            </div>
-        </div>  
-    )
-}
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
 
-export default Home
+  return (
+    <Container fluid className="homepage">
+      <Carousel />
+
+      <div className="filters_container mt-3">
+        <main className="page-content">
+          <div className="home-card">
+            <div className="content">
+              <h2 className="title">Camisetas</h2>
+              <p className="copy">
+                Todas las camisetas de las mejores selecciones del mundo
+              </p>
+              <Nav.Link href="/store/jersey" className="navLinks">
+                <button className="home-btn">Ir a tienda</button>
+              </Nav.Link>
+            </div>
+          </div>
+          <div className="home-card">
+            <div className="content">
+              <h2 className="title">Pantalones</h2>
+              <p className="copy">
+                Todos los pantalones de las mejores selecciones del mundo
+              </p>
+              <Nav.Link href="/store/shorts" className="navLinks">
+                <button className="home-btn">Ir a tienda</button>
+              </Nav.Link>
+            </div>
+          </div>
+          <div className="home-card">
+            <div className="content">
+              <h2 className="title">Botines</h2>
+              <p className="copy">Botines de los mejores jugadores del mundo</p>
+              <Nav.Link href="/store/calzado" className="navLinks">
+                <button className="home-btn">Ir a tienda</button>
+              </Nav.Link>
+            </div>
+          </div>
+          <div className="home-card">
+            <div className="content">
+              <h2 className="title">Balones</h2>
+              <p className="copy">
+                Balones oficiales del mundial, incluido el balon de
+                entrenamiento!
+              </p>
+              <Nav.Link href="/store/balón" className="navLinks">
+                <button className="home-btn">Ir a tienda</button>
+              </Nav.Link>
+            </div>
+          </div>
+        </main>
+      </div>
+      <section className="container center-row">
+        <h2 className="title-home mb-5 align-center">Nuevos productos</h2>
+        <Row>
+          {allProducts.slice(0, 6).map((product) => {
+            return (
+              <Col md={2} xs={6} key={product.id}>
+                <ProductCard
+                  name={product.name}
+                  price={product.price}
+                  image={product.image}
+                  stars={product.stars}
+                  id={product.id}
+                />
+              </Col>
+            );
+          })}
+        </Row>
+        <Link class="btn btn-primary align-center" to="/store">
+          VER TODOS <Unicons.UilArrowRight />
+        </Link>
+      </section>
+      <section className="mt-5 row-balones">
+        <div className="container">
+          <Col md={4} className="one">
+            <h2 className="title-home">Balones del modelo oficial</h2>
+            <p>
+              Contamos con las mejores marcas y productos del mundo. Adidas,
+              Nike, Puma confian en nosotros y vos tambien podes hacerlo. Hace
+              tu pedido ya!
+            </p>
+            <Link class="btn btn-primary align-center" to="/store/balón">
+              VER MÁS <Unicons.UilArrowRight />
+            </Link>
+          </Col>
+          <Col></Col>
+        </div>
+      </section>
+
+      <div className="testimonios">
+        <h2>Testimonios</h2>
+        <p>proximamente</p>
+      </div>
+    </Container>
+  );
+};
+
+export default Home;

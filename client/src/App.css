@@ -70,7 +70,7 @@ footer img {
   width: 70%;
 }
 .btn.btn-primary {
-  padding: 1rem;
+  padding: 1rem 3rem;
 }
 @media (max-width: 600px) {
   .container,
