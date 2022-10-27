@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const { Order } = require("../../db");
+const transporter = require('../../config/nodemailer');
+const messageOrder = require('../../templates/messageOrder');
 
 router.post("/", async (req, res) => {
   try {
@@ -19,6 +21,14 @@ router.post("/", async (req, res) => {
         client
       });
 
+
+      transporter.sendMail({
+        from: '"QatarEshop🏪" <qatareshop08@gmail.com>',
+        to: client,
+        subject: "Clientes como tú hacen la diferencia. Es un placer servirte",
+        html: messageOrder(newOrder.id, newOrder.createdAt, newOrder.products.map(data => data), newOrder.total_purchase)
+      });
+
       return res.status(201).json({
         creado: true,
         message: 'Numero de orden creada correctamente',
@@ -26,7 +36,7 @@ router.post("/", async (req, res) => {
       })
     }
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   }
 });
 
