@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-
 import ProductCard from "../Product/Card";
 import "./cards.css";
 import Pages from "../Pagination/pagination";
@@ -11,8 +10,6 @@ import { Alert, Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const Cards = ({ loading, setLoading }) => {
-  const { category } = useParams();
-
   const allProducts = useSelector((state) => state.products);
   const superAllProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
@@ -48,15 +45,16 @@ const Cards = ({ loading, setLoading }) => {
    * FIN PAGINADO
    */
 
-  useEffect(() => {
-    /*if (allProducts.length > superAllProducts.length) {
-      dispatch(getAllProducts())
+  //CATEGORIA DE PARAMS
+  const { category } = useParams();
 
-    } else */
+  useEffect(() => {
+    console.log("CATEGORY", category);
+    if (superAllProducts.length === 0) {
+      dispatch(getAllProducts());
+    }
     if (category) {
       dispatch(linkCategory(category));
-    } else if (superAllProducts.length === 0) {
-      dispatch(getAllProducts());
     }
   }, [allProducts.length, dispatch, setLoading, superAllProducts.length]);
 

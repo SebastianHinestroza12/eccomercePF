@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   //getAllProducts,
   filterBySize,
@@ -17,6 +18,8 @@ const Sidebar = ({
   setActualPage,
   setOrder,
 }) => {
+  let history = useHistory();
+
   const dispatch = useDispatch();
 
   const camisetas = [
@@ -86,6 +89,7 @@ const Sidebar = ({
   };
 
   const handleFilterByCategory = (e) => {
+    history.push("/store");
     setActualPage(1);
     setMinPageNumber(0);
     setMaxPageNumber(5);
