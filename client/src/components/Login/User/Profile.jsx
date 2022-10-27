@@ -110,7 +110,7 @@ function Profile() {
             </div>
             <div>
               <strong>Correo electrónico: </strong>
-              {profileUser.email}
+              {user.email}
             </div>
             <div>
               <strong>Teléfono: </strong>

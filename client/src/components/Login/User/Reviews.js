@@ -12,12 +12,12 @@ const validate = (input) => {
   if (input.review === '') err.review = 'Falta seleccionar puntaje'
   if (input.comment === '') err.comment = 'Falta agregar comentario'
   if (input.comment.length > 200) err.comment = '200 caracteres maximos'
-  if (input.comment.length < 10) err.comment = 'Minimo 20 caracteres'
+  if (input.comment.length < 15) err.comment = 'Minimo 15 caracteres'
 
   return err
 }
 
-const Reviews = ({name}) => {
+const Reviews = ({name, id}) => {
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -25,41 +25,41 @@ const Reviews = ({name}) => {
     
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
-      review: '',
+      stars: '',
       comment: '',
+      productId: id,
+      name: name
     });
-    console.log('a',input)
     
     const handleSubmit = e => {
       e.preventDefault()
-      console.log('b',input)
-      if (!errors.name && !errors.comment) {
+      if (input.stars !== '' && input.comment !== '' && input.comment.length > 15 && input.comment.length < 250) {
         const newReview = {
           ...input,
-          review: input.review,
+          stars: input.stars,
           comment: input.comment.trim(),
+          productId: id,
+          name: name
         };
         dispatch(newComentForm(newReview));
         setInput({
-          review: '',
+          stars: '',
           comment: '',
+          productId: id,
+          name: name
         });
         handleClose()
       };
     };
     
     const handleChangeReview = (e) => {
-      e.preventDefault()
-      setInput({...input, review:e.target.value})
+      setInput({...input, stars:e.target.value})
       setErrors(validate({...input, [e.target.value]: e.target.value}))
-      console.log('c',input)
     }
 
     const handleChangeComment = (e) => {
-      e.preventDefault()
       setInput({...input, comment:e.target.value})
       setErrors(validate({...input, [e.target.value]: e.target.value}))
-      console.log('d',input)
     }
     
 
@@ -95,7 +95,7 @@ const Reviews = ({name}) => {
                         </div>
                     </div>
                   <Form.Label>Comentario</Form.Label>
-                  <Form.Control as="textarea" rows={3} id="comment" type="text" onChange={handleChangeComment}
+                  <Form.Control as="textarea" rows={3} type="text" onChange={handleChangeComment}
                   />
                   <div className="reviews-errors">{errors.comment && (<p>{errors.comment}</p>)}</div>
                 </Form.Group>
