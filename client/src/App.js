@@ -16,8 +16,6 @@ import LayoutAdmin from "./components/Admin/LayoutAdmin";
 import RutasBloqueadas from "./components/Login/RutasBloqueadas";
 import RedirectToLogin from "./components/Login/ReditectToLogin";
 
-
-
 const initialOptions = {
   "client-id":
     "AfDNE98mgkMy8dhaS7qGfn9KML3r3kSIsXt3-jAMMR_gsL2-1bFGijHeHAunQJGSytq1QUWdtMWW02go",
@@ -58,13 +56,11 @@ function App() {
         <Route path={"/panel-control"}>
           <LayoutAdmin />
         </Route>
-<<<<<<< HEAD
         <Route path={"/rutas"}>
           <RutasBloqueadas />
-=======
+        </Route>
         <Route path={"/login"}>
           <RedirectToLogin />
->>>>>>> ae6011a2c542f062bf8f2c82e6809b55ff976dbe
         </Route>
         <Route>
           <Footer />
