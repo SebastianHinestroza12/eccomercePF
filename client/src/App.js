@@ -15,7 +15,6 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
 import RutasBloqueadas from "./components/Login/RutasBloqueadas";
 import RedirectToLogin from "./components/Login/ReditectToLogin";
-import ComponentePrueba from "./components/Login/ComponentePrueba";
 
 const initialOptions = {
   "client-id":
@@ -59,9 +58,6 @@ function App() {
         </Route>
         <Route path={"/rutas"}>
           <RutasBloqueadas />
-        </Route>
-        <Route path={"/bloqueo"}>
-          <ComponentePrueba />
         </Route>
         <Route path={"/login"}>
           <RedirectToLogin />

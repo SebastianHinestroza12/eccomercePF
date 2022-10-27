@@ -30,6 +30,7 @@ function Profile() {
               src={user.picture}
               alt={user.name}
               className="card-img-top"
+              class="img-thumbnail"
             />
           </div>
           <div className="card-body">
