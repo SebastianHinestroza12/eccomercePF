@@ -13,7 +13,7 @@ const Table = (props) => {
       selector: (row) => row.name,
       grow: 3,
       cell: (row) => (
-        <Link target="_blank" to={`/store/${row.id}`}>
+        <Link target="_blank" to={`/product/${row.id}`}>
           {row.name}
         </Link>
       ),

@@ -19,7 +19,7 @@ const ProductCard = (props) => {
   const { name, price, image, stars, id } = props;
   const history = useHistory();
   const goToDetail = (id) => {
-    history.push(`/store/${id}`);
+    history.push(`/product/${id}`);
   };
 
   return (

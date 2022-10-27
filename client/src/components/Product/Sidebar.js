@@ -1,6 +1,5 @@
 import React from "react";
 import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
 import { useDispatch } from "react-redux";
 import {
   //getAllProducts,
@@ -116,17 +115,27 @@ const Sidebar = ({
     <>
       <div className="filters_container mt-3">
         <h5>CATEGORIAS</h5>
-        <Nav.Link href="/store/jersey" >
-          <button>Jersey</button>
-        </Nav.Link>
-
-        <Nav.Link href="/store/calzado" className="navLinks">
-          <button>Calzado</button>
-        </Nav.Link>
-
-        <Nav.Link href="/store/balón" className="navLinks">
-          <button>Balones</button>
-        </Nav.Link>
+        <button
+          onClick={(e) => handleFilterByCategory(e)}
+          value="JERSEY"
+          label="Jersey"
+        >
+          Jersey
+        </button>
+        <button
+          onClick={(e) => handleFilterByCategory(e)}
+          value="CALZADO"
+          label="Calzado"
+        >
+          Calzado
+        </button>
+        <button
+          onClick={(e) => handleFilterByCategory(e)}
+          value="BALÓN"
+          label="Balones"
+        >
+          Balones
+        </button>
       </div>
 
       <div className="filters_container mt-3">

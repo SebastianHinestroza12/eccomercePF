@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Store from "./Pages/Store";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import NavScrollExample from "./components/NavBar/navBar";
 import Footer from "./components/Footer/footer";
 import ProductDetail from "./components/Product/ProductDetail";
@@ -15,8 +15,6 @@ import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
 import RedirectToLogin from "./components/Login/ReditectToLogin";
-
-
 
 const initialOptions = {
   "client-id":
@@ -37,11 +35,11 @@ function App() {
         <Route exact path={"/store"}>
           <Store />
         </Route>
-        <Route path={"/store/:productId"}>
-          <ProductDetail />
-        </Route>
-        <Route path={"/store/:category"}>
+        <Route exact path={"/store/:category"}>
           <Store />
+        </Route>
+        <Route path={"/product/:productId"}>
+          <ProductDetail />
         </Route>
         <Route path={"/user"}>
           <User />
