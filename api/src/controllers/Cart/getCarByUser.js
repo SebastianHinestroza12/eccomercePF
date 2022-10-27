@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 router.get('/', async (req, res, next) => {
 
-    let { userId } = req.query;
+    let { userId } = req.body;
     try {
       let userCart = await Cart.findOne({
         where: {
