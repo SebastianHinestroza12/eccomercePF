@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
 			status:
         {
           type: DataTypes.ENUM(["Active", "Disabled"]),
-          defaultValue: "Active",
+          defaultValue: "Disabled",
         },
 			totalPrice:
         {

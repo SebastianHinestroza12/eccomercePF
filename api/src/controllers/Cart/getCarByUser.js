@@ -12,6 +12,15 @@ router.get('/', async (req, res, next) => {
         },
         include: {
           model: Item,
+          attributes: [
+            'productId',
+            'name',
+            'size',
+            'units',
+            'price',
+            'subtotal',
+            'image'
+          ],
         },
       });
       if (userCart) res.status(200).json(userCart);

@@ -19,23 +19,33 @@ router.put('/', async (req, res, next) => {
     let product = await Item.findOne({
       where:{
 				size: size.toUpperCase(),
-        productId: productId
-				
+        productId: productId,
+				cartId: userId
       }
     })
-		
-    let newPrice = cart.totalPrice - product.price;
-    let newUnits = product.units - 1;
-		console.log(product)
-    await cart.update({
-			totalPrice: newPrice,
-		});
 
-		await product.update({
-			units: newUnits,
-		});
+		let infProduct = await Product.findOne({
+			where: {
+				id: productId
+			}
+		})
+		
+		let newPrice = cart.totalPrice - product.price;
+    let newUnits = product.units - 1;
+
+		if(product.units > 1){
     
-    return res.send(product);
+			await cart.update({
+				totalPrice: newPrice,
+			});
+
+			await product.update({
+				units: newUnits,
+			});
+
+			return res.send(product)
+		}
+    return res.status(400).send('Quantity cannot be less than 1');
 
 	} catch (err) {
 		next(err);
