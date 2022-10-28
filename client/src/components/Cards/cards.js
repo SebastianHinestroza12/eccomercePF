@@ -88,17 +88,21 @@ const Cards = ({ loading, setLoading }) => {
         />
         <Row className="row">
           {Array.isArray(actualproducts) ? (
-            actualproducts.map((products) => (
-              <Col md={3} xs={6} key={products.id}>
-                <ProductCard
-                  name={products.name}
-                  price={products.price}
-                  image={products.image}
-                  stars={products.stars}
-                  id={products.id}
-                />
-              </Col>
-            ))
+            actualproducts.map((products) => {
+              if (products.visible !== false) {
+                return (
+                  <Col md={3} xs={6} key={products.id}>
+                    <ProductCard
+                      name={products.name}
+                      price={products.price}
+                      image={products.image}
+                      stars={products.stars}
+                      id={products.id}
+                    />
+                  </Col>
+                );
+              }
+            })
           ) : (
             <>
               <Alert key={"warning"} variant={"warning"}>
