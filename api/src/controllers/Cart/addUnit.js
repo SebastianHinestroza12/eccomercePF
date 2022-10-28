@@ -33,15 +33,12 @@ router.put('/', async (req, res, next) => {
       }
     })
 
-		console.log(product)
-
 		let infProduct = await Product.findOne({
 			where: {
 				id: productId
 			}
 		})
 
-		console.log(infProduct)
 
 		let stockProduct = infProduct.size_stock.find(el => el.size = size);
 		
