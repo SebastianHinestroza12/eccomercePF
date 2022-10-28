@@ -268,11 +268,18 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
+  margin-bottom: 8rem;
+}
+
+.testimonios-title {
+  justify-content: center;
+  display: flex;
+  margin: 6rem;
 }
 
 
 .testimonios-caja {
-  width: 500px;
+  width: 800px;
   box-shadow: 2px 2px 30px rgb(107, 107, 107);
   background-color: white;
   padding: 20px;
