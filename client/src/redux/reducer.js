@@ -17,6 +17,7 @@ const initialState = {
   newProducts: [],
   editProduct: [],
   reviews: [],
+  orders: [],
   newReviews: [],
   cartTotal: 0,
   cartProducts: localStorage.getItem("cartProductsAdded")
@@ -283,6 +284,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cartTotal: payload,
+      };
+
+    case "GET_ORDERS":
+      return {
+        ...state,
+        orders: payload,
       };
 
     default:

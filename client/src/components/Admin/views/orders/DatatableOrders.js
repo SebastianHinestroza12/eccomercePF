@@ -1,21 +1,29 @@
 import React, { useMemo } from "react";
 import * as Unicons from "@iconscout/react-unicons";
-
+import { useEffect, useDispatch } from "react";
 import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
+
 import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
+import { getOrders } from "../../../../redux/action";
 
 const Table = (props) => {
+const dispatch = useDispatch();
+
+
+
+
+
   const columns = [
     {
-      name: "Cliente",
-      selector: (row) => row.user,
+      name: "Id",
+      selector: (row) => row.id,
       sortable: true,
     },
     {
-      name: "Fecha",
-      selector: (row) => row.date,
+      name: "Cliente",
+      selector: (row) => row.client,
       sortable: true,
     },
     {
@@ -25,7 +33,7 @@ const Table = (props) => {
     },
     {
       name: "Total",
-      selector: (row) => row.order_total,
+      selector: (row) => row.total_purchase,
       sortable: true,
     },
     {
