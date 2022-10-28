@@ -113,6 +113,16 @@ export const newProductForm = (data) => {
   };
 };
 
+export const editProductForm = (data) => {
+  return async (dispatch) => {
+    await axios.put(`/product`, data);
+    dispatch({
+      type: "EDIT_PRODUCT",
+      payload: data,
+    });
+  };
+};
+
 export const newComentForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postReview`, data);

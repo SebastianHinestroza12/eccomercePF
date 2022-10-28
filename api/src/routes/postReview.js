@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 
     res.send("Reseña añadida correctamente");
   } catch (err) {
-    res.send("Error al agregar reseña/review");
+    res.send("Error al agregar reseña");
     console.log("Error en postReview.js:", err.message);
   }
 });
