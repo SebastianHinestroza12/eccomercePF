@@ -98,26 +98,39 @@ const ProductDetail = () => {
                 stock={productDetail.size_stock[idSizeStock].stock}
               />
             </section>
-          </Col>
+          
             <hr></hr>
             <section>
-              <h3 className="reviews">Reviews</h3>
+              <h3 className="reviews-detail">Reviews</h3>
               <br></br>
               {
                 productDetail.reviews.length ? (
                   productDetail.reviews.map ((e) => (
                     <>
-                    <div className="product-review">
-                      <h6 className="product-user">User name</h6>
-                      {
-                        e.stars === '5' ? <p className="product-stars">★★★★★</p> :
-                        e.stars === '4' ? <p className="product-stars">★★★★</p> :
-                        e.stars === '3' ? <p className="product-stars">★★★</p> :
-                        e.stars === '2' ? <p className="product-stars">★★</p> : <p className="product-stars">★</p>
-                      }
-                      
-                      <p className="product-comment">"{e.comment}"</p>
-                    </div>
+                    <div className="testimonios-detail">
+                      <div className="caja-top">
+                        <div className="perfil">
+                          <div className="perfil-img">
+                            <img src="" alt=""/>
+                          </div>
+                          <div className="name-user">
+                            <strong>User name</strong>
+                            <span>{e.name}</span>
+                          </div>
+                        </div>
+                        <div className="reviews">
+                          {
+                            e.stars === '5' ? <p className="product-stars">★★★★★</p> :
+                            e.stars === '4' ? <p className="product-stars">★★★★</p> :
+                            e.stars === '3' ? <p className="product-stars">★★★</p> :
+                            e.stars === '2' ? <p className="product-stars">★★</p> : <p className="product-stars">★</p>
+                          }
+                        </div>
+                        </div>
+                          <div className="comentarios">
+                            <p className="product-comment">"{e.comment}"</p>
+                          </div>
+                      </div>
                   </>
                   ))
                 ) : (
@@ -127,8 +140,11 @@ const ProductDetail = () => {
                 )
               }
             </section>
+            </Col>
         </Row>
+        
       )}
+      
     </Container>
   );
 };
