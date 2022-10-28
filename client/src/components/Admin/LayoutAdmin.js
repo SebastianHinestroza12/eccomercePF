@@ -11,28 +11,28 @@ import { UilLockSlash } from '@iconscout/react-unicons'
 
 
 const LayoutAdmin = () => {
-  const [aprobado, setAprobado] = useState(true);
-  const { getAccessTokenSilently } = useAuth0();
+  // const [aprobado, setAprobado] = useState(true);
+  // const { getAccessTokenSilently } = useAuth0();
 
-  useEffect(async () => {
-    try {
-      const token = await getAccessTokenSilently();
-      console.log(token);
-      const llamada = await axios.get("/user/prueba/role", {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(llamada.data);
-      setAprobado(true);
-    } catch (error) {
-      console.log(error.message);
-      setAprobado(false);
-    }
-  }, []);
+  // useEffect(async () => {
+  //   try {
+  //     const token = await getAccessTokenSilently();
+  //     console.log(token);
+  //     const llamada = await axios.get("/user/prueba/role", {
+  //       headers: {
+  //         authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     console.log(llamada.data);
+  //     setAprobado(true);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //     setAprobado(false);
+  //   }
+  // }, []);
   return (
     <>
-      {aprobado === true ? (
+      {/* {aprobado === true ? ( */}
         <Container fluid className="admin">
           <Row>
             <Col md={2} className="sidebar">
@@ -46,7 +46,7 @@ const LayoutAdmin = () => {
             </Col>
           </Row>
         </Container>
-      ) : (
+      {/* ) : (
         <div class="text-bg-danger p-5">
           <br />
           <br />
@@ -57,7 +57,7 @@ const LayoutAdmin = () => {
           <br />
           <br />
         </div>
-      )}
+      )} */}
     </>
   );
 };
