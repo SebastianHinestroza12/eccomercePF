@@ -20,7 +20,7 @@ const checkPermissions = jwtAuthz(["read:users"], {
 
     customScopeKey: "permissions",
     customUserKey: "auth",
-    // checkAllScopes: true
+    checkAllScopes: true
     // debe cumplir todos los permisos especificados
 })
 
