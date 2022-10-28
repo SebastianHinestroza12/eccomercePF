@@ -3,7 +3,7 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
-import { postRegister } from "../../../redux/action";
+import { postRegister, saveUserGlobalState } from "../../../redux/action";
 
 const AuthNAv = () => {
   const { isAuthenticated } = useAuth0();
@@ -21,6 +21,7 @@ function Login() {
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(postRegister(user));
+      dispatch(saveUserGlobalState(user));
     }
   }, [dispatch, isAuthenticated, user]);
   return <>{isLoading ? <Loading /> : <AuthNAv />}</>;

@@ -1,6 +1,9 @@
 import axios from "axios";
+//verificar usuario loggeado
 
 export const getAllProducts = () => {
+  //user logged
+
   return function (dispatch) {
     return axios("/product")
       .then((response) => response.data)
@@ -26,10 +29,20 @@ export const getProductDetail = (productId) => {
 };
 
 //REGISTRAR USUARIOS LOGUADOS EN DB
-export const postRegister = (user) => {
+/*export const postRegister = (user) => {
   return async () => {
     console.log("action", user);
     await axios.post(`/user/register`, user);
+  };
+};*/
+export const postRegister = (user) => {
+  return async () => {
+    await axios.post(`/user/register`, user);
+  };
+};
+export const saveUserGlobalState = (user) => {
+  return function (dispatch) {
+    dispatch({ type: "SAVE_USER", payload: user });
   };
 };
 
@@ -123,6 +136,7 @@ export const editProductForm = (data) => {
 };
 
 export const newComentForm = (data) => {
+  console.log("comment", data);
   return async (dispatch) => {
     await axios.post(`/postReview`, data);
     dispatch({
@@ -132,19 +146,58 @@ export const newComentForm = (data) => {
   };
 };
 
-export function addProductToCart(payload, quantity, sizePicked) {
+export const getReviewByProduct = (idProduct) => {
+  return function (dispatch) {
+    return axios(`/getReviews/${idProduct}`)
+      .then((response) => response.data)
+      .then((review) => {
+        dispatch({ type: "GET_REVIEW_BY_PRODUCT", payload: review });
+      });
+  };
+};
+
+export function AddProductToCart(payload, quantity, sizePicked, email) {
+  const data = {
+    productId: payload.id,
+    units: quantity,
+    size: sizePicked,
+    email: email,
+  };
+
+  //si usuario esta loggeado guardo en la DB
+  if (email) {
+    return async (dispatch) => {
+      await axios.post(`/cart`, data);
+      dispatch({
+        type: "ADD_PRODUCTS_TO_CART",
+        payload: data,
+      });
+    };
+  }
+  /*
   return {
     type: "ADD_PRODUCTS_TO_CART",
     payload: { ...payload, quantity, sizePicked },
     quantity,
+  };*/
+}
+
+export function getCartDetail(userEmail) {
+  //console.log("email", userEmail);
+  return function (dispatch) {
+    return axios(`/cart/?email=${userEmail}`)
+      .then((response) => response.data)
+      .then((cartDetail) => {
+        dispatch({ type: "GET_CART_DETAIL", payload: cartDetail });
+      });
   };
 }
 
-export function deleteProductFromCart(payload, quantity) {
+export function deleteProductFromCart(payload, units) {
   return {
     type: "DELETE_PRODUCT_FROM_CART",
     payload,
-    quantity,
+    units,
   };
 }
 
@@ -161,11 +214,11 @@ export function DecreaseQuantity(payload) {
   };
 }
 
-export function RemoveItemFromCart(payload, quantity) {
+export function RemoveItemFromCart(payload, units) {
   return {
     type: "REMOVE_ITEM_FROM_CART",
     payload,
-    quantity,
+    units,
   };
 }
 

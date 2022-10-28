@@ -1,7 +1,7 @@
 let sum = 0;
 const cartWidgetNumber = () => {
   for (let i of JSON.parse(localStorage.getItem("cartProductsAdded"))) {
-    sum += i.quantity;
+    sum += i.units;
   }
   return sum;
 };
@@ -19,16 +19,15 @@ const initialState = {
   reviews: [],
   newReviews: [],
   cartTotal: 0,
-  cartProducts: localStorage.getItem("cartProductsAdded")
-    ? JSON.parse(localStorage.getItem("cartProductsAdded"))
-    : [],
+  cartProducts: [],
   quantityProductsAdded: localStorage.getItem("cartProductsAdded")
     ? cartWidgetNumber()
     : 0,
+  cartUserLogged: [],
 };
 
 const rootReducer = (state = initialState, action) => {
-  const { type, payload, quantity } = action;
+  const { type, payload, units } = action;
   switch (type) {
     case "GET_ALL_PRODUCTS":
       return {
@@ -41,15 +40,20 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newProducts: payload,
       };
-      case "EDIT_PRODUCT":
-        return {
-          ...state,
-          editProduct: payload,
-        };
+    case "EDIT_PRODUCT":
+      return {
+        ...state,
+        editProduct: payload,
+      };
     case "LOAD_REVIEW":
       return {
         ...state,
         newReviews: [...state.newReviews, payload],
+      };
+    case "GET_REVIEW_BY_PRODUCT":
+      return {
+        ...state,
+        newReviews: payload,
       };
     case "GET_PRODUCT_DETAIL":
       return {
@@ -62,17 +66,23 @@ const rootReducer = (state = initialState, action) => {
         products: payload,
       };
 
-      case "PUT_PRODUCT_DETAIL":
-        console.log('REDUCER', payload)
-        return {
-          ...state,
-          productDetail: payload,
-        };
+    case "PUT_PRODUCT_DETAIL":
+      console.log("REDUCER", payload);
+      return {
+        ...state,
+        productDetail: payload,
+      };
 
     case "POST_REGISTER":
       return {
         ...state,
         usuario: payload,
+      };
+    case "SAVE_USER":
+      localStorage.setItem("currentUser", JSON.stringify(payload));
+      return {
+        ...state,
+        user: payload,
       };
     case "PUT_USER":
       localStorage.setItem("currentUser", JSON.stringify(payload.update_Data));
@@ -80,7 +90,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: payload.update_Data,
       };
-
     case "ORDER_BY_PRICE":
       const filterByPrice =
         payload === "MayorPrecio"
@@ -165,8 +174,8 @@ const rootReducer = (state = initialState, action) => {
         products: productsResult,
       };
 
-    case 'PUT_PRODUCT':
-      console.log('REDUCER', payload.data)
+    case "PUT_PRODUCT":
+      console.log("REDUCER", payload.data);
       return {
         ...state,
         pruebaProduct: payload.data,
@@ -205,14 +214,16 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "ADD_PRODUCTS_TO_CART":
+      console.log("payload addcart", payload);
+
       let productAlreadyInTheCart = state.cartProducts.findIndex(
         (element) =>
           element.id === payload.id && element.sizePicked === payload.sizePicked
       );
 
       if (productAlreadyInTheCart >= 0) {
-        state.quantityProductsAdded += quantity;
-        state.cartProducts[productAlreadyInTheCart].quantity += quantity;
+        state.quantityProductsAdded += units;
+        state.cartProducts[productAlreadyInTheCart].units += units;
         localStorage.setItem(
           "cartProductsAdded",
           JSON.stringify(state.cartProducts)
@@ -229,12 +240,19 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           cartProducts: [...state.cartProducts, payload],
-          quantityProductsAdded: state.quantityProductsAdded + quantity,
+          quantityProductsAdded: state.quantityProductsAdded + units,
         };
       }
 
+    case "GET_CART_DETAIL":
+      console.log("payload cart", payload);
+      return {
+        ...state,
+        cartProducts: payload,
+      };
+
     case "INCREASE_QUANTITY":
-      let quantity2 = state.cartProducts[action.payload].quantity;
+      let quantity2 = state.cartProducts[action.payload].units;
       let sizePicked = state.cartProducts[action.payload].sizePicked;
       let stock_product = state.cartProducts[action.payload].size_stock.filter(
         (e) => e.size === sizePicked
@@ -243,7 +261,7 @@ const rootReducer = (state = initialState, action) => {
 
       if (quantity2 < stock) {
         state.quantityProductsAdded++;
-        state.cartProducts[payload].quantity++;
+        state.cartProducts[payload].units++;
       }
 
       return {
@@ -251,10 +269,10 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "DECREASE_QUANTITY":
-      let quantity1 = state.cartProducts[action.payload].quantity;
+      let quantity1 = state.cartProducts[action.payload].units;
       if (quantity1 > 1) {
         state.quantityProductsAdded--;
-        state.cartProducts[payload].quantity--;
+        state.cartProducts[payload].units--;
       }
 
       localStorage.setItem(
@@ -269,7 +287,7 @@ const rootReducer = (state = initialState, action) => {
       //borrado por index del elemento en el array
       let cartProductsUpdated = state.cartProducts;
       cartProductsUpdated.splice(payload, 1);
-      state.quantityProductsAdded -= quantity;
+      state.quantityProductsAdded -= units;
       localStorage.setItem(
         "cartProductsAdded",
         JSON.stringify(cartProductsUpdated)

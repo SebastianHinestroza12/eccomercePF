@@ -26,8 +26,9 @@ const Cart = () => {
 
   let subtotal = 0;
   if (productsInTheCart) {
-    for (let i = 0; i < productsInTheCart.length; i++) {
-      subtotal += productsInTheCart[i].price * productsInTheCart[i].quantity;
+    for (let i = 0; i < productsInTheCart.items.length; i++) {
+      subtotal +=
+        productsInTheCart.items[i].price * productsInTheCart.items[i].units;
     }
   }
 
@@ -49,7 +50,7 @@ const Cart = () => {
   useEffect(() => {
     //setTotal(totalPrice);
     dispatch(getCartTotal(totalPrice));
-  }, [totalPrice, dispatch]);
+  }, [totalPrice, dispatch, productsInTheCart]);
 
   /*
   function loginWithRedirect() {
@@ -65,7 +66,8 @@ const Cart = () => {
       <Container>
         <h2 className="cart-title">Mi carrito</h2>
         <section>
-          {productsInTheCart.length ? (
+          {console.log("productsInTheCart", productsInTheCart)}
+          {productsInTheCart.status === "Active" ? (
             <Table responsive>
               <thead>
                 <tr>
@@ -78,7 +80,7 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody>
-                {productsInTheCart.map((element, index) => (
+                {productsInTheCart.items.map((element, index) => (
                   <tr key={index} id={index}>
                     <td>
                       <img
@@ -89,19 +91,25 @@ const Cart = () => {
                     </td>
                     <td>
                       {element.name}
-                      <p>Talla: {element.sizePicked}</p>
+                      <p>Talla: {element.size || element.sizePicked}</p>
                     </td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
                       <ItemCount
                         productDetail={element}
-                        quantity={element.quantity}
+                        quantity={element.units}
                         addedToCart={addedToCart}
                         carrito="true"
                         index={index}
                       />
                     </td>
-                    <td>$ {TotalPrice(element.price, element.quantity)} </td>
+                    <td>
+                      ${" "}
+                      {
+                        TotalPrice(element.price, element.units)
+                        //TotalPrice(element.price, element.quantity)
+                      }{" "}
+                    </td>
                     <td>
                       <div
                         onClick={() =>
@@ -127,7 +135,7 @@ const Cart = () => {
               </div>
             </div>
           )}
-          {productsInTheCart.length ? (
+          {productsInTheCart.status === "Active" ? (
             <section className="totals-cart">
               <div>
                 <Link to="/store" className="buy btn btn-primary buttons-cart">

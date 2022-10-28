@@ -1,12 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Toast } from "react-bootstrap";
 import { useState } from "react";
-import { addProductToCart } from "../../redux/action";
+import { AddProductToCart } from "../../redux/action";
 import "./addToCart.css";
 import ItemCount from "../Cart/ItemCount";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const AddToCart = ({ sizePicked, stock }) => {
+  //verificar is logged
+  const { user } = useAuth0();
+
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
   const [quantity, setQuantity] = useState(1);
 
@@ -17,7 +21,7 @@ const AddToCart = ({ sizePicked, stock }) => {
 
   function addToCartButton() {
     setShow(true);
-    dispatch(addProductToCart(productDetail, quantity, sizePicked));
+    dispatch(AddProductToCart(productDetail, quantity, sizePicked, user.email));
   }
 
   return (

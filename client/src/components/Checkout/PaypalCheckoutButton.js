@@ -42,7 +42,6 @@ const PaypalCheckoutButton = ({ product, inputErrors }) => {
 
   return (
     <PayPalScriptProvider>
-      {console.log("inputErrors", inputErrors)}
       <PayPalButtons
         disabled={Object.entries(inputErrors).length !== 0}
         onClick={(data, actions) => {
