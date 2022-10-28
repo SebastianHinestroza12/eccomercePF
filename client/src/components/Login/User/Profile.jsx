@@ -9,8 +9,9 @@ import { Col, Container, Row } from "react-bootstrap";
 
 function Profile() {
   const { user, isAuthenticated } = useAuth0();
+  console.log(user)
   const profileUser = useSelector((state) => state.user);
-  console.log(profileUser.update_Data);
+  console.log(profileUser.email);
   console.log(isAuthenticated);
   return isAuthenticated ? (
     <Fragment>
@@ -29,6 +30,7 @@ function Profile() {
               src={user.picture}
               alt={user.name}
               className="card-img-top"
+              class="img-thumbnail"
             />
           </div>
           <div className="card-body">
@@ -110,7 +112,7 @@ function Profile() {
             </div>
             <div>
               <strong>Correo electrónico: </strong>
-              {profileUser.email}
+              {user.email}
             </div>
             <div>
               <strong>Teléfono: </strong>

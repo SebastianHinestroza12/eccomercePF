@@ -1,6 +1,5 @@
 import Card from "react-bootstrap/Card";
 import { useHistory } from "react-router-dom";
-
 import "./card.css";
 //UNIcons library
 import * as Unicons from "@iconscout/react-unicons";
@@ -20,7 +19,7 @@ const ProductCard = (props) => {
   const { name, price, image, stars, id } = props;
   const history = useHistory();
   const goToDetail = (id) => {
-    history.push(`/store/${id}`);
+    history.push(`/product/${id}`);
   };
 
   return (

@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from "react";
-
 import ProductCard from "../Product/Card";
 import "./cards.css";
 import Pages from "../Pagination/pagination";
@@ -11,9 +10,6 @@ import { Alert, Col, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 const Cards = ({ loading, setLoading }) => {
-
-  const { category } = useParams();
-
   const allProducts = useSelector((state) => state.products);
   const superAllProducts = useSelector((state) => state.allProducts);
   const dispatch = useDispatch();
@@ -49,18 +45,16 @@ const Cards = ({ loading, setLoading }) => {
    * FIN PAGINADO
    */
 
+  //CATEGORIA DE PARAMS
+  const { category } = useParams();
+
   useEffect(() => {
-
-    /*if (allProducts.length > superAllProducts.length) {
-      dispatch(getAllProducts())
-
-    } else */
-    if(category){
-      console.log('CATEGORY',category)
-      dispatch(linkCategory(category))
-    }
-    else if (superAllProducts.length === 0) {
+    console.log("CATEGORY", category);
+    if (superAllProducts.length === 0) {
       dispatch(getAllProducts());
+    }
+    if (category) {
+      dispatch(linkCategory(category));
     }
   }, [allProducts.length, dispatch, setLoading, superAllProducts.length]);
 
@@ -94,18 +88,21 @@ const Cards = ({ loading, setLoading }) => {
         />
         <Row className="row">
           {Array.isArray(actualproducts) ? (
-            actualproducts.map((products) => (
-              <Col md={3} xs={6} key={products.id}>
-                {console.log("products", products)}
-                <ProductCard
-                  name={products.name}
-                  price={products.price}
-                  image={products.image}
-                  stars={products.stars}
-                  id={products.id}
-                />
-              </Col>
-            ))
+            actualproducts.map((products) => {
+              if (products.visible !== false) {
+                return (
+                  <Col md={3} xs={6} key={products.id}>
+                    <ProductCard
+                      name={products.name}
+                      price={products.price}
+                      image={products.image}
+                      stars={products.stars}
+                      id={products.id}
+                    />
+                  </Col>
+                );
+              }
+            })
           ) : (
             <>
               <Alert key={"warning"} variant={"warning"}>

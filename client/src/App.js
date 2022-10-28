@@ -10,13 +10,11 @@ import User from "./components/Login/User/User";
 import Shopping from "./components/Login/User/Shopping";
 import Cart from "./components/Cart/Cart";
 import React, { Fragment } from "react";
-import LogAdmin from "./components/Login/Admin/LogAdmin";
 import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
+import RutasBloqueadas from "./components/Login/RutasBloqueadas";
 import RedirectToLogin from "./components/Login/ReditectToLogin";
-
-
 
 const initialOptions = {
   "client-id":
@@ -37,11 +35,11 @@ function App() {
         <Route exact path={"/store"}>
           <Store />
         </Route>
-        <Route path={"/store/:productId"}>
-          <ProductDetail />
-        </Route>
-        <Route path={"/store/:category"}>
+        <Route exact path={"/store/:category"}>
           <Store />
+        </Route>
+        <Route path={"/product/:productId"}>
+          <ProductDetail />
         </Route>
         <Route path={"/user"}>
           <User />
@@ -52,14 +50,14 @@ function App() {
         <Route path={"/carrito"}>
           <Cart />
         </Route>
-        <Route path={"/admin"}>
-          <LogAdmin />
-        </Route>
         <Route path={"/pagar"}>
           <Checkout />
         </Route>
         <Route path={"/panel-control"}>
           <LayoutAdmin />
+        </Route>
+        <Route path={"/rutas"}>
+          <RutasBloqueadas />
         </Route>
         <Route path={"/login"}>
           <RedirectToLogin />
