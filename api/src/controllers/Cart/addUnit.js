@@ -1,11 +1,20 @@
-const { Cart, Product, Item } = require('../../db');
+const { Cart, Product, Item, User } = require('../../db');
 const router = require("express").Router();
 
 
 router.put('/', async (req, res, next) => {
 
-	let { userId, productId, size } = req.body;
+	let { email, productId, size } = req.body;
 	try {
+
+		let user = await User.findOne({
+			where:{
+				email
+			}
+		})
+
+		let userId = user.id
+
 		let cart = await Cart.findOne({
 			where: {
 				userId: userId,
@@ -24,11 +33,15 @@ router.put('/', async (req, res, next) => {
       }
     })
 
+		console.log(product)
+
 		let infProduct = await Product.findOne({
 			where: {
 				id: productId
 			}
 		})
+
+		console.log(infProduct)
 
 		let stockProduct = infProduct.size_stock.find(el => el.size = size);
 		
