@@ -1,11 +1,20 @@
-const { Cart, Product, Item } = require('../../db');
+const { Cart, Product, Item, User } = require('../../db');
 const router = require("express").Router();
 
 
 router.delete('/', async (req, res, next) => {
-	let { userId, productId, size } = req.body;
+	let { email, productId, size } = req.body;
 
 	try {
+
+		let user = await User.findOne({
+			where:{
+				email
+			}
+		})
+
+		let userId = user.id
+
 		let product = await Item.findOne({
 			where: {
 				size: size.toUpperCase(),

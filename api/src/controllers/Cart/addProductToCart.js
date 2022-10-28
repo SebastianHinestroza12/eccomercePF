@@ -5,7 +5,15 @@ const Op = Sequelize.Op;
 
 router.post("/", async (req, res) => {
   try {
-    let { size, units, productId, userId } = req.body;
+    let { size, units, productId, email } = req.body;
+
+		let user = await User.findOne({
+			where:{
+				email
+			}
+		})
+
+		let userId = user.id
 
 		let product = await Item.findOne({
       where:{
