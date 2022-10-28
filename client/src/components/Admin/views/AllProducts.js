@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Table from "./DataTable";
 
 function AllProducts() {
-  const { productId } = useParams();
+  //const { productId } = useParams();
 
   const dispatch = useDispatch();
 
@@ -17,11 +17,11 @@ function AllProducts() {
   }, [dispatch]);
 
   //carga de detalle
-  useEffect(() => {
+  /*useEffect(() => {
     new Promise((resolve) => {
       resolve(dispatch(getProductDetail(productId)));
     });
-  }, [dispatch, productId]);
+  }, [dispatch, productId]);*/
 
   const clickhandler = (name) => console.log("delete", name);
 

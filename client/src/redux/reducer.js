@@ -15,6 +15,8 @@ const initialState = {
   productDetail: [],
   pruebaProduct: [],
   newProducts: [],
+  editProduct: [],
+  reviews: [],
   newReviews: [],
   cartTotal: 0,
   cartProducts: localStorage.getItem("cartProductsAdded")
@@ -39,6 +41,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newProducts: payload,
       };
+      case "EDIT_PRODUCT":
+        return {
+          ...state,
+          editProduct: payload,
+        };
     case "LOAD_REVIEW":
       return {
         ...state,

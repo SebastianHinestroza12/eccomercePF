@@ -38,7 +38,7 @@ const Table = (props) => {
       name: "Editar",
       cell: (row) => (
         <Link
-          to={`/panel-control/nuevo-producto/${row.id}`}
+          to={`/panel-control/editar-producto/${row.id}`}
           onClick={() => props.click(row.name)}
         >
           <Unicons.UilEdit />

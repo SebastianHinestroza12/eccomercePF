@@ -38,6 +38,8 @@ const deleteProduct = require('../controllers/Cart/deleteProduct');
 const addUnit = require('../controllers/Cart/addUnit');
 const removeUnit = require('../controllers/Cart/removeUnit');
 
+const getReviews = require('./getReviews');
+const getReviewsByPID = require('./getReviewsByPID');
 const postReview = require('./postReview');
 const getUsers = require('./getUsers');
 
@@ -82,5 +84,7 @@ router.use('/filterStatusOrder', filterStatusOrder);
 
 //review
 router.use('/postReview', postReview);
+router.use('/getReviews', getReviews);
+router.use('/getReviews', getReviewsByPID);
 
 module.exports = router;
