@@ -81,6 +81,8 @@ const FormNewProduct = ({ productId }) => {
   useEffect(() => {
     dispatch(getProductDetail(productId));
     //setImage(productDetail.image);
+
+
   }, [dispatch, /*setImage, productDetail.image,*/ productId]);
 
   function fillInputs(productDetail) {
@@ -88,11 +90,11 @@ const FormNewProduct = ({ productId }) => {
     setValue("price", productDetail.price);
     setValue("detail", productDetail.detail);
     setValue("image", productDetail.image);
-    //setValue("category", productDetail.categories ? productDetail.categories[0].name : false);
+    setValue("category", productDetail.categories ? productDetail.categories[0].name : false);
     setValue("status", productDetail.visible ? "Publicado" : "Borrador");
   }
-
-  return (productDetail.size_stock ? 
+  
+  return (
     <>
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         {[productDetail].length > 0 && fillInputs(productDetail)}
@@ -169,7 +171,7 @@ const FormNewProduct = ({ productId }) => {
                   validate: selectValidator,
                 })}
               >
-                <option disabled hidden>{productDetail.categories ? productDetail.categories[0].name : false}</option>
+                <option selected disabled hidden>{productDetail.categories ? productDetail.categories[0].name : false}</option>
                 <option value="Jersey">Jersey</option>
                 <option value="Balon">Balon</option>
                 <option value="Calzado">Calzado</option>
@@ -268,7 +270,7 @@ const FormNewProduct = ({ productId }) => {
           </Col>
         </Row>
       </form>
-    </> : <h1>nada nadita</h1>
+    </>
   );
 };
 export default FormNewProduct;

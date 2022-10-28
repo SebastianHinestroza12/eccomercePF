@@ -14,7 +14,7 @@ const LayoutAdmin = () => {
   const [aprobado, setAprobado] = useState(true);
   const { getAccessTokenSilently } = useAuth0();
 
-  useEffect(async () => {
+  /*useEffect(async () => {
     try {
       const token = await getAccessTokenSilently();
       console.log(token);
@@ -29,7 +29,7 @@ const LayoutAdmin = () => {
       console.log(error.message);
       setAprobado(false);
     }
-  }, []);
+  }, []);*/
   return (
     <>
       {aprobado === true ? (
