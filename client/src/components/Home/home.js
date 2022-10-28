@@ -104,18 +104,18 @@ const Home = () => {
         </div>
       </section>
 
-      <h2 className="testimonios">Testimonios</h2>
+      <h2 className="testimonios-title">Testimonios</h2>
 
       <section className="testimonios">
         <div className="testimonios-contenedor">
           {allProducts.slice(0, 6).map((product) => {
             return (
-              <Col md={2} xs={4} key={product.id}>
+              
                 <div className="testimonios-caja">
                   <div className="caja-top">
                     <div className="perfil">
                       <div className="perfil-img">
-                        <img src="" alt=""/>
+                        <img src={product.image} alt=""/>
                       </div>
                       <div className="name-user">
                         <strong>User name</strong>
@@ -131,7 +131,7 @@ const Home = () => {
                       en buen estado y no tardo en llegar. Lo recomiendo!!"</p>
                     </div>
                 </div>
-              </Col>
+              
             );
           })}
         </div>
