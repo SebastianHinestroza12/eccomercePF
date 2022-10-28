@@ -83,6 +83,13 @@ label.form-check-label,
   text-decoration: underline;
 }
 
-.reviews {
+.reviews-detail {
   text-align: center;
+}
+
+.testimonios-detail {
+  box-shadow: 2px 2px 30px rgb(107, 107, 107);
+  background-color: white;
+  padding: 20px;
+  margin: 15px;
 }
