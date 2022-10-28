@@ -3,6 +3,13 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) =>
   sequelize.define("item", 
   {
+    productId: {
+      type: DataTypes.STRING,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     size: {
       type: DataTypes.STRING,
     },
@@ -14,9 +21,14 @@ module.exports = (sequelize) =>
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },
-    productId: {
-        type: DataTypes.STRING,
-    }
+    subtotal: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   }, 
   {timestamps: false}
 );

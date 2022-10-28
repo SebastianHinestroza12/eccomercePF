@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 router.delete('/', async (req, res, next) => {
 
-	let { cartId, userId } = req.body;
+	let { userId } = req.body;
 
 	let cart = await Cart.findOne({
 		where: {
@@ -20,7 +20,7 @@ router.delete('/', async (req, res, next) => {
 
 		await Item.destroy({
 			where:{
-				cartId: cartId
+				cartId: userId
 			}
 		})
 		return res.send('Cart has been emptied');
