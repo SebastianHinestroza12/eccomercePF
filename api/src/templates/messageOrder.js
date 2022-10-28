@@ -6,18 +6,18 @@ const messageOrder = (numberOrder, dateOrder, products, totalOrder) => {
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Confirmacion Pedido</title>
 
     <style>
       body {
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
       .container {
         background-color: #e3e3e3;
         width: 100%;
       }
       .container-sub {
-        padding: 20px 10px 20px 10px;
+        padding: 10px 10px 10px 10px;
       }
       .logo {
         padding: 10px 0px 10px 0px;
@@ -27,7 +27,6 @@ const messageOrder = (numberOrder, dateOrder, products, totalOrder) => {
       }
       .data {
         background-color: #fff;
-        padding: 20px 0 5px 0px;
         width: 100%;
         text-align: center;
       }
@@ -53,6 +52,10 @@ const messageOrder = (numberOrder, dateOrder, products, totalOrder) => {
         width: 150px;
         height: 80px;
       }
+      p {
+        text-transform: capitalize;
+        font-weight: bolder;
+      }
     </style>
   </head>
   <body>
@@ -67,14 +70,18 @@ const messageOrder = (numberOrder, dateOrder, products, totalOrder) => {
         </div>
         <div class="data">
           <h1>Tu pedido ha sido confirmado</h1>
-          <h4>RESUMEN DEL PEDIDO:</h4>
-          <p>Número de orden: ${numberOrder}</p>
-          <p>Fecha de pedido: ${dateOrder}</p>
-          <p>Productos: ${products}</p>
-          <p>Total del pedido: $${totalOrder}</p>
+          <h3>RESUMEN DEL PEDIDO:</h3>
+          <p>Número de orden</p>
+          <span>${numberOrder}</span>
+          <p>Fecha de pedido</p>
+          <span> ${dateOrder}</span>
+          <p>Productos</p>
+          <span>${products}</span>
+          <p>Total del pedido</p>
+          <span>$${totalOrder}</span>
           <h4>
             ¡Gracias por confiar en nosotros! Tenemos tus necesidades como la
-            prioridad número 1
+            prioridad número 1.
           </h4>
           <div class="btn">
             <a href="https://eccomercepf.vercel.app" target="_blank" class="buy"
@@ -86,6 +93,8 @@ const messageOrder = (numberOrder, dateOrder, products, totalOrder) => {
     </div>
   </body>
 </html>
+
+
 `
 }
 
