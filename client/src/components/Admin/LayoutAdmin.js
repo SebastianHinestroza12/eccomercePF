@@ -6,35 +6,33 @@ import AdminContent from "./AdminContent";
 import AdminHeader from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
 import "./admin.css";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-import { UilLockSlash } from "@iconscout/react-unicons";
+// import { withAuthenticationRequired } from "@auth0/auth0-react";
+// import { UilLockSlash } from "@iconscout/react-unicons";
 
 const LayoutAdmin = () => {
   const [aprobado, setAprobado] = useState(true);
   const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-    const functionPrueba = async () => {
+    const hola = async () => {
       const token = await getAccessTokenSilently();
       console.log(token);
-      await axios
+      const pedido = await axios
         .get("/user/prueba/role", {
           headers: { authorization: `Bearer ${token}` },
         })
-        .then((res) => {
-          console.log(res.data);
-        })
         .catch((e) => {
-          console.log(e.message);
+          console.log(e.response);
           setAprobado(false);
         });
+      console.log(pedido.data);
     };
-    functionPrueba();
+    hola();
   }, []);
 
   return (
     <>
-      {aprobado === true ? (
+
         <Container fluid className="admin">
           <Row>
             <Col md={2} className="sidebar">
@@ -48,20 +46,9 @@ const LayoutAdmin = () => {
             </Col>
           </Row>
         </Container>
-      ) : (
-        <div class="text-bg-danger p-5">
-          <br />
-          <br />
-          <UilLockSlash />
-          <span class="ms-5">
-            NO TIENES LOS PERMISOS NECESARIOS PARA ACCEDER
-          </span>
-          <br />
-          <br />
-        </div>
-      )}
+    
     </>
   );
 };
-export default withAuthenticationRequired(LayoutAdmin);
+export default LayoutAdmin;
 // export default LayoutAdmin;
