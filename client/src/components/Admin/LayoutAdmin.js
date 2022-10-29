@@ -10,8 +10,8 @@ import "./admin.css";
 // import { UilLockSlash } from "@iconscout/react-unicons";
 
 const LayoutAdmin = () => {
-  const [aprobado, setAprobado] = useState(true);
-  const { getAccessTokenSilently } = useAuth0();
+  // const [aprobado, setAprobado] = useState(true);
+  // const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
     const hola = async () => {
