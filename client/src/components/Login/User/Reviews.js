@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { newComentForm } from '../../../redux/action'
+import { newComentForm, getReviews } from '../../../redux/action'
 import './review.css'
 
 const validate = (input) => {
@@ -17,7 +18,9 @@ const validate = (input) => {
   return err
 }
 
-const Reviews = ({name, id}) => {
+const Reviews = ({productId, name, id}) => {
+    const userId = useSelector((state) => state.user.id)
+
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -28,7 +31,7 @@ const Reviews = ({name, id}) => {
       stars: '',
       comment: '',
       productId: id,
-      name: name
+      userId: productId
     });
     
     const handleSubmit = e => {
@@ -39,14 +42,15 @@ const Reviews = ({name, id}) => {
           stars: input.stars,
           comment: input.comment.trim(),
           productId: id,
-          name: name
+          userId: productId
         };
+        console.log(newReview)
         dispatch(newComentForm(newReview));
         setInput({
           stars: '',
           comment: '',
           productId: id,
-          name: name
+          userId: productId
         });
         handleClose()
       };
@@ -61,7 +65,10 @@ const Reviews = ({name, id}) => {
       setInput({...input, comment:e.target.value})
       setErrors(validate({...input, [e.target.value]: e.target.value}))
     }
-    
+
+    useEffect(() => {
+      dispatch(getReviews(productId));
+    }, [dispatch, productId])
 
     return (
         <>

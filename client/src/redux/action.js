@@ -25,6 +25,26 @@ export const getProductDetail = (productId) => {
   };
 };
 
+export const getReviews = (productId) => {
+  return function (dispatch) {
+    return axios(`/getReviews/${productId}`)
+    .then((response) => response.data) 
+    .then((productReviews) => {
+      dispatch({ type: "GET_PRODUCT_REVIEW", payload: productReviews });
+    });
+  };
+};
+
+export const newProductForm = (data) => {
+  return async (dispatch) => {
+    await axios.post(`/postProduct`, data);
+    dispatch({
+      type: "LOAD_PRODUCTS",
+      payload: data,
+    });
+  };
+};
+
 //REGISTRAR USUARIOS LOGUADOS EN DB
 export const postRegister = (user) => {
   return async () => {
@@ -102,15 +122,7 @@ export function filterByName(payload) {
 
 //CREACION DE PRODUCTO
 
-export const newProductForm = (data) => {
-  return async (dispatch) => {
-    await axios.post(`/postProduct`, data);
-    dispatch({
-      type: "LOAD_PRODUCTS",
-      payload: data,
-    });
-  };
-};
+
 
 export const editProductForm = (data) => {
   return async (dispatch) => {
