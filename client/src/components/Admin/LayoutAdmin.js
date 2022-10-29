@@ -10,31 +10,31 @@ import { withAuthenticationRequired } from "@auth0/auth0-react";
 import { UilLockSlash } from "@iconscout/react-unicons";
 
 const LayoutAdmin = () => {
-  const [aprobado, setAprobado] = useState(true);
-  const { getAccessTokenSilently } = useAuth0();
+  // const [aprobado, setAprobado] = useState(true);
+  // const { getAccessTokenSilently } = useAuth0();
 
-  useEffect(() => {
-    const functionPrueba = async () => {
-      const token = await getAccessTokenSilently();
-      console.log(token);
-      await axios
-        .get("/user/prueba/role", {
-          headers: { authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((e) => {
-          console.log(e.message);
-          setAprobado(false);
-        });
-    };
-    functionPrueba();
-  }, []);
+  // useEffect(() => {
+  //   const functionPrueba = async () => {
+  //     const token = await getAccessTokenSilently();
+  //     console.log(token);
+  //     await axios
+  //       .get("/user/prueba/role", {
+  //         headers: { authorization: `Bearer ${token}` },
+  //       })
+  //       .then((res) => {
+  //         console.log(res.data);
+  //       })
+  //       .catch((e) => {
+  //         console.log(e.message);
+  //         setAprobado(false);
+  //       });
+  //   };
+  //   functionPrueba();
+  // }, []);
 
   return (
     <>
-      {aprobado === true ? (
+
         <Container fluid className="admin">
           <Row>
             <Col md={2} className="sidebar">
@@ -48,18 +48,7 @@ const LayoutAdmin = () => {
             </Col>
           </Row>
         </Container>
-      ) : (
-        <div class="text-bg-danger p-5">
-          <br />
-          <br />
-          <UilLockSlash />
-          <span class="ms-5">
-            NO TIENES LOS PERMISOS NECESARIOS PARA ACCEDER
-          </span>
-          <br />
-          <br />
-        </div>
-      )}
+    
     </>
   );
 };
