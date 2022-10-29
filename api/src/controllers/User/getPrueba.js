@@ -18,13 +18,13 @@ const verifyJwt = jwt({
 
 const checkPermissions = jwtAuthz(["read:users"], {
 
-    customScopeKey: "permissions",
-    customUserKey: "auth",
-    // checkAllScopes: true
-    // debe cumplir todos los permisos especificados
+  customScopeKey: "permissions",
+  customUserKey: "auth",
+  // checkAllScopes: true
+  // debe cumplir todos los permisos especificados
 })
 
-router.get('/role', verifyJwt, checkPermissions, (req, res)=>{
+router.get('/role', verifyJwt, checkPermissions, (req, res) => {
   res.send("Accediendo a ruta ROLES");
 })
 
