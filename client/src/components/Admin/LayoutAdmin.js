@@ -34,21 +34,20 @@ const LayoutAdmin = () => {
 
   return (
     <>
+      <Container fluid className="admin">
+        <Row>
+          <Col md={2} className="sidebar">
+            <AdminSidebar />
+          </Col>
+          <Col>
+            <AdminHeader />
+            <div className="body flex-grow-1 px-3">
+              <AdminContent />
+            </div>
+          </Col>
+        </Row>
+      </Container>
 
-        <Container fluid className="admin">
-          <Row>
-            <Col md={2} className="sidebar">
-              <AdminSidebar />
-            </Col>
-            <Col>
-              <AdminHeader />
-              <div className="body flex-grow-1 px-3">
-                <AdminContent />
-              </div>
-            </Col>
-          </Row>
-        </Container>
-    
     </>
   );
 };
