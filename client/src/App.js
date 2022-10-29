@@ -16,6 +16,7 @@ import LayoutAdmin from "./components/Admin/LayoutAdmin";
 import RutasBloqueadas from "./components/Login/RutasBloqueadas";
 import RedirectToLogin from "./components/Login/ReditectToLogin";
 import Bloqueo from "./components/Login/Bloqueo";
+import BloqueoC from "./components/Login/BloqueoC";
 
 const initialOptions = {
   "client-id":
@@ -62,6 +63,9 @@ function App() {
         </Route>
         <Route path={"/bloqueo"}>
           <Bloqueo />
+        </Route>
+        <Route path={"/bloqueoC"}>
+          <BloqueoC />
         </Route>
         <Route path={"/login"}>
           <RedirectToLogin />
