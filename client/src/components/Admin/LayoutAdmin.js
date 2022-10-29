@@ -6,31 +6,29 @@ import AdminContent from "./AdminContent";
 import AdminHeader from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
 import "./admin.css";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
-import { UilLockSlash } from "@iconscout/react-unicons";
+// import { withAuthenticationRequired } from "@auth0/auth0-react";
+// import { UilLockSlash } from "@iconscout/react-unicons";
 
 const LayoutAdmin = () => {
   // const [aprobado, setAprobado] = useState(true);
   // const { getAccessTokenSilently } = useAuth0();
 
-  // useEffect(() => {
-  //   const functionPrueba = async () => {
-  //     const token = await getAccessTokenSilently();
-  //     console.log(token);
-  //     await axios
-  //       .get("/user/prueba/role", {
-  //         headers: { authorization: `Bearer ${token}` },
-  //       })
-  //       .then((res) => {
-  //         console.log(res.data);
-  //       })
-  //       .catch((e) => {
-  //         console.log(e.message);
-  //         setAprobado(false);
-  //       });
-  //   };
-  //   functionPrueba();
-  // }, []);
+  useEffect(() => {
+    const hola = async () => {
+      const token = await getAccessTokenSilently();
+      console.log(token);
+      const pedido = await axios
+        .get("/user/prueba/role", {
+          headers: { authorization: `Bearer ${token}` },
+        })
+        .catch((e) => {
+          console.log(e.response);
+          setAprobado(false);
+        });
+      console.log(pedido.data);
+    };
+    hola();
+  }, []);
 
   return (
     <>
@@ -51,5 +49,5 @@ const LayoutAdmin = () => {
     </>
   );
 };
-export default withAuthenticationRequired(LayoutAdmin);
+export default LayoutAdmin;
 // export default LayoutAdmin;
