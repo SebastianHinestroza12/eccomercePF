@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Col, Container, Row } from "react-bootstrap";
@@ -7,29 +7,31 @@ import AdminHeader from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
 import "./admin.css";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import { UilLockSlash } from '@iconscout/react-unicons'
-
+import { UilLockSlash } from "@iconscout/react-unicons";
 
 const LayoutAdmin = () => {
   const [aprobado, setAprobado] = useState(true);
   const { getAccessTokenSilently } = useAuth0();
 
-  /*useEffect(async () => {
-    try {
+  useEffect(() => {
+    const functionPrueba = async () => {
       const token = await getAccessTokenSilently();
       console.log(token);
-      const llamada = await axios.get("/user/prueba/role", {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(llamada.data);
-      setAprobado(true);
-    } catch (error) {
-      console.log(error.message);
-      setAprobado(false);
-    }
-  }, []);*/
+      await axios
+        .get("/user/prueba/role", {
+          headers: { authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((e) => {
+          console.log(e.message);
+          setAprobado(false);
+        });
+    };
+    functionPrueba();
+  }, []);
+
   return (
     <>
       {aprobado === true ? (
