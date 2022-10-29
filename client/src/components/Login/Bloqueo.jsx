@@ -10,15 +10,14 @@ function Bloqueo() {
     const hola = async () => {
       const token = await getAccessTokenSilently();
       console.log(token);
-      const pedido = await axios
+      await axios
         .get("/user/prueba/role", {
           headers: { authorization: `Bearer ${token}` },
         })
         .catch((e) => {
           console.log(e.response);
-          setAprobado(false);
+          setAprobado(false); 
         });
-      console.log(pedido.data);
     };
     hola();
   }, []);

@@ -24,7 +24,7 @@ const checkPermissions = jwtAuthz(["read:users"], {
     // debe cumplir todos los permisos especificados
 })
 
-router.get('/role', (req, res)=>{
+router.get('/role', verifyJwt, checkPermissions,(req, res)=>{
   res.send("Accediendo a ruta ROLES");
 })
 
