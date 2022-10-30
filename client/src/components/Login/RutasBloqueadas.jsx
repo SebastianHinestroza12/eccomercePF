@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+import { useState } from "react";
 import axios from "axios";
 
 function RutasBloqueadas() {
@@ -43,11 +43,12 @@ function RutasBloqueadas() {
       console.log(response.data); //Respuesta de la ruta del Back
     } catch (error) {
       console.log(error.message);
-    }
+    }    
   };
 
 
   return (
+
     <div>
       <h1>Auth0 Authentication</h1>
       <ul>
@@ -67,7 +68,7 @@ function RutasBloqueadas() {
       </ul>
       <br />
       <br />
-      <h3>El usuario esta: {isAuthenticated ? "LOGUEADO" : "NO LOGUEADO"}</h3>
+      <h3 class="text-bg-danger">El usuario esta: {isAuthenticated ? "LOGUEADO" : "NO LOGUEADO"}</h3>
       <br />
       <br />
       <ul>
@@ -94,6 +95,7 @@ function RutasBloqueadas() {
         </>
       )}
     </div>
+
   );
 }
 

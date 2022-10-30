@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import * as Unicons from "@iconscout/react-unicons";
 import { useAuth0 } from "@auth0/auth0-react";
 import Reviews from "./Reviews";
+import {  useParams } from "react-router-dom";
 import "./shopping.css";
 
 function Shopping() {
@@ -13,6 +14,8 @@ function Shopping() {
     const fechaCompra = '10-10-2022'
     const fechaEntrega = '15-10-2022'
     const purchasedProducts = useSelector((state) => state.cartProducts);
+    const id = purchasedProducts.id
+    console.log(id)
     const { isAuthenticated } = useAuth0();
 
     function TotalPrice(price, quantity) {
@@ -69,7 +72,7 @@ function Shopping() {
                       <td style={{ width: "10px", padding: "50px"}}>
                       <Reviews 
                           name = {e.name}
-                          id = {e.id}
+                          id = 'cd791e40-7d80-4807-8c0e-587dc0eafbaa'
                         />
                       </td>
                     </tr>

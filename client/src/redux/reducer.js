@@ -49,12 +49,22 @@ const rootReducer = (state = initialState, action) => {
     case "LOAD_REVIEW":
       return {
         ...state,
-        newReviews: [...state.newReviews, payload],
+        newReviews:  payload
       };
     case "GET_PRODUCT_DETAIL":
       return {
         ...state,
         productDetail: payload,
+      };
+      case "CLEAN_PRODUCT_DETAIL":
+        return {
+          ...state,
+          productDetail: [],
+        };
+    case "GET_PRODUCT_REVIEW":
+      return {
+        ...state,
+        newReviews: payload
       };
     case "LINK_CATEGORY":
       return {

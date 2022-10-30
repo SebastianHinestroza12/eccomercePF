@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FormNewProduct from "./createProduct/formNewProduct";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../../../redux/action";
+import { getProductDetail, cleanProductDetail } from "../../../redux/action";
 import { editProductForm } from "../../../redux/action";
 
 const NewProduct = () => {
@@ -13,6 +13,8 @@ const NewProduct = () => {
 
   useEffect(() => {
     dispatch(getProductDetail(productId));
+    dispatch(cleanProductDetail());
+
     //setImage(productDetail.image);
 
 
