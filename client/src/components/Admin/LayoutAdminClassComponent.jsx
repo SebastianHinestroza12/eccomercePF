@@ -11,7 +11,7 @@ import "./admin.css";
 class LayoutAdminClassComponent extends Component {
     constructor(props) {
         super(props)
-        this.state = { usuarioVerificado: false };
+        this.state = { usuarioVerificado: true };
     }
     async componentDidMount() {
         try {
@@ -20,23 +20,23 @@ class LayoutAdminClassComponent extends Component {
           const pedido = await axios.get("/user/prueba/role", {
             headers: { authorization: `Bearer ${token}` },
           });
-          //console.log("llamado a api -->", pedido.data);
-          //console.log("estado", this.state.usuarioVerificado);
+          console.log("llamado a api -->", pedido.data);
+          console.log("estado", this.state.usuarioVerificado);
         } catch (error) {
           this.setState({ usuarioVerificado: false });
-          //console.log("estado", this.state.usuarioVerificado);
-          //console.log("ERROR", error.response);
+          console.log("estado", this.state.usuarioVerificado);
+          console.log("ERROR", error.response);
         }
       }    
     render() {
         const { user, isAuthenticated } = this.props.auth0;
-        //console.log("usuario", user);
+        console.log("usuario", user);
         // console.log(user.email); --> NO FUNCA
-        //console.log("isAuthenticated", isAuthenticated);
+        console.log("isAuthenticated", isAuthenticated);
         // `this.props.auth0` has all the same properties as the `useAuth0` hook
         return (
             <div>
-            {this.state.usuarioVerificado === true ? (
+            {this.state.usuarioVerificado === false ? (
               <div class="text-bg-danger p-5">
                 <h1>PRUEBA CON CLASES</h1>
                 <UilLockSlash />
