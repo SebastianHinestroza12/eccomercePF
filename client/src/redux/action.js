@@ -25,6 +25,10 @@ export const getProductDetail = (productId) => {
   };
 };
 
+export const cleanProductDetail = () => ({
+  type: "CLEAN_PRODUCT_DETAIL"
+});
+
 export const getReviews = (productId) => {
   return function (dispatch) {
     return axios(`/getReviews/${productId}`)

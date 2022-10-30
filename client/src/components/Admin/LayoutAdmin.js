@@ -7,17 +7,16 @@ import AdminHeader from "./AdminHeader";
 import AdminSidebar from "./AdminSidebar";
 import "./admin.css";
 // import { withAuthenticationRequired } from "@auth0/auth0-react";
-// import { UilLockSlash } from "@iconscout/react-unicons";
+import { UilLockSlash } from "@iconscout/react-unicons";
 
 const LayoutAdmin = () => {
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [aprobado, setAprobado] = useState(true);
-  const { getAccessTokenSilently } = useAuth0();
-
   useEffect(() => {
-    const hola = async () => {
+    const passToken = async () => {
       const token = await getAccessTokenSilently();
       console.log(token);
-      const pedido = await axios
+      await axios
         .get("/user/prueba/role", {
           headers: { authorization: `Bearer ${token}` },
         })
@@ -25,27 +24,33 @@ const LayoutAdmin = () => {
           console.log(e.response);
           setAprobado(false);
         });
-      console.log(pedido.data);
     };
-    hola();
+    passToken();
   }, []);
-
   return (
     <>
-      <Container fluid className="admin">
-        <Row>
-          <Col md={2} className="sidebar">
-            <AdminSidebar />
-          </Col>
-          <Col>
-            <AdminHeader />
-            <div className="body flex-grow-1 px-3">
-              <AdminContent />
-            </div>
-          </Col>
-        </Row>
-      </Container>
-
+      {aprobado === false ? (
+        <div class="text-bg-danger p-5">
+          <UilLockSlash />
+          <span class="ms-5">
+            NO TIENES LOS PERMISOS NECESARIOS PARA ACCEDER
+          </span>
+        </div>)
+        : (
+          <Container fluid className="admin">
+            <Row>
+              <Col md={2} className="sidebar">
+                <AdminSidebar />
+              </Col>
+              <Col>
+                <AdminHeader />
+                <div className="body flex-grow-1 px-3">
+                  <AdminContent />
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        )}
     </>
   );
 };
