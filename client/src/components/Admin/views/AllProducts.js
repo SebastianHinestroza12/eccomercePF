@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts, getProductDetail } from "../../../redux/action";
+import { getAllProducts, getProductDetail, cleanProductDetail } from "../../../redux/action";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import "bootstrap/dist/css/bootstrap.css";
 import Table from "./DataTable";
@@ -12,8 +12,11 @@ function AllProducts() {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products);
+  
   useEffect(() => {
     dispatch(getAllProducts());
+    dispatch(cleanProductDetail());
+
   }, [dispatch]);
 
   //carga de detalle
