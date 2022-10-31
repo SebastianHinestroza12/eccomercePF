@@ -17,6 +17,7 @@ const initialState = {
   newProducts: [],
   editProduct: [],
   reviews: [],
+  order: [],
   newReviews: [],
   cartTotal: 0,
   cartProducts: localStorage.getItem("cartProductsAdded")
@@ -36,16 +37,21 @@ const rootReducer = (state = initialState, action) => {
         products: payload,
         allProducts: payload,
       };
+    case "GET_ORDER":
+      return {
+        ...state,
+        order: payload,
+      };
     case "LOAD_PRODUCTS":
       return {
         ...state,
         newProducts: payload,
       };
-      case "EDIT_PRODUCT":
-        return {
-          ...state,
-          editProduct: payload,
-        };
+    case "EDIT_PRODUCT":
+      return {
+        ...state,
+        editProduct: payload,
+      };
     case "LOAD_REVIEW":
       return {
         ...state,
@@ -56,11 +62,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productDetail: payload,
       };
-      case "CLEAN_PRODUCT_DETAIL":
-        return {
-          ...state,
-          productDetail: [],
-        };
+    case "CLEAN_PRODUCT_DETAIL":
+      return {
+        ...state,
+        productDetail: [],
+      };
     case "GET_PRODUCT_REVIEW":
       return {
         ...state,
@@ -72,12 +78,12 @@ const rootReducer = (state = initialState, action) => {
         products: payload,
       };
 
-      case "PUT_PRODUCT_DETAIL":
-        console.log('REDUCER', payload)
-        return {
-          ...state,
-          productDetail: payload,
-        };
+    case "PUT_PRODUCT_DETAIL":
+      console.log('REDUCER', payload)
+      return {
+        ...state,
+        productDetail: payload,
+      };
 
     case "POST_REGISTER":
       return {
@@ -95,15 +101,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByPrice =
         payload === "MayorPrecio"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.price) > parseInt(b.price)) return -1;
-              if (parseInt(a.price) < parseInt(b.price)) return 1;
-              return 0;
-            })
+            if (parseInt(a.price) > parseInt(b.price)) return -1;
+            if (parseInt(a.price) < parseInt(b.price)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.price) < parseInt(b.price)) return -1;
-              if (parseInt(a.price) > parseInt(b.price)) return 1;
-              return 0;
-            });
+            if (parseInt(a.price) < parseInt(b.price)) return -1;
+            if (parseInt(a.price) > parseInt(b.price)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByPrice,
@@ -113,15 +119,15 @@ const rootReducer = (state = initialState, action) => {
       const filterByRating =
         payload === "MayorRating"
           ? state.products.sort((a, b) => {
-              if (parseInt(a.stars) > parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) < parseInt(b.stars)) return 1;
-              return 0;
-            })
+            if (parseInt(a.stars) > parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) < parseInt(b.stars)) return 1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (parseInt(a.stars) < parseInt(b.stars)) return -1;
-              if (parseInt(a.stars) > parseInt(b.stars)) return 1;
-              return 0;
-            });
+            if (parseInt(a.stars) < parseInt(b.stars)) return -1;
+            if (parseInt(a.stars) > parseInt(b.stars)) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: filterByRating,
@@ -131,15 +137,15 @@ const rootReducer = (state = initialState, action) => {
       const orderedByName =
         action.payload === "Name (A-Z)"
           ? state.products.sort((a, b) => {
-              if (a.name > b.name) return 1;
-              if (a.name < b.name) return -1;
-              return 0;
-            })
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
+            return 0;
+          })
           : state.products.sort((a, b) => {
-              if (a.name > b.name) return -1;
-              if (a.name < b.name) return 1;
-              return 0;
-            });
+            if (a.name > b.name) return -1;
+            if (a.name < b.name) return 1;
+            return 0;
+          });
       return {
         ...state,
         products: orderedByName,
