@@ -118,16 +118,16 @@ const Home = () => {
                         <img src={product.image} alt=""/>
                       </div>
                       <div className="name-user">
-                        <strong>User name</strong>
-                        <span>{product.name}</span>
+                        <span className="decoration">{product.name}</span>
+                       
                       </div>
                     </div>
                     <div className="reviews">
-                      <i className="fas fa-star">★★★★★</i>
+                      <i>★★★★★</i>
                     </div>
                     </div>
                     <div className="comentarios">
-                      <p>"Me encanto este producto, me llego 
+                      <p className="italic">"Me encanto este producto, me llego 
                       en buen estado y no tardo en llegar. Lo recomiendo!!"</p>
                     </div>
                 </div>

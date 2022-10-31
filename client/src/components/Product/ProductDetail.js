@@ -2,21 +2,22 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./productDetail.css";
-import { getProductDetail } from "../../redux/action";
+import { getProductDetail, getReviews } from "../../redux/action";
 import { Link, useParams } from "react-router-dom";
 import AddToCart from "./AddToCart";
+import userImg from "./img/a.png";
 import * as Unicons from "@iconscout/react-unicons";
 
 const ProductDetail = () => {
   const { productId } = useParams();
+  const profileUser = useSelector((state) => state.user);
+  console.log("auth", profileUser);
 
   //loader hasta que se carga el detalle del producto
   const [loading, setLoading] = useState([true]);
   const [idSizeStock, setidSizeStock] = useState(0);
-
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.newReviews);
-  console.log("oa", reviews);
 
   const productDetail = useSelector((state) => state.productDetail);
   productDetail.reviews = reviews;
@@ -25,6 +26,7 @@ const ProductDetail = () => {
   useEffect(() => {
     new Promise((resolve) => {
       resolve(dispatch(getProductDetail(productId)));
+      resolve(dispatch(getReviews(productId)));
     }).then((res) => {
       setLoading(false);
     });
@@ -43,8 +45,6 @@ const ProductDetail = () => {
 
   return (
     <Container className="product-detail">
-      {console.log("productId", productDetail)}
-
       {loading ? (
         <img src="/images/loader-blue.gif" className="loading" alt="loader" />
       ) : (
@@ -96,52 +96,51 @@ const ProductDetail = () => {
                 units={productDetail.size_stock[idSizeStock].stock}
               />
             </section>
-
-            <hr></hr>
-            <section>
-              <h3 className="reviews-detail">Reviews</h3>
-              <br></br>
-              {productDetail.reviews.length ? (
-                productDetail.reviews.map((e) => (
-                  <>
-                    <div className="testimonios-detail">
-                      <div className="caja-top">
-                        <div className="perfil">
-                          <div className="perfil-img">
-                            <img src="" alt="" />
-                          </div>
-                          <div className="name-user">
-                            <strong>User name</strong>
-                            <span>{e.name}</span>
-                          </div>
+          </Col>
+          <hr></hr>
+          <section>
+            <h3 className="reviews-detail">Reviews</h3>
+            <br></br>
+            {reviews.length ? (
+              reviews.map((e) => (
+                <>
+                  <div className="testimonios-detail">
+                    <div className="caja-top">
+                      <div className="perfil">
+                        <div className="perfil-img">
+                          <img src={userImg} alt="" />
                         </div>
-                        <div className="reviews">
-                          {e.stars === "5" ? (
-                            <p className="product-stars">★★★★★</p>
-                          ) : e.stars === "4" ? (
-                            <p className="product-stars">★★★★</p>
-                          ) : e.stars === "3" ? (
-                            <p className="product-stars">★★★</p>
-                          ) : e.stars === "2" ? (
-                            <p className="product-stars">★★</p>
-                          ) : (
-                            <p className="product-stars">★</p>
-                          )}
+                        <div className="name-user">
+                          <strong>{profileUser.name}</strong>
+                          <span></span>
                         </div>
                       </div>
-                      <div className="comentarios">
-                        <p className="product-comment">"{e.comment}"</p>
+                      <div className="reviews">
+                        {e.stars === 5 ? (
+                          <p className="product-stars">★★★★★</p>
+                        ) : e.stars === 4 ? (
+                          <p className="product-stars">★★★★</p>
+                        ) : e.stars === 3 ? (
+                          <p className="product-stars">★★★</p>
+                        ) : e.stars === 2 ? (
+                          <p className="product-stars">★★</p>
+                        ) : (
+                          <p className="product-stars">★</p>
+                        )}
                       </div>
                     </div>
-                  </>
-                ))
-              ) : (
-                <>
-                  <p className="reviews">No hay reseñas de este producto</p>
+                    <div className="comentarios">
+                      <p className="product-comment">"{e.comment}"</p>
+                    </div>
+                  </div>
                 </>
-              )}
-            </section>
-          </Col>
+              ))
+            ) : (
+              <>
+                <p className="not-reviews">No hay reseñas de este producto</p>
+              </>
+            )}
+          </section>
         </Row>
       )}
     </Container>

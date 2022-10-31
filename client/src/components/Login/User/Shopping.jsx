@@ -1,10 +1,11 @@
 import React from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Unicons from "@iconscout/react-unicons";
 import { useAuth0 } from "@auth0/auth0-react";
 import Reviews from "./Reviews";
+import {  useParams } from "react-router-dom";
 import "./shopping.css";
 
 function Shopping() {
@@ -13,6 +14,8 @@ function Shopping() {
     const fechaCompra = '10-10-2022'
     const fechaEntrega = '15-10-2022'
     const purchasedProducts = useSelector((state) => state.cartProducts);
+    const id = purchasedProducts.id
+    console.log(id)
     const { isAuthenticated } = useAuth0();
 
     function TotalPrice(price, quantity) {
@@ -58,7 +61,7 @@ function Shopping() {
                         <h6 style={{color:"#45DE48", fontWeight:"bold", width: "200px", paddingLeft: "40px"}}> {estadoPedido}</h6>
                       </td>
                       <td>
-                        <p style={{fontWeight:"bold", marginRight: "175px", marginLeft: "60px", marginTop: "50px"}}>Pedido el {fechaCompra}</p>
+                        <p style={{fontWeight:"bold", marginRight: "130px", marginLeft: "60px", marginTop: "50px"}}>Pedido el {fechaCompra}</p>
                       </td>
                       <td>
                         <p style={{fontWeight:"bold", marginTop: "50px"}}>Llegó el {fechaEntrega}</p>

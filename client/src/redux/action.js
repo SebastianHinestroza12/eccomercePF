@@ -28,6 +28,30 @@ export const getProductDetail = (productId) => {
   };
 };
 
+export const cleanProductDetail = () => ({
+  type: "CLEAN_PRODUCT_DETAIL",
+});
+
+export const getReviews = (productId) => {
+  return function (dispatch) {
+    return axios(`/getReviews/${productId}`)
+      .then((response) => response.data)
+      .then((productReviews) => {
+        dispatch({ type: "GET_PRODUCT_REVIEW", payload: productReviews });
+      });
+  };
+};
+
+export const newProductForm = (data) => {
+  return async (dispatch) => {
+    await axios.post(`/postProduct`, data);
+    dispatch({
+      type: "LOAD_PRODUCTS",
+      payload: data,
+    });
+  };
+};
+
 //REGISTRAR USUARIOS LOGUADOS EN DB
 /*export const postRegister = (user) => {
   return async () => {
@@ -52,6 +76,23 @@ export const postOrder = (user) => {
   return async () => {
     console.log("action", user);
     await axios.post(`/order`, user);
+  };
+};
+
+// Mostrar Ordenes
+
+export const getOrder = () => {
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("/order");
+      console.log(json.data);
+      return dispatch({
+        type: "GET_ORDER",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -114,16 +155,6 @@ export function filterByName(payload) {
 }
 
 //CREACION DE PRODUCTO
-
-export const newProductForm = (data) => {
-  return async (dispatch) => {
-    await axios.post(`/postProduct`, data);
-    dispatch({
-      type: "LOAD_PRODUCTS",
-      payload: data,
-    });
-  };
-};
 
 export const editProductForm = (data) => {
   return async (dispatch) => {
@@ -206,18 +237,32 @@ export function getCartDetail(userEmail) {
   }
 }
 
-export function IncreaseQuantity(payload) {
-  return {
-    type: "INCREASE_QUANTITY",
-    payload,
+export const addUnitDB = (productId, size, email) => {
+  const dataToAdd = { productId, size, email };
+  console.log("dataToAdd", dataToAdd);
+  return async (dispatch) => {
+    await axios.put(`/cart/add`, {
+      data: dataToAdd,
+    });
+    dispatch({
+      type: "INCREASE_QUANTITY",
+      payload: dataToAdd,
+    });
   };
-}
-export function DecreaseQuantity(payload) {
-  return {
-    type: "DECREASE_QUANTITY",
-    payload,
+};
+
+export const removeUnitDB = (productId, size, email) => {
+  const dataToRemove = { productId, size, email };
+  return async (dispatch) => {
+    await axios.put(`/cart/remove`, {
+      data: dataToRemove,
+    });
+    dispatch({
+      type: "DECREASE_QUANTITY",
+      payload: dataToRemove,
+    });
   };
-}
+};
 
 export function RemoveItemFromCart(payload, units) {
   return {

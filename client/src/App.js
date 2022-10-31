@@ -12,9 +12,12 @@ import Cart from "./components/Cart/Cart";
 import React, { Fragment } from "react";
 import Checkout from "./Pages/Checkout";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+// import LayoutAdmin from "./components/Admin/LayoutAdmin";
 import LayoutAdmin from "./components/Admin/LayoutAdmin";
 import RutasBloqueadas from "./components/Login/RutasBloqueadas";
 import RedirectToLogin from "./components/Login/ReditectToLogin";
+import Bloqueo from "./components/Login/Bloqueo";
+import BloqueoC from "./components/Login/BloqueoC";
 
 const initialOptions = {
   "client-id":
@@ -58,6 +61,12 @@ function App() {
         </Route>
         <Route path={"/rutas"}>
           <RutasBloqueadas />
+        </Route>
+        <Route path={"/bloqueo"}>
+          <Bloqueo />
+        </Route>
+        <Route path={"/bloqueoC"}>
+          <BloqueoC />
         </Route>
         <Route path={"/login"}>
           <RedirectToLogin />

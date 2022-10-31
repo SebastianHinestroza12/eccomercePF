@@ -17,6 +17,7 @@ const initialState = {
   newProducts: [],
   editProduct: [],
   reviews: [],
+  order: [],
   newReviews: [],
   cartTotal: 0,
   cartProducts: !localStorage.getItem("currentUser")
@@ -40,6 +41,11 @@ const rootReducer = (state = initialState, action) => {
         products: payload,
         allProducts: payload,
       };
+    case "GET_ORDER":
+      return {
+        ...state,
+        order: payload,
+      };
     case "LOAD_PRODUCTS":
       return {
         ...state,
@@ -53,7 +59,7 @@ const rootReducer = (state = initialState, action) => {
     case "LOAD_REVIEW":
       return {
         ...state,
-        newReviews: [...state.newReviews, payload],
+        newReviews: payload,
       };
     case "GET_REVIEW_BY_PRODUCT":
       return {
@@ -64,6 +70,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         productDetail: payload,
+      };
+    case "CLEAN_PRODUCT_DETAIL":
+      return {
+        ...state,
+        productDetail: [],
+      };
+    case "GET_PRODUCT_REVIEW":
+      return {
+        ...state,
+        newReviews: payload,
       };
     case "LINK_CATEGORY":
       return {

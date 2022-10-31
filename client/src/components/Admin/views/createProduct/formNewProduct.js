@@ -46,10 +46,10 @@ const FormNewProduct = ({ productId }) => {
     defaultValues: {
       image: "",
       name: "",
-      category: "Camisetas",
+      category: "",
       price: "",
       status: "",
-      size_stock: [{ size: "XS", stock: "1" }],
+      size_stock: [],
       detail: "",
     },
   });
@@ -75,15 +75,15 @@ const FormNewProduct = ({ productId }) => {
   const productDetail = useSelector((state) => state.productDetail);
   useEffect(() => {
     dispatch(getProductDetail(productId));
-    setImage(productDetail.image);
-  }, [dispatch, setImage, productDetail.image, productId]);
+    //setImage(productDetail.image);
+  }, [dispatch, /*setImage, productDetail.image,*/ productId]);
 
   function fillInputs(productDetail) {
-    setValue("name", productDetail.name);
+    /*setValue("name", productDetail.name);
     setValue("price", productDetail.price);
     setValue("detail", productDetail.detail);
     setValue("image", productDetail.image);
-    setValue("status", productDetail.visible ? "Publicado" : "Borrador");
+    setValue("status", productDetail.visible ? "Publicado" : "Borrador");*/
   }
 
   return (
@@ -163,9 +163,11 @@ const FormNewProduct = ({ productId }) => {
                   validate: selectValidator,
                 })}
               >
-                <option value="Camisetas">Camisetas</option>
-                <option value="Botines">Botines</option>
-                <option value="Balones">Balones</option>
+                <option value="Jersey">Jersey</option>
+                <option value="Balon">Balon</option>
+                <option value="Calzado">Calzado</option>
+                <option value="Short">Short</option>
+
               </select>
               {errors.category && (
                 <p className="textoError">Debes seleccionar una opción</p>
@@ -182,7 +184,7 @@ const FormNewProduct = ({ productId }) => {
                         required: true,
                       })}
                     >
-                      {values === "Camisetas" ? (
+                      {values === "Jersey" ? (
                         <>
                           <option value="XS">XS</option>
                           <option value="S">S</option>

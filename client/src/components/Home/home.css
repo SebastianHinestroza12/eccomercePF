@@ -325,4 +325,11 @@
   font-size: 1.4rem;
 }
 
+.italic {
+  font-style: italic;
+  color: rgb(79, 79, 79);
+}
 
+.decoration {
+  text-decoration-line: underline;
+}
