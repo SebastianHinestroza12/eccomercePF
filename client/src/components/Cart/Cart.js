@@ -60,7 +60,7 @@ const Cart = () => {
     //dispatch(getCartTotal(totalPrice));
     dispatch(getCartDetail(currentUser.email));
     console.log("dispatch cart detail");
-  }, [dispatch]);
+  }, [dispatch, getCartDetail]);
 
   /*
   function loginWithRedirect() {

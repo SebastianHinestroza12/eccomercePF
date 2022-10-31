@@ -21,7 +21,11 @@ const AddToCart = ({ size, units }) => {
 
   function addToCartButton() {
     setShow(true);
-    dispatch(AddProductToCart(productDetail, quantity, size, user.email));
+    if (user) {
+      dispatch(AddProductToCart(productDetail, quantity, size, user.email));
+    } else {
+      dispatch(AddProductToCart(productDetail, quantity, size));
+    }
   }
 
   return (

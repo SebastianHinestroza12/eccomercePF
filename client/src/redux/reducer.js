@@ -1,10 +1,10 @@
 let sum = 0;
-const cartWidgetNumber = () => {
+/*const cartWidgetNumber = () => {
   for (let i of JSON.parse(localStorage.getItem("cartProductsAdded"))) {
     sum += i.units;
   }
   return sum;
-};
+};*/
 
 const initialState = {
   user: localStorage.getItem("currentUser")
@@ -19,16 +19,21 @@ const initialState = {
   reviews: [],
   newReviews: [],
   cartTotal: 0,
-  cartProducts: [],
-  quantityProductsAdded: localStorage.getItem("cartProductsAdded")
-    ? cartWidgetNumber()
-    : 0,
+  cartProducts: !localStorage.getItem("currentUser")
+    ? JSON.parse(localStorage.getItem("cartProductsAdded"))
+    : [],
+  //quantityProductsAdded: localStorage.getItem("cartProductsAdded")    ? cartWidgetNumber()    : 0,
   cartUserLogged: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   const { type, payload, units } = action;
   switch (type) {
+    case "LOGOUT_USER":
+      return {
+        ...state,
+        cartProducts: [],
+      };
     case "GET_ALL_PRODUCTS":
       return {
         ...state,
@@ -214,14 +219,52 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case "ADD_PRODUCTS_TO_CART":
-      console.log("payload addcart", payload);
+      let productAlreadyInTheCart = state.cartProducts.findIndex(
+        (element) =>
+          element.productId === payload.productId &&
+          element.size === payload.size
+      );
+
+      if (productAlreadyInTheCart >= 0) {
+        // console.log("ADD_PRODUCTS_TO_CART repetido", payload);
+        //state.quantityProductsAdded += units;
+        state.cartProducts[productAlreadyInTheCart].units += payload.units;
+        localStorage.setItem(
+          "cartProductsAdded",
+          JSON.stringify(state.cartProducts)
+        );
+        return {
+          ...state,
+        };
+      } else {
+        const data = { payload, status: "guest" };
+        // console.log("ADD_PRODUCTS_TO_CART", payload);
+        localStorage.setItem(
+          "cartProductsAdded",
+          JSON.stringify([...state.cartProducts, data])
+        );
+        return {
+          ...state,
+          cartProducts: [...state.cartProducts, data],
+          //quantityProductsAdded: state.quantityProductsAdded + units,
+        };
+      }
 
     case "GET_CART_DETAIL":
-      console.log("payload cart", payload);
-      return {
-        ...state,
-        cartProducts: payload,
-      };
+      //console.log("GET_CART_DETAIL", payload);
+      if (localStorage.getItem("currentUser")) {
+        //si esta logged
+        console.log("entro al db");
+        return {
+          ...state,
+          cartProducts: payload,
+        };
+      } else {
+        console.log("entro al guest");
+        return {
+          ...state,
+        };
+      }
 
     case "INCREASE_QUANTITY":
       let quantity2 = state.cartProducts[action.payload].units;
@@ -273,7 +316,7 @@ const rootReducer = (state = initialState, action) => {
       console.log("entro al reducer remove");
       return {
         ...state,
-        cartTotal,
+        //  cartTotal,
       };
 
     case "GET_TOTAL_CART":

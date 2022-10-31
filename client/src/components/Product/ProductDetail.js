@@ -40,7 +40,6 @@ const ProductDetail = () => {
     }
     return ratingStars.join("");
   }
-  console.log("ea", productDetail);
 
   return (
     <Container className="product-detail">

@@ -28,9 +28,9 @@ const CartWidget = () => {
   //const email = user.email;
 
   useEffect(() => {
-    console.log("user widget 2", currentUser.email);
-    dispatch(getCartDetail(currentUser.email));
-  }, [currentUser]);
+    //console.log("user widget 2", currentUser.email);
+    currentUser && dispatch(getCartDetail(currentUser.email));
+  }, [dispatch, currentUser, productsInTheCart]);
 
   const getTotalUnitsCart = () => {};
   return (
@@ -40,43 +40,7 @@ const CartWidget = () => {
         id="dropdown-cart"
         title={<Unicons.UilShoppingCartAlt />}
       >
-        {productsInTheCart.status === "Active" ? (
-          productsInTheCart.items.map((product) => (
-            <Dropdown.Item
-              className="listItem"
-              key={product.id}
-              onClick={() => goToProduct(product.id)}
-            >
-              <img
-                src={product.image}
-                className="cart-image"
-                alt={product.name}
-              />
-              <div className="detailsCart">
-                <span className="title">{product.name}</span>
-                <span className="">Talla: {product.size}</span>
-
-                <span>
-                  {product.units} unds. x ${product.price}
-                </span>
-              </div>
-            </Dropdown.Item>
-          ))
-        ) : (
-          <p>No hay productos en el carrito</p>
-        )}
-        {productsInTheCart.status === "Active" ? (
-          <div className="buttons-cart-group">
-            <Link to="/pagar" className="buy btn btn-primary buttons-cart">
-              FINALIZAR COMPRA
-            </Link>
-            <Link to="/carrito" className="buy btn btn-primary buttons-cart">
-              IR AL CARRITO
-            </Link>
-          </div>
-        ) : (
-          <div></div>
-        )}
+        {console.log("productsInTheCart cartwidget", productsInTheCart.length)}
       </DropdownButton>
     </>
   );
