@@ -181,18 +181,33 @@ export function deleteProductFromCart(payload, quantity) {
   };
 }
 
-export function IncreaseQuantity(payload) {
-  return {
-    type: "INCREASE_QUANTITY",
-    payload,
+export const addUnitDB = (productId, size, email) => {
+  const dataToAdd = { productId, size, email }
+  console.log('dataToAdd',dataToAdd)
+  return async (dispatch) => {
+    await axios.put(`/cart/add`, {
+      data: dataToAdd,
+    })
+    dispatch({
+      type:'INCREASE_QUANTITY',
+      payload: dataToAdd,
+    });
   };
 }
-export function DecreaseQuantity(payload) {
-  return {
-    type: "DECREASE_QUANTITY",
-    payload,
+
+export const removeUnitDB = (productId, size, email) => {
+  const dataToRemove = { productId, size, email }
+  return async (dispatch) => {
+      await axios.put(`/cart/remove`, {
+      data: dataToRemove,
+    })
+    dispatch({
+      type:'DECREASE_QUANTITY',
+      payload: dataToRemove,
+    });
   };
 }
+
 
 export function RemoveItemFromCart(payload, quantity) {
   return {
