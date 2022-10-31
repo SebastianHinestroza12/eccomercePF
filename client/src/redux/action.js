@@ -32,10 +32,10 @@ export const cleanProductDetail = () => ({
 export const getReviews = (productId) => {
   return function (dispatch) {
     return axios(`/getReviews/${productId}`)
-    .then((response) => response.data) 
-    .then((productReviews) => {
-      dispatch({ type: "GET_PRODUCT_REVIEW", payload: productReviews });
-    });
+      .then((response) => response.data)
+      .then((productReviews) => {
+        dispatch({ type: "GET_PRODUCT_REVIEW", payload: productReviews });
+      });
   };
 };
 
@@ -63,6 +63,23 @@ export const postOrder = (user) => {
   return async () => {
     console.log("action", user);
     await axios.post(`/order`, user);
+  };
+};
+
+// Mostrar Ordenes
+
+export const getOrder = () => {
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("/order");
+      console.log(json.data)
+      return dispatch({
+        type: "GET_ORDER",
+        payload: json.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
