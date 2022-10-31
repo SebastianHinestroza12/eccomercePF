@@ -10,7 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Cart = () => {
   const { loginWithRedirect } = useAuth0();
-
+  const user = useSelector((state) => state.user)
   let history = useHistory();
   const { isAuthenticated } = useAuth0();
 
@@ -23,7 +23,7 @@ const Cart = () => {
 
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const addedToCart = useSelector((state) => state.quantityProductsAdded);
-
+  console.log(productsInTheCart)
   let subtotal = 0;
   if (productsInTheCart) {
     for (let i = 0; i < productsInTheCart.length; i++) {
@@ -93,7 +93,10 @@ const Cart = () => {
                     </td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
-                      <ItemCount
+                    <ItemCount
+                        productId = {element.id}
+                        size = {element.sizePicked}
+                        email = {user.email}
                         productDetail={element}
                         quantity={element.quantity}
                         addedToCart={addedToCart}

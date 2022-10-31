@@ -244,33 +244,11 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case "INCREASE_QUANTITY":
-      let quantity2 = state.cartProducts[action.payload].quantity;
-      let sizePicked = state.cartProducts[action.payload].sizePicked;
-      let stock_product = state.cartProducts[action.payload].size_stock.filter(
-        (e) => e.size === sizePicked
-      );
-      let stock = stock_product[0].stock;
-
-      if (quantity2 < stock) {
-        state.quantityProductsAdded++;
-        state.cartProducts[payload].quantity++;
-      }
-
       return {
         ...state,
       };
 
     case "DECREASE_QUANTITY":
-      let quantity1 = state.cartProducts[action.payload].quantity;
-      if (quantity1 > 1) {
-        state.quantityProductsAdded--;
-        state.cartProducts[payload].quantity--;
-      }
-
-      localStorage.setItem(
-        "cartProductsAdded",
-        JSON.stringify([...state.cartProducts])
-      );
       return {
         ...state,
       };
