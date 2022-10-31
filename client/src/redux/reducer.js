@@ -216,34 +216,6 @@ const rootReducer = (state = initialState, action) => {
     case "ADD_PRODUCTS_TO_CART":
       console.log("payload addcart", payload);
 
-      let productAlreadyInTheCart = state.cartProducts.findIndex(
-        (element) =>
-          element.id === payload.id && element.sizePicked === payload.sizePicked
-      );
-
-      if (productAlreadyInTheCart >= 0) {
-        state.quantityProductsAdded += units;
-        state.cartProducts[productAlreadyInTheCart].units += units;
-        localStorage.setItem(
-          "cartProductsAdded",
-          JSON.stringify(state.cartProducts)
-        );
-        return {
-          ...state,
-        };
-      } else {
-        localStorage.setItem(
-          "cartProductsAdded",
-          JSON.stringify([...state.cartProducts, payload])
-        );
-
-        return {
-          ...state,
-          cartProducts: [...state.cartProducts, payload],
-          quantityProductsAdded: state.quantityProductsAdded + units,
-        };
-      }
-
     case "GET_CART_DETAIL":
       console.log("payload cart", payload);
       return {
@@ -295,6 +267,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cartProducts: cartProductsUpdated,
+      };
+
+    case "REMOVE_ITEM_FROM_CART_DB":
+      console.log("entro al reducer remove");
+      return {
+        ...state,
+        cartTotal,
       };
 
     case "GET_TOTAL_CART":

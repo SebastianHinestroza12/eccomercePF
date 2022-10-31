@@ -7,7 +7,7 @@ import ItemCount from "../Cart/ItemCount";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const AddToCart = ({ sizePicked, stock }) => {
+const AddToCart = ({ size, units }) => {
   //verificar is logged
   const { user } = useAuth0();
 
@@ -21,7 +21,7 @@ const AddToCart = ({ sizePicked, stock }) => {
 
   function addToCartButton() {
     setShow(true);
-    dispatch(AddProductToCart(productDetail, quantity, sizePicked, user.email));
+    dispatch(AddProductToCart(productDetail, quantity, size, user.email));
   }
 
   return (
@@ -55,8 +55,8 @@ const AddToCart = ({ sizePicked, stock }) => {
           productDetail={productDetail}
           quantity={quantity}
           setQuantity={setQuantity}
-          sizePicked={sizePicked}
-          stock={stock}
+          size={size}
+          units={units}
         />
       </div>
       <Button className="buy" onClick={() => addToCartButton()}>

@@ -1,7 +1,12 @@
 import { Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getCartTotal, RemoveItemFromCart } from "../../redux/action";
+import {
+  getCartDetail,
+  getCartTotal,
+  RemoveItemFromCart,
+  RemoveItemFromCartDb,
+} from "../../redux/action";
 import { Link, useHistory } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import * as Unicons from "@iconscout/react-unicons";
@@ -24,8 +29,10 @@ const Cart = () => {
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const addedToCart = useSelector((state) => state.quantityProductsAdded);
 
+  /*
   let subtotal = 0;
-  if (productsInTheCart) {
+  if ([productsInTheCart].length) {
+    console.log("productsInTheCart items", productsInTheCart.items);
     for (let i = 0; i < productsInTheCart.items.length; i++) {
       subtotal +=
         productsInTheCart.items[i].price * productsInTheCart.items[i].units;
@@ -42,15 +49,18 @@ const Cart = () => {
   if (subtotal > 0) {
     totalPrice = subtotal + impuestos;
   }
-
-  function removeItemFromCart(index, quantity) {
-    dispatch(RemoveItemFromCart(index, quantity));
+*/
+  function removeItemFromCart(productId, size, email) {
+    dispatch(RemoveItemFromCartDb(productId, size, email));
   }
 
+  const currentUser = useSelector((state) => state.user);
   useEffect(() => {
     //setTotal(totalPrice);
-    dispatch(getCartTotal(totalPrice));
-  }, [totalPrice, dispatch, productsInTheCart]);
+    //dispatch(getCartTotal(totalPrice));
+    dispatch(getCartDetail(currentUser.email));
+    console.log("dispatch cart detail");
+  }, [dispatch]);
 
   /*
   function loginWithRedirect() {
@@ -83,6 +93,7 @@ const Cart = () => {
                 {productsInTheCart.items.map((element, index) => (
                   <tr key={index} id={index}>
                     <td>
+                      {console.log("element", element)}
                       <img
                         src={element.image}
                         className="cart-image-detail"
@@ -113,7 +124,12 @@ const Cart = () => {
                     <td>
                       <div
                         onClick={() =>
-                          removeItemFromCart(index, element.quantity)
+                          //removeItemFromCart(index, element.quantity)
+                          removeItemFromCart(
+                            element.productId,
+                            element.size,
+                            currentUser.email
+                          )
                         }
                         className="remove-item"
                       >
@@ -135,7 +151,8 @@ const Cart = () => {
               </div>
             </div>
           )}
-          {productsInTheCart.status === "Active" ? (
+          {productsInTheCart.status === "Active" &&
+          [productsInTheCart].length ? (
             <section className="totals-cart">
               <div>
                 <Link to="/store" className="buy btn btn-primary buttons-cart">
@@ -146,17 +163,10 @@ const Cart = () => {
               <div>
                 <div className="totals">
                   <div className="item-totals">
-                    Subtotal
-                    <span>$ {subtotal.toLocaleString("en-US")}</span>
-                  </div>
-                  <div className="item-totals">
-                    Impuestos
-                    <span>$ {impuestos.toLocaleString("en-US")}</span>
-                  </div>
-                  <hr></hr>
-                  <div className="item-totals">
                     Total
-                    <span>$ {totalPrice.toLocaleString("en-US")}</span>
+                    <span>
+                      $ {productsInTheCart.totalPrice.toLocaleString("en-US")}
+                    </span>
                   </div>
                 </div>
                 {isAuthenticated ? (

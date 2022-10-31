@@ -156,11 +156,11 @@ export const getReviewByProduct = (idProduct) => {
   };
 };
 
-export function AddProductToCart(payload, quantity, sizePicked, email) {
+export function AddProductToCart(payload, quantity, size, email) {
   const data = {
     productId: payload.id,
     units: quantity,
-    size: sizePicked,
+    size: size,
     email: email,
   };
 
@@ -193,14 +193,6 @@ export function getCartDetail(userEmail) {
   };
 }
 
-export function deleteProductFromCart(payload, units) {
-  return {
-    type: "DELETE_PRODUCT_FROM_CART",
-    payload,
-    units,
-  };
-}
-
 export function IncreaseQuantity(payload) {
   return {
     type: "INCREASE_QUANTITY",
@@ -219,6 +211,18 @@ export function RemoveItemFromCart(payload, units) {
     type: "REMOVE_ITEM_FROM_CART",
     payload,
     units,
+  };
+}
+export function RemoveItemFromCartDb(productId, size, email) {
+  const dataToDelete = { productId, size, email };
+  return async (dispatch) => {
+    await axios.delete(`/cart`, {
+      data: dataToDelete,
+    });
+    dispatch({
+      type: "REMOVE_ITEM_FROM_CART_DB",
+      payload: dataToDelete,
+    });
   };
 }
 

@@ -16,11 +16,11 @@ const ProductDetail = () => {
 
   const dispatch = useDispatch();
   const reviews = useSelector((state) => state.newReviews);
-  console.log('oa',reviews)
+  console.log("oa", reviews);
 
   const productDetail = useSelector((state) => state.productDetail);
-  productDetail.reviews = reviews
-  console.log(productDetail)
+  productDetail.reviews = reviews;
+  console.log(productDetail);
 
   useEffect(() => {
     new Promise((resolve) => {
@@ -40,8 +40,7 @@ const ProductDetail = () => {
     }
     return ratingStars.join("");
   }
-  console.log('ea',productDetail)
-
+  console.log("ea", productDetail);
 
   return (
     <Container className="product-detail">
@@ -94,24 +93,23 @@ const ProductDetail = () => {
             </section>
             <section className="buttonsAddToCart">
               <AddToCart
-                sizePicked={productDetail.size_stock[idSizeStock].size}
-                stock={productDetail.size_stock[idSizeStock].stock}
+                size={productDetail.size_stock[idSizeStock].size}
+                units={productDetail.size_stock[idSizeStock].stock}
               />
             </section>
-          
+
             <hr></hr>
             <section>
               <h3 className="reviews-detail">Reviews</h3>
               <br></br>
-              {
-                productDetail.reviews.length ? (
-                  productDetail.reviews.map ((e) => (
-                    <>
+              {productDetail.reviews.length ? (
+                productDetail.reviews.map((e) => (
+                  <>
                     <div className="testimonios-detail">
                       <div className="caja-top">
                         <div className="perfil">
                           <div className="perfil-img">
-                            <img src="" alt=""/>
+                            <img src="" alt="" />
                           </div>
                           <div className="name-user">
                             <strong>User name</strong>
@@ -119,32 +117,34 @@ const ProductDetail = () => {
                           </div>
                         </div>
                         <div className="reviews">
-                          {
-                            e.stars === '5' ? <p className="product-stars">★★★★★</p> :
-                            e.stars === '4' ? <p className="product-stars">★★★★</p> :
-                            e.stars === '3' ? <p className="product-stars">★★★</p> :
-                            e.stars === '2' ? <p className="product-stars">★★</p> : <p className="product-stars">★</p>
-                          }
+                          {e.stars === "5" ? (
+                            <p className="product-stars">★★★★★</p>
+                          ) : e.stars === "4" ? (
+                            <p className="product-stars">★★★★</p>
+                          ) : e.stars === "3" ? (
+                            <p className="product-stars">★★★</p>
+                          ) : e.stars === "2" ? (
+                            <p className="product-stars">★★</p>
+                          ) : (
+                            <p className="product-stars">★</p>
+                          )}
                         </div>
-                        </div>
-                          <div className="comentarios">
-                            <p className="product-comment">"{e.comment}"</p>
-                          </div>
                       </div>
+                      <div className="comentarios">
+                        <p className="product-comment">"{e.comment}"</p>
+                      </div>
+                    </div>
                   </>
-                  ))
-                ) : (
-                  <>
-                    <p className="reviews">No hay reseñas de este producto</p>
-                  </>
-                )
-              }
+                ))
+              ) : (
+                <>
+                  <p className="reviews">No hay reseñas de este producto</p>
+                </>
+              )}
             </section>
-            </Col>
+          </Col>
         </Row>
-        
       )}
-      
     </Container>
   );
 };
