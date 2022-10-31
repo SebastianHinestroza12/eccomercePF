@@ -10,6 +10,8 @@ import * as Unicons from "@iconscout/react-unicons";
 
 const ProductDetail = () => {
   const { productId } = useParams();
+  const profileUser = useSelector((state) => state.user);
+  console.log('auth', profileUser)
   
   //loader hasta que se carga el detalle del producto
   const [loading, setLoading] = useState([true]);
@@ -110,8 +112,8 @@ const ProductDetail = () => {
                             <img src={userImg} alt=""/>
                           </div>
                           <div className="name-user">
-                            <strong>User name</strong>
-                            <span>{e.name}</span>
+                            <strong>{profileUser.name}</strong>
+                            <span></span>
                           </div>
                         </div>
                         <div className="reviews">
