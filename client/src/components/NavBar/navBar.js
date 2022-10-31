@@ -10,9 +10,14 @@ import Searchbar from "./Searchbar";
 import CartWidget from "../Cart/CartWidget";
 import Login from "../Login/User/Login.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
+import Button from 'react-bootstrap/Button';
 
 function NavScrollExample() {
-  const { isAuthenticated } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
+  const name = () => {
+    if (user.email === "qatareshop08@gmail.com") return true
+    else return false
+  }
 
   return (
     <Navbar className="navv" variant="dark" expand="lg">
@@ -37,19 +42,26 @@ function NavScrollExample() {
                 <Unicons.UilUser />
                 <Login />
               </Link>
+              {
+                isAuthenticated && name() ?
+                  <Link to={`/panel-control`} >
+                    <Button variant="outline-primary" size="lg">Panel</Button>{' '}
+                  </Link> : null
+              }
+
               {isAuthenticated && (
                 <NavDropdown
                   title="Mi cuenta"
                   id="navbarScrollingDropdown"
                   className="linkcs">
-                    
+
                   <NavDropdown.Item as={Link} to="/user"> Mi perfil </NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/shopping"> Mis compras </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action5">
-                  Something else
+                    Something else
                   </NavDropdown.Item>
-                  
+
                 </NavDropdown>
               )}
             </div>

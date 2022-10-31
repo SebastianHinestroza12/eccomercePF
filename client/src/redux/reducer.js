@@ -50,7 +50,7 @@ const rootReducer = (state = initialState, action) => {
     case "LOAD_REVIEW":
       return {
         ...state,
-        newReviews:  payload
+        newReviews: payload,
       };
     case "GET_PRODUCT_DETAIL":
       return {
@@ -65,7 +65,7 @@ const rootReducer = (state = initialState, action) => {
     case "GET_PRODUCT_REVIEW":
       return {
         ...state,
-        newReviews: payload
+        newReviews: payload,
       };
     case "LINK_CATEGORY":
       return {

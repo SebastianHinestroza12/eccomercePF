@@ -31,7 +31,7 @@ const Reviews = ({productId, name, id}) => {
       stars: '',
       comment: '',
       productId: id,
-      userId: productId
+      name: name
     });
     
     const handleSubmit = e => {
@@ -42,7 +42,7 @@ const Reviews = ({productId, name, id}) => {
           stars: input.stars,
           comment: input.comment.trim(),
           productId: id,
-          userId: productId
+          name: name
         };
         console.log(newReview)
         dispatch(newComentForm(newReview));
@@ -50,7 +50,7 @@ const Reviews = ({productId, name, id}) => {
           stars: '',
           comment: '',
           productId: id,
-          userId: productId
+          name: name
         });
         handleClose()
       };
