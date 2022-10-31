@@ -5,8 +5,22 @@ import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
 import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
+import { getReviews } from "../../../../redux/action";
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 
 const Table = (props) => {
+
+const dispatch = useDispatch()
+const newReviews = useSelector(state => state.newReviews)
+console.log('RESEÑAS', newReviews)
+
+
+useEffect(() => {
+  dispatch(getReviews())
+},[])
+
+
   const columns = [
     {
       name: "Autor",
