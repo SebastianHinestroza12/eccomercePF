@@ -56,6 +56,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productDetail: payload,
       };
+      case "CLEAN_PRODUCT_DETAIL":
+        return {
+          ...state,
+          productDetail: [],
+        };
     case "GET_PRODUCT_REVIEW":
       return {
         ...state,
