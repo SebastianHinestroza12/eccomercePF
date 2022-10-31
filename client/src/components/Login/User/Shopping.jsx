@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Table } from "react-bootstrap";
+import { Container, Table } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Unicons from "@iconscout/react-unicons";
@@ -61,7 +61,7 @@ function Shopping() {
                         <h6 style={{color:"#45DE48", fontWeight:"bold", width: "200px", paddingLeft: "40px"}}> {estadoPedido}</h6>
                       </td>
                       <td>
-                        <p style={{fontWeight:"bold", marginRight: "175px", marginLeft: "60px", marginTop: "50px"}}>Pedido el {fechaCompra}</p>
+                        <p style={{fontWeight:"bold", marginRight: "130px", marginLeft: "60px", marginTop: "50px"}}>Pedido el {fechaCompra}</p>
                       </td>
                       <td>
                         <p style={{fontWeight:"bold", marginTop: "50px"}}>Llegó el {fechaEntrega}</p>
@@ -72,7 +72,7 @@ function Shopping() {
                       <td style={{ width: "10px", padding: "50px"}}>
                       <Reviews 
                           name = {e.name}
-                          id = 'cd791e40-7d80-4807-8c0e-587dc0eafbaa'
+                          id = {e.id}
                         />
                       </td>
                     </tr>
