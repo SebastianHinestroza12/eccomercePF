@@ -12,6 +12,11 @@ const Table = (props) => {
 
   const columns = [
     {
+      name: "#Orden",
+      selector: (row) => row.numberOrder,
+      sortable: true,
+    },
+    {
       name: "Cliente",
       selector: (row) => row.client,
       sortable: true,
@@ -41,6 +46,7 @@ const Table = (props) => {
       cell: (row) => (
         <Link to={`#`} onClick={() => props.click(row.name)}>
           <Unicons.UilTrash />
+          <Unicons.UilEdit />
         </Link>
       ),
     },
