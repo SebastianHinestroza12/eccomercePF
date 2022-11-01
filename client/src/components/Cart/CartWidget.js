@@ -30,7 +30,7 @@ const CartWidget = () => {
   useEffect(() => {
     //console.log("user widget 2", currentUser.email);
     currentUser && dispatch(getCartDetail(currentUser.email));
-  }, [dispatch, currentUser, productsInTheCart]);
+  }, [dispatch, currentUser]);
 
   const getTotalUnitsCart = () => {};
   return (
@@ -40,13 +40,16 @@ const CartWidget = () => {
         id="dropdown-cart"
         title={<Unicons.UilShoppingCartAlt />}
       >
-        {console.log("productsInTheCart cartwidget", productsInTheCart)}
-        {productsInTheCart?.length ? (
-          productsInTheCart.items.map((product) => (
+        {console.log("productsInTheCart currentUser", [currentUser].length)}
+        {[productsInTheCart]?.length === 0 ? (
+          <p>No hay productos en el carrito</p>
+        ) : //if user is not logged in
+        [currentUser]?.length === 0 ? (
+          productsInTheCart.map((product, index) => (
             <Dropdown.Item
               className="listItem"
-              key={product.id}
-              onClick={() => goToProduct(product.id)}
+              key={index}
+              onClick={() => goToProduct(product.idProduct)}
             >
               <img
                 src={product.image}
@@ -64,9 +67,32 @@ const CartWidget = () => {
             </Dropdown.Item>
           ))
         ) : (
-          <p>No hay productos en el carrito</p>
+          //  console.log("logged", productsInTheCart.items)
+
+          productsInTheCart.items?.map((product, index) => (
+            <Dropdown.Item
+              className="listItem"
+              key={index}
+              onClick={() => goToProduct(product.idProduct)}
+            >
+              <img
+                src={product.image}
+                className="cart-image"
+                alt={product.name}
+              />
+              <div className="detailsCart">
+                <span className="title">{product.name}</span>
+                <span className="">Talla: {product.size}</span>
+
+                <span>
+                  {product.units} unds. x ${product.price}
+                </span>
+              </div>
+            </Dropdown.Item>
+          ))
         )}
-        {productsInTheCart?.length ? (
+
+        {[productsInTheCart]?.length ? (
           <div className="buttons-cart-group">
             <Link to="/pagar" className="buy btn btn-primary buttons-cart">
               FINALIZAR COMPRA

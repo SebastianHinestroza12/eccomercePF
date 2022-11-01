@@ -11,7 +11,6 @@ import * as Unicons from "@iconscout/react-unicons";
 const ProductDetail = () => {
   const { productId } = useParams();
   const profileUser = useSelector((state) => state.user);
-  console.log("auth", profileUser);
 
   //loader hasta que se carga el detalle del producto
   const [loading, setLoading] = useState([true]);
@@ -21,7 +20,6 @@ const ProductDetail = () => {
 
   const productDetail = useSelector((state) => state.productDetail);
   productDetail.reviews = reviews;
-  console.log(productDetail);
 
   useEffect(() => {
     new Promise((resolve) => {

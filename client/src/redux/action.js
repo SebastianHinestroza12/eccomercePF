@@ -70,6 +70,7 @@ export const newProductForm = (data) => {
   };
 };*/
 export const postRegister = (user) => {
+  console.log("postregister", user);
   return async () => {
     await axios.post(`/user/register`, user);
   };
@@ -197,21 +198,23 @@ export const getReviewByProduct = (idProduct) => {
   };
 };
 
-export function AddProductToCart(payload, quantity, size, email) {
-  const data = {
-    productId: payload.id,
-    units: quantity,
-    size,
-    email,
-  };
-  //console.log("add prod", data);
+export const AddProductToCart = (payload, quantity, size, user) => {
+  console.log("add prod db", payload, payload.user);
   //si usuario esta loggeado guardo en la DB
-  if (email) {
-    return async (dispatch) => {
+  if (payload.user) {
+    console.log("entro al login", payload.user);
+
+    const data = {
+      productId: payload.product.productId,
+      units: payload.product.units,
+      size: payload.product.size,
+      email: payload.user.email,
+    };
+    console.log("data", data);
+    return async () => {
       await axios.post(`/cart`, data);
       /* dispatch({
         type: "ADD_PRODUCTS_TO_CART",
-        payload: data,
       });*/
     };
   } else {
@@ -228,11 +231,12 @@ export function AddProductToCart(payload, quantity, size, email) {
       },
     };
   }
-}
+};
 
 export function getCartDetail(userEmail) {
   //console.log("email", userEmail);
   if (userEmail) {
+    console.log("entro al action de getcart");
     return function (dispatch) {
       return axios(`/cart/?email=${userEmail}`)
         .then((response) => response.data)

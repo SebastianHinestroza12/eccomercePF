@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   AddProductToCart,
   logoutUser,
@@ -20,20 +20,25 @@ export const Loading = () => {
 };
 
 function Login() {
-  const productsInTheCart = useSelector((state) => state.cartProducts);
-
   const dispatch = useDispatch();
   const { isAuthenticated, isLoading, user } = useAuth0();
 
   useEffect(() => {
     if (isAuthenticated) {
-      //mandar localstorage a db => getCart db
-      productsInTheCart.map((product) => {
-        dispatch(AddProductToCart(product));
-      });
-      localStorage.removeItem("cartProductsAdded");
       dispatch(postRegister(user));
       dispatch(saveUserGlobalState(user));
+      //mandar localstorage a db => getCart db
+      if (JSON.parse(localStorage.getItem("cartProductsAdded"))?.length > 0) {
+        const userLogged = user;
+        console.log("user logged", userLogged);
+
+        JSON.parse(localStorage.getItem("cartProductsAdded")).forEach(
+          (product) => {
+            dispatch(AddProductToCart({ product, user: user }));
+          }
+        );
+        localStorage.removeItem("cartProductsAdded");
+      }
     } else {
       localStorage.removeItem("currentUser");
       dispatch(logoutUser());

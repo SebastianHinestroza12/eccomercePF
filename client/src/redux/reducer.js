@@ -17,10 +17,13 @@ const initialState = {
   newProducts: [],
   editProduct: [],
   reviews: [],
-  order: [],
-  allReviews: [],
   newReviews: [],
   cartTotal: 0,
+  cartProducts:
+    !localStorage.getItem("currentUser") &&
+    localStorage.getItem("cartProductsAdded")
+      ? JSON.parse(localStorage.getItem("cartProductsAdded"))
+      : [],
   //quantityProductsAdded: localStorage.getItem("cartProductsAdded")    ? cartWidgetNumber()    : 0,
   cartUserLogged: [],
 };
@@ -31,18 +34,13 @@ const rootReducer = (state = initialState, action) => {
     case "LOGOUT_USER":
       return {
         ...state,
-        cartProducts: [],
+        // cartProducts: [],
       };
     case "GET_ALL_PRODUCTS":
       return {
         ...state,
         products: payload,
         allProducts: payload,
-      };
-    case "GET_ORDER":
-      return {
-        ...state,
-        order: payload,
       };
     case "LOAD_PRODUCTS":
       return {
@@ -57,7 +55,7 @@ const rootReducer = (state = initialState, action) => {
     case "LOAD_REVIEW":
       return {
         ...state,
-        newReviews: payload,
+        newReviews: [...state.newReviews, payload],
       };
     case "GET_REVIEW_BY_PRODUCT":
       return {
@@ -68,21 +66,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         productDetail: payload,
-      };
-    case "CLEAN_PRODUCT_DETAIL":
-      return {
-        ...state,
-        productDetail: [],
-      };
-      case "GET_ALL_REVIEWS":
-        return {
-          ...state,
-          allReviews: payload,
-        };
-    case "GET_PRODUCT_REVIEW":
-      return {
-        ...state,
-        newReviews: payload,
       };
     case "LINK_CATEGORY":
       return {
@@ -260,11 +243,11 @@ const rootReducer = (state = initialState, action) => {
         // console.log("ADD_PRODUCTS_TO_CART", payload);
         localStorage.setItem(
           "cartProductsAdded",
-          JSON.stringify([...state.cartProducts, data])
+          JSON.stringify([...state.cartProducts, payload])
         );
         return {
           ...state,
-          cartProducts: [...state.cartProducts, data],
+          cartProducts: [...state.cartProducts, payload],
           //quantityProductsAdded: state.quantityProductsAdded + units,
         };
       }

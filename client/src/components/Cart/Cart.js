@@ -15,7 +15,6 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Cart = () => {
   const { loginWithRedirect } = useAuth0();
-  const user = useSelector((state) => state.user);
   let history = useHistory();
   const { isAuthenticated } = useAuth0();
 
@@ -28,7 +27,14 @@ const Cart = () => {
 
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const addedToCart = useSelector((state) => state.quantityProductsAdded);
+  let total = 0;
 
+  function getTotalProducts() {
+    for (let element of productsInTheCart) {
+      total += element.price * element.units;
+    }
+    return total;
+  }
   /*
   console.log(productsInTheCart)
   let subtotal = 0;
@@ -78,7 +84,7 @@ const Cart = () => {
         <h2 className="cart-title">Mi carrito</h2>
         <section>
           {console.log("productsInTheCart", productsInTheCart)}
-          {productsInTheCart.status === "Active" ? (
+          {isAuthenticated && [productsInTheCart]?.length ? (
             <Table responsive>
               <thead>
                 <tr>
@@ -91,7 +97,7 @@ const Cart = () => {
                 </tr>
               </thead>
               <tbody>
-                {productsInTheCart.items.map((element, index) => (
+                {productsInTheCart.items?.map((element, index) => (
                   <tr key={index} id={index}>
                     <td>
                       {console.log("element", element)}
@@ -103,14 +109,14 @@ const Cart = () => {
                     </td>
                     <td>
                       {element.name}
-                      <p>Talla: {element.size || element.sizePicked}</p>
+                      <p>Talla: {element.size}</p>
                     </td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
                       <ItemCount
                         productId={element.id}
                         size={element.sizePicked}
-                        email={user.email}
+                        email={currentUser.email}
                         productDetail={element}
                         quantity={element.units}
                         addedToCart={addedToCart}
@@ -118,13 +124,7 @@ const Cart = () => {
                         index={index}
                       />
                     </td>
-                    <td>
-                      ${" "}
-                      {
-                        TotalPrice(element.price, element.units)
-                        //TotalPrice(element.price, element.quantity)
-                      }{" "}
-                    </td>
+                    <td>${TotalPrice(element.price, element.units)}</td>
                     <td>
                       <div
                         onClick={() =>
@@ -144,7 +144,8 @@ const Cart = () => {
                 ))}
               </tbody>
             </Table>
-          ) : (
+          ) : //user not logged
+          [productsInTheCart]?.length === 0 ? (
             <div className="cart-empty">
               <p>No hay productos en el carrito</p>
               <div>
@@ -154,9 +155,68 @@ const Cart = () => {
                 </Link>
               </div>
             </div>
+          ) : (
+            <Table responsive>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Total</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {productsInTheCart.map((element, index) => (
+                  <tr key={index} id={index}>
+                    <td>
+                      {console.log("element", element)}
+                      <img
+                        src={element.image}
+                        className="cart-image-detail"
+                        alt={element.name}
+                      />
+                    </td>
+                    <td>
+                      {element.name}
+                      <p>Talla: {element.size}</p>
+                    </td>
+                    <td>$ {element.price.toLocaleString("en-US")}</td>
+                    <td>
+                      <ItemCount
+                        productId={element.idProduct}
+                        size={element.size}
+                        email={currentUser.email}
+                        productDetail={element}
+                        quantity={element.units}
+                        addedToCart={addedToCart}
+                        carrito="true"
+                        index={index}
+                      />
+                    </td>
+                    <td>${TotalPrice(element.subtotal, element.units)}</td>
+                    <td>
+                      <div
+                        onClick={() =>
+                          //removeItemFromCart(index, element.quantity)
+                          removeItemFromCart(
+                            element.productId,
+                            element.size,
+                            currentUser.email
+                          )
+                        }
+                        className="remove-item"
+                      >
+                        <Unicons.UilTrash />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
           )}
-          {productsInTheCart.status === "Active" &&
-          [productsInTheCart].length ? (
+          {[productsInTheCart]?.length ? (
             <section className="totals-cart">
               <div>
                 <Link to="/store" className="buy btn btn-primary buttons-cart">
@@ -169,7 +229,10 @@ const Cart = () => {
                   <div className="item-totals">
                     Total
                     <span>
-                      $ {productsInTheCart.totalPrice.toLocaleString("en-US")}
+                      $
+                      {!currentUser
+                        ? getTotalProducts().toLocaleString("en-US")
+                        : productsInTheCart.totalPrice}
                     </span>
                   </div>
                 </div>
