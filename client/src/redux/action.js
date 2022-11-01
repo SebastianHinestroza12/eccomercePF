@@ -32,6 +32,16 @@ export const cleanProductDetail = () => ({
   type: "CLEAN_PRODUCT_DETAIL",
 });
 
+export const getAllReviews = () => {
+  return function (dispatch) {
+    return axios("/getReviews")
+      .then((response) => response.data)
+      .then((reviews) => {
+        dispatch({ type: "GET_ALL_REVIEWS", payload: reviews });
+      });
+  };
+};
+
 export const getReviews = (productId) => {
   return function (dispatch) {
     return axios(`/getReviews/${productId}`)

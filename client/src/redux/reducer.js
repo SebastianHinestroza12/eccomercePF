@@ -18,6 +18,7 @@ const initialState = {
   editProduct: [],
   reviews: [],
   order: [],
+  allReviews: [],
   newReviews: [],
   cartTotal: 0,
   //quantityProductsAdded: localStorage.getItem("cartProductsAdded")    ? cartWidgetNumber()    : 0,
@@ -73,6 +74,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productDetail: [],
       };
+      case "GET_ALL_REVIEWS":
+        return {
+          ...state,
+          allReviews: payload,
+        };
     case "GET_PRODUCT_REVIEW":
       return {
         ...state,
