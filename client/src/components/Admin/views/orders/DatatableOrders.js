@@ -44,6 +44,7 @@ const Table = (props) => {
       cell: (row) => (
         <Link to={`#`} onClick={() => props.click(row.name)}>
           <Unicons.UilTrash />
+          <Unicons.UilEdit />
         </Link>
       ),
     },
