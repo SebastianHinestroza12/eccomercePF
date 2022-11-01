@@ -1,6 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState } from "react";
 import axios from "axios";
+import { Redirect } from 'react-router-dom'
 
 function RutasBloqueadas() {
   const {
@@ -35,12 +36,21 @@ function RutasBloqueadas() {
   const accederRoles = async () => {
     try {
       const token = await getAccessTokenSilently();
+      console.log(token)
       const response = await axios.get("/user/prueba/role", {
         headers: {
           authorization: `Bearer ${token}`,
         },
       });
       console.log(response.data); //Respuesta de la ruta del Back
+    } catch (error) {
+      console.log(error.message);
+    }    
+  };
+  const accederAuth = async () => {
+    try {
+      const response = await axios.get("/user/prueba/auth/")
+      console.log(response.data)
     } catch (error) {
       console.log(error.message);
     }    
@@ -84,6 +94,11 @@ function RutasBloqueadas() {
       <ul>
         <li>
           <button onClick={accederRoles}>RUTA CON ROLES</button>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <button onClick={accederAuth}>RUTA NUEVA PRUEBA</button>
         </li>
       </ul>
 
