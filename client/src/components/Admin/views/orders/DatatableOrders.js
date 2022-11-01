@@ -7,10 +7,21 @@ import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
 
 const Table = (props) => {
+
   const columns = [
     {
+      name: "#Orden",
+      selector: (row) => row.numberOrder,
+      sortable: true,
+    },
+    {
       name: "Cliente",
-      selector: (row) => row.user,
+      selector: (row) => row.client,
+      sortable: true,
+    },
+    {
+      name: "Product",
+      selector: (row) => row.products,
       sortable: true,
     },
     {
@@ -25,7 +36,7 @@ const Table = (props) => {
     },
     {
       name: "Total",
-      selector: (row) => row.order_total,
+      selector: (row) => row.total_purchase,
       sortable: true,
     },
     {

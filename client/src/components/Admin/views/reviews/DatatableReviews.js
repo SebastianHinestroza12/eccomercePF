@@ -10,7 +10,7 @@ const Table = (props) => {
   const columns = [
     {
       name: "Autor",
-      selector: (row) => row.user,
+      selector: (row) => row.user.name,
       sortable: true,
     },
     {
@@ -20,7 +20,7 @@ const Table = (props) => {
     },
     {
       name: "Producto",
-      selector: (row) => row.product_name,
+      selector: (row) => row.product.name,
       sortable: true,
     },
     {
