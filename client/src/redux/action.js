@@ -241,9 +241,7 @@ export const addUnitDB = (productId, size, email) => {
   const dataToAdd = { productId, size, email };
   console.log("dataToAdd", dataToAdd);
   return async (dispatch) => {
-    await axios.put(`/cart/add`, {
-      data: dataToAdd,
-    });
+    await axios.put(`/cart/add`, dataToAdd);
     dispatch({
       type: "INCREASE_QUANTITY",
       payload: dataToAdd,
@@ -253,10 +251,9 @@ export const addUnitDB = (productId, size, email) => {
 
 export const removeUnitDB = (productId, size, email) => {
   const dataToRemove = { productId, size, email };
+  console.log("dataToAdd", dataToRemove);
   return async (dispatch) => {
-    await axios.put(`/cart/remove`, {
-      data: dataToRemove,
-    });
+    await axios.put(`/cart/remove`, dataToRemove);
     dispatch({
       type: "DECREASE_QUANTITY",
       payload: dataToRemove,

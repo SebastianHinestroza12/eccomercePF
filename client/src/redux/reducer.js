@@ -20,8 +20,10 @@ const initialState = {
   order: [],
   newReviews: [],
   cartTotal: 0,
-  //quantityProductsAdded: localStorage.getItem("cartProductsAdded")    ? cartWidgetNumber()    : 0,
+  quantityProductsAdded: 0,
   cartUserLogged: [],
+  cartProducts: [],
+  productCart: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -259,6 +261,7 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           cartProducts: [...state.cartProducts, data],
+          productCart: [...state.productCart, data]
           //quantityProductsAdded: state.quantityProductsAdded + units,
         };
       }
@@ -271,6 +274,7 @@ const rootReducer = (state = initialState, action) => {
         return {
           ...state,
           cartProducts: payload,
+          productCart: payload
         };
       } else {
         console.log("entro al guest");
@@ -280,35 +284,41 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case "INCREASE_QUANTITY":
-      let quantity2 = state.cartProducts[action.payload].units;
-      let sizePicked = state.cartProducts[action.payload].sizePicked;
-      let stock_product = state.cartProducts[action.payload].size_stock.filter(
-        (e) => e.size === sizePicked
-      );
-      let stock = stock_product[0].stock;
+      // const increaseProduct = state.cartProducts
+      // const items = action.payload
+      // const productToIncrease = increaseProduct.items.find(el => el.productId === items.productId)
+      // console.log(productToIncrease)
+      // console.log('action.payload', items)
+      // let quantity2 = productToIncrease.units;
+      // let sizePicked = productToIncrease.size;
+      // // let stock_product = increaseProduct.items[action.payload].size_stock.filter(
+      // //   (e) => e.size === sizePicked
+      // // );
+      // // let stock = stock_product[0].stock;
 
-      if (quantity2 < stock) {
-        state.quantityProductsAdded++;
-        state.cartProducts[payload].units++;
-      }
+      // // if (quantity2 < stock) {
+      //   state.quantityProductsAdded++;
+      //   // state.cartProducts[payload].units++;
+      // // }
 
       return {
         ...state,
       };
 
     case "DECREASE_QUANTITY":
-      let quantity1 = state.cartProducts[action.payload].units;
-      if (quantity1 > 1) {
-        state.quantityProductsAdded--;
-        state.cartProducts[payload].units--;
-      }
+      // let quantity1 = state.cartProducts[action.payload].units;
+      // if (quantity1 > 1) {
+      //   state.quantityProductsAdded--;
+      //   state.cartProducts[payload].units--;
+      // }
 
-      localStorage.setItem(
-        "cartProductsAdded",
-        JSON.stringify([...state.cartProducts])
-      );
+      // localStorage.setItem(
+      //   "cartProductsAdded",
+      //   JSON.stringify([...state.cartProducts])
+      // );
       return {
         ...state,
+        
       };
 
     case "REMOVE_ITEM_FROM_CART":

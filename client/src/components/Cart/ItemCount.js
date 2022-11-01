@@ -1,10 +1,15 @@
 import * as Unicons from "@iconscout/react-unicons";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { addUnitDB, removeUnitDB } from "../../redux/action";
+import { addUnitDB, getCartDetail, removeUnitDB } from "../../redux/action";
 
 const ItemCount = ({ quantity, setQuantity, carrito, index, stock, productId, size, email }) => {
   const dispatch = useDispatch();
+  let [num, setNum] = useState(0)
+
+  useEffect(() => {
+    console.log("me actualizo");
+  }, [dispatch]);
 
   function addQuantityToCart(actionButton) {
     if (!carrito) {
@@ -13,15 +18,19 @@ const ItemCount = ({ quantity, setQuantity, carrito, index, stock, productId, si
       } else {
         setQuantity(quantity + 1);
       }
-    } else {
+    } else {  
+      
       if (actionButton === "minus") {
         console.log('si',productId, size, email)
         dispatch(removeUnitDB(productId, size, email));
+        dispatch(getCartDetail(email))
       } else {
         console.log('si',productId, size, email)
         dispatch(addUnitDB(productId, size, email));
+        dispatch(getCartDetail(email))
       }
     }
+    
   }
 
   useEffect(() => {

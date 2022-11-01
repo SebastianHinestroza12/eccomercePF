@@ -30,7 +30,7 @@ const CartWidget = () => {
   useEffect(() => {
     //console.log("user widget 2", currentUser.email);
     currentUser && dispatch(getCartDetail(currentUser.email));
-  }, [dispatch, currentUser, productsInTheCart]);
+  }, [dispatch, currentUser]);
 
   const getTotalUnitsCart = () => {};
   return (

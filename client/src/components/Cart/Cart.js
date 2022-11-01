@@ -2,6 +2,7 @@ import { Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
+  addUnitDB,
   getCartDetail,
   getCartTotal,
   RemoveItemFromCart,
@@ -53,6 +54,7 @@ const Cart = () => {
 */
   function removeItemFromCart(productId, size, email) {
     dispatch(RemoveItemFromCartDb(productId, size, email));
+    dispatch(getCartDetail(currentUser.email));
   }
 
   const currentUser = useSelector((state) => state.user);
@@ -61,7 +63,7 @@ const Cart = () => {
     //dispatch(getCartTotal(totalPrice));
     dispatch(getCartDetail(currentUser.email));
     console.log("dispatch cart detail");
-  }, [dispatch, getCartDetail]);
+  }, [dispatch]);
 
   /*
   function loginWithRedirect() {
@@ -107,9 +109,10 @@ const Cart = () => {
                     </td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
+                      {console.log('product in the car', productsInTheCart)}
                       <ItemCount
-                        productId={element.id}
-                        size={element.sizePicked}
+                        productId={element.productId}
+                        size={element.size}
                         email={user.email}
                         productDetail={element}
                         quantity={element.units}
