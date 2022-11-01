@@ -20,9 +20,6 @@ const initialState = {
   order: [],
   newReviews: [],
   cartTotal: 0,
-  cartProducts: !localStorage.getItem("currentUser")
-    ? JSON.parse(localStorage.getItem("cartProductsAdded"))
-    : [],
   //quantityProductsAdded: localStorage.getItem("cartProductsAdded")    ? cartWidgetNumber()    : 0,
   cartUserLogged: [],
 };
