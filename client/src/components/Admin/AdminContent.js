@@ -4,6 +4,7 @@ import CreateProduct from "./views/CreateProduct";
 import EditProduct from "./views/EditProduct";
 import Orders from "./views/orders/Orders";
 import AdminReviews from "./views/reviews/AdminReviews";
+import Users from './views/users/AdminUsers'
 const ADMIN_ROUTE = "panel-control";
 
 const AdminContent = () => {
@@ -27,6 +28,9 @@ const AdminContent = () => {
         </Route>
         <Route exact path={`/${ADMIN_ROUTE}/pedidos/`}>
           <Orders />
+        </Route>
+        <Route exact path={`/${ADMIN_ROUTE}/clientes/`}>
+          <Users />
         </Route>
       </Switch>
     </>

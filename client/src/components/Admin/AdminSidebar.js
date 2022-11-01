@@ -20,7 +20,7 @@ const AdminSidebar = () => {
         <Link to={"/panel-control/pedidos"}>
           <li>Pedidos</li>
         </Link>
-        <Link to={"#"}>
+        <Link to={"/panel-control/clientes"}>
           <li>Clientes</li>
         </Link>
       </ul>

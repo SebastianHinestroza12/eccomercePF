@@ -3,6 +3,7 @@ import * as Unicons from "@iconscout/react-unicons";
 import DataTable from "react-data-table-component";
 import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
+import { getOrders } from "../../../../redux/action";
 
 const Table = (props) => {
 
@@ -23,8 +24,8 @@ const Table = (props) => {
       sortable: true,
     },
     {
-      name: "Fecha",
-      selector: (row) => row.date,
+      name: "Cliente",
+      selector: (row) => row.client,
       sortable: true,
     },
     {

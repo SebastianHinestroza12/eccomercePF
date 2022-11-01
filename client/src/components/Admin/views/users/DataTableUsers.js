@@ -5,46 +5,29 @@ import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
 import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
-import { getReviews } from "../../../../redux/action";
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 
 const Table = (props) => {
 
 const dispatch = useDispatch()
-const newReviews = useSelector(state => state.newReviews)
-console.log('RESEÑAS', newReviews)
 
 
-useEffect(() => {
-  dispatch(getReviews())
-},[])
+
+
+// useEffect(() => {
+//   dispatch(getUsers())
+// },[])
 
 
   const columns = [
     {
-      name: "Autor",
-      selector: (row) => row.user.name,
+      name: "Nombre",
+      selector: (row) => row.user,
       sortable: true,
     },
     {
-      name: "Puntuacion",
-      selector: (row) => Array(row.stars).fill("★"),
-      sortable: true,
-    },
-    {
-      name: "Producto",
-      selector: (row) => row.product.name,
-      sortable: true,
-    },
-    {
-      name: "Comentarios",
-      selector: (row) => row.comment,
-      grow: 3,
-      sortable: true,
-    },
-    {
-      name: "Eliminar",
+      name: "Banear",
       cell: (row) => (
         <Link to={`#`} onClick={() => props.click(row.name)}>
           <Unicons.UilTrash />
@@ -84,7 +67,7 @@ useEffect(() => {
 
   return (
     <DataTable
-      title="Valoraciones"
+      title="Clientes"
       columns={columns}
       data={filteredItems}
       defaultSortField="name"
