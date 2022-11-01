@@ -49,6 +49,7 @@ function validateForm(dataFromInput) {
 }
 
 const Checkout = () => {
+  const dispatch = useDispatch();
   const getTotal = useSelector((state) => state.cartTotal);
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const currentUser = useSelector((state) => state.user);
@@ -89,19 +90,20 @@ const Checkout = () => {
         ...input,
       })
     );
-  }, [input]);
+  }, []);
 
-  const dispatch = useDispatch();
   useEffect(() => {
-    console.log("user", currentUser);
+    //setTotal(totalPrice);
+    //dispatch(getCartTotal(totalPrice));
     dispatch(getCartDetail(currentUser.email));
-  }, [dispatch, productsInTheCart]);
+  }, [dispatch, getCartDetail]);
 
   return (
     <Container>
       <h2 className="cart-title">Finalizar compra</h2>
 
       <Row>
+        {console.log("firstrrrrrrrrrrrrrrrrrrrrrrrr", productsInTheCart)}
         <Col md={6}>
           <Form>
             <h4>Datos de facturación</h4>
@@ -224,11 +226,14 @@ const Checkout = () => {
         <Col md={6}>
           <section className="totals checkout">
             <h4>Productos en el carrito</h4>
-            {console.log("productsInTheCart checkout", productsInTheCart)}
-            {productsInTheCart.items.length === 0 ? (
+            {console.log(
+              "CHECKOUTTTTTTTTTTTTTTTTTTTTT",
+              productsInTheCart.items
+            )}
+            {productsInTheCart.items?.length === 0 ? (
               <div>Aún no hay productos en el carrito</div>
             ) : (
-              productsInTheCart.items.map((element, index) => (
+              productsInTheCart.items?.map((element, index) => (
                 <div key={index} className="checkout-subtotal">
                   <span>
                     {element.name} x
@@ -245,7 +250,7 @@ const Checkout = () => {
             <p className="totalsCheckout">
               <span className="totalTitle">Total: </span>
               <span>
-                ${productsInTheCart.totalPrice.toLocaleString("en-US")}
+                ${productsInTheCart.totalPrice?.toLocaleString("en-US")}
               </span>
             </p>
           </section>

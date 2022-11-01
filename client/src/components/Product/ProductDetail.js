@@ -28,7 +28,7 @@ const ProductDetail = () => {
     }).then((res) => {
       setLoading(false);
     });
-  }, [dispatch, productId]);
+  }, [dispatch]);
 
   function writeRatingStars(rating) {
     let ratingStars = [];

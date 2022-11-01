@@ -30,7 +30,7 @@ const CartWidget = () => {
   useEffect(() => {
     //console.log("user widget 2", currentUser.email);
     currentUser && dispatch(getCartDetail(currentUser.email));
-  }, [dispatch, currentUser]);
+  }, [dispatch]);
 
   const getTotalUnitsCart = () => {};
   return (
@@ -38,13 +38,17 @@ const CartWidget = () => {
       <DropdownButton
         align="end"
         id="dropdown-cart"
-        title={<Unicons.UilShoppingCartAlt />}
+        title={
+          <span>
+            <Unicons.UilShoppingCartAlt />
+          </span>
+        }
       >
-        {console.log("productsInTheCart currentUser", [currentUser].length)}
+        {console.log("productsInTheCart currentUser", [currentUser])}
         {[productsInTheCart]?.length === 0 ? (
           <p>No hay productos en el carrito</p>
         ) : //if user is not logged in
-        [currentUser]?.length === 0 ? (
+        currentUser?.length === 0 ? (
           productsInTheCart.map((product, index) => (
             <Dropdown.Item
               className="listItem"

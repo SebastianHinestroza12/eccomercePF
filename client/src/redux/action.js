@@ -198,16 +198,16 @@ export const getReviewByProduct = (idProduct) => {
   };
 };
 
-export const AddProductToCart = (payload, quantity, size, user) => {
-  console.log("add prod db", payload, payload.user);
+export const AddProductToCart = (payload, units, size) => {
+  console.log("add prod db", payload);
   //si usuario esta loggeado guardo en la DB
   if (payload.user) {
     console.log("entro al login", payload.user);
 
     const data = {
-      productId: payload.product.productId,
-      units: payload.product.units,
-      size: payload.product.size,
+      productId: payload.product.id,
+      units: payload.units,
+      size: payload.size,
       email: payload.user.email,
     };
     console.log("data", data);
@@ -224,17 +224,35 @@ export const AddProductToCart = (payload, quantity, size, user) => {
         productId: payload.id,
         name: payload.name,
         size,
-        units: quantity,
+        units,
         price: payload.price,
-        subtotal: quantity * payload.price,
+        subtotal: units * payload.price,
         image: payload.image,
       },
     };
   }
 };
 
+export const addProductFromLocalStorage = (payload, units, size) => {
+  if (payload.user) {
+    const data = {
+      productId: payload.product.productId,
+      units: payload.product.units,
+      size: payload.product.size,
+      email: payload.user.email,
+    };
+    console.log("data", data);
+    return async () => {
+      await axios.post(`/cart`, data);
+      /* dispatch({
+        type: "ADD_PRODUCTS_TO_CART",
+      });*/
+    };
+  }
+};
+
 export function getCartDetail(userEmail) {
-  //console.log("email", userEmail);
+  console.log("actualizo cart", userEmail);
   if (userEmail) {
     console.log("entro al action de getcart");
     return function (dispatch) {
@@ -255,11 +273,9 @@ export const addUnitDB = (productId, size, email) => {
   const dataToAdd = { productId, size, email };
   console.log("dataToAdd", dataToAdd);
   return async (dispatch) => {
-    await axios.put(`/cart/add`, {
-      data: dataToAdd,
-    });
+    await axios.put(`/cart/add`, dataToAdd);
     dispatch({
-      type: "INCREASE_QUANTITY",
+      type: "INCREASE_QUANTITY_DB",
       payload: dataToAdd,
     });
   };
@@ -268,11 +284,9 @@ export const addUnitDB = (productId, size, email) => {
 export const removeUnitDB = (productId, size, email) => {
   const dataToRemove = { productId, size, email };
   return async (dispatch) => {
-    await axios.put(`/cart/remove`, {
-      data: dataToRemove,
-    });
+    await axios.put(`/cart/remove`, dataToRemove);
     dispatch({
-      type: "DECREASE_QUANTITY",
+      type: "DECREASE_QUANTITY_DB",
       payload: dataToRemove,
     });
   };
@@ -342,3 +356,16 @@ export const logoutUser = () => {
     type: "LOGOUT_USER",
   };
 };
+
+export function IncreaseQuantity(payload) {
+  return {
+    type: "INCREASE_QUANTITY",
+    payload,
+  };
+}
+export function DecreaseQuantity(payload) {
+  return {
+    type: "DECREASE_QUANTITY",
+    payload,
+  };
+}

@@ -4,7 +4,7 @@ import LogoutButton from "./LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
 import {
-  AddProductToCart,
+  addProductFromLocalStorage,
   logoutUser,
   postRegister,
   saveUserGlobalState,
@@ -34,7 +34,7 @@ function Login() {
 
         JSON.parse(localStorage.getItem("cartProductsAdded")).forEach(
           (product) => {
-            dispatch(AddProductToCart({ product, user: user }));
+            dispatch(addProductFromLocalStorage({ product, user: user }));
           }
         );
         localStorage.removeItem("cartProductsAdded");

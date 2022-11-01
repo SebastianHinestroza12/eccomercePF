@@ -30,10 +30,14 @@ const Cart = () => {
   let total = 0;
 
   function getTotalProducts() {
-    for (let element of productsInTheCart) {
-      total += element.price * element.units;
+    if (productsInTheCart?.length) {
+      for (let element of productsInTheCart) {
+        total += element.price * element.units;
+      }
+      return total;
+    } else {
+      return total;
     }
-    return total;
   }
   /*
   console.log(productsInTheCart)
@@ -57,16 +61,25 @@ const Cart = () => {
     totalPrice = subtotal + impuestos;
   }
 */
-  function removeItemFromCart(productId, size, email) {
-    dispatch(RemoveItemFromCartDb(productId, size, email));
-  }
 
   const currentUser = useSelector((state) => state.user);
+  function removeItemFromCartDb(productId, size, email) {
+    //remove from db
+    new Promise((res, rej) => {
+      res(dispatch(RemoveItemFromCartDb(productId, size, email)));
+    }).then(() => {
+      dispatch(getCartDetail(currentUser.email));
+    });
+  }
+
+  function removeItemFromCart(index, quantity) {
+    dispatch(RemoveItemFromCart(index, quantity));
+  }
+
   useEffect(() => {
     //setTotal(totalPrice);
     //dispatch(getCartTotal(totalPrice));
     dispatch(getCartDetail(currentUser.email));
-    console.log("dispatch cart detail");
   }, [dispatch, getCartDetail]);
 
   /*
@@ -83,7 +96,6 @@ const Cart = () => {
       <Container>
         <h2 className="cart-title">Mi carrito</h2>
         <section>
-          {console.log("productsInTheCart", productsInTheCart)}
           {isAuthenticated && [productsInTheCart]?.length ? (
             <Table responsive>
               <thead>
@@ -100,7 +112,6 @@ const Cart = () => {
                 {productsInTheCart.items?.map((element, index) => (
                   <tr key={index} id={index}>
                     <td>
-                      {console.log("element", element)}
                       <img
                         src={element.image}
                         className="cart-image-detail"
@@ -114,8 +125,8 @@ const Cart = () => {
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
                       <ItemCount
-                        productId={element.id}
-                        size={element.sizePicked}
+                        productId={element.productId}
+                        size={element.size}
                         email={currentUser.email}
                         productDetail={element}
                         quantity={element.units}
@@ -129,7 +140,7 @@ const Cart = () => {
                       <div
                         onClick={() =>
                           //removeItemFromCart(index, element.quantity)
-                          removeItemFromCart(
+                          removeItemFromCartDb(
                             element.productId,
                             element.size,
                             currentUser.email
@@ -145,7 +156,7 @@ const Cart = () => {
               </tbody>
             </Table>
           ) : //user not logged
-          [productsInTheCart]?.length === 0 ? (
+          productsInTheCart?.length === 0 ? (
             <div className="cart-empty">
               <p>No hay productos en el carrito</p>
               <div>
@@ -157,6 +168,7 @@ const Cart = () => {
             </div>
           ) : (
             <Table responsive>
+              {console.log("not logged")}
               <thead>
                 <tr>
                   <th></th>
@@ -171,7 +183,6 @@ const Cart = () => {
                 {productsInTheCart.map((element, index) => (
                   <tr key={index} id={index}>
                     <td>
-                      {console.log("element", element)}
                       <img
                         src={element.image}
                         className="cart-image-detail"
@@ -185,9 +196,6 @@ const Cart = () => {
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
                       <ItemCount
-                        productId={element.idProduct}
-                        size={element.size}
-                        email={currentUser.email}
                         productDetail={element}
                         quantity={element.units}
                         addedToCart={addedToCart}
@@ -200,11 +208,7 @@ const Cart = () => {
                       <div
                         onClick={() =>
                           //removeItemFromCart(index, element.quantity)
-                          removeItemFromCart(
-                            element.productId,
-                            element.size,
-                            currentUser.email
-                          )
+                          removeItemFromCart(index, element.units)
                         }
                         className="remove-item"
                       >
@@ -216,7 +220,7 @@ const Cart = () => {
               </tbody>
             </Table>
           )}
-          {[productsInTheCart]?.length ? (
+          {productsInTheCart?.length || productsInTheCart.items?.length ? (
             <section className="totals-cart">
               <div>
                 <Link to="/store" className="buy btn btn-primary buttons-cart">
@@ -230,7 +234,7 @@ const Cart = () => {
                     Total
                     <span>
                       $
-                      {!currentUser
+                      {!isAuthenticated
                         ? getTotalProducts().toLocaleString("en-US")
                         : productsInTheCart.totalPrice}
                     </span>

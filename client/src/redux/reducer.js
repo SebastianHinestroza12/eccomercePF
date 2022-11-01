@@ -253,7 +253,7 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case "GET_CART_DETAIL":
-      //console.log("GET_CART_DETAIL", payload);
+      console.log("GET_CART_DETAIL", payload);
       if (localStorage.getItem("currentUser")) {
         //si esta logged
         console.log("entro al db");
@@ -267,7 +267,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
         };
       }
-
+    /*
     case "INCREASE_QUANTITY":
       let quantity2 = state.cartProducts[action.payload].units;
       let sizePicked = state.cartProducts[action.payload].sizePicked;
@@ -285,6 +285,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
 
+    case "INCREASE_QUANTITY_DB":
+      return {
+        ...state,
+      };
+
     case "DECREASE_QUANTITY":
       let quantity1 = state.cartProducts[action.payload].units;
       if (quantity1 > 1) {
@@ -296,6 +301,37 @@ const rootReducer = (state = initialState, action) => {
         "cartProductsAdded",
         JSON.stringify([...state.cartProducts])
       );
+      return {
+        ...state,
+      };
+*/
+    case "INCREASE_QUANTITY":
+      //console.log("INCREASE_QUANTITY", state.cartProducts[payload].units);
+      //      state.quantityProductsAdded++;
+      state.cartProducts[payload].units++;
+      localStorage.setItem(
+        "cartProductsAdded",
+        JSON.stringify([...state.cartProducts])
+      );
+      return {
+        ...state,
+      };
+    case "DECREASE_QUANTITY":
+      let quantity1 = state.cartProducts[payload].units;
+      console.log("DECREASE_QUANTITY", quantity1);
+      localStorage.setItem(
+        "cartProductsAdded",
+        JSON.stringify([...state.cartProducts])
+      );
+      if (quantity1 > 1) {
+        //state.quantityProductsAdded--;
+        state.cartProducts[payload].units--;
+      }
+      return {
+        ...state,
+      };
+
+    case "DECREASE_QUANTITY_DB":
       return {
         ...state,
       };

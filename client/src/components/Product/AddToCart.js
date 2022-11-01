@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Toast } from "react-bootstrap";
 import { useState } from "react";
-import { AddProductToCart } from "../../redux/action";
+import { AddProductToCart, getCartDetail } from "../../redux/action";
 import "./addToCart.css";
 import ItemCount from "../Cart/ItemCount";
 import { Link } from "react-router-dom";
@@ -18,14 +18,38 @@ const AddToCart = ({ size, units }) => {
 
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
+  const product = useSelector((state) => state.productDetail);
 
   function addToCartButton() {
     setShow(true);
-    if (user) {
-      dispatch(AddProductToCart(productDetail, quantity, size, user.email));
-    } else {
-      dispatch(AddProductToCart(productDetail, quantity, size));
-    }
+    /*if (user) {
+      dispatch(
+        AddProductToCart(
+          { product, user: user, units: quantity, size },
+          quantity,
+          size,
+          user.email
+        )
+      );
+      user && dispatch(getCartDetail(user.email));*/
+    new Promise((res, rej) => {
+      if (user) {
+        res(
+          dispatch(
+            AddProductToCart(
+              { product, user: user, units: quantity, size },
+              quantity,
+              size,
+              user.email
+            )
+          )
+        );
+      } else {
+        res(dispatch(AddProductToCart(productDetail, quantity, size)));
+      }
+    }).then(() => {
+      user && dispatch(getCartDetail(user.email));
+    });
   }
 
   return (
