@@ -1,9 +1,6 @@
 import React, { useMemo } from "react";
 import * as Unicons from "@iconscout/react-unicons";
-import { useEffect, useDispatch } from "react";
 import DataTable from "react-data-table-component";
-import { Link } from "react-router-dom";
-
 import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
 import { getOrders } from "../../../../redux/action";
@@ -44,10 +41,11 @@ const Table = (props) => {
     {
       name: "Acciones",
       cell: (row) => (
-        <Link to={`#`} onClick={() => props.click(row.name)}>
+        <div>
           <Unicons.UilTrash />
           <Unicons.UilEdit />
-        </Link>
+
+        </div>
       ),
     },
   ];
