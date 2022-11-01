@@ -103,39 +103,6 @@ const Home = () => {
           </Col>
         </div>
       </section>
-
-      <h2 className="testimonios-title">Testimonios</h2>
-
-      <section className="testimonios">
-        <div className="testimonios-contenedor">
-          {allProducts.slice(0, 6).map((product) => {
-            return (
-              
-                <div className="testimonios-caja">
-                  <div className="caja-top">
-                    <div className="perfil">
-                      <div className="perfil-img">
-                        <img src={product.image} alt=""/>
-                      </div>
-                      <div className="name-user">
-                        <span className="decoration">{product.name}</span>
-                       
-                      </div>
-                    </div>
-                    <div className="reviews">
-                      <i>★★★★★</i>
-                    </div>
-                    </div>
-                    <div className="comentarios">
-                      <p className="italic">"Me encanto este producto, me llego 
-                      en buen estado y no tardo en llegar. Lo recomiendo!!"</p>
-                    </div>
-                </div>
-              
-            );
-          })}
-        </div>
-      </section>
     </Container>
   );
 };
