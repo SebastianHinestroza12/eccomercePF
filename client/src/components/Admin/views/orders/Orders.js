@@ -3,7 +3,8 @@ import Table from "./DatatableOrders";
 import { useSelector } from "react-redux";
 import { getOrder } from '../../../../redux/action';
 import { useDispatch } from "react-redux";
-import Button from 'react-bootstrap/Button';
+import { UilSync } from '@iconscout/react-unicons'
+import './refreshButton.css';
 
 const Orders = () => {
   const clickhandler = (name) => console.log("delete", name);
@@ -18,12 +19,13 @@ const Orders = () => {
   return (
     <div className="App">
       <div>
-        <div className="refresOrder">
-          <Button variant="outline-primary" size="lg" onClick={() => handleRefresh()}>Refrescar</Button>
+        <div className="refreshButton">
+          <UilSync className="refresh" onClick={() => handleRefresh()} />
         </div>
         <Table data={allOrder.map(el => {
           return (
             {
+              numberOrder: el.id.slice(0, 8),
               client: el.client,
               products: el.products,
               total_purchase: `$${el.total_purchase}`,

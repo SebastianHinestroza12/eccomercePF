@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const { expressjwt: jwt } = require("express-jwt");
+const jwtDiferente = require('jsonwebtoken')
+const { config } = require('./config')
 const jwks = require("jwks-rsa");
 const axios = require("axios");
 const jwtAuthz = require("express-jwt-authz");
@@ -43,6 +45,21 @@ router.get("/protected", verifyJwt, (req, res) => {
     console.log(error.message);
   }
 });
+router.get('/auth', (req, res) => {
+  // const { email, username, name } = req.body  
+  const token = jwtDiferente.sign({ sub: {username:"pepe", email:"argento", name:"mony"} }, config.authJwtSecret)
+  // res.send("Accediendo a ruta AUTH");
+  res.json({access_token: token})
+})
+router.get('/auth/verify', (req, res, next) => {
+ const { access_token } = req.query
+ try {
+  const decoded = jwtDiferente.verify(access_token, config.authJwtSecret)
+  res.json({message: true, username: decoded.sub})
+ } catch (error) {
+  console.log(error.message)
+ }
+})
 
 
 module.exports = router;

@@ -1,14 +1,17 @@
 import React, { useMemo } from "react";
 import * as Unicons from "@iconscout/react-unicons";
-
 import DataTable from "react-data-table-component";
-import { Link } from "react-router-dom";
 import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
 
 const Table = (props) => {
 
   const columns = [
+    {
+      name: "#Orden",
+      selector: (row) => row.numberOrder,
+      sortable: true,
+    },
     {
       name: "Cliente",
       selector: (row) => row.client,
@@ -37,9 +40,11 @@ const Table = (props) => {
     {
       name: "Acciones",
       cell: (row) => (
-        <Link to={`#`} onClick={() => props.click(row.name)}>
+        <div>
           <Unicons.UilTrash />
-        </Link>
+          <Unicons.UilEdit />
+
+        </div>
       ),
     },
   ];

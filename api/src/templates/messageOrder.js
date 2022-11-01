@@ -72,7 +72,7 @@ const messageOrder = (numberOrder, dateOrder, products, totalOrder) => {
           <h1>Tu pedido ha sido confirmado</h1>
           <h3>RESUMEN DEL PEDIDO:</h3>
           <p>Número de orden</p>
-          <span>${numberOrder}</span>
+          <span>${numberOrder.slice(0, 8)}</span>
           <p>Fecha de pedido</p>
           <span> ${dateOrder}</span>
           <p>Productos</p>
