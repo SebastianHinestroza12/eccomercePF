@@ -23,7 +23,7 @@ const dispatch = useDispatch()
   const columns = [
     {
       name: "Nombre",
-      selector: (row) => row.user.name,
+      selector: (row) => row.user,
       sortable: true,
     },
     {
