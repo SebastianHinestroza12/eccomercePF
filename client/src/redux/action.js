@@ -351,21 +351,14 @@ export const getCartTotal = (payload) => {
   };
 };
 
-export const logoutUser = () => {
-  return {
-    type: "LOGOUT_USER",
+
+export const getOrders = (data) => {
+  console.log('ORDERS',data)
+  return function (dispatch) {
+    return axios(`/orders`)
+      .then((response) => response.data)
+      .then((userOrders) => {
+        dispatch({ type: "GET_ORDERS", payload: userOrders });
+      });
   };
 };
-
-export function IncreaseQuantity(payload) {
-  return {
-    type: "INCREASE_QUANTITY",
-    payload,
-  };
-}
-export function DecreaseQuantity(payload) {
-  return {
-    type: "DECREASE_QUANTITY",
-    payload,
-  };
-}
