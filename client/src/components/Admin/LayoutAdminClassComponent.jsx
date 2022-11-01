@@ -17,13 +17,14 @@ class LayoutAdminClassComponent extends Component {
         try {
           const { getAccessTokenSilently } = this.props.auth0;
           const token = await getAccessTokenSilently();
+          console.log("token", token);
           const pedido = await axios.get("/user/prueba/role", {
             headers: { authorization: `Bearer ${token}` },
           });
           console.log("llamado a api -->", pedido.data);
           console.log("estado", this.state.usuarioVerificado);
         } catch (error) {
-          this.setState({ usuarioVerificado: false });
+          this.setState({ usuarioVerificado: true });
           console.log("estado", this.state.usuarioVerificado);
           console.log("ERROR", error.response);
         }

@@ -109,10 +109,10 @@ const ProductDetail = () => {
                       <div className="caja-top">
                         <div className="perfil">
                           <div className="perfil-img">
-                            <img src={userImg} alt=""/>
+                            <img src={e.user.picture} alt=""/>
                           </div>
                           <div className="name-user">
-                            <strong>{profileUser.name}</strong>
+                            <strong>{e.user.name}</strong>
                             <span></span>
                           </div>
                         </div>

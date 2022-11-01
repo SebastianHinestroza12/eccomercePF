@@ -6,9 +6,7 @@ router.get("/:productId", async (req, res) => {
 
   try {
 
-    const resp = await Review.findAll({
-      where: { productId: productId }
-    });
+    const resp = await Review.findAll({ where: { productId: productId }, include: { all : true }});
 
     return res.json(resp);
   
