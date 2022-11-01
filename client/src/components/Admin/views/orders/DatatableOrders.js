@@ -10,6 +10,11 @@ const Table = (props) => {
 
   const columns = [
     {
+      name: "#Orden",
+      selector: (row) => row.numberOrder,
+      sortable: true,
+    },
+    {
       name: "Cliente",
       selector: (row) => row.client,
       sortable: true,
