@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
       where: { name: category },
     });
 
-    const matchingCategorys = await Category.findAll({
+    const matchingCategorys = await Category.findOne({
       where: {
         name: {
           [Op.eq]: category,
