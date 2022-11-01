@@ -24,7 +24,7 @@ useEffect(() => {
   const columns = [
     {
       name: "Autor",
-      selector: (row) => row.user,
+      selector: (row) => row.user.name,
       sortable: true,
     },
     {
@@ -34,7 +34,7 @@ useEffect(() => {
     },
     {
       name: "Producto",
-      selector: (row) => row.product_name,
+      selector: (row) => row.product.name,
       sortable: true,
     },
     {

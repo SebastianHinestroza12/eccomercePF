@@ -48,7 +48,7 @@ const FormNewProduct = ({ productId }) => {
       name: "",
       category: "",
       price: "",
-      status: "",
+      visible: "",
       size_stock: [],
       detail: "",
     },
@@ -68,8 +68,15 @@ const FormNewProduct = ({ productId }) => {
   };
 
   const onSubmit = (data) => {
+
+    if(data.size_stock.length > 0) {
+    console.log("datos enviados", data);
+    setImage("");
     dispatch(newProductForm(data));
     reset();
+    } else {
+      window.alert("Por favor ingrese al menos una talla")
+    }
   };
 
   const productDetail = useSelector((state) => state.productDetail);
@@ -248,12 +255,12 @@ const FormNewProduct = ({ productId }) => {
           <Col md={4}>
             <div className="actions-new-product">
               <h4>ACCIONES</h4>
-              <label htmlFor="status" className="form-label">
+              <label htmlFor="visible" className="form-label">
                 Estado:
               </label>
-              <select name="status" id="status" {...register("status", {})}>
-                <option value="Publicado">Publicado</option>
-                <option value="Borrador">Borrador</option>
+              <select name="visible" id="visible" {...register("visible", {})}>
+                <option value="true">Publicado</option>
+                <option value="false">Borrador</option>
               </select>
               <button
                 type="submit"

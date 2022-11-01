@@ -5,7 +5,7 @@ router.get("/", async (req, res) => {
 
   try {
 
-    const resp = await Review.findAll();
+    const resp = await Review.findAll({include: { all: true }});
 
     return res.json(resp);
   

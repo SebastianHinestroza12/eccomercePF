@@ -9,16 +9,16 @@ import "../dataTable.css";
 import { getOrders } from "../../../../redux/action";
 
 const Table = (props) => {
-// const dispatch = useDispatch();
-
-
-
-
 
   const columns = [
     {
-      name: "Id",
-      selector: (row) => row.id,
+      name: "Cliente",
+      selector: (row) => row.client,
+      sortable: true,
+    },
+    {
+      name: "Product",
+      selector: (row) => row.products,
       sortable: true,
     },
     {

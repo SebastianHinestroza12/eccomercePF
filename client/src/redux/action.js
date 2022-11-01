@@ -29,13 +29,23 @@ export const cleanProductDetail = () => ({
   type: "CLEAN_PRODUCT_DETAIL"
 });
 
+export const getAllReviews = () => {
+  return function (dispatch) {
+    return axios("/getReviews")
+      .then((response) => response.data)
+      .then((reviews) => {
+        dispatch({ type: "GET_ALL_REVIEWS", payload: reviews });
+      });
+  };
+};
+
 export const getReviews = (productId) => {
   return function (dispatch) {
     return axios(`/getReviews/${productId}`)
-    .then((response) => response.data) 
-    .then((productReviews) => {
-      dispatch({ type: "GET_PRODUCT_REVIEW", payload: productReviews });
-    });
+      .then((response) => response.data)
+      .then((productReviews) => {
+        dispatch({ type: "GET_PRODUCT_REVIEW", payload: productReviews });
+      });
   };
 };
 
@@ -63,6 +73,23 @@ export const postOrder = (user) => {
   return async () => {
     console.log("action", user);
     await axios.post(`/order`, user);
+  };
+};
+
+// Mostrar Ordenes
+
+export const getOrder = () => {
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("/order");
+      console.log(json.data)
+      return dispatch({
+        type: "GET_ORDER",
+        payload: json.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -164,18 +191,33 @@ export function deleteProductFromCart(payload, quantity) {
   };
 }
 
-export function IncreaseQuantity(payload) {
-  return {
-    type: "INCREASE_QUANTITY",
-    payload,
+export const addUnitDB = (productId, size, email) => {
+  const dataToAdd = { productId, size, email }
+  console.log('dataToAdd',dataToAdd)
+  return async (dispatch) => {
+    await axios.put(`/cart/add`, {
+      data: dataToAdd,
+    })
+    dispatch({
+      type:'INCREASE_QUANTITY',
+      payload: dataToAdd,
+    });
   };
 }
-export function DecreaseQuantity(payload) {
-  return {
-    type: "DECREASE_QUANTITY",
-    payload,
+
+export const removeUnitDB = (productId, size, email) => {
+  const dataToRemove = { productId, size, email }
+  return async (dispatch) => {
+      await axios.put(`/cart/remove`, {
+      data: dataToRemove,
+    })
+    dispatch({
+      type:'DECREASE_QUANTITY',
+      payload: dataToRemove,
+    });
   };
 }
+
 
 export function RemoveItemFromCart(payload, quantity) {
   return {

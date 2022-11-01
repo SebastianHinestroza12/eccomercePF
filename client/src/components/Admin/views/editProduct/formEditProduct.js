@@ -36,7 +36,7 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
   };
 
   const { register, reset, formState: { errors }, handleSubmit, control, setValue } = useForm ({ 
-    defaultValues: { id: productId, name: "", detail: "", price: "", status: "", image: "",
+    defaultValues: { id: productId, name: "", detail: "", price: "", visible: "", image: "",
         category: "" /*cat[0] ? cat[0].categories.name : false*/,
         size_stock: []
       },
@@ -50,6 +50,8 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
   useEffect(() => {
     productDetail.size_stock ?  console.log("nada") : dispatch(getProductDetail(productId));
     setValue('size_stock', productDetail.size_stock);
+    setValue("visible", productDetail.visible ? "true" : "false");
+    setValue("category", productDetail.categories ? productDetail.categories[0].name : false);
 
   }, [dispatch, productDetail.size_stock ? false : productDetail.size_stock, productId, setValue]);
 
@@ -68,10 +70,8 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
     setValue("price", productDetail.price);
     setValue("detail", productDetail.detail);
     setValue("image", productDetail.image);
-    //setValue("category", productDetail.categories ? productDetail.categories[0].name : false);
-    setValue("status", productDetail.visible ? "Publicado" : "Borrador");
   }
-  
+    console.log(productDetail);
   return (
     <>
       <form className="" onSubmit={handleSubmit(onSubmit)}>
@@ -94,7 +94,6 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
               <label> Categoría </label>
               <select onClick={value} name="category" id="category" aria-label="Default select example" { ...register("category") }>
 
-                <option disabled hidden>{productDetail.categories ? productDetail.categories[0].name : false}</option>
                 <option value="Jersey">Jersey</option>
                 <option value="Balon">Balon</option>
                 <option value="Calzado">Calzado</option>
@@ -111,16 +110,6 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
                     <input className="form-control" {...register(`size_stock.${index}.size`, { required: true })} />
                     <input className="form-control" {...register(`size_stock.${index}.stock`, { required: true })} />
 
-                    { /*<Controller render={({ field }) => (
-                        <input {...field} className="form-control" /> )}
-                      name={`size_stock.${index}.size`}
-                      control={control} />
-
-                    <Controller render={({ field }) => (
-                        <input {...field} className="form-control" /> )}
-                      name={`size_stock.${index}.stock`}
-                    control={control} /> */}
-
                     <button type="button" className="remove-item btn btn-danger" onClick={() => remove(index)}>
                       <Unicons.UilTrash />
                     </button>
@@ -136,10 +125,10 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
             <div className="actions-new-product">
               <h4>ACCIONES</h4>
               <label> Estado: </label>
-              <select name="status" id="status" { ...register("status") }>
+              <select onClick={value} name="visible" id="visible" aria-label="Default select example" { ...register("visible") }>
 
-                <option value="Publicado">Publicado</option>
-                <option value="Borrador">Borrador</option>
+                <option value="true">Publicado</option>
+                <option value="false">Borrador</option>
 
               </select>
               <button type="submit" variant="success" className="save-product btn btn-primary mt-2"> Guardar </button>
