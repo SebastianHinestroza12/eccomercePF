@@ -24,6 +24,7 @@ const Orders = () => {
         <Table data={allOrder.map(el => {
           return (
             {
+              numberOrder: el.id.slice(0, 8),
               client: el.client,
               products: el.products,
               total_purchase: `$${el.total_purchase}`,
