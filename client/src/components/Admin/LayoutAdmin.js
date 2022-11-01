@@ -8,6 +8,7 @@ import { getOrder } from "../../redux/action";
 import { useDispatch } from "react-redux";
 import "./admin.css";
 import { listEmails } from "../../utils/EmailsValidos";
+import { UilLockSlash } from "@iconscout/react-unicons";
 
 
 const LayoutAdmin = () => {
@@ -46,7 +47,12 @@ const LayoutAdmin = () => {
           </Row>
         </Container>
       ) : (
-        <div>No tenes permiso para ingresar</div>
+        <div class="text-bg-danger p-5">
+        <UilLockSlash />
+        <span class="ms-5">
+          NO TIENES LOS PERMISOS NECESARIOS PARA ACCEDER
+        </span>
+      </div>
       )}
     </div>
   );
