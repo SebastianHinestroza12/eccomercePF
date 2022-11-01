@@ -1,0 +1,14 @@
+.refreshButton {
+  margin-top: 20px;
+  height: 60px;
+}
+
+.refreshButton .refresh {
+  height: 100%;
+  width: 100%;
+}
+
+.refreshButton .refresh:hover {
+  color: #2075d8;
+  cursor: pointer;
+}
