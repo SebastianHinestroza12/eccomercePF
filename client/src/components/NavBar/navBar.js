@@ -59,10 +59,6 @@
 
                     <NavDropdown.Item as={Link} to="/user"> Mi perfil </NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/shopping"> Mis compras </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                      Something else
-                    </NavDropdown.Item>
 
                   </NavDropdown>
                 )}
