@@ -10,6 +10,7 @@ const initialState = {
   user: localStorage.getItem("currentUser")
     ? JSON.parse(localStorage.getItem("currentUser"))
     : [],
+  newUsers: [],
   allProducts: [],
   products: [],
   productDetail: [],
@@ -289,6 +290,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         orders: payload,
+      };
+    case "GET_USERS":
+      return {
+        ...state,
+        newUsers: payload,
       };
 
     default:

@@ -267,6 +267,7 @@ export const getCartTotal = (payload) => {
 };
 
 
+
 export const getOrders = (data) => {
   console.log('ORDERS',data)
   return function (dispatch) {
@@ -278,5 +279,15 @@ export const getOrders = (data) => {
   };
 };
 
+
+export const getUsers = () => {
+  return function (dispatch) {
+    return axios(`/getUsers`)
+      .then((response) => response.data)
+      .then((users) => {
+        dispatch({ type: "GET_USERS", payload: users });
+      });
+  };
+};
 
 
