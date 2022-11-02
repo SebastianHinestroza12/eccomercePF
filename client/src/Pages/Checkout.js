@@ -1,8 +1,9 @@
 import { Alert, Col, Container, Form, Row } from "react-bootstrap";
 import PaypalCheckoutButton from "../components/Checkout/PaypalCheckoutButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./checkout.css";
 import { useEffect, useState } from "react";
+import { getCartDetail } from "../redux/action";
 
 //recibe los datos de los input y verficia errores
 function validateForm(dataFromInput) {
@@ -48,6 +49,7 @@ function validateForm(dataFromInput) {
 }
 
 const Checkout = () => {
+  const dispatch = useDispatch();
   const getTotal = useSelector((state) => state.cartTotal);
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const currentUser = useSelector((state) => state.user);
@@ -88,14 +90,20 @@ const Checkout = () => {
         ...input,
       })
     );
-  }, [input]);
+  }, []);
+
+  useEffect(() => {
+    //setTotal(totalPrice);
+    //dispatch(getCartTotal(totalPrice));
+    dispatch(getCartDetail(currentUser.email));
+  }, [dispatch, getCartDetail]);
 
   return (
     <Container>
-      {console.log("currentUser", currentUser)}
       <h2 className="cart-title">Finalizar compra</h2>
 
       <Row>
+        {console.log("firstrrrrrrrrrrrrrrrrrrrrrrrr", productsInTheCart)}
         <Col md={6}>
           <Form>
             <h4>Datos de facturación</h4>
@@ -218,22 +226,32 @@ const Checkout = () => {
         <Col md={6}>
           <section className="totals checkout">
             <h4>Productos en el carrito</h4>
-            {productsInTheCart.length === 0 ? (
+            {console.log(
+              "CHECKOUTTTTTTTTTTTTTTTTTTTTT",
+              productsInTheCart.items
+            )}
+            {productsInTheCart.items?.length === 0 ? (
               <div>Aún no hay productos en el carrito</div>
             ) : (
-              productsInTheCart.map((element, index) => (
-                <div key={index}>
-                  {element.name} x
-                  {element.quantity === 1
-                    ? ` ${element.quantity} unidad`
-                    : ` ${element.quantity} unds.`}
+              productsInTheCart.items?.map((element, index) => (
+                <div key={index} className="checkout-subtotal">
+                  <span>
+                    {element.name} x
+                    {element.units === 1
+                      ? ` ${element.units} unidad`
+                      : ` ${element.units} unds.`}
+                  </span>
+
+                  <span>$ {element.subtotal.toLocaleString("en-US")}</span>
                 </div>
               ))
             )}
             <hr></hr>
             <p className="totalsCheckout">
               <span className="totalTitle">Total: </span>
-              <span>${getTotal.toLocaleString("en-US")}</span>
+              <span>
+                ${productsInTheCart.totalPrice?.toLocaleString("en-US")}
+              </span>
             </p>
           </section>
           <PaypalCheckoutButton product={product} inputErrors={errors} />

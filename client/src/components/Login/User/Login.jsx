@@ -3,7 +3,13 @@ import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
-import { postRegister } from "../../../redux/action";
+import {
+  addProductFromLocalStorage,
+  getCartDetail,
+  logoutUser,
+  postRegister,
+  saveUserGlobalState,
+} from "../../../redux/action";
 
 const AuthNAv = () => {
   const { isAuthenticated } = useAuth0();
@@ -20,7 +26,24 @@ function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
+      const userLogged = user;
       dispatch(postRegister(user));
+      dispatch(saveUserGlobalState(user));
+      //mandar localstorage a db => getCart db
+      if (JSON.parse(localStorage.getItem("cartProductsAdded"))?.length > 0) {
+        console.log("user logged", userLogged);
+
+        JSON.parse(localStorage.getItem("cartProductsAdded")).forEach(
+          (product) => {
+            dispatch(addProductFromLocalStorage({ product, user: user }));
+          }
+        );
+        localStorage.removeItem("cartProductsAdded");
+      }
+      dispatch(getCartDetail(userLogged.email));
+    } else {
+      localStorage.removeItem("currentUser");
+      dispatch(logoutUser());
     }
   }, [dispatch, isAuthenticated, user]);
   return <>{isLoading ? <Loading /> : <AuthNAv />}</>;

@@ -1,10 +1,28 @@
 import * as Unicons from "@iconscout/react-unicons";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addUnitDB, removeUnitDB } from "../../redux/action";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addUnitDB,
+  DecreaseQuantity,
+  getCartDetail,
+  IncreaseQuantity,
+  removeUnitDB,
+} from "../../redux/action";
 
-const ItemCount = ({ quantity, setQuantity, carrito, index, stock, productId, size, email }) => {
+const ItemCount = ({
+  quantity,
+  setQuantity,
+  carrito,
+  index,
+  stock,
+  productId,
+  size,
+  email,
+}) => {
+  const currentUser = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
+  let [num, setNum] = useState(0);
 
   function addQuantityToCart(actionButton) {
     if (!carrito) {
@@ -14,19 +32,31 @@ const ItemCount = ({ quantity, setQuantity, carrito, index, stock, productId, si
         setQuantity(quantity + 1);
       }
     } else {
-      if (actionButton === "minus") {
-        console.log('si',productId, size, email)
-        dispatch(removeUnitDB(productId, size, email));
+      //user logged in
+      if (currentUser?.email) {
+        if (actionButton === "minus") {
+          new Promise((res, rej) => {
+            res(dispatch(removeUnitDB(productId, size, email)));
+          }).then(() => {
+            dispatch(getCartDetail(email));
+          });
+        } else {
+          new Promise((res, rej) => {
+            res(dispatch(addUnitDB(productId, size, email)));
+          }).then(() => {
+            dispatch(getCartDetail(email));
+          });
+        }
       } else {
-        console.log('si',productId, size, email)
-        dispatch(addUnitDB(productId, size, email));
+        console.log("no loggeeeeeeeeeeeeed");
+        if (actionButton === "minus") {
+          dispatch(DecreaseQuantity(index));
+        } else {
+          dispatch(IncreaseQuantity(index));
+        }
       }
     }
   }
-
-  useEffect(() => {
-    console.log("me actualizo");
-  }, []);
 
   return (
     <div className="qty-box">
