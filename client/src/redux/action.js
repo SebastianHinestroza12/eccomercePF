@@ -1,6 +1,8 @@
 import axios from "axios";
+//verificar usuario loggeado
 
 export const getAllProducts = () => {
+  //user logged
   return function (dispatch) {
     return axios("/product")
       .then((response) => response.data)
@@ -14,7 +16,6 @@ export const getAllProducts = () => {
       });
   };
 };
-
 export const getProductDetail = (productId) => {
   return function (dispatch) {
     return axios(`/product/${productId}`)
@@ -26,7 +27,7 @@ export const getProductDetail = (productId) => {
 };
 
 export const cleanProductDetail = () => ({
-  type: "CLEAN_PRODUCT_DETAIL"
+  type: "CLEAN_PRODUCT_DETAIL",
 });
 
 export const getAllReviews = () => {
@@ -38,7 +39,6 @@ export const getAllReviews = () => {
       });
   };
 };
-
 export const getReviews = (productId) => {
   return function (dispatch) {
     return axios(`/getReviews/${productId}`)
@@ -51,14 +51,13 @@ export const getReviews = (productId) => {
 
 export const removeReview = (data) => {
   return async (dispatch) => {
-    await axios.put(`/putReview`, {id: data, visible: "false"});
+    await axios.put(`/putReview`, { id: data, visible: "false" });
     dispatch({
       type: "REMOVE_REVIEW",
       payload: data,
     });
   };
 };
-
 export const newProductForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postProduct`, data);
@@ -70,41 +69,47 @@ export const newProductForm = (data) => {
 };
 
 //REGISTRAR USUARIOS LOGUADOS EN DB
-export const postRegister = (user) => {
+/*export const postRegister = (user) => {
   return async () => {
     console.log("action", user);
     await axios.post(`/user/register`, user);
   };
+};*/
+export const postRegister = (user) => {
+  console.log("postregister", user);
+  return async () => {
+    await axios.post(`/user/register`, user);
+  };
+};
+export const saveUserGlobalState = (user) => {
+  return function (dispatch) {
+    dispatch({ type: "SAVE_USER", payload: user });
+  };
 };
 
 //Crear una orden
-
 export const postOrder = (user) => {
   return async () => {
     console.log("action", user);
     await axios.post(`/order`, user);
   };
 };
-
 // Mostrar Ordenes
-
 export const getOrder = () => {
   return async function (dispatch) {
     try {
       let json = await axios.get("/order");
-      console.log(json.data)
+      console.log(json.data);
       return dispatch({
         type: "GET_ORDER",
-        payload: json.data
+        payload: json.data,
       });
     } catch (error) {
       console.log(error);
     }
   };
 };
-
 // EDITAR DATOS DE USUARIO
-
 export const putUser = (data) => {
   return async function (dispatch) {
     try {
@@ -120,21 +125,18 @@ export const putUser = (data) => {
     }
   };
 };
-
 export function filterByPrice(payload) {
   return {
     type: "ORDER_BY_PRICE",
     payload,
   };
 }
-
 export function filterByRating(payload) {
   return {
     type: "ORDER_BY_RATING",
     payload,
   };
 }
-
 export const SearchByName = (name) => {
   return function (dispatch) {
     return axios(`/product?name=${name}`)
@@ -153,7 +155,6 @@ export const SearchByName = (name) => {
       });
   };
 };
-
 export function filterByName(payload) {
   return {
     type: "ORDER_BY_NAME",
@@ -162,8 +163,6 @@ export function filterByName(payload) {
 }
 
 //CREACION DE PRODUCTO
-
-
 
 export const editProductForm = (data) => {
   return async (dispatch) => {
@@ -176,6 +175,7 @@ export const editProductForm = (data) => {
 };
 
 export const newComentForm = (data) => {
+  console.log("comment", data);
   return async (dispatch) => {
     await axios.post(`/postReview`, data);
     dispatch({
@@ -185,55 +185,127 @@ export const newComentForm = (data) => {
   };
 };
 
-export function addProductToCart(payload, quantity, sizePicked) {
-  return {
-    type: "ADD_PRODUCTS_TO_CART",
-    payload: { ...payload, quantity, sizePicked },
-    quantity,
+export const getReviewByProduct = (idProduct) => {
+  return function (dispatch) {
+    return axios(`/getReviews/${idProduct}`)
+      .then((response) => response.data)
+      .then((review) => {
+        dispatch({ type: "GET_REVIEW_BY_PRODUCT", payload: review });
+      });
   };
-}
+};
 
-export function deleteProductFromCart(payload, quantity) {
-  return {
-    type: "DELETE_PRODUCT_FROM_CART",
-    payload,
-    quantity,
-  };
+export const AddProductToCart = (payload, units, size) => {
+  console.log("add prod db", payload);
+  //si usuario esta loggeado guardo en la DB
+  if (payload.user) {
+    console.log("entro al login", payload.user);
+
+    const data = {
+      productId: payload.product.id,
+      units: payload.units,
+      size: payload.size,
+      email: payload.user.email,
+    };
+    console.log("data", data);
+    return async () => {
+      await axios.post(`/cart`, data);
+      /* dispatch({
+        type: "ADD_PRODUCTS_TO_CART",
+      });*/
+    };
+  } else {
+    return {
+      type: "ADD_PRODUCTS_TO_CART",
+      payload: {
+        productId: payload.id,
+        name: payload.name,
+        size,
+        units,
+        price: payload.price,
+        subtotal: units * payload.price,
+        image: payload.image,
+      },
+    };
+  }
+};
+
+export const addProductFromLocalStorage = (payload, units, size) => {
+  if (payload.user) {
+    const data = {
+      productId: payload.product.productId,
+      units: payload.product.units,
+      size: payload.product.size,
+      email: payload.user.email,
+    };
+    console.log("data", data);
+    return async () => {
+      await axios.post(`/cart`, data);
+      /* dispatch({
+        type: "ADD_PRODUCTS_TO_CART",
+      });*/
+    };
+  }
+};
+
+export function getCartDetail(userEmail) {
+  console.log("actualizo cart", userEmail);
+  if (userEmail) {
+    console.log("entro al action de getcart");
+    return function (dispatch) {
+      return axios(`/cart/?email=${userEmail}`)
+        .then((response) => response.data)
+        .then((cartDetail) => {
+          dispatch({ type: "GET_CART_DETAIL", payload: cartDetail });
+        });
+    };
+  } else {
+    return function (dispatch) {
+      dispatch({ type: "GET_CART_DETAIL" });
+    };
+  }
 }
 
 export const addUnitDB = (productId, size, email) => {
-  const dataToAdd = { productId, size, email }
-  console.log('dataToAdd',dataToAdd)
+  const dataToAdd = { productId, size, email };
+  console.log("dataToAdd", dataToAdd);
   return async (dispatch) => {
-    await axios.put(`/cart/add`, {
-      data: dataToAdd,
-    })
+    await axios.put(`/cart/add`, dataToAdd);
     dispatch({
-      type:'INCREASE_QUANTITY',
+      type: "INCREASE_QUANTITY_DB",
       payload: dataToAdd,
     });
   };
-}
+};
 
 export const removeUnitDB = (productId, size, email) => {
-  const dataToRemove = { productId, size, email }
+  const dataToRemove = { productId, size, email };
   return async (dispatch) => {
-      await axios.put(`/cart/remove`, {
-      data: dataToRemove,
-    })
+    await axios.put(`/cart/remove`, dataToRemove);
     dispatch({
-      type:'DECREASE_QUANTITY',
+      type: "DECREASE_QUANTITY_DB",
       payload: dataToRemove,
     });
   };
-}
+};
 
-
-export function RemoveItemFromCart(payload, quantity) {
+export function RemoveItemFromCart(payload, units) {
   return {
     type: "REMOVE_ITEM_FROM_CART",
     payload,
-    quantity,
+    units,
+  };
+}
+export function RemoveItemFromCartDb(productId, size, email) {
+  const dataToDelete = { productId, size, email };
+  return async (dispatch) => {
+    await axios.delete(`/cart`, {
+      data: dataToDelete,
+    });
+    dispatch({
+      type: "REMOVE_ITEM_FROM_CART_DB",
+      payload: dataToDelete,
+    });
   };
 }
 
@@ -243,14 +315,12 @@ export const filterBySize = (payload) => {
     payload,
   };
 };
-
 export const filterByType = (payload) => {
   return {
     type: "FILTER_BY_TYPE",
     payload,
   };
 };
-
 export const linkCategory = (category) => {
   return function (dispatch) {
     return axios(`/filterType?type=${category}`)
@@ -261,14 +331,12 @@ export const linkCategory = (category) => {
       });
   };
 };
-
 export const filterByCategory = (payload) => {
   return {
     type: "FILTER_BY_CATEGORY",
     payload,
   };
 };
-
 export const getCartTotal = (payload) => {
   return {
     type: "GET_TOTAL_CART",
@@ -276,10 +344,27 @@ export const getCartTotal = (payload) => {
   };
 };
 
+export const logoutUser = () => {
+  return {
+    type: "LOGOUT_USER",
+  };
+};
 
+export function IncreaseQuantity(payload) {
+  return {
+    type: "INCREASE_QUANTITY",
+    payload,
+  };
+}
+export function DecreaseQuantity(payload) {
+  return {
+    type: "DECREASE_QUANTITY",
+    payload,
+  };
+}
 
 export const getOrders = (data) => {
-  console.log('ORDERS',data)
+  console.log("ORDERS", data);
   return function (dispatch) {
     return axios(`/orders`)
       .then((response) => response.data)
@@ -288,7 +373,6 @@ export const getOrders = (data) => {
       });
   };
 };
-
 export const getUsers = () => {
   return function (dispatch) {
     return axios(`/getUsers`)
@@ -301,14 +385,13 @@ export const getUsers = () => {
 
 export const removeUser = (data) => {
   return async (dispatch) => {
-    await axios.put(`/putUser`, {id: data, visible: "false"});
+    await axios.put(`/putUser`, { id: data, visible: "false" });
     dispatch({
       type: "REMOVE_USER",
       payload: data,
     });
   };
 };
-
 export const getActualUser = (userEmail) => {
   return function (dispatch) {
     return axios(`/user/login?email=${userEmail}`)
