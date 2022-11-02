@@ -7,23 +7,28 @@ import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import { getUsers } from "../../../../redux/action";
 
 const Table = (props) => {
+
+
+const users = useSelector(state => state.newUsers)
+console.log('USERSS', users)
 
 const dispatch = useDispatch()
 
 
 
 
-// useEffect(() => {
-//   dispatch(getUsers())
-// },[])
+useEffect(() => {
+  dispatch(getUsers())
+},[])
 
 
   const columns = [
     {
       name: "Nombre",
-      selector: (row) => row.user,
+      selector: (row) => row.name,
       sortable: true,
     },
     {
