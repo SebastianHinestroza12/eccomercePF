@@ -1,16 +1,17 @@
 import * as Unicons from "@iconscout/react-unicons";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUnitDB, getCartDetail, removeUnitDB } from "../../redux/action";
 
 const ItemCount = ({ quantity, setQuantity, carrito, index, stock, productId, size, email }) => {
   const dispatch = useDispatch();
   let [num, setNum] = useState(0)
+  const productsInTheCart = useSelector((state) => state.cartProducts);
 
-  useEffect(() => {
-    console.log("me actualizo");
-  }, [dispatch]);
+  const [count, setCount] = useState(0);
 
+  //console.log("carrito", carrito);
+  console.log(count);
   function addQuantityToCart(actionButton) {
     if (!carrito) {
       if (actionButton === "minus") {
@@ -18,24 +19,32 @@ const ItemCount = ({ quantity, setQuantity, carrito, index, stock, productId, si
       } else {
         setQuantity(quantity + 1);
       }
-    } else {  
+    } else {
       
       if (actionButton === "minus") {
         console.log('si',productId, size, email)
         dispatch(removeUnitDB(productId, size, email));
         dispatch(getCartDetail(email))
+        setCount(productsInTheCart.size_stock)
+        setCount(count+1)
+        console.log("restando");
       } else {
         console.log('si',productId, size, email)
         dispatch(addUnitDB(productId, size, email));
         dispatch(getCartDetail(email))
+        setCount(count+1)
+        console.log("sumando");
       }
     }
-    
+    setCount(count+1)
   }
+  const currentUser = useSelector((state) => state.user);
 
   useEffect(() => {
-    console.log("me actualizo");
-  }, []);
+
+    dispatch(getCartDetail(currentUser.email));
+    }, [currentUser.email, dispatch, count]
+  );
 
   return (
     <div className="qty-box">

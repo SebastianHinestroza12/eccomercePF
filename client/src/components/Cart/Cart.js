@@ -1,6 +1,6 @@
 import { Container, Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   addUnitDB,
   getCartDetail,
@@ -13,6 +13,7 @@ import ItemCount from "./ItemCount";
 import * as Unicons from "@iconscout/react-unicons";
 import "./cart.css";
 import { useAuth0 } from "@auth0/auth0-react";
+let xxx;
 
 const Cart = () => {
   const { loginWithRedirect } = useAuth0();
@@ -52,18 +53,30 @@ const Cart = () => {
     totalPrice = subtotal + impuestos;
   }
 */
+
+  const [count, setCount] = useState(0);
+  //console.log("count", count);
+
   function removeItemFromCart(productId, size, email) {
     dispatch(RemoveItemFromCartDb(productId, size, email));
     dispatch(getCartDetail(currentUser.email));
+    setCount(productsInTheCart.items ? productsInTheCart.items.length : false)
+    setCount(count+1)
   }
 
   const currentUser = useSelector((state) => state.user);
+  xxx = productsInTheCart.items ? productsInTheCart.items.length : false;
+  
+  //console.log("productsInTheCart.items.length", productsInTheCart.items ? productsInTheCart.items.length : false);
+  //console.log("xxx", xxx);
+
   useEffect(() => {
     //setTotal(totalPrice);
     //dispatch(getCartTotal(totalPrice));
     dispatch(getCartDetail(currentUser.email));
-    console.log("dispatch cart detail");
-  }, [dispatch]);
+    //console.log("dispatch cart detail");
+    }, [currentUser.email, dispatch, count]
+  );
 
   /*
   function loginWithRedirect() {
@@ -79,7 +92,7 @@ const Cart = () => {
       <Container>
         <h2 className="cart-title">Mi carrito</h2>
         <section>
-          {console.log("productsInTheCart", productsInTheCart)}
+          {/*console.log("productsInTheCart", productsInTheCart)*/}
           {productsInTheCart.status === "Active" ? (
             <Table responsive>
               <thead>
@@ -96,7 +109,7 @@ const Cart = () => {
                 {productsInTheCart.items.map((element, index) => (
                   <tr key={index} id={index}>
                     <td>
-                      {console.log("element", element)}
+                      {/*console.log("element", element)*/}
                       <img
                         src={element.image}
                         className="cart-image-detail"
@@ -109,7 +122,7 @@ const Cart = () => {
                     </td>
                     <td>$ {element.price.toLocaleString("en-US")}</td>
                     <td>
-                      {console.log('product in the car', productsInTheCart)}
+                      {/*console.log('product in the car', productsInTheCart)*/}
                       <ItemCount
                         productId={element.productId}
                         size={element.size}
@@ -137,6 +150,7 @@ const Cart = () => {
                             element.size,
                             currentUser.email
                           )
+                          
                         }
                         className="remove-item"
                       >

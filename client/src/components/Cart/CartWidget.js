@@ -32,7 +32,11 @@ const CartWidget = () => {
     currentUser && dispatch(getCartDetail(currentUser.email));
   }, [dispatch, currentUser]);
 
+  
   const getTotalUnitsCart = () => {};
+
+  //console.log("productsInTheCart", productsInTheCart)
+  //productsInTheCart.items ? console.log("xx", productsInTheCart.items.map(i=>i)) : console.log("xx", false);
   return (
     <>
       <DropdownButton
@@ -40,8 +44,9 @@ const CartWidget = () => {
         id="dropdown-cart"
         title={<Unicons.UilShoppingCartAlt />}
       >
-        {console.log("productsInTheCart cartwidget", productsInTheCart)}
-        {productsInTheCart?.length ? (
+        {/*console.log("productsInTheCart cartwidget", productsInTheCart)*/}
+        {
+        productsInTheCart.items ? (
           productsInTheCart.items.map((product) => (
             <Dropdown.Item
               className="listItem"
@@ -60,12 +65,25 @@ const CartWidget = () => {
                 <span>
                   {product.units} unds. x ${product.price}
                 </span>
+                
               </div>
+              
             </Dropdown.Item>
+            
           ))
         ) : (
           <p>No hay productos en el carrito</p>
         )}
+
+        <div className="buttons-cart-group">
+            <Link to="/pagar" className="buy btn btn-primary buttons-cart">
+              FINALIZAR COMPRA
+            </Link>
+            <Link to="/carrito" className="buy btn btn-primary buttons-cart">
+              IR AL CARRITO
+            </Link>
+          </div>
+
         {productsInTheCart?.length ? (
           <div className="buttons-cart-group">
             <Link to="/pagar" className="buy btn btn-primary buttons-cart">

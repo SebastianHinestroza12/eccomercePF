@@ -23,10 +23,10 @@ router.delete('/', async (req, res, next) => {
 			},
 		});
 		
-		console.log('prroduc', product)
+		//console.log('prroduc', product)
 		if (!product)
 			return res.status(400).send('No product was found with that ID');
-
+4
 		let cart = await Cart.findOne({
 			where: {
 				userId: userId,
@@ -36,7 +36,7 @@ router.delete('/', async (req, res, next) => {
 
 		let subtotalProduct = product.units * product.price;
 
-		console.log('cart', cart)
+		//console.log('cart', cart)
 		let newPrice = (
 			cart.totalPrice - subtotalProduct
 		).toFixed(2);
@@ -55,7 +55,7 @@ router.delete('/', async (req, res, next) => {
 				}
 			})
       return res.send(
-        `Product ${product.name} removed from cart`
+        `Product removed from cart`
       );
 			
       // return res.send(`No product ${product.name} in cart!`);
