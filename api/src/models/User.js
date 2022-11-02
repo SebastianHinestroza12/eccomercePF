@@ -43,7 +43,12 @@ module.exports = (sequelize) => {
       favorites: {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
-      }
+      },
+      visible: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: true
+      },
     },
     {
       timestamps: false,

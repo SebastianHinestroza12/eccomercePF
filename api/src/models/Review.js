@@ -12,6 +12,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      visible: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: true
+      },
     },
     {
       timestamps: false,

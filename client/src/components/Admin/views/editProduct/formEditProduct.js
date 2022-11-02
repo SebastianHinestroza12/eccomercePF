@@ -19,9 +19,6 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
   const dispatch = useDispatch();
 
   const productDetail = useSelector((state) => state.productDetail);
-  const productDetail3 = useSelector((state) => state.products);
-
-
 
   const handleInputValue = async (e) => {
     const file = e.target.files[0];
@@ -37,7 +34,7 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
 
   const { register, reset, formState: { errors }, handleSubmit, control, setValue } = useForm ({ 
     defaultValues: { id: productId, name: "", detail: "", price: "", visible: "", image: "",
-        category: "" /*cat[0] ? cat[0].categories.name : false*/,
+        category: "",
         size_stock: []
       },
     });
@@ -48,7 +45,7 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
   });
   
   useEffect(() => {
-    productDetail.size_stock ?  console.log("nada") : dispatch(getProductDetail(productId));
+    productDetail.size_stock ? console.log("nada") : dispatch(getProductDetail(productId));
     setValue('size_stock', productDetail.size_stock);
     setValue("visible", productDetail.visible ? "true" : "false");
     setValue("category", productDetail.categories ? productDetail.categories[0].name : false);
@@ -61,8 +58,7 @@ const FormNewProduct = ({ productId, productDetail2 }) => {
   };
 
   const onSubmit = (data) => {
-    dispatch(editProductForm(data));
-    reset();
+    dispatch(editProductForm(data)).then(() => window.location.reload(false));
   };
 
   function fillInputs(productDetail) {

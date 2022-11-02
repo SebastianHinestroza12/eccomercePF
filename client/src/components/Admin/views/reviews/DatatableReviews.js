@@ -5,7 +5,7 @@ import DataTable from "react-data-table-component";
 import { Link } from "react-router-dom";
 import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
-import { getReviews } from "../../../../redux/action";
+import { getAllReviews, removeReview } from "../../../../redux/action";
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 
@@ -17,14 +17,19 @@ console.log('RESEÑAS', newReviews)
 
 
 useEffect(() => {
-  dispatch(getReviews())
-},[])
+  dispatch(getAllReviews())
+},[dispatch])
 
 
   const columns = [
     {
+      name: "ID",
+      selector: (row) => row.id,
+      sortable: true,
+    },
+    {
       name: "Autor",
-      selector: (row) => row.user.name,
+      selector: (row) => row.user?.name,
       sortable: true,
     },
     {
@@ -34,19 +39,29 @@ useEffect(() => {
     },
     {
       name: "Producto",
-      selector: (row) => row.product.name,
+      selector: (row) => row.product?.name,
       sortable: true,
     },
     {
       name: "Comentarios",
       selector: (row) => row.comment,
-      grow: 3,
+      grow: 2,
       sortable: true,
     },
     {
-      name: "Eliminar",
+      name: "Estado",
+      selector: (row) => row.visible ? "Publicado" : "Oculto",
+      grow: 1,
+      sortable: true,
+    },
+    {
+      name: "Ocultar",
       cell: (row) => (
-        <Link to={`#`} onClick={() => props.click(row.name)}>
+        <Link to={`#`} onClick={() => {
+          props.click(row.name)
+          dispatch(removeReview(row.id)).then(() => dispatch(getAllReviews()));
+          
+        }}>
           <Unicons.UilTrash />
         </Link>
       ),
