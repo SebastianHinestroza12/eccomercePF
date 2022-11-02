@@ -49,6 +49,16 @@ export const getReviews = (productId) => {
   };
 };
 
+export const removeReview = (data) => {
+  return async (dispatch) => {
+    await axios.put(`/putReview`, {id: data, visible: "false"});
+    dispatch({
+      type: "REMOVE_REVIEW",
+      payload: data,
+    });
+  };
+};
+
 export const newProductForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postProduct`, data);
@@ -279,7 +289,6 @@ export const getOrders = (data) => {
   };
 };
 
-
 export const getUsers = () => {
   return function (dispatch) {
     return axios(`/getUsers`)
@@ -290,4 +299,22 @@ export const getUsers = () => {
   };
 };
 
+export const removeUser = (data) => {
+  return async (dispatch) => {
+    await axios.put(`/putUser`, {id: data, visible: "false"});
+    dispatch({
+      type: "REMOVE_USER",
+      payload: data,
+    });
+  };
+};
 
+export const getActualUser = (userEmail) => {
+  return function (dispatch) {
+    return axios(`/user/login?email=${userEmail}`)
+      .then((response) => response.data)
+      .then((user) => {
+        dispatch({ type: "GET_ACTUAL_USER", payload: user });
+      });
+  };
+};

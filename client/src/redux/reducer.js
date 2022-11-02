@@ -11,6 +11,7 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("currentUser"))
     : [],
   newUsers: [],
+  actualUser: {},
   allProducts: [],
   products: [],
   productDetail: [],
@@ -79,6 +80,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newReviews: payload,
       };
+      case "REMOVE_REVIEW":
+        return console.log("REVIEW REMOVIDA");
     case "LINK_CATEGORY":
       return {
         ...state,
@@ -296,6 +299,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         newUsers: payload,
       };
+      case "REMOVE_USER":
+        return console.log("USUARIO BANEADO");
+      case "GET_ACTUAL_USER":
+        console.log("GET_ACTUAL_USER", payload);
+        return {
+          ...state,
+          actualUser: payload,
+        };
 
     default:
       return state;

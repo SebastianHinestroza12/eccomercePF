@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import data from "./jsonUsers";
+//import data from "./jsonUsers";
 import Table from "./DataTableUsers";
 import { getUsers } from "../../../../redux/action";
 
@@ -23,7 +23,7 @@ const AdminReviews = () => {
     
       <div>
         
-        <Table  data={users} click={clickhandler} />
+        <Table data={users} click={clickhandler} />
       </div>
     </div>
   );else{

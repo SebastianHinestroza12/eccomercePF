@@ -7,34 +7,68 @@ import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import { getUsers } from "../../../../redux/action";
+import { getUsers, removeUser } from "../../../../redux/action";
 
 const Table = (props) => {
 
+  const dispatch = useDispatch()
+  const users = useSelector(state => state.newUsers)
 
-const users = useSelector(state => state.newUsers)
-console.log('USERSS', users)
+  console.log('USERSS', users)
 
-const dispatch = useDispatch()
-
-
-
-
-useEffect(() => {
-  dispatch(getUsers())
-},[])
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
 
 
   const columns = [
+    {
+      name: "ID",
+      selector: (row) => row.id,
+      sortable: true,
+      grow: 0,
+    },
     {
       name: "Nombre",
       selector: (row) => row.name,
       sortable: true,
     },
     {
+      name: "Email",
+      selector: (row) => row.email,
+      sortable: true,
+      grow: 1,
+    },
+    {
+      name: "N° de Reviews",
+      selector: (row) => row.reviews?.length,
+      sortable: true,
+      grow: 1,
+      center: true
+
+    },
+    {
+      name: "N° de Pedidos",
+      selector: (row) => row.orders?.length,
+      sortable: true,
+      grow: 1,
+      center: true
+    },
+    {
+      name: "Estado",
+      selector: (row) => row.visible ? "Activo" : "Baneado",
+      grow: 1,
+      sortable: true,
+    },
+    {
       name: "Banear",
+      center: true,
       cell: (row) => (
-        <Link to={`#`} onClick={() => props.click(row.name)}>
+        <Link to={`#`} onClick={() => {
+          props.click(row.name)
+          dispatch(removeUser(row.id)).then(() => dispatch(getUsers()))
+          
+        }}>
           <Unicons.UilTrash />
         </Link>
       ),

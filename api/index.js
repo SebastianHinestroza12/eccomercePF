@@ -31,10 +31,10 @@ conn
     });
   })
   .then(() => {
-    Category.create({ name: "Jersey" });
-    Category.create({ name: "Balon" });
-    Category.create({ name: "Calzado" });
-    Category.create({ name: "Short" });
+    Category.findOrCreate({ where: {name: "Jersey"} });
+    Category.findOrCreate({ where: {name: "Balon"} });
+    Category.findOrCreate({ where: {name: "Calzado"} });
+    Category.findOrCreate({ where: {name: "Short"} });
 
     console.log("Categorias creadas");
   });

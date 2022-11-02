@@ -13,8 +13,8 @@ router.post('/', async (req, res) => {
       }
     })
     if (verifique) {
-        console.log(`YA EXISTE EL USUARIO ${email}`);
-        return res.status(404).json({
+        console.log("Usuario ya registrado", email);
+        return res.status(304).json({
         message: `YA EXISTE EL USUARIO ${email}`
       })
     }
@@ -27,10 +27,6 @@ router.post('/', async (req, res) => {
       }
     });
 
-    /*User.findAll({
-
-    })*/
-    //console.log(newUser[0].id);
     Cart.create({
       userId: newUser[0].id
     });
