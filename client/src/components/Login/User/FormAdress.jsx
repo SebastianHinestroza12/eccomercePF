@@ -20,9 +20,9 @@ function FormAdress() {
       address: "",
       city: "",
       country: "",
-      phone: 9543757605859,
-      postal_code: 5000,
-      dni: 31256762,
+      phone: "",
+      postal_code: "",
+      dni: "",
     },
   });
 
@@ -219,7 +219,7 @@ function FormAdress() {
                       /^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/,
                   })}
                 />
-                <small>Format: 1234-56-7890</small>
+                <small>Format: 54-9-3548-605859</small>
                 {errors.phone?.type === "required" && (
                   <p className="textoError">El campo Teléfono es requerido</p>
                 )}
