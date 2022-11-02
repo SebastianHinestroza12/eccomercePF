@@ -52,7 +52,6 @@ const ItemCount = ({
         if (actionButton === "minus") {
           dispatch(DecreaseQuantity(index));
         } else {
-          console.log(index);
           dispatch(IncreaseQuantity(index));
         }
       }

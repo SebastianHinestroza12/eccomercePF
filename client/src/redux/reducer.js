@@ -319,14 +319,14 @@ const rootReducer = (state = initialState, action) => {
     case "DECREASE_QUANTITY":
       let quantity1 = state.cartProducts[payload].units;
       console.log("DECREASE_QUANTITY", quantity1);
-      localStorage.setItem(
-        "cartProductsAdded",
-        JSON.stringify([...state.cartProducts])
-      );
       if (quantity1 > 1) {
         //state.quantityProductsAdded--;
         state.cartProducts[payload].units--;
       }
+      localStorage.setItem(
+        "cartProductsAdded",
+        JSON.stringify([...state.cartProducts])
+      );
       return {
         ...state,
       };
