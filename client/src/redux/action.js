@@ -369,3 +369,14 @@ export function DecreaseQuantity(payload) {
     payload,
   };
 }
+
+export const getOrders = (data) => {
+  console.log("ORDERS", data);
+  return function (dispatch) {
+    return axios(`/orders`)
+      .then((response) => response.data)
+      .then((userOrders) => {
+        dispatch({ type: "GET_ORDERS", payload: userOrders });
+      });
+  };
+};

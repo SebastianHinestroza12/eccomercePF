@@ -363,6 +363,12 @@ const rootReducer = (state = initialState, action) => {
         cartTotal: payload,
       };
 
+    case "GET_ORDERS":
+      return {
+        ...state,
+        orders: payload,
+      };
+
     default:
       return state;
   }
