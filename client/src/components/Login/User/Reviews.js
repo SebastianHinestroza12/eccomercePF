@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import { newComentForm, getReviews } from '../../../redux/action'
+import { newComentForm, getReviews, getActualUser } from '../../../redux/action'
+import { useAuth0 } from "@auth0/auth0-react";
+
 import './review.css'
 
 const validate = (input) => {
@@ -19,9 +21,20 @@ const validate = (input) => {
 }
 
 const Reviews = ({productId, name, id}) => {
-    const userId = useSelector((state) => state.user.id)
+
+  const { user } = useAuth0();
 
     const dispatch = useDispatch();
+    const actualUser = useSelector((state) => state.actualUser)
+
+    console.log("actualUser", actualUser);
+    console.log("user", user.email);
+
+  useEffect(() => {
+    if (user.email) dispatch(getActualUser(user.email));
+  }, [dispatch])
+      
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -42,7 +55,7 @@ const Reviews = ({productId, name, id}) => {
           stars: input.stars,
           comment: input.comment.trim(),
           productId: id,
-          name: name
+          userId: actualUser.id
         };
         console.log(newReview)
         dispatch(newComentForm(newReview));

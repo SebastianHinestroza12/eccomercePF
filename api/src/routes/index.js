@@ -41,7 +41,9 @@ const removeUnit = require('../controllers/Cart/removeUnit');
 const getReviews = require('./getReviews');
 const getReviewsByPID = require('./getReviewsByPID');
 const postReview = require('./postReview');
+const putReview = require('./putReview');
 const getUsers = require('./getUsers');
+const putUser = require('./putUser');
 
 
 router.use('/product', getProduct);
@@ -86,5 +88,8 @@ router.use('/filterStatusOrder', filterStatusOrder);
 router.use('/postReview', postReview);
 router.use('/getReviews', getReviews);
 router.use('/getReviews', getReviewsByPID);
+router.use('/putReview', putReview)
+
+router.use('/putUser', putUser)
 
 module.exports = router;

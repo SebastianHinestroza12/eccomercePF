@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Review } = require("../db.js");
+const { Review, User } = require("../db.js");
 
 router.get("/:productId", async (req, res) => {
   const { productId } = req.params;
@@ -7,7 +7,8 @@ router.get("/:productId", async (req, res) => {
   try {
 
     const resp = await Review.findAll({
-      where: { productId: productId }
+      where: { productId: productId },
+      include: { model: User }
     });
 
     return res.json(resp);

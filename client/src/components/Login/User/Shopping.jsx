@@ -14,6 +14,8 @@ function Shopping() {
     const fechaCompra = '10-10-2022'
     const fechaEntrega = '15-10-2022'
     const purchasedProducts = useSelector((state) => state.cartProducts);
+    
+    console.log("purchasedProducts", purchasedProducts);
     const id = purchasedProducts.id
     console.log(id)
     const { isAuthenticated } = useAuth0();
@@ -73,6 +75,7 @@ function Shopping() {
                       <Reviews 
                           name = {e.name}
                           id = {e.id}
+
                         />
                       </td>
                     </tr>
