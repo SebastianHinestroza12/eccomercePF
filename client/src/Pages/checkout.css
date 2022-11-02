@@ -20,3 +20,8 @@ p.totalsCheckout {
 .pay-disabled {
   cursor: none;
 }
+.checkout-subtotal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

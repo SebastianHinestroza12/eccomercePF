@@ -1,8 +1,9 @@
 import { Alert, Col, Container, Form, Row } from "react-bootstrap";
 import PaypalCheckoutButton from "../components/Checkout/PaypalCheckoutButton";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "./checkout.css";
 import { useEffect, useState } from "react";
+import { getCartDetail } from "../redux/action";
 
 //recibe los datos de los input y verficia errores
 function validateForm(dataFromInput) {
@@ -90,9 +91,14 @@ const Checkout = () => {
     );
   }, [input]);
 
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("user", currentUser);
+    dispatch(getCartDetail(currentUser.email));
+  }, [dispatch, productsInTheCart]);
+
   return (
     <Container>
-      {console.log("currentUser", currentUser)}
       <h2 className="cart-title">Finalizar compra</h2>
 
       <Row>
@@ -218,22 +224,29 @@ const Checkout = () => {
         <Col md={6}>
           <section className="totals checkout">
             <h4>Productos en el carrito</h4>
-            {productsInTheCart.length === 0 ? (
+            {console.log("productsInTheCart checkout", productsInTheCart)}
+            {productsInTheCart.items.length === 0 ? (
               <div>Aún no hay productos en el carrito</div>
             ) : (
-              productsInTheCart.map((element, index) => (
-                <div key={index}>
-                  {element.name} x
-                  {element.quantity === 1
-                    ? ` ${element.quantity} unidad`
-                    : ` ${element.quantity} unds.`}
+              productsInTheCart.items.map((element, index) => (
+                <div key={index} className="checkout-subtotal">
+                  <span>
+                    {element.name} x
+                    {element.units === 1
+                      ? ` ${element.units} unidad`
+                      : ` ${element.units} unds.`}
+                  </span>
+
+                  <span>$ {element.subtotal.toLocaleString("en-US")}</span>
                 </div>
               ))
             )}
             <hr></hr>
             <p className="totalsCheckout">
               <span className="totalTitle">Total: </span>
-              <span>${getTotal.toLocaleString("en-US")}</span>
+              <span>
+                ${productsInTheCart.totalPrice.toLocaleString("en-US")}
+              </span>
             </p>
           </section>
           <PaypalCheckoutButton product={product} inputErrors={errors} />
