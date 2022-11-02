@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch } from "react-redux";
 import {
   addProductFromLocalStorage,
+  getCartDetail,
   logoutUser,
   postRegister,
   saveUserGlobalState,
@@ -25,11 +26,11 @@ function Login() {
 
   useEffect(() => {
     if (isAuthenticated) {
+      const userLogged = user;
       dispatch(postRegister(user));
       dispatch(saveUserGlobalState(user));
       //mandar localstorage a db => getCart db
       if (JSON.parse(localStorage.getItem("cartProductsAdded"))?.length > 0) {
-        const userLogged = user;
         console.log("user logged", userLogged);
 
         JSON.parse(localStorage.getItem("cartProductsAdded")).forEach(
@@ -39,6 +40,7 @@ function Login() {
         );
         localStorage.removeItem("cartProductsAdded");
       }
+      dispatch(getCartDetail(userLogged.email));
     } else {
       localStorage.removeItem("currentUser");
       dispatch(logoutUser());
