@@ -56,14 +56,14 @@ function App() {
         <Route path={"/pagar"}>
           <Checkout />
         </Route>
+        <Route path={"/panel-control"}>
+          <LayoutAdmin />
+        </Route>
         <Route path={"/rutas"}>
           <RutasBloqueadas />
         </Route>
         <Route path={"/bloqueo"}>
           <Bloqueo />
-        </Route>
-        <Route exact path={"/panel-control"}>
-          <LayoutAdmin />
         </Route>
         <Route path={"/bloqueoC"}>
           <BloqueoC />
