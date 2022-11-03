@@ -352,11 +352,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cartTotal: payload,
       };
-    case "GET_ORDER":
-      console.log(payload)
+    case "GET_ORDERS":
       return {
         ...state,
-        order: payload,
+        orders: payload,
       };
     case "GET_USERS":
       return {

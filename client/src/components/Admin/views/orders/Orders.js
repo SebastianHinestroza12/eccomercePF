@@ -7,15 +7,13 @@ import { UilSync } from '@iconscout/react-unicons'
 import './refreshButton.css';
 
 const Orders = () => {
-  const dispatch = useDispatch();
   const clickhandler = (name) => console.log("delete", name);
   const allOrder = useSelector((state) => state.order);
-
-
+  const dispatch = useDispatch();
+  console.log('order', allOrder)
 
   const handleRefresh = () => {
     dispatch(getOrder())
-  console.log('buiug')
   };
 
   return (
