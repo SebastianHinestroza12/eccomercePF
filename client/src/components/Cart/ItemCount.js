@@ -1,6 +1,7 @@
 import * as Unicons from "@iconscout/react-unicons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
 import {
   addUnitDB,
   DecreaseQuantity,
@@ -19,13 +20,15 @@ const ItemCount = ({
   size,
   email,
 }) => {
+  const { isAuthenticated } = useAuth0();
   const currentUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   let [num, setNum] = useState(0);
 
-  const tamaño = stock.filter(e=>e.size === size)
-  console.log(tamaño[0].stock)
-  console.log(tamaño)
+
+    // const tamaño = stock.filter(e=>e.size === size)
+    // console.log(tamaño[0].stock)
+    // console.log(tamaño)
 
   function addQuantityToCart(actionButton) {
     if (!carrito) {
@@ -90,7 +93,7 @@ const ItemCount = ({
         className="cartButtons increase"
         onClick={() => addQuantityToCart("plus")}
         
-        disabled={quantity === tamaño[0].stock}
+        // disabled={quantity === tamaño[0].stock}
       >
         <Unicons.UilPlus />
       </button>

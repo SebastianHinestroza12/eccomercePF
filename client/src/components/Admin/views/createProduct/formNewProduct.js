@@ -4,7 +4,7 @@ import * as Unicons from "@iconscout/react-unicons";
 import axios from "axios";
 import "./newProduct.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetail } from "../../../../redux/action";
+import { getAllProducts, getProductDetail } from "../../../../redux/action";
 import { newProductForm } from "../../../../redux/action";
 import { Col, Row } from "react-bootstrap";
 
@@ -73,6 +73,7 @@ const FormNewProduct = ({ productId }) => {
     console.log("datos enviados", data);
     setImage("");
     dispatch(newProductForm(data));
+    dispatch(getAllProducts());
     reset();
     } else {
       window.alert("Por favor ingrese al menos una talla")

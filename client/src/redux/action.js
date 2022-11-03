@@ -40,6 +40,7 @@ export const getAllReviews = () => {
   };
 };
 export const getReviews = (productId) => {
+  console.log(productId)
   return function (dispatch) {
     return axios(`/getReviews/${productId}`)
       .then((response) => response.data)

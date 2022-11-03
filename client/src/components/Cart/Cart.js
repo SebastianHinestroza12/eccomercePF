@@ -203,7 +203,7 @@ const Cart = () => {
                         quantity={element.units}
                         addedToCart={addedToCart}
                         carrito="true"
-                        stock={productsInTheCart.items}
+            
                         index={index}
                       />
                     </td>
