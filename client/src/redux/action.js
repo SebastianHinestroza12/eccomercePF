@@ -101,7 +101,7 @@ export const getOrder = () => {
       let json = await axios.get("/order");
       console.log(json.data);
       return dispatch({
-        type: "GET_ORDER",
+        type: "GET_ORDERS",
         payload: json.data,
       });
     } catch (error) {

@@ -79,7 +79,7 @@ const Checkout = () => {
     );
   };
   const product = {
-    price: getTotal,
+    price: productsInTheCart.totalPrice,
   };
   useEffect(() => {
     setErrors(

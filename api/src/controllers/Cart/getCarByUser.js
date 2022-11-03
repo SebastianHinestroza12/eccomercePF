@@ -13,6 +13,7 @@ router.get("/", async (req, res, next) => {
     let userId = user.id;
 
     let userCart = await Cart.findOne({
+      order: [['id', 'ASC']],
       where: {
         userId: userId,
         status: "Active",
@@ -20,6 +21,7 @@ router.get("/", async (req, res, next) => {
       include: {
         model: Item,
         attributes: [
+          "id",
           "productId",
           "name",
           "size",

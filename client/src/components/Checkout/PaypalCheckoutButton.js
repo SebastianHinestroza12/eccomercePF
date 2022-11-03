@@ -72,8 +72,8 @@ const PaypalCheckoutButton = ({ product, inputErrors }) => {
           }
           dispatch(
             postOrder({
-              products: productsInTheCart.map(
-                (data) => `${data.name} X ${data.quantity} Unidad`
+              products: productsInTheCart.items.map(
+                (data) => `${data.name} X ${data.units} Unidad - Talle ${data.size}`
               ),
               total_purchase: parseInt(order.purchase_units[0].amount.value),
               client: user.email,
