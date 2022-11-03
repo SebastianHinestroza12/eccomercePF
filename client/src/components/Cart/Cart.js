@@ -20,11 +20,14 @@ const Cart = () => {
 
   const dispatch = useDispatch();
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
+
   function TotalPrice(price, quantity) {
     return Number(price * quantity).toLocaleString("en-US");
   }
 
   const productsInTheCart = useSelector((state) => state.cartProducts);
+  console.log(productsInTheCart.items)
+  const productDetail = useSelector((state) => state.productDetail);
   const addedToCart = useSelector((state) => state.quantityProductsAdded);
   let total = 0;
 
@@ -48,10 +51,12 @@ const Cart = () => {
         productsInTheCart.items[i].price * productsInTheCart.items[i].units;
     }
   }
+
   let impuestos = 0;
   if (productsInTheCart) {
     impuestos = Math.floor(subtotal * 0.2);
   }
+
   let totalPrice = 0;
   //const [total, setTotal] = useState();
   if (subtotal > 0) {
@@ -87,12 +92,13 @@ const Cart = () => {
       history.push("/pagar");
     }
   }*/
+
   return (
     <>
       <Container>
         <h2 className="cart-title">Mi carrito</h2>
         <section>
-          {isAuthenticated && [productsInTheCart]?.length ? (
+          {isAuthenticated && productsInTheCart.items?.length ? (
             <Table responsive>
               <thead>
                 <tr>
@@ -128,6 +134,7 @@ const Cart = () => {
                         quantity={element.units}
                         addedToCart={addedToCart}
                         carrito="true"
+                        stock={productsInTheCart.items}
                         index={index}
                       />
                     </td>
@@ -152,7 +159,7 @@ const Cart = () => {
               </tbody>
             </Table>
           ) : //user not logged
-          productsInTheCart?.length === 0 ? (
+          productsInTheCart?.length === 0 || productsInTheCart.items?.length === 0 ? (
             <div className="cart-empty">
               <p>No hay productos en el carrito</p>
               <div>
@@ -196,6 +203,7 @@ const Cart = () => {
                         quantity={element.units}
                         addedToCart={addedToCart}
                         carrito="true"
+                        stock={productsInTheCart.items}
                         index={index}
                       />
                     </td>

@@ -18,6 +18,8 @@ const AddToCart = ({ size, units }) => {
 
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
+  const stockArray = productDetail.size_stock
+
   const product = useSelector((state) => state.productDetail);
 
   function addToCartButton() {
@@ -84,6 +86,7 @@ const AddToCart = ({ size, units }) => {
           setQuantity={setQuantity}
           size={size}
           units={units}
+          stock={stockArray}
         />
       </div>
       <Button className="buy" onClick={() => addToCartButton()}>
