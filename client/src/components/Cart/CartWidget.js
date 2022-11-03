@@ -53,10 +53,6 @@ const CartWidget = () => {
             <Dropdown.Item
               className="listItem"
               key={index}
-<<<<<<< HEAD
-              // onClick={() => goToProduct(product.idProduct)}
-=======
->>>>>>> 177b11bd49a47086cd64d96822ac6f39cfd8d484
             >
               <img
                 src={product.image}
