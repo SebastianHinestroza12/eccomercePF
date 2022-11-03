@@ -20,7 +20,6 @@ const Cart = () => {
 
   const dispatch = useDispatch();
   /**ESTADOS PARA CONTROLAR EL AGREGAR O ELIMINAR CANTIDAD DEL PRODUCTO AL CARRITO */
-
   function TotalPrice(price, quantity) {
     return Number(price * quantity).toLocaleString("en-US");
   }
@@ -49,12 +48,10 @@ const Cart = () => {
         productsInTheCart.items[i].price * productsInTheCart.items[i].units;
     }
   }
-
   let impuestos = 0;
   if (productsInTheCart) {
     impuestos = Math.floor(subtotal * 0.2);
   }
-
   let totalPrice = 0;
   //const [total, setTotal] = useState();
   if (subtotal > 0) {
@@ -90,7 +87,6 @@ const Cart = () => {
       history.push("/pagar");
     }
   }*/
-
   return (
     <>
       <Container>

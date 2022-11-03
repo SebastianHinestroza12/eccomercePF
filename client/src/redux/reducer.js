@@ -1,10 +1,10 @@
 let sum = 0;
-/*const cartWidgetNumber = () => {
+const cartWidgetNumber = () => {
   for (let i of JSON.parse(localStorage.getItem("cartProductsAdded"))) {
-    sum += i.units;
+    sum += i.quantity;
   }
   return sum;
-};*/
+};
 
 const initialState = {
   user: localStorage.getItem("currentUser")
@@ -19,15 +19,17 @@ const initialState = {
   newProducts: [],
   editProduct: [],
   reviews: [],
+  order: [],
+  allReviews: [],
   newReviews: [],
+  newOrders: [],
   cartTotal: 0,
-  cartProducts:
-    !localStorage.getItem("currentUser") &&
-    localStorage.getItem("cartProductsAdded")
-      ? JSON.parse(localStorage.getItem("cartProductsAdded"))
-      : [],
-  //quantityProductsAdded: localStorage.getItem("cartProductsAdded")    ? cartWidgetNumber()    : 0,
-  cartUserLogged: [],
+  cartProducts: localStorage.getItem("cartProductsAdded")
+    ? JSON.parse(localStorage.getItem("cartProductsAdded"))
+    : [],
+  quantityProductsAdded: localStorage.getItem("cartProductsAdded")
+    ? cartWidgetNumber()
+    : 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -69,10 +71,27 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productDetail: payload,
       };
+      case "CLEAN_PRODUCT_DETAIL":
+        return {
+          ...state,
+          productDetail: [],
+        };
+        case "GET_ALL_REVIEWS":
+          return {
+            ...state,
+            allReviews: payload,
+          };
+        case "GET_PRODUCT_REVIEW":
+          return {
+            ...state,
+            newReviews: payload,
+          };
       case "REMOVE_REVIEW":
-        return console.log("REVIEW REMOVIDA");
-    case "LINK_CATEGORY":
-      return {
+        return {
+          ...state,
+        };   
+      case "LINK_CATEGORY":
+        return {
         ...state,
         products: payload,
       };
@@ -83,7 +102,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         productDetail: payload,
       };
-
     case "POST_REGISTER":
       return {
         ...state,
@@ -118,7 +136,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: filterByPrice,
       };
-
     case "ORDER_BY_RATING":
       const filterByRating =
         payload === "MayorRating"
@@ -136,7 +153,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: filterByRating,
       };
-
     case "ORDER_BY_NAME":
       const orderedByName =
         action.payload === "Name (A-Z)"
@@ -154,7 +170,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: orderedByName,
       };
-
     case "ALL_FILTERS":
       const allProducts = state.allProducts;
       if (payload.length === 0) {
@@ -176,7 +191,6 @@ const rootReducer = (state = initialState, action) => {
             }
           }
         }
-
         return productsFiltered;
       };
       const productsResult = Array.from(filters());
@@ -191,7 +205,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         pruebaProduct: payload.data,
       };
-
     case "FILTER_BY_TYPE":
       const allProducts4 = state.allProducts;
       if (payload.length === 0) {
@@ -207,7 +220,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: filterByType,
       };
-
     case "FILTER_BY_CATEGORY":
       const allProducts3 = state.allProducts;
       const filterByCategory = allProducts3.filter((p) =>
@@ -217,13 +229,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         products: filterByCategory,
       };
-
     case "SEARCH_PRODUCTS":
       return {
         ...state,
         products: payload,
       };
-
     case "ADD_PRODUCTS_TO_CART":
       let productAlreadyInTheCart = state.cartProducts.findIndex(
         (element) =>
@@ -279,28 +289,23 @@ const rootReducer = (state = initialState, action) => {
         (e) => e.size === sizePicked
       );
       let stock = stock_product[0].stock;
-
       if (quantity2 < stock) {
         state.quantityProductsAdded++;
         state.cartProducts[payload].units++;
       }
-
       return {
         ...state,
       };
-
     case "INCREASE_QUANTITY_DB":
       return {
         ...state,
       };
-
     case "DECREASE_QUANTITY":
       let quantity1 = state.cartProducts[action.payload].units;
       if (quantity1 > 1) {
         state.quantityProductsAdded--;
         state.cartProducts[payload].units--;
       }
-
       localStorage.setItem(
         "cartProductsAdded",
         JSON.stringify([...state.cartProducts])
@@ -339,7 +344,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
-
     case "REMOVE_ITEM_FROM_CART":
       //borrado por index del elemento en el array
       let cartProductsUpdated = state.cartProducts;
@@ -366,11 +370,10 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cartTotal: payload,
       };
-
     case "GET_ORDERS":
       return {
         ...state,
-        orders: payload,
+        order: payload,
       };
     case "GET_USERS":
       return {
@@ -385,7 +388,6 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           actualUser: payload,
         };
-
     default:
       return state;
   }

@@ -60,7 +60,6 @@ const ProductDetail = () => {
               <div className="rating">
                 {writeRatingStars(productDetail.stars)}
               </div>
-
               <hr></hr>
               <h4>$ {productDetail.price}</h4>
               <p className="detail-text">{productDetail.detail}</p>

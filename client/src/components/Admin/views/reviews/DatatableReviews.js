@@ -12,8 +12,8 @@ import { useEffect } from 'react'
 const Table = (props) => {
 
 const dispatch = useDispatch()
-const newReviews = useSelector(state => state.newReviews)
-console.log('RESEÑAS', newReviews)
+//const newReviews = useSelector(state => state.newReviews)
+//console.log('RESEÑAS', newReviews)
 
 
 useEffect(() => {

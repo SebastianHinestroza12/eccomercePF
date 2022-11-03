@@ -23,7 +23,7 @@ router.delete('/', async (req, res, next) => {
 			},
 		});
 		
-		console.log('prroduc', product)
+		//console.log('prroduc', product)
 		if (!product)
 			return res.status(400).send('No product was found with that ID');
 
@@ -36,7 +36,7 @@ router.delete('/', async (req, res, next) => {
 
 		let subtotalProduct = product.units * product.price;
 
-		console.log('cart', cart)
+		//console.log('cart', cart)
 		let newPrice = (
 			cart.totalPrice - subtotalProduct
 		).toFixed(2);

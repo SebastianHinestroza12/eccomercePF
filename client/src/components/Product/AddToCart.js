@@ -76,7 +76,6 @@ const AddToCart = ({ size, units }) => {
           </>
         </Toast.Body>
       </Toast>
-
       <div>
         Cantidad
         <ItemCount

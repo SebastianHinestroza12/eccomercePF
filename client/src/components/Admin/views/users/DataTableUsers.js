@@ -12,9 +12,6 @@ import { getUsers, removeUser } from "../../../../redux/action";
 const Table = (props) => {
 
   const dispatch = useDispatch()
-  const users = useSelector(state => state.newUsers)
-
-  console.log('USERSS', users)
 
   useEffect(() => {
     dispatch(getUsers())

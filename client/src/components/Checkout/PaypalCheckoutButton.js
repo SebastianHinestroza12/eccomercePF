@@ -70,10 +70,11 @@ const PaypalCheckoutButton = ({ product, inputErrors }) => {
           if (order.status === "COMPLETED") {
             localStorage.removeItem("cartProductsAdded");
           }
+
           dispatch(
             postOrder({
-              products: productsInTheCart.map(
-                (data) => `${data.name} X ${data.quantity} Unidad`
+              products: productsInTheCart.items.map(
+                (data) => `${data.name} X ${data.units} Unidad`
               ),
               total_purchase: parseInt(order.purchase_units[0].amount.value),
               client: user.email,
