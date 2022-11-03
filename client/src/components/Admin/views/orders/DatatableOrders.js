@@ -3,14 +3,22 @@ import * as Unicons from "@iconscout/react-unicons";
 import DataTable from "react-data-table-component";
 import FilterComponent from "../../FilterComponent";
 import "../dataTable.css";
-import { getOrders } from "../../../../redux/action";
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+
+import { getOrder } from "../../../../redux/action";
 
 const Table = (props) => {
 
+  const dispatch = useDispatch()
+  
+  useEffect(() => {
+    dispatch(getOrder())
+  },[dispatch])
   const columns = [
     {
       name: "#Orden",
-      selector: (row) => row.numberOrder,
+      selector: (row) => row.id,
       sortable: true,
     },
     {

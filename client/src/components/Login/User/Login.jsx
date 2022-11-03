@@ -19,7 +19,6 @@ export const Loading = () => {
   const { isLoading } = useAuth0();
   return isLoading && <h6>Loading...</h6>;
 };
-
 function Login() {
   const dispatch = useDispatch();
   const { isAuthenticated, isLoading, user } = useAuth0();
@@ -48,5 +47,4 @@ function Login() {
   }, [dispatch, isAuthenticated, user]);
   return <>{isLoading ? <Loading /> : <AuthNAv />}</>;
 }
-
 export default Login;

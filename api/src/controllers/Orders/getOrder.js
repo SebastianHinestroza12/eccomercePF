@@ -3,7 +3,7 @@ const { Order } = require('../../db');
 
 
 router.get('/', async (req, res) => {
-  const allOder = await Order.findAll();
+  const allOder = await Order.findAll({include: {all: true}});
 
   try {
     if (allOder.length > 0) {

@@ -1,23 +1,34 @@
 import React from "react";
 import { Container, Table } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Unicons from "@iconscout/react-unicons";
 import { useAuth0 } from "@auth0/auth0-react";
 import Reviews from "./Reviews";
 import {  useParams } from "react-router-dom";
 import "./shopping.css";
+import { useEffect } from "react";
+import { getOrder } from "../../../redux/action";
+
 
 function Shopping() {
 
     const estadoPedido = 'Entregado'
     const fechaCompra = '10-10-2022'
     const fechaEntrega = '15-10-2022'
-    const purchasedProducts = useSelector((state) => state.cartProducts);
+    const purchasedProducts = useSelector((state) => state.order);
     
     console.log("purchasedProducts", purchasedProducts);
+    const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getOrder())
+  }, [dispatch]);
+
     const id = purchasedProducts.id
+    
     console.log(id)
+
     const { isAuthenticated } = useAuth0();
 
     function TotalPrice(price, quantity) {

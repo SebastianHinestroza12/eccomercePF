@@ -3,7 +3,6 @@ import axios from "axios";
 
 export const getAllProducts = () => {
   //user logged
-
   return function (dispatch) {
     return axios("/product")
       .then((response) => response.data)
@@ -17,7 +16,6 @@ export const getAllProducts = () => {
       });
   };
 };
-
 export const getProductDetail = (productId) => {
   return function (dispatch) {
     return axios(`/product/${productId}`)
@@ -41,7 +39,6 @@ export const getAllReviews = () => {
       });
   };
 };
-
 export const getReviews = (productId) => {
   return function (dispatch) {
     return axios(`/getReviews/${productId}`)
@@ -61,7 +58,6 @@ export const removeReview = (data) => {
     });
   };
 };
-
 export const newProductForm = (data) => {
   return async (dispatch) => {
     await axios.post(`/postProduct`, data);
@@ -92,23 +88,20 @@ export const saveUserGlobalState = (user) => {
 };
 
 //Crear una orden
-
 export const postOrder = (user) => {
   return async () => {
     console.log("action", user);
     await axios.post(`/order`, user);
   };
 };
-
 // Mostrar Ordenes
-
 export const getOrder = () => {
   return async function (dispatch) {
     try {
       let json = await axios.get("/order");
       console.log(json.data);
       return dispatch({
-        type: "GET_ORDER",
+        type: "GET_ORDERS",
         payload: json.data,
       });
     } catch (error) {
@@ -116,9 +109,7 @@ export const getOrder = () => {
     }
   };
 };
-
 // EDITAR DATOS DE USUARIO
-
 export const putUser = (data) => {
   return async function (dispatch) {
     try {
@@ -134,21 +125,18 @@ export const putUser = (data) => {
     }
   };
 };
-
 export function filterByPrice(payload) {
   return {
     type: "ORDER_BY_PRICE",
     payload,
   };
 }
-
 export function filterByRating(payload) {
   return {
     type: "ORDER_BY_RATING",
     payload,
   };
 }
-
 export const SearchByName = (name) => {
   return function (dispatch) {
     return axios(`/product?name=${name}`)
@@ -167,7 +155,6 @@ export const SearchByName = (name) => {
       });
   };
 };
-
 export function filterByName(payload) {
   return {
     type: "ORDER_BY_NAME",
@@ -328,14 +315,12 @@ export const filterBySize = (payload) => {
     payload,
   };
 };
-
 export const filterByType = (payload) => {
   return {
     type: "FILTER_BY_TYPE",
     payload,
   };
 };
-
 export const linkCategory = (category) => {
   return function (dispatch) {
     return axios(`/filterType?type=${category}`)
@@ -346,14 +331,12 @@ export const linkCategory = (category) => {
       });
   };
 };
-
 export const filterByCategory = (payload) => {
   return {
     type: "FILTER_BY_CATEGORY",
     payload,
   };
 };
-
 export const getCartTotal = (payload) => {
   return {
     type: "GET_TOTAL_CART",
@@ -383,13 +366,21 @@ export function DecreaseQuantity(payload) {
 export const getOrders = (data) => {
   console.log("ORDERS", data);
   return function (dispatch) {
-    return axios(`/orders`)
+    return axios(`/order`)
       .then((response) => response.data)
       .then((userOrders) => {
         dispatch({ type: "GET_ORDERS", payload: userOrders });
       });
   };
 };
+
+export const getBuyedProductsByUser = (pokemonId) => {
+  return function (dispatch) {
+      return axios.get(`http://localhost:3001/pokemonsByID/${pokemonId}`)
+          .then((res) => {
+              dispatch({type: "GET_PRODUCTS_BUYED", payload: res.data})
+          })
+}};
 
 export const getUsers = () => {
   return function (dispatch) {
@@ -410,7 +401,6 @@ export const removeUser = (data) => {
     });
   };
 };
-
 export const getActualUser = (userEmail) => {
   return function (dispatch) {
     return axios(`/user/login?email=${userEmail}`)

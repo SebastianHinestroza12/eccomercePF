@@ -22,6 +22,7 @@ const OrderId = require('../controllers/Orders/OrderId');
 const getOrder = require('../controllers/Orders/getOrder');
 const filterStatusOrder = require('../controllers/FilterOrders/filterStatus');
 
+const getBuyedProducts = require('./getBuyedProducts');
 
 
 const postProduct = require('./postProduct');
@@ -83,6 +84,9 @@ router.use('/order', postOrder);
 router.use('/order', OrderId);
 router.use('/order', getOrder);
 router.use('/filterStatusOrder', filterStatusOrder);
+
+router.use('/getBuyedProducts', getBuyedProducts);
+
 
 //review
 router.use('/postReview', postReview);

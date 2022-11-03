@@ -35,7 +35,6 @@ function validateForm(dataFromInput) {
   ) {
     errors.city = "Ingrese un nombre de ciudad válido";
   }
-
   //validacion de phone
   if (dataFromInput.phone.length < 7) {
     errors.phone = "Ingrese un número de teléfono válido";
@@ -79,11 +78,9 @@ const Checkout = () => {
       })
     );
   };
-
   const product = {
-    price: getTotal,
+    price: productsInTheCart.totalPrice,
   };
-
   useEffect(() => {
     setErrors(
       validateForm({
@@ -162,12 +159,10 @@ const Checkout = () => {
             <br></br>
             <br></br>
             <h4>Datos de envío</h4>
-
             <Form.Group className="mb-3">
               <Form.Label>
                 Ubicación <span className="input-required">*</span>
               </Form.Label>
-
               <Form.Control
                 type="text"
                 onChange={(e) => handleChange(e)}
@@ -200,7 +195,6 @@ const Checkout = () => {
                 </Alert>
               )}
             </Form.Group>
-
             <Form.Group className="mb-3">
               <Form.Label>
                 Teléfono <span className="input-required">*</span>

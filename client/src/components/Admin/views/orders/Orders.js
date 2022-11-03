@@ -22,18 +22,7 @@ const Orders = () => {
         <div className="refreshButton">
           <UilSync className="refresh" onClick={() => handleRefresh()} />
         </div>
-        <Table data={allOrder.map(el => {
-          return (
-            {
-              numberOrder: el.id.slice(0, 8),
-              client: el.client,
-              products: el.products,
-              total_purchase: `$${el.total_purchase}`,
-              status: el.status,
-              date: el.createdAt.slice(0, 10)
-            }
-          )
-        })}
+        <Table data={allOrder}
           click={clickhandler}
         />
       </div>
