@@ -308,6 +308,18 @@ export function RemoveItemFromCartDb(productId, size, email) {
     });
   };
 }
+export function clearCart(email) {
+  const dataToDelete = { email };
+  console.log(dataToDelete)
+  return async () => {
+    console.log('entro a la accion')
+    await axios.delete(`/clear`, {
+      data: dataToDelete,
+    });
+    console.log('entro a la accion')
+    
+  };
+}
 
 export const filterBySize = (payload) => {
   return {

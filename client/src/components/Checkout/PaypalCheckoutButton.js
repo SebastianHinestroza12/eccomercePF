@@ -2,7 +2,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { postOrder } from "../../redux/action";
+import { clearCart, postOrder, getCartDetail } from "../../redux/action";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
 
@@ -10,6 +10,7 @@ const PaypalCheckoutButton = ({ product, inputErrors }) => {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState();
   const productsInTheCart = useSelector((state) => state.cartProducts);
+  console.log(productsInTheCart);
   const dispatch = useDispatch();
   const { user } = useAuth0();
   const history = useHistory();
@@ -27,7 +28,7 @@ const PaypalCheckoutButton = ({ product, inputErrors }) => {
       showConfirmButton: false,
     });
     setTimeout(() => {
-      history.push("/");
+      history.push("/shopping");
     }, 3000);
   }
   if (error) {
@@ -66,27 +67,29 @@ const PaypalCheckoutButton = ({ product, inputErrors }) => {
         }}
         onApprove={async (data, actions) => {
           const order = await actions.order.capture();
-          console.log("DataOrden", order);
           if (order.status === "COMPLETED") {
             localStorage.removeItem("cartProductsAdded");
           }
           dispatch(
             postOrder({
               products: productsInTheCart.items.map(
-                (data) => `${data.name} X ${data.units} Unidad - Talle ${data.size}`
+                (e) => `${e.name} X ${e.units} Unidad - Talle ${e.size}`
               ),
               total_purchase: parseInt(order.purchase_units[0].amount.value),
               client: user.email,
               status: order.status,
             })
           );
+          dispatch(clearCart(user.email));
+          setTimeout(() => {
+            dispatch(getCartDetail(user.email));
+          }, 1000);
 
           handleApprove(data.orderID);
         }}
         onCancel={() => {}}
         onError={(error) => {
           setError(error);
-          console.log("Paypal error", error);
         }}
       />
     </PayPalScriptProvider>

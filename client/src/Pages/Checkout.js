@@ -8,7 +8,7 @@ import { getCartDetail } from "../redux/action";
 //recibe los datos de los input y verficia errores
 function validateForm(dataFromInput) {
   //para verificar que solo se ingrese texto y espacios en el nombre de la receta
-  //console.log("dataFromInput", dataFromInput);
+  console.log("dataFromInput", dataFromInput);
   var regex = new RegExp("^[a-zA-Z ]+$");
   let errors = {};
   //validacion del nombre
@@ -50,7 +50,9 @@ function validateForm(dataFromInput) {
 const Checkout = () => {
   const dispatch = useDispatch();
   const getTotal = useSelector((state) => state.cartTotal);
+  console.log(getTotal)
   const productsInTheCart = useSelector((state) => state.cartProducts);
+  console.log(productsInTheCart)
   const currentUser = useSelector((state) => state.user);
   //aqui se guardan los errores
   const [errors, setErrors] = useState({});
@@ -81,6 +83,7 @@ const Checkout = () => {
   const product = {
     price: productsInTheCart.totalPrice,
   };
+  console.log(product)
   useEffect(() => {
     setErrors(
       validateForm({

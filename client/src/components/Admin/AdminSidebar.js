@@ -1,6 +1,18 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getOrder } from "../../redux/action";
+
 
 const AdminSidebar = () => {
+
+ const dispatch = useDispatch()
+
+  const handleClick = () => {
+    dispatch(getOrder())
+  console.log('ENTRE A GET ORDER')
+  };
+
+
   return (
     <>
       <h4>PRODUCTOS</h4>
@@ -17,7 +29,7 @@ const AdminSidebar = () => {
       </ul>
       <h4>TIENDA</h4>
       <ul>
-        <Link to={"/panel-control/pedidos"}>
+        <Link to={"/panel-control/pedidos"} onClick={handleClick}>
           <li>Pedidos</li>
         </Link>
         <Link to={"/panel-control/clientes"}>
