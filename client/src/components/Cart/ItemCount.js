@@ -20,9 +20,12 @@ const ItemCount = ({
   email,
 }) => {
   const currentUser = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
   let [num, setNum] = useState(0);
+
+  const tamaño = stock.filter(e=>e.size === size)
+  console.log(tamaño[0].stock)
+  console.log(tamaño)
 
   function addQuantityToCart(actionButton) {
     if (!carrito) {
@@ -82,10 +85,12 @@ const ItemCount = ({
         inputMode="numeric"
         readOnly={true}
       />
+ 
       <button
         className="cartButtons increase"
         onClick={() => addQuantityToCart("plus")}
-        disabled={quantity === stock}
+        
+        disabled={quantity === tamaño[0].stock}
       >
         <Unicons.UilPlus />
       </button>
