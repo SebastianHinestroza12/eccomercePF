@@ -26,6 +26,8 @@ const Cart = () => {
   }
 
   const productsInTheCart = useSelector((state) => state.cartProducts);
+  console.log(productsInTheCart.items)
+  const productDetail = useSelector((state) => state.productDetail);
   const addedToCart = useSelector((state) => state.quantityProductsAdded);
   let total = 0;
 
@@ -132,6 +134,7 @@ const Cart = () => {
                         quantity={element.units}
                         addedToCart={addedToCart}
                         carrito="true"
+                        stock={productsInTheCart.items}
                         index={index}
                       />
                     </td>
@@ -200,6 +203,7 @@ const Cart = () => {
                         quantity={element.units}
                         addedToCart={addedToCart}
                         carrito="true"
+            
                         index={index}
                       />
                     </td>
