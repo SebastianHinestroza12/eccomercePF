@@ -22,9 +22,9 @@ const CartWidget = () => {
   const productsInTheCart = useSelector((state) => state.cartProducts);
   const currentUser = useSelector((state) => state.user);
 
-  function goToProduct(id) {
-    history.push(`/product/${id}`);
-  }
+  // function goToProduct(id) {
+  //   history.push(`/product/${id}`);
+  // }
   //const email = user.email;
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const CartWidget = () => {
         }
       >
         {console.log("productsInTheCart currentUser", [currentUser])}
-        {[productsInTheCart]?.length === 0 ? (
+        {!productsInTheCart || productsInTheCart?.length === 0 || productsInTheCart.items?.length === 0 ? (
           <p>No hay productos en el carrito</p>
         ) : //if user is not logged in
         currentUser?.length === 0 ? (
@@ -53,7 +53,7 @@ const CartWidget = () => {
             <Dropdown.Item
               className="listItem"
               key={index}
-              onClick={() => goToProduct(product.idProduct)}
+              // onClick={() => goToProduct(product.idProduct)}
             >
               <img
                 src={product.image}
@@ -77,7 +77,7 @@ const CartWidget = () => {
             <Dropdown.Item
               className="listItem"
               key={index}
-              onClick={() => goToProduct(product.idProduct)}
+              // onClick={() => goToProduct(product.idProduct)}
             >
               <img
                 src={product.image}

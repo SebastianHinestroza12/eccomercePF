@@ -24,7 +24,10 @@ const ItemCount = ({
   const dispatch = useDispatch();
   let [num, setNum] = useState(0);
 
+  
+
   function addQuantityToCart(actionButton) {
+  
     if (!carrito) {
       if (actionButton === "minus") {
         setQuantity(quantity - 1);
@@ -57,7 +60,6 @@ const ItemCount = ({
       }
     }
   }
-
   return (
     <div className="qty-box">
       <button
