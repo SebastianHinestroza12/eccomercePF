@@ -1,49 +1,18 @@
 require("dotenv").config();
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT, CONECTION } = process.env;
+const { CONECTION } = process.env;
 
 /**
  * CONEXION CON LA BD EN PRODUCCION
  */
-let sequelize =
-  process.env.NODE_ENV === "production"
-    ? new Sequelize({
-        database: DB_NAME,
-        dialect: "postgres",
-        host: DB_HOST,
-        port: DB_PORT,
-        username: DB_USER,
-        password: DB_PASSWORD,
-        pool: {
-          max: 3,
-          min: 1,
-          idle: 10000,
-        },
-        dialectOptions: {
-          ssl: {
-            require: true,
-            rejectUnauthorized: false,
-          },
-          keepAlive: true,
-        },
-        ssl: true,
-      })
-    : new Sequelize(
-      `${CONECTION}`,
-        {
-          logging: false, // set to console.log to see the raw SQL queries
-          native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-        }
-      );
 
-/*
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/eccomerce`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+const sequelize = new Sequelize(`${CONECTION}`, {
+  logging: false,
+  native: false,
 });
-*/
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -73,7 +42,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 sequelize.query("CREATE EXTENSION IF NOT EXISTS unaccent");
 
-const { Admin, Product, User, Order, Category, Review, Cart, Item } = sequelize.models;
+const { Product, User, Order, Category, Review, Cart, Item } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -101,13 +70,6 @@ Item.belongsTo(Cart);
 User.hasOne(Cart);
 Cart.belongsTo(User);
 
-// //Muchos productos pueden estar en una misma orden y distintas ordenes pueden tener a los mismos productos
-// Product.belongsToMany(Cart, { through: "Product_cart" }); //orders
-// Cart.belongsToMany(Product, { through: "Product_cart" }); //products
-
-// //Un usuario puede tener varias ordenes, pero cada orden pertenece a un único usuario
-// Cart.belongsToMany(User, { through: "user_cart" }); //orders
-// User.belongsToMany(Cart, { through: "user_cart" }); //products
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

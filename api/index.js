@@ -26,15 +26,19 @@ const port = process.env.PORT || 3001;
 conn
   .sync({ force: true })
   .then(() => {
+    console.log("¡Conexión a la base de datos satisfactoria!");
     server.listen(port, () => {
-      console.log("%s listening at 3001"); // eslint-disable-line no-console
+      console.log("Servidor Corriendo🍓"); // eslint-disable-line no-console
     });
   })
   .then(() => {
-    Category.findOrCreate({ where: {name: "Jersey"} });
-    Category.findOrCreate({ where: {name: "Balon"} });
-    Category.findOrCreate({ where: {name: "Calzado"} });
-    Category.findOrCreate({ where: {name: "Short"} });
-
-    console.log("Categorias creadas");
+    // Creación de categorías (si es necesario)
+    Category.findOrCreate({ where: { name: "Jersey" } });
+    Category.findOrCreate({ where: { name: "Balon" } });
+    Category.findOrCreate({ where: { name: "Calzado" } });
+    Category.findOrCreate({ where: { name: "Short" } });
+  })
+  .catch((error) => {
+    console.error("¡Error en la conexión a la base de datos😫", error);
+    process.exit(1);
   });
