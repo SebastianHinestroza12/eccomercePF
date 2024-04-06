@@ -29,9 +29,7 @@ const Searchbar = ({ setLoading }) => {
 
   //control del input de busqueda
   const keyDown = (e) => {
-    //console.log("e.keyCode", e.keyCode);
     setName(e.target.value);
-    seterrors(validateInput({ name: e.target.value }));
     if (e.keyCode === 13) {
       console.log("enter");
       history.push("/store");
@@ -41,23 +39,11 @@ const Searchbar = ({ setLoading }) => {
     }
   };
 
-  function validateInput(value) {
-    let errors = {};
-    if (value.name.length > 0 && value.name.length < 2) {
-      errors.name = "Enter minimum 2 characters";
-    }
-    if (value.name.length === 0) {
-      errors.name = "";
-    }
-    return errors;
-  }
-
   return (
     <InputGroup>
       <Form.Control
-        placeholder="Estoy buscando..."
-        aria-label="Estoy buscando..."
-        aria-describedby="basic-addon2"
+        placeholder="Buscar Producto..."
+        aria-label="Buscando Producto..."
         value={name}
         onChange={(e) => keyDown(e)}
         onKeyDown={(e) => keyDown(e)}
