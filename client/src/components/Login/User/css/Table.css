@@ -1,0 +1,10 @@
+table.sizeFixed {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: separate;
+}
+
+th,
+td {
+  padding: 3px;
+}

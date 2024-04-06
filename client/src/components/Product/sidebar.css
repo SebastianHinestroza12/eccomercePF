@@ -1,0 +1,49 @@
+.sidebar-btn {
+  border: 1px solid black;
+  background-color: aqua;
+}
+.filters_container.list-group.list-group-flush {
+  padding: 2rem;
+}
+.sidebar .filters_container button::before {
+  content: ">";
+  margin-right: 18px;
+}
+.sidebar .filters_container button:hover {
+  background: var(--third-color);
+  color: white;
+}
+.sidebar .filters_container button::before {
+  content: ">";
+}
+.sidebar .filters_container button:hover {
+  background: var(--third-color);
+  color: white;
+}
+.sidebar .filters_container button {
+  border: none;
+  text-align: left;
+  background: none;
+  padding: 1rem;
+  list-style: square;
+  width: 100%;
+}
+.sidebar .filters_container button {
+  border: none;
+  text-align: left;
+  background: none;
+  padding: 1rem;
+  list-style: square;
+}
+
+.home-btn {
+  
+    margin-left: 15px;
+    border: none;
+    background-color: #0D6EFD;
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 0.4rem 1rem;
+
+
+}

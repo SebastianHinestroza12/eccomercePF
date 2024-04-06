@@ -1,0 +1,27 @@
+input.form-control {
+  padding: 1rem;
+}
+.totals.checkout {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+span.totalTitle {
+  font-weight: 600;
+}
+p.totalsCheckout {
+  font-size: 1.22rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.input-required {
+  color: red;
+}
+.pay-disabled {
+  cursor: none;
+}
+.checkout-subtotal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

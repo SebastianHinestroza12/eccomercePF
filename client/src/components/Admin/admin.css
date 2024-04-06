@@ -1,0 +1,27 @@
+.admin .header {
+  border-bottom: 2px solid var(--grey200);
+  padding: 1rem;
+}
+.admin .sidebar {
+  background: #192a56;
+  color: white;
+  padding: 2rem;
+}
+.admin .sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 15px;
+  display: block;
+}
+.admin .sidebar a:hover {
+  background: var(--third-color);
+}
+.admin .sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 2rem;
+}
+.admin .sidebar li::before {
+  content: ">";
+  margin-right: 13px;
+}

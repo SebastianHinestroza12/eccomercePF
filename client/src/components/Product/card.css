@@ -1,0 +1,57 @@
+.card {
+  border: none;
+  min-height: 380px;
+  margin-bottom: 2rem;
+}
+.card.user-profile {
+  border: none;
+  min-height: 380px;
+  margin-bottom: 2rem;
+  padding: 4rem;
+}
+.card-title.h5 {
+  font-size: 1rem;
+}
+.card div:first-child {
+  overflow: hidden;
+  height: 187px;
+}
+
+.card:hover {
+  cursor: pointer;
+  border: 1px solid silver;
+}
+.buttons_shop {
+  visibility: hidden;
+  opacity: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 3;
+  transition: visibility 0s linear 0.33s, opacity 0.33s linear;
+  top: 155px;
+  height: auto;
+  right: 0px;
+  height: auto;
+  position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 1rem 0;
+}
+.card:hover .buttons_shop {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.buttons_shop svg {
+  padding: 6px;
+  box-sizing: content-box;
+}
+
+.buttons_shop svg:hover {
+  background: var(--third-color);
+  border-radius: 40px;
+  box-sizing: content-box;
+  color: white;
+}
