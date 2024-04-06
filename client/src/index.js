@@ -9,7 +9,6 @@ import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import Auth0ProviderWithHistory from "./components/auth/auth0-provider-with-history.js";
 
-console.log(process.env.REACT_APP_API);
 axios.defaults.baseURL = `${process.env.REACT_APP_API}`;
 
 ReactDOM.render(
